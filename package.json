@@ -19,6 +19,8 @@
 	},
 	"dependencies": {
 		"react-responsive-carousel": "^3.2.23",
+		"slick-carousel": "^1.8.1",
+		"slick-slider": "^1.8.2",
 		"swiper": "^11.0.7"
 	}
 }

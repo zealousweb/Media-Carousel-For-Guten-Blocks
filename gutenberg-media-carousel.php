@@ -28,3 +28,13 @@ function gutenberg_media_carousel_gutenberg_media_carousel_block_init() {
 	register_block_type( __DIR__ . '/build' );
 }
 add_action( 'init', 'gutenberg_media_carousel_gutenberg_media_carousel_block_init' );
+
+
+function enqueue_slick_slider() {
+    // Enqueue Slick slider CSS
+    wp_enqueue_style( 'slick-slider-css', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css' );
+
+    // Enqueue Slick slider JavaScript
+    wp_enqueue_script( 'slick-slider-js', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js', array('jquery'), '1.8.1', true );
+}
+add_action( 'wp_enqueue_scripts', 'enqueue_slick_slider' );

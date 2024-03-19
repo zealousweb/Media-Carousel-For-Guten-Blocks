@@ -4,7 +4,10 @@
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps } from "@wordpress/block-editor";
+import {
+	InnerBlocks,
+	useBlockProps,
+} from "@wordpress/block-editor";
 
 /**
  * The save function defines the way in which the different attributes should
@@ -13,34 +16,52 @@ import { useBlockProps } from "@wordpress/block-editor";
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#save
  *
- * @return {Element} Element to render.
+ * @return {WPElement} Element to render.
  */
-// const Save = ({ attributes }) => {
-// 	return (
-// 	  <div>
-// 		{attributes.images.map((imageUrl, index) => (
-// 		  <img key={index} src={imageUrl} alt={`Image ${index + 1}`} />
-// 		))}
-// 	  </div>
-// 	);
-//   };
-//   export default Save;
+export default function save({ attributes }) {
+	
+	const { galleryId, galleryType, galleryImages, galleryColumns, galleryGap, imageLightbox, imageHover } = attributes;
 
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-const Save = ({ attributes }) => {
+	var customClass = `utk-gallery-type-${galleryType} utk-gallery-col-${galleryColumns} utk-gallery-gutter-${galleryGap}`;
+
+	const blockProps = useBlockProps.save({
+		className: customClass
+	});
+
 	return (
-		<div>
-			<div>
-				<Carousel>
-					{attributes.images.map((imageUrl, index) => (
-						<div key={index}>
-							<img src={imageUrl} alt={`Image ${index + 1}`} />
+		<>
+			
+		<div { ...blockProps } style={ `--utk--gallery--type:${galleryType}; --utk--gallery--col:${galleryColumns}; --utk--gallery--gutter:${galleryGap}px;` }>
+		
+			{ galleryImages &&
+				galleryImages.map( ( image ) => {
+					
+					return imageLightbox ? (
+
+						<a
+							className={`utk-gallery-single utk-gallery-gutter-${galleryGap} utk-gallery-hover-${imageHover}`}
+							href={ image.url }
+							data-fancybox='gallery'
+						>
+							<img src={ image.url } alt={ image.alt ? image.alt : 'Gallery Image' } />
+						</a>
+
+					) : (
+							
+						<div
+							key={ image.id }
+							className={`utk-gallery-single utk-gallery-gutter-${galleryGap} utk-gallery-hover-${imageHover}`}
+						>
+							<img src={ image.url } alt={ image.alt ? image.alt : 'Gallery Image' } />
 						</div>
-					))}
-				</Carousel>
-			</div>
+							
+					);
+
+				} )
+			}
+			
 		</div>
+		
+		</>
 	);
-};
-export default Save;
+}
