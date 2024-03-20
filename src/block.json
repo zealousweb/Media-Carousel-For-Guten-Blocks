@@ -34,13 +34,18 @@
 		"imageHover": {
 			"type": "string",
 			"default": "none"
+		},
+		"sliderType": { 
+			"type": "string",
+			"default": "simple"
 		}
 	},
 	"supports": {
 		"html": false,"align": [
 			"wide",
 			"full"
-		]
+		],
+		"sliderType": true 
 	},
 	"textdomain": "gutenberg-media-carousel",
 	"editorScript": "file:./index.js",

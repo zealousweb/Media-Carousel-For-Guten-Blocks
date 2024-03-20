@@ -58,12 +58,13 @@ import './editor.scss';
  */
 export default function Edit({ attributes, setAttributes, clientId }) {
 
-	const { galleryId, galleryType, galleryImages, galleryColumns, galleryGap, imageLightbox, imageHover } = attributes;
+	const { galleryId, galleryType, galleryImages, galleryColumns, galleryGap, imageLightbox, imageHover,sliderType } = attributes;
 
 	var customClass = `utk-gallery-type-${galleryType} utk-gallery-col-${galleryColumns} utk-gallery-gutter-${galleryGap}`;
 
 	const blockProps = useBlockProps({
-		className: customClass
+		className: customClass,
+		"data-slider-type": sliderType // Add data-slider-type attribute
 	});
 	const ALLOWED_MEDIA_TYPES = [ 'image' ];
 	
@@ -80,7 +81,18 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		<>
 		<InspectorControls key="setting">
 			<PanelBody title={ __( 'Gallery Settings', 'utk-unified-blocks' ) }>
-
+			<SelectControl
+						label={__('Slider Type', 'utk-unified-blocks')}
+						value={sliderType}
+						options={[
+							{ label: 'Simple', value: 'simple' },
+							{ label: 'Carousel', value: 'carousel' },
+							{ label: 'Fade', value: 'fade' },
+						]}
+						onChange={(val) => {
+							setAttributes({ sliderType: val });
+						}}
+					/>
 				<SelectControl
 					label={ __( 'Gallery type', 'utk-unified-blocks' ) }
 					value={ galleryType }

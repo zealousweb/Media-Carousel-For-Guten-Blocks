@@ -79,11 +79,13 @@ function Edit({
     galleryColumns,
     galleryGap,
     imageLightbox,
-    imageHover
+    imageHover,
+    sliderType
   } = attributes;
   var customClass = `utk-gallery-type-${galleryType} utk-gallery-col-${galleryColumns} utk-gallery-gutter-${galleryGap}`;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)({
-    className: customClass
+    className: customClass,
+    "data-slider-type": sliderType // Add data-slider-type attribute
   });
   const ALLOWED_MEDIA_TYPES = ['image'];
 
@@ -101,6 +103,24 @@ function Edit({
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Gallery Settings', 'utk-unified-blocks')
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Slider Type', 'utk-unified-blocks'),
+    value: sliderType,
+    options: [{
+      label: 'Simple',
+      value: 'simple'
+    }, {
+      label: 'Carousel',
+      value: 'carousel'
+    }, {
+      label: 'Fade',
+      value: 'fade'
+    }],
+    onChange: val => {
+      setAttributes({
+        sliderType: val
+      });
+    }
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Gallery type', 'utk-unified-blocks'),
     value: galleryType,
     options: [{
@@ -313,11 +333,13 @@ function save({
     galleryColumns,
     galleryGap,
     imageLightbox,
-    imageHover
+    imageHover,
+    sliderType
   } = attributes;
   var customClass = `utk-gallery-type-${galleryType} utk-gallery-col-${galleryColumns} utk-gallery-gutter-${galleryGap}`;
   const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
-    className: customClass
+    className: customClass,
+    "data-slider-type": sliderType // Add data-slider-type attribute
   });
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...blockProps,
@@ -339,6 +361,96 @@ function save({
     }));
   })));
 }
+
+// export default function save({ attributes }) {
+//     const {
+//         galleryId,
+//         galleryType,
+//         galleryImages,
+//         galleryColumns,
+//         galleryGap,
+//         imageLightbox,
+//         imageHover,
+//         sliderType // Added sliderType attribute
+//     } = attributes;
+
+//     var customClass = `utk-gallery-type-${galleryType} utk-gallery-col-${galleryColumns} utk-gallery-gutter-${galleryGap}`;
+
+//     const blockProps = useBlockProps.save({
+//         className: customClass
+//     });
+
+//     return (
+//         <>
+//             <div {...blockProps} style={`--utk--gallery--type:${galleryType}; --utk--gallery--col:${galleryColumns}; --utk--gallery--gutter:${galleryGap}px;`}>
+//                 {galleryImages &&
+//                     galleryImages.map((image) => {
+//                         return imageLightbox ? (
+//                             <a
+//                                 className={`utk-gallery-single utk-gallery-gutter-${galleryGap} utk-gallery-hover-${imageHover}`}
+//                                 href={image.url}
+//                                 data-fancybox="gallery"
+//                             >
+//                                 <img src={image.url} alt={image.alt ? image.alt : "Gallery Image"} />
+//                             </a>
+//                         ) : (
+//                             <div
+//                                 key={image.id}
+//                                 className={`utk-gallery-single utk-gallery-gutter-${galleryGap} utk-gallery-hover-${imageHover}`}
+//                             >
+//                                 <img src={image.url} alt={image.alt ? image.alt : "Gallery Image"} />
+//                             </div>
+//                         );
+//                     })}
+//             </div>
+//             {/* Render slider script based on selected slider type */}
+//             <script>
+//                 {`
+//                     jQuery(document).ready(function($) {
+//                         // Initialize the slider based on the selected type
+//                         switch ("${sliderType}") {
+//                             case 'simple':
+//                                 // Initialize simple slider
+//                                 $('.utk-gallery-container').slick({
+//                                     // Add options for simple slider
+//                                 });
+//                                 break;
+//                             case 'carousel':
+//                                 // Initialize carousel slider
+//                                 $('.utk-gallery-container').slick({
+//                                     // Add options for carousel slider
+//                                     slidesToShow: 3,
+//                                     slidesToScroll: 1,
+//                                     autoplay: true,
+//                                     autoplaySpeed: 2000,
+//                                 });
+//                                 break;
+//                             case 'fade':
+//                                 // Initialize fade slider
+//                                 $('.utk-gallery-container').slick({
+//                                     // Add options for fade slider
+//                                     fade: true,
+//                                     autoplay: true,
+//                                     autoplaySpeed: 2000,
+//                                 });
+//                                 break;
+//                             default:
+//                                 // Default slider initialization
+//                                 $('.utk-gallery-container').slick({
+//                                     // Add default options
+//                                     slidesToShow: 1,
+//                                     slidesToScroll: 1,
+//                                     autoplay: true,
+//                                     autoplaySpeed: 2000,
+//                                 });
+//                                 break;
+//                         }
+//                     });
+//                 `}
+//             </script>
+//         </>
+//     );
+// }
 
 /***/ }),
 
@@ -432,7 +544,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"0.1.0","title":"Gutenberg Media Carousel","category":"widgets","icon":"smiley","description":"A custom block for uploading multiple images with sliding effect.","example":{},"attributes":{"galleryId":{"type":"string"},"galleryType":{"type":"string","default":"masonry"},"galleryImages":{"type":"array"},"galleryColumns":{"type":"number","default":3},"galleryGap":{"type":"number","default":10},"imageLightbox":{"type":"boolean","default":true},"imageHover":{"type":"string","default":"none"}},"supports":{"html":false,"align":["wide","full"]},"textdomain":"gutenberg-media-carousel","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"0.1.0","title":"Gutenberg Media Carousel","category":"widgets","icon":"smiley","description":"A custom block for uploading multiple images with sliding effect.","example":{},"attributes":{"galleryId":{"type":"string"},"galleryType":{"type":"string","default":"masonry"},"galleryImages":{"type":"array"},"galleryColumns":{"type":"number","default":3},"galleryGap":{"type":"number","default":10},"imageLightbox":{"type":"boolean","default":true},"imageHover":{"type":"string","default":"none"},"sliderType":{"type":"string","default":"simple"}},"supports":{"html":false,"align":["wide","full"],"sliderType":true},"textdomain":"gutenberg-media-carousel","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

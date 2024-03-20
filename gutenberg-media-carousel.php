@@ -29,12 +29,35 @@ function gutenberg_media_carousel_gutenberg_media_carousel_block_init() {
 }
 add_action( 'init', 'gutenberg_media_carousel_gutenberg_media_carousel_block_init' );
 
-
+// Enqueue Slick slider library
 function enqueue_slick_slider() {
-    // Enqueue Slick slider CSS
-    wp_enqueue_style( 'slick-slider-css', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css' );
+    wp_enqueue_script(
+        'slick-slider',
+        'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js',
+        array('jquery'),
+        '1.8.1',
+        true
+    );
 
-    // Enqueue Slick slider JavaScript
-    wp_enqueue_script( 'slick-slider-js', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js', array('jquery'), '1.8.1', true );
+    wp_enqueue_style(
+        'slick-slider-style',
+        'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css',
+        array(),
+        '1.8.1'
+    );
 }
-add_action( 'wp_enqueue_scripts', 'enqueue_slick_slider' );
+add_action('wp_enqueue_scripts', 'enqueue_slick_slider');
+
+// Enqueue the slider.js script
+function enqueue_slider_script() {
+    wp_enqueue_script(
+        'gutenberg-media-carousel-slider-script',
+        plugins_url( 'assets/slider.js', __FILE__ ),
+        array( 'jquery', 'slick-slider' ), // Make sure 'slick-slider' is enqueued before this script
+        '1.0',
+        true
+    );
+}
+add_action( 'wp_enqueue_scripts', 'enqueue_slider_script' );
+
+?>
