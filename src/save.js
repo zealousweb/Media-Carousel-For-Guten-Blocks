@@ -14,31 +14,31 @@ import { InnerBlocks, useBlockProps } from "@wordpress/block-editor";
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#save
  *
  * @return {WPElement} Element to render.
- */                                                                           
+ */
 import $ from "jquery";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.js";
 
 export default function save({ attributes }) {
-    const {
-        galleryImages,
-        sliderType,
-    } = attributes;
+	const { galleryImages, sliderType } = attributes;
 
-    const blockProps = useBlockProps.save();
-    return (
-        <>
-                       <div {...blockProps}>
-                {galleryImages &&
-                    galleryImages.map((image) => (
-                        <div key={image.id} className="utk-gallery-single">
-                            <img src={image.url} alt={image.alt ? image.alt : 'Gallery Image'} />
-                        </div>
-                    ))}
-            </div>
-            <script>
-                {`
+	const blockProps = useBlockProps.save();
+	return (
+		<>
+			<div {...blockProps}>
+				{galleryImages &&
+					galleryImages.map((image) => (
+						<div key={image.id} className="utk-gallery-single">
+							<img
+								src={image.url}
+								alt={image.alt ? image.alt : "Gallery Image"}
+							/>
+						</div>
+					))}
+			</div>
+			<script>
+				{`
                     jQuery(document).ready(function($) {
                         switch ("${sliderType}") {
                             case 'simple':
@@ -74,7 +74,7 @@ export default function save({ attributes }) {
                         }
                     });
                 `}
-            </script>
-        </>
-    );
+			</script>
+		</>
+	);
 }

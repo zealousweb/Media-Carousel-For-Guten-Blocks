@@ -93,23 +93,23 @@ function Edit({
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)({
     "data-slider-type": sliderType // Add data-slider-type attribute
   });
-  const ALLOWED_MEDIA_TYPES = ['image'];
+  const ALLOWED_MEDIA_TYPES = ["image"];
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, {
     key: "setting"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Gallery Settings', 'utk-unified-blocks')
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gallery Settings", "utk-unified-blocks")
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Slider Type', 'utk-unified-blocks'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slider Type", "utk-unified-blocks"),
     value: sliderType,
     options: [{
-      label: 'Simple',
-      value: 'simple'
+      label: "Simple",
+      value: "simple"
     }, {
-      label: 'Carousel',
-      value: 'carousel'
+      label: "Carousel",
+      value: "carousel"
     }, {
-      label: 'Fade',
-      value: 'fade'
+      label: "Fade",
+      value: "fade"
     }],
     onChange: val => {
       setAttributes({
@@ -124,13 +124,13 @@ function Edit({
       });
     },
     gallery: true,
-    allowedTypes: ['image'],
+    allowedTypes: ["image"],
     value: attributes.galleryImages.map(image => image.id),
     render: ({
       open
     }) => {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarButton, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Edit Images', 'utk-unified-blocks'),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Edit Images", "utk-unified-blocks"),
         onClick: open,
         icon: "edit"
       });
@@ -142,7 +142,7 @@ function Edit({
       key: image.id
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
       src: image.url,
-      alt: image.alt ? image.alt : 'Gallery Image'
+      alt: image.alt ? image.alt : "Gallery Image"
     }));
   }) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaPlaceholder, {
     multiple: true,
@@ -159,7 +159,7 @@ function Edit({
     onSelectURL: false,
     allowedTypes: ALLOWED_MEDIA_TYPES,
     labels: {
-      title: 'Add Gallery Images'
+      title: "Add Gallery Images"
     }
   })));
 }
@@ -279,7 +279,7 @@ function save({
     className: "utk-gallery-single"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: image.url,
-    alt: image.alt ? image.alt : 'Gallery Image'
+    alt: image.alt ? image.alt : "Gallery Image"
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("script", null, `
                     jQuery(document).ready(function($) {
                         switch ("${sliderType}") {
