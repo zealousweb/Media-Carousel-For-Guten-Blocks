@@ -12,28 +12,8 @@
     "galleryId": {
       "type": "string"
     },
-    "galleryType": {
-      "type": "string",
-      "default": "masonry"
-    },
     "galleryImages": {
       "type": "array"
-    },
-    "galleryColumns": {
-      "type": "number",
-      "default": 3
-    },
-    "galleryGap": {
-      "type": "number",
-      "default": 10
-    },
-    "imageLightbox": {
-      "type": "boolean",
-      "default": true
-    },
-    "imageHover": {
-      "type": "string",
-      "default": "none"
     },
     "sliderType": {
       "type": "string",
