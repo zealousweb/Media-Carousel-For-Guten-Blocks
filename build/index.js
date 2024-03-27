@@ -88,12 +88,14 @@ function Edit({
 }) {
   const {
     galleryImages,
-    sliderType
+    sliderType,
+    showArrows
   } = attributes;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)({
     "data-slider-type": sliderType // Add data-slider-type attribute
   });
   const ALLOWED_MEDIA_TYPES = ["image"];
+  // console.log(showArrows);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, {
     key: "setting"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
@@ -114,6 +116,14 @@ function Edit({
     onChange: val => {
       setAttributes({
         sliderType: val
+      });
+    }
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Show Arrows", "utk-unified-blocks"),
+    checked: showArrows,
+    onChange: val => {
+      setAttributes({
+        showArrows: val
       });
     }
   }))), galleryImages && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUploadCheck, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUpload, {
@@ -269,8 +279,10 @@ function save({
 }) {
   const {
     galleryImages,
-    sliderType
+    sliderType,
+    showArrows
   } = attributes;
+  // console.log(showArrows, 't');
   const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save();
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...blockProps
@@ -285,7 +297,7 @@ function save({
                         switch ("${sliderType}") {
                             case 'simple':
                                 $('.wp-block-create-block-gutenberg-media-carousel').slick({
-                                  
+                                    arrows:${showArrows}
                                 });
                                 break;
                             case 'carousel':
@@ -293,7 +305,8 @@ function save({
                                     infinite: true,
                                     slidesToShow: 3,
                                     slidesToScroll: 1,
-                                    dots: true
+                                    dots: true,
+                                    arrows:${showArrows}
                                 });
                                 break;
                             case 'fade':
@@ -302,7 +315,8 @@ function save({
                                     infinite: true,
                                     speed: 500,
                                     fade: true,
-                                    cssEase: 'linear'
+                                    cssEase: 'linear',
+                                    arrows:${showArrows}
                                 });
                                 break;
                             default:
@@ -311,6 +325,7 @@ function save({
                                     slidesToScroll: 1,
                                     autoplay: true,
                                     autoplaySpeed: 2000,
+                                    arrows:${showArrows}
                                 });
                                 break;
                         }
@@ -3487,7 +3502,7 @@ module.exports = window["wp"]["i18n"];
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"0.1.0","title":"Gutenberg Media Carousel","category":"widgets","icon":"smiley","description":"A custom block for uploading multiple images with sliding effect.","example":{},"attributes":{"galleryId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simple"}},"supports":{"html":false,"align":["wide","full"],"sliderType":true},"textdomain":"gutenberg-media-carousel","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"0.1.0","title":"Gutenberg Media Carousel","category":"widgets","icon":"smiley","description":"A custom block for uploading multiple images with sliding effect.","example":{},"attributes":{"galleryId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simple"},"showArrows":{"type":"boolean","default":true}},"supports":{"html":false,"align":["wide","full"],"sliderType":true},"textdomain":"gutenberg-media-carousel","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

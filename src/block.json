@@ -18,6 +18,10 @@
 		"sliderType": {
 			"type": "string",
 			"default": "simple"
+		},
+		"showArrows": {
+			"type": "boolean",
+			"default": true
 		}
 	},
 	"supports": {

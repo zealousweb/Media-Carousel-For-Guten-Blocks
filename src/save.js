@@ -21,8 +21,8 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.js";
 
 export default function save({ attributes }) {
-	const { galleryImages, sliderType } = attributes;
-
+	const { galleryImages, sliderType, showArrows } = attributes;
+    // console.log(showArrows, 't');
 	const blockProps = useBlockProps.save();
 	return (
 		<>
@@ -43,7 +43,7 @@ export default function save({ attributes }) {
                         switch ("${sliderType}") {
                             case 'simple':
                                 $('.wp-block-create-block-gutenberg-media-carousel').slick({
-                                  
+                                    arrows:${showArrows}
                                 });
                                 break;
                             case 'carousel':
@@ -51,7 +51,8 @@ export default function save({ attributes }) {
                                     infinite: true,
                                     slidesToShow: 3,
                                     slidesToScroll: 1,
-                                    dots: true
+                                    dots: true,
+                                    arrows:${showArrows}
                                 });
                                 break;
                             case 'fade':
@@ -60,7 +61,8 @@ export default function save({ attributes }) {
                                     infinite: true,
                                     speed: 500,
                                     fade: true,
-                                    cssEase: 'linear'
+                                    cssEase: 'linear',
+                                    arrows:${showArrows}
                                 });
                                 break;
                             default:
@@ -69,6 +71,7 @@ export default function save({ attributes }) {
                                     slidesToScroll: 1,
                                     autoplay: true,
                                     autoplaySpeed: 2000,
+                                    arrows:${showArrows}
                                 });
                                 break;
                         }

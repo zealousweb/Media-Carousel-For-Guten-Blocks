@@ -34,6 +34,7 @@ import {
 	ToolbarButton,
 	PanelBody,
 	SelectControl,
+    ToggleControl 
 } from "@wordpress/components";
 
 /**
@@ -60,13 +61,13 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.js";
 
 export default function Edit({ attributes, setAttributes, clientId }) {
-	const { galleryImages, sliderType } = attributes;
+	const { galleryImages, sliderType, showArrows  } = attributes;
 
 	const blockProps = useBlockProps({
 		"data-slider-type": sliderType, // Add data-slider-type attribute
 	});
 	const ALLOWED_MEDIA_TYPES = ["image"];
-
+    // console.log(showArrows);
 	return (
 		<>
 			<InspectorControls key="setting">
@@ -83,6 +84,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							setAttributes({ sliderType: val });
 						}}
 					/>
+                     <ToggleControl
+                        label={__("Show Arrows", "utk-unified-blocks")}
+                        checked={showArrows}
+                        onChange={(val) => {
+                            setAttributes({ showArrows: val });
+                        }}
+                    />
+                    
 				</PanelBody>
 			</InspectorControls>
 
