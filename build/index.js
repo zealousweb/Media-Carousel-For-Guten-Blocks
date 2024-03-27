@@ -284,12 +284,12 @@ function save({
                     jQuery(document).ready(function($) {
                         switch ("${sliderType}") {
                             case 'simple':
-                                $('.utk-gallery-type-grid, .utk-gallery-type-masonry').slick({
+                                $('.wp-block-create-block-gutenberg-media-carousel').slick({
                                   
                                 });
                                 break;
                             case 'carousel':
-                                $('.utk-gallery-type-grid, .utk-gallery-type-masonry').slick({
+                                $('.wp-block-create-block-gutenberg-media-carousel').slick({
                                     infinite: true,
                                     slidesToShow: 3,
                                     slidesToScroll: 1,
@@ -297,7 +297,7 @@ function save({
                                 });
                                 break;
                             case 'fade':
-                                $('.utk-gallery-type-grid, .utk-gallery-type-masonry').slick({
+                                $('.wp-block-create-block-gutenberg-media-carousel').slick({
                                     dots: true,
                                     infinite: true,
                                     speed: 500,
@@ -306,7 +306,7 @@ function save({
                                 });
                                 break;
                             default:
-                                $('.utk-gallery-type-grid, .utk-gallery-type-masonry').slick({
+                                $('.wp-block-create-block-gutenberg-media-carousel').slick({
                                     slidesToShow: 1,
                                     slidesToScroll: 1,
                                     autoplay: true,
