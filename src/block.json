@@ -22,7 +22,11 @@
 		"showArrows": {
 			"type": "boolean",
 			"default": true
-		}
+		},
+		"arrowType": {
+            "type": "string",
+            "default": "custom1"
+        }
 	},
 	"supports": {
 		"html": false,
