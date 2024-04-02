@@ -177,6 +177,116 @@ const {
 // 	);
 // }
 
+// export default function Edit({ attributes, setAttributes, clientId }) {
+//     const { galleryImages, sliderType, showArrows, arrowType } = attributes;
+//     // console.log(arrowType);
+//     const blockProps = useBlockProps({
+//         "data-slider-type": sliderType, // Add data-slider-type attribute
+//         "data-arrow-type":arrowType,
+//     });
+
+//     const ALLOWED_MEDIA_TYPES = ["image"];
+
+//     return (
+//         <>
+//             <InspectorControls key="setting">
+//                 <PanelBody title={__("Gallery Settings", "utk-unified-blocks")}>
+//                     <SelectControl
+//                         label={__("Slider Type", "utk-unified-blocks")}
+//                         value={sliderType}
+//                         options={[
+//                             { label: "Simple", value: "simple" },
+//                             { label: "Carousel", value: "carousel" },
+//                             { label: "Fade", value: "fade" },
+//                         ]}
+//                         onChange={(val) => {
+//                             setAttributes({ sliderType: val });
+//                         }}
+//                     />
+//                     <ToggleControl
+//                         label={__("Show Arrows", "utk-unified-blocks")}
+//                         checked={showArrows}
+//                         onChange={(val) => {
+//                             setAttributes({ showArrows: val });
+//                         }}
+//                     />
+//                     {showArrows && (
+//                         <SelectControl
+//                             label={__("Arrow Type", "utk-unified-blocks")}
+//                             value={arrowType}
+//                             options={[
+//                                 { label: "Arrow 1", value: "custom1" },
+//                                 { label: "Arrow 2", value: "custom2" },
+//                                 { label: "Arrow 3", value: "custom3" },
+//                             ]}
+//                             onChange={(val) => {
+//                                 setAttributes({ arrowType: val });
+//                             }}
+//                         />
+//                     )}
+//                 </PanelBody>
+//             </InspectorControls>
+
+//             {galleryImages && (
+//                 <BlockControls>
+//                     <ToolbarGroup>
+//                         <MediaUploadCheck>
+//                             <MediaUpload
+//                                 multiple={true}
+//                                 onSelect={(val) => {
+//                                     setAttributes({ galleryImages: val });
+//                                 }}
+//                                 gallery={true}
+//                                 allowedTypes={["image"]}
+//                                 value={attributes.galleryImages.map((image) => image.id)}
+//                                 render={({ open }) => {
+//                                     return (
+//                                         <ToolbarButton
+//                                             label={__("Edit Images", "utk-unified-blocks")}
+//                                             onClick={open}
+//                                             icon="edit"
+//                                         />
+//                                     );
+//                                 }}
+//                             />
+//                         </MediaUploadCheck>
+//                     </ToolbarGroup>
+//                 </BlockControls>
+//             )}
+
+//             <div {...blockProps}>
+//                 {galleryImages ? (
+//                     galleryImages.map((image) => {
+//                         return (
+//                             <div key={image.id}>
+//                                 <img
+//                                     src={image.url}
+//                                     alt={image.alt ? image.alt : "Gallery Image"}
+//                                 />
+//                             </div>
+//                         );
+//                     })
+//                 ) : (
+//                     <MediaPlaceholder
+//                         multiple={true}
+//                         onSelect={(val) => {
+//                             setAttributes({ galleryImages: val });
+//                         }}
+//                         onFilesPreUpload={(val) => {
+//                             setAttributes({ galleryImages: val });
+//                         }}
+//                         onSelectURL={false}
+//                         allowedTypes={ALLOWED_MEDIA_TYPES}
+//                         labels={{
+//                             title: "Add Gallery Images",
+//                         }}
+//                     />
+//                 )}
+//             </div>
+//         </>
+//     );
+// }
+
 function Edit({
   attributes,
   setAttributes,
@@ -188,15 +298,13 @@ function Edit({
     showArrows,
     arrowType
   } = attributes;
-  // console.log(arrowType);
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)({
     "data-slider-type": sliderType,
-    // Add data-slider-type attribute
     "data-arrow-type": arrowType
   });
   const ALLOWED_MEDIA_TYPES = ["image"];
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, {
-    key: "setting"
+    key: `setting-${clientId}`
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gallery Settings", "utk-unified-blocks")
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
@@ -263,15 +371,15 @@ function Edit({
       });
     }
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    ...blockProps
-  }, galleryImages ? galleryImages.map(image => {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      key: image.id
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-      src: image.url,
-      alt: image.alt ? image.alt : "Gallery Image"
-    }));
-  }) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaPlaceholder, {
+    ...blockProps,
+    id: `utk-slider-${clientId}`
+  }, galleryImages ? galleryImages.map(image => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    key: image.id,
+    className: "utk-gallery-single"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: image.url,
+    alt: image.alt ? image.alt : "Gallery Image"
+  }))) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaPlaceholder, {
     multiple: true,
     onSelect: val => {
       setAttributes({
@@ -454,8 +562,219 @@ __webpack_require__.r(__webpack_exports__);
 // 	);
 // }
 
+// export default function save({ attributes }) {
+//     const { galleryImages, sliderType, showArrows, arrowType } = attributes;
+
+//     const blockProps = useBlockProps.save();
+
+//     // Define getPrevArrow and getNextArrow functions
+//     function getPrevArrow(arrowType) {
+// switch (arrowType) {
+//     case 'custom1':
+//         return ;
+//     case 'custom2':
+//         return ;
+//     case 'custom3':
+//         return ;
+//     default:
+//         return ;
+// }
+//     }
+
+//     function getNextArrow(arrowType) {
+// switch (arrowType) {
+//     case 'custom1':
+//         return ;
+//     case 'custom2':
+//         return;
+//     case 'custom3':
+//         return ;
+//     default:
+//         return ;
+// }
+//     }
+
+//     console.log('this', sliderType);
+//     return (
+//         <>
+//             <div {...blockProps}>
+//             {/* {arrowType} */}
+//                 {galleryImages &&
+//                     galleryImages.map((image) => (
+//                         <div key={image.id} className="utk-gallery-single" data-sliderType={sliderType}>
+//                             <img
+//                                 src={image.url}
+//                                 alt={image.alt ? image.alt : "Gallery Image"}
+//                             />
+//                         </div>
+//                     ))}
+//             </div>
+//             {showArrows && <p>Arrow Type: {arrowType}</p>}
+//             <script>
+
+//                 {`
+//                     jQuery(document).ready(function($) {
+//                         var arrowType = "${arrowType}";
+//                         switch ("${sliderType}") {
+//                             case 'simple':
+//                                 $('.wp-block-create-block-gutenberg-media-carousel').slick({
+//                                     arrows: ${showArrows},
+
+//                                     prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
+//                                     nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
+
+//                                 });
+//                                 break;
+//                             case 'carousel':
+//                                 $('.wp-block-create-block-gutenberg-media-carousel').slick({
+//                                     infinite: true,
+//                                     slidesToShow: 3,
+//                                     slidesToScroll: 1,
+//                                     dots: true,
+//                                     arrows: ${showArrows},
+//                                     prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
+//                                     nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
+
+//                                 });
+//                                 break;
+//                             case 'fade':
+//                                 $('.wp-block-create-block-gutenberg-media-carousel').slick({
+//                                     dots: true,
+//                                     infinite: true,
+//                                     speed: 500,
+//                                     fade: true,
+//                                     cssEase: 'linear',
+//                                     arrows: ${showArrows},
+//                                     prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
+//                                     nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
+
+//                                 });
+//                                 break;
+//                             default:
+//                                 $('.wp-block-create-block-gutenberg-media-carousel').slick({
+//                                     slidesToShow: 1,
+//                                     slidesToScroll: 1,
+//                                     autoplay: true,
+//                                     autoplaySpeed: 2000,
+//                                     arrows: ${showArrows},
+//                                     prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
+//                                     nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
+
+//                                 });
+//                                 break;
+//                         }
+//                     });
+//                 `}
+//             </script>
+//         </>
+//     );
+// }
+
+// export default function save({ attributes, clientId }) {
+//     const { galleryImages, sliderType, showArrows, arrowType } = attributes;
+
+//     const blockProps = useBlockProps.save();
+
+//     // Define getPrevArrow and getNextArrow functions
+//     function getPrevArrow(arrowType) {
+//         switch (arrowType) {
+//             case 'custom1':
+//                 return ;
+//             case 'custom2':
+//                 return ;
+//             case 'custom3':
+//                 return ;
+//             default:
+//                 return ;
+//         }
+//     }
+
+//     function getNextArrow(arrowType) {
+//         switch (arrowType) {
+//             case 'custom1':
+//                 return ;
+//             case 'custom2':
+//                 return;
+//             case 'custom3':
+//                 return ;
+//             default:
+//                 return ;
+//         }
+//     }
+//     console.log(clientId);
+//     console.log(sliderType);
+//     return (
+//         <>
+//             <div {...blockProps} id={`utk-slider-${sliderType}`}>
+//                 {galleryImages &&
+//                     galleryImages.map((image) => (
+//                         <div key={image.id} className="utk-gallery-single">
+//                             <img
+//                                 src={image.url}
+//                                 alt={image.alt ? image.alt : "Gallery Image"}
+//                             />
+//                         </div>
+//                     ))}
+//             </div>
+//             {showArrows && <p>Arrow Type: {arrowType}</p>}
+//             <script>
+//                 {`
+//                     jQuery(document).ready(function($) {
+//                         var sliderId = "#utk-slider-${sliderType}";
+
+//                         switch ("${sliderType}") {
+//                             case 'simple':
+//                                 $(sliderId).slick({
+//                                     arrows: ${showArrows},
+//                                     prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
+//                                     nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
+//                                 });
+//                                 break;
+//                             case 'carousel':
+//                                 $(sliderId).slick({
+//                                     infinite: true,
+//                                     slidesToShow: 3,
+//                                     slidesToScroll: 1,
+//                                     dots: true,
+//                                     arrows: ${showArrows},
+//                                     prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
+//                                     nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
+//                                 });
+//                                 break;
+//                             case 'fade':
+//                                 $(sliderId).slick({
+//                                     dots: true,
+//                                     infinite: true,
+//                                     speed: 500,
+//                                     fade: true,
+//                                     cssEase: 'linear',
+//                                     arrows: ${showArrows},
+//                                     prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
+//                                     nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
+//                                 });
+//                                 break;
+//                             default:
+//                                 $(sliderId).slick({
+//                                     slidesToShow: 1,
+//                                     slidesToScroll: 1,
+//                                     autoplay: true,
+//                                     autoplaySpeed: 2000,
+//                                     arrows: ${showArrows},
+//                                     prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
+//                                     nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
+//                                 });
+//                                 break;
+//                         }
+//                     });
+//                 `}
+//             </script>
+//         </>
+//     );
+// }
+
 function save({
-  attributes
+  attributes,
+  clientId
 }) {
   const {
     galleryImages,
@@ -463,7 +782,6 @@ function save({
     showArrows,
     arrowType
   } = attributes;
-  const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save();
 
   // Define getPrevArrow and getNextArrow functions
   function getPrevArrow(arrowType) {
@@ -490,8 +808,10 @@ function save({
         return;
     }
   }
+  console.log(clientId);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    ...blockProps
+    ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save(),
+    id: `utk-slider-${clientId}-${sliderType}`
   }, galleryImages && galleryImages.map(image => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     key: image.id,
     className: "utk-gallery-single"
@@ -500,19 +820,18 @@ function save({
     alt: image.alt ? image.alt : "Gallery Image"
   })))), showArrows && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Arrow Type: ", arrowType), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("script", null, `
                     jQuery(document).ready(function($) {
-                        var arrowType = "${arrowType}";
+                        var sliderId = "#utk-slider-${clientId}-${sliderType}";
+
                         switch ("${sliderType}") {
                             case 'simple':
-                                $('.wp-block-create-block-gutenberg-media-carousel').slick({
+                                $(sliderId).slick({
                                     arrows: ${showArrows},
-                                    
                                     prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
                                     nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
-                                    
                                 });
                                 break;
                             case 'carousel':
-                                $('.wp-block-create-block-gutenberg-media-carousel').slick({
+                                $(sliderId).slick({
                                     infinite: true,
                                     slidesToShow: 3,
                                     slidesToScroll: 1,
@@ -520,11 +839,10 @@ function save({
                                     arrows: ${showArrows},
                                     prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
                                     nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
-                                    
                                 });
                                 break;
                             case 'fade':
-                                $('.wp-block-create-block-gutenberg-media-carousel').slick({
+                                $(sliderId).slick({
                                     dots: true,
                                     infinite: true,
                                     speed: 500,
@@ -533,11 +851,10 @@ function save({
                                     arrows: ${showArrows},
                                     prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
                                     nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
-                                   
                                 });
                                 break;
                             default:
-                                $('.wp-block-create-block-gutenberg-media-carousel').slick({
+                                $(sliderId).slick({
                                     slidesToShow: 1,
                                     slidesToScroll: 1,
                                     autoplay: true,
@@ -545,7 +862,6 @@ function save({
                                     arrows: ${showArrows},
                                     prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
                                     nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
-                                  
                                 });
                                 break;
                         }
