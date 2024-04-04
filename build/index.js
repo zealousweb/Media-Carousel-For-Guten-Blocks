@@ -83,8 +83,7 @@ const {
 
 function Edit({
   attributes,
-  setAttributes,
-  clientId
+  setAttributes
 }) {
   const {
     galleryImages,
@@ -92,15 +91,12 @@ function Edit({
     showArrows,
     arrowType
   } = attributes;
-  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)({
-    "data-slider-type": sliderType,
-    "data-arrow-type": arrowType,
-    id: `utk-slider-${clientId}-${sliderType}`
-  });
-  const ALLOWED_MEDIA_TYPES = ["image"];
-  console.log(clientId);
+  const [sliderId, setSliderId] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)('');
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
+    setSliderId(`utk-slider-${sliderType}-${Math.floor(Math.random() * 1000)}`);
+  }, [sliderType]);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, {
-    key: `setting-${clientId}`
+    key: `setting`
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gallery Settings", "utk-unified-blocks")
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
@@ -118,8 +114,7 @@ function Edit({
     }],
     onChange: val => {
       setAttributes({
-        sliderType: val,
-        clientId
+        sliderType: val
       });
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
@@ -127,8 +122,7 @@ function Edit({
     checked: showArrows,
     onChange: val => {
       setAttributes({
-        showArrows: val,
-        clientId
+        showArrows: val
       });
     }
   }), showArrows && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
@@ -146,16 +140,14 @@ function Edit({
     }],
     onChange: val => {
       setAttributes({
-        arrowType: val,
-        clientId
+        arrowType: val
       });
     }
   }))), galleryImages && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUploadCheck, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUpload, {
     multiple: true,
     onSelect: val => {
       setAttributes({
-        galleryImages: val,
-        clientId
+        galleryImages: val
       });
     },
     gallery: true,
@@ -171,7 +163,8 @@ function Edit({
       });
     }
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    ...blockProps
+    ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)(),
+    id: sliderId
   }, galleryImages ? galleryImages.map(image => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     key: image.id,
     className: "utk-gallery-single"
@@ -182,18 +175,16 @@ function Edit({
     multiple: true,
     onSelect: val => {
       setAttributes({
-        galleryImages: val,
-        clientId
+        galleryImages: val
       });
     },
     onFilesPreUpload: val => {
       setAttributes({
-        galleryImages: val,
-        clientId
+        galleryImages: val
       });
     },
     onSelectURL: false,
-    allowedTypes: ALLOWED_MEDIA_TYPES,
+    allowedTypes: ["image"],
     labels: {
       title: "Add Gallery Images"
     }
@@ -309,9 +300,11 @@ function save({
     galleryImages,
     sliderType,
     showArrows,
-    arrowType,
-    clientId
+    arrowType
   } = attributes;
+
+  // Generate a unique ID for each slider instance
+  const sliderId = `utk-slider-${sliderType}-${Math.floor(Math.random() * 1000)}`;
 
   // Define getPrevArrow and getNextArrow functions
   function getPrevArrow(arrowType) {
@@ -338,11 +331,10 @@ function save({
         return;
     }
   }
-  console.log(clientId);
-  console.log(sliderType);
+  console.log(sliderId);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save(),
-    id: `utk-slider-${clientId}-${sliderType}`
+    id: sliderId
   }, galleryImages && galleryImages.map(image => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     key: image.id,
     className: "utk-gallery-single"
@@ -351,14 +343,14 @@ function save({
     alt: image.alt ? image.alt : "Gallery Image"
   })))), showArrows && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Arrow Type: ", arrowType), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("script", null, `
                     jQuery(document).ready(function($) {
-                        var sliderId = "#utk-slider-${clientId}-${sliderType}";
+                        var sliderId = "#${sliderId}";
 
                         switch ("${sliderType}") {
                             case 'simple':
                                 $(sliderId).slick({
                                     arrows: ${showArrows},
-                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
-                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
+                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
+                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
                                 });
                                 break;
                             case 'carousel':
@@ -368,8 +360,8 @@ function save({
                                     slidesToScroll: 1,
                                     dots: true,
                                     arrows: ${showArrows},
-                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
-                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
+                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
+                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
                                 });
                                 break;
                             case 'fade':
@@ -380,8 +372,8 @@ function save({
                                     fade: true,
                                     cssEase: 'linear',
                                     arrows: ${showArrows},
-                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
-                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
+                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
+                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
                                 });
                                 break;
                             default:
@@ -391,8 +383,8 @@ function save({
                                     autoplay: true,
                                     autoplaySpeed: 2000,
                                     arrows: ${showArrows},
-                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
-                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
+                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
+                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
                                 });
                                 break;
                         }

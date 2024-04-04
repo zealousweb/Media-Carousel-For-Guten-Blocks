@@ -21,40 +21,44 @@ import React from 'react';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.js";
-export default function save({ attributes}) {
-    const { galleryImages, sliderType, showArrows, arrowType , clientId} = attributes;
+
+export default function save({ attributes }) {
+    const { galleryImages, sliderType, showArrows, arrowType } = attributes;
+
+    // Generate a unique ID for each slider instance
+    const sliderId = `utk-slider-${sliderType}-${Math.floor(Math.random() * 1000)}`;
 
     // Define getPrevArrow and getNextArrow functions
     function getPrevArrow(arrowType) {
         switch (arrowType) {
             case 'custom1':
-                return ;
+                return;
             case 'custom2':
-                return ;
+                return;
             case 'custom3':
-                return ;
+                return;
             default:
-                return ;
+                return;
         }
     }
 
     function getNextArrow(arrowType) {
         switch (arrowType) {
             case 'custom1':
-                return ;
+                return;
             case 'custom2':
                 return;
             case 'custom3':
-                return ;
+                return;
             default:
-                return ;
+                return;
         }
     }
-    console.log(clientId);
-    console.log(sliderType);
+
+    console.log(sliderId);
     return (
         <>
-            <div {...useBlockProps.save()} id={`utk-slider-${clientId}-${sliderType}`}>
+           <div {...useBlockProps.save()} id={sliderId}>
                 {galleryImages &&
                     galleryImages.map((image) => (
                         <div key={image.id} className="utk-gallery-single">
@@ -67,16 +71,16 @@ export default function save({ attributes}) {
             </div>
             {showArrows && <p>Arrow Type: {arrowType}</p>}
             <script>
-                {`
+            {`
                     jQuery(document).ready(function($) {
-                        var sliderId = "#utk-slider-${clientId}-${sliderType}";
+                        var sliderId = "#${sliderId}";
 
                         switch ("${sliderType}") {
                             case 'simple':
                                 $(sliderId).slick({
                                     arrows: ${showArrows},
-                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
-                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
+                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
+                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
                                 });
                                 break;
                             case 'carousel':
@@ -86,8 +90,8 @@ export default function save({ attributes}) {
                                     slidesToScroll: 1,
                                     dots: true,
                                     arrows: ${showArrows},
-                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
-                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
+                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
+                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
                                 });
                                 break;
                             case 'fade':
@@ -98,8 +102,8 @@ export default function save({ attributes}) {
                                     fade: true,
                                     cssEase: 'linear',
                                     arrows: ${showArrows},
-                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
-                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
+                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
+                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
                                 });
                                 break;
                             default:
@@ -109,8 +113,8 @@ export default function save({ attributes}) {
                                     autoplay: true,
                                     autoplaySpeed: 2000,
                                     arrows: ${showArrows},
-                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
-                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
+                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
+                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
                                 });
                                 break;
                         }

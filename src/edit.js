@@ -60,21 +60,18 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.js";
 
-
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes }) {
     const { galleryImages, sliderType, showArrows, arrowType } = attributes;
-    const blockProps = useBlockProps({
-        "data-slider-type": sliderType, 
-        "data-arrow-type": arrowType,
-       id: `utk-slider-${clientId}-${sliderType}`,
-    });
 
-    const ALLOWED_MEDIA_TYPES = ["image"];
-    console.log(clientId);
+    const [sliderId, setSliderId] = useState('');
+
+    useEffect(() => {
+        setSliderId(`utk-slider-${sliderType}-${Math.floor(Math.random() * 1000)}`);
+    }, [sliderType]);
+
     return (
         <>
-            <InspectorControls key={`setting-${clientId}`}>
-                {/* Use unique keys for each instance */}
+            <InspectorControls key={`setting`}>
                 <PanelBody title={__("Gallery Settings", "utk-unified-blocks")}>
                     <SelectControl
                         label={__("Slider Type", "utk-unified-blocks")}
@@ -85,14 +82,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             { label: "Fade", value: "fade" },
                         ]}
                         onChange={(val) => {
-                            setAttributes({ sliderType: val, clientId  });
+                            setAttributes({ sliderType: val });
                         }}
                     />
                     <ToggleControl
                         label={__("Show Arrows", "utk-unified-blocks")}
                         checked={showArrows}
                         onChange={(val) => {
-                            setAttributes({ showArrows: val, clientId });
+                            setAttributes({ showArrows: val });
                         }}
                     />
                     {showArrows && (
@@ -105,7 +102,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                 { label: "Arrow 3", value: "custom3" },
                             ]}
                             onChange={(val) => {
-                                setAttributes({ arrowType: val, clientId });
+                                setAttributes({ arrowType: val });
                             }}
                         />
                     )}
@@ -119,7 +116,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             <MediaUpload
                                 multiple={true}
                                 onSelect={(val) => {
-                                    setAttributes({ galleryImages: val, clientId });
+                                    setAttributes({ galleryImages: val });
                                 }}
                                 gallery={true}
                                 allowedTypes={["image"]}
@@ -139,7 +136,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 </BlockControls>
             )}
 
-            <div {...blockProps}>
+            <div {...useBlockProps()} id={sliderId}>
                 {galleryImages ? (
                     galleryImages.map((image) => (
                         <div key={image.id} className="utk-gallery-single">
@@ -153,13 +150,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     <MediaPlaceholder
                         multiple={true}
                         onSelect={(val) => {
-                            setAttributes({ galleryImages: val, clientId });
+                            setAttributes({ galleryImages: val });
                         }}
                         onFilesPreUpload={(val) => {
-                            setAttributes({ galleryImages: val, clientId });
+                            setAttributes({ galleryImages: val });
                         }}
                         onSelectURL={false}
-                        allowedTypes={ALLOWED_MEDIA_TYPES}
+                        allowedTypes={["image"]}
                         labels={{
                             title: "Add Gallery Images",
                         }}
