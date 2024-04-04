@@ -81,212 +81,6 @@ const {
 
 
 
-
-// export default function Edit({ attributes, setAttributes, clientId }) {
-// 	const { galleryImages, sliderType, showArrows  } = attributes;
-
-// 	const blockProps = useBlockProps({
-// 		"data-slider-type": sliderType, // Add data-slider-type attribute
-// 	});
-// 	const ALLOWED_MEDIA_TYPES = ["image"];
-//     // console.log(showArrows);
-// 	return (
-// 		<>
-// 			<InspectorControls key="setting">
-// 				<PanelBody title={__("Gallery Settings", "utk-unified-blocks")}>
-// 					<SelectControl
-// 						label={__("Slider Type", "utk-unified-blocks")}
-// 						value={sliderType}
-// 						options={[
-// 							{ label: "Simple", value: "simple" },
-// 							{ label: "Carousel", value: "carousel" },
-// 							{ label: "Fade", value: "fade" },
-// 						]}
-// 						onChange={(val) => {
-// 							setAttributes({ sliderType: val });
-// 						}}
-// 					/>
-//                      <ToggleControl
-//                         label={__("Show Arrows", "utk-unified-blocks")}
-//                         checked={showArrows}
-//                         onChange={(val) => {
-//                             setAttributes({ showArrows: val });
-//                         }}
-//                     />
-
-// 				</PanelBody>
-// 			</InspectorControls>
-
-// 			{galleryImages && (
-// 				<BlockControls>
-// 					<ToolbarGroup>
-// 						<MediaUploadCheck>
-// 							<MediaUpload
-// 								multiple={true}
-// 								onSelect={(val) => {
-// 									setAttributes({ galleryImages: val });
-// 								}}
-// 								gallery={true}
-// 								allowedTypes={["image"]}
-// 								value={attributes.galleryImages.map((image) => image.id)}
-// 								render={({ open }) => {
-// 									return (
-// 										<ToolbarButton
-// 											label={__("Edit Images", "utk-unified-blocks")}
-// 											onClick={open}
-// 											icon="edit"
-// 										/>
-// 									);
-// 								}}
-// 							/>
-// 						</MediaUploadCheck>
-// 					</ToolbarGroup>
-// 				</BlockControls>
-// 			)}
-
-// 			<div {...blockProps}>
-// 				{galleryImages ? (
-// 					galleryImages.map((image) => {
-// 						return (
-// 							<div key={image.id}>
-// 								<img
-// 									src={image.url}
-// 									alt={image.alt ? image.alt : "Gallery Image"}
-// 								/>
-// 							</div>
-// 						);
-// 					})
-// 				) : (
-// 					<MediaPlaceholder
-// 						multiple={true}
-// 						onSelect={(val) => {
-// 							setAttributes({ galleryImages: val });
-// 						}}
-// 						onFilesPreUpload={(val) => {
-// 							setAttributes({ galleryImages: val });
-// 						}}
-// 						onSelectURL={false}
-// 						allowedTypes={ALLOWED_MEDIA_TYPES}
-// 						labels={{
-// 							title: "Add Gallery Images",
-// 						}}
-// 					/>
-// 				)}
-// 			</div>
-// 		</>
-// 	);
-// }
-
-// export default function Edit({ attributes, setAttributes, clientId }) {
-//     const { galleryImages, sliderType, showArrows, arrowType } = attributes;
-//     // console.log(arrowType);
-//     const blockProps = useBlockProps({
-//         "data-slider-type": sliderType, // Add data-slider-type attribute
-//         "data-arrow-type":arrowType,
-//     });
-
-//     const ALLOWED_MEDIA_TYPES = ["image"];
-
-//     return (
-//         <>
-//             <InspectorControls key="setting">
-//                 <PanelBody title={__("Gallery Settings", "utk-unified-blocks")}>
-//                     <SelectControl
-//                         label={__("Slider Type", "utk-unified-blocks")}
-//                         value={sliderType}
-//                         options={[
-//                             { label: "Simple", value: "simple" },
-//                             { label: "Carousel", value: "carousel" },
-//                             { label: "Fade", value: "fade" },
-//                         ]}
-//                         onChange={(val) => {
-//                             setAttributes({ sliderType: val });
-//                         }}
-//                     />
-//                     <ToggleControl
-//                         label={__("Show Arrows", "utk-unified-blocks")}
-//                         checked={showArrows}
-//                         onChange={(val) => {
-//                             setAttributes({ showArrows: val });
-//                         }}
-//                     />
-//                     {showArrows && (
-//                         <SelectControl
-//                             label={__("Arrow Type", "utk-unified-blocks")}
-//                             value={arrowType}
-//                             options={[
-//                                 { label: "Arrow 1", value: "custom1" },
-//                                 { label: "Arrow 2", value: "custom2" },
-//                                 { label: "Arrow 3", value: "custom3" },
-//                             ]}
-//                             onChange={(val) => {
-//                                 setAttributes({ arrowType: val });
-//                             }}
-//                         />
-//                     )}
-//                 </PanelBody>
-//             </InspectorControls>
-
-//             {galleryImages && (
-//                 <BlockControls>
-//                     <ToolbarGroup>
-//                         <MediaUploadCheck>
-//                             <MediaUpload
-//                                 multiple={true}
-//                                 onSelect={(val) => {
-//                                     setAttributes({ galleryImages: val });
-//                                 }}
-//                                 gallery={true}
-//                                 allowedTypes={["image"]}
-//                                 value={attributes.galleryImages.map((image) => image.id)}
-//                                 render={({ open }) => {
-//                                     return (
-//                                         <ToolbarButton
-//                                             label={__("Edit Images", "utk-unified-blocks")}
-//                                             onClick={open}
-//                                             icon="edit"
-//                                         />
-//                                     );
-//                                 }}
-//                             />
-//                         </MediaUploadCheck>
-//                     </ToolbarGroup>
-//                 </BlockControls>
-//             )}
-
-//             <div {...blockProps}>
-//                 {galleryImages ? (
-//                     galleryImages.map((image) => {
-//                         return (
-//                             <div key={image.id}>
-//                                 <img
-//                                     src={image.url}
-//                                     alt={image.alt ? image.alt : "Gallery Image"}
-//                                 />
-//                             </div>
-//                         );
-//                     })
-//                 ) : (
-//                     <MediaPlaceholder
-//                         multiple={true}
-//                         onSelect={(val) => {
-//                             setAttributes({ galleryImages: val });
-//                         }}
-//                         onFilesPreUpload={(val) => {
-//                             setAttributes({ galleryImages: val });
-//                         }}
-//                         onSelectURL={false}
-//                         allowedTypes={ALLOWED_MEDIA_TYPES}
-//                         labels={{
-//                             title: "Add Gallery Images",
-//                         }}
-//                     />
-//                 )}
-//             </div>
-//         </>
-//     );
-// }
-
 function Edit({
   attributes,
   setAttributes,
@@ -300,9 +94,11 @@ function Edit({
   } = attributes;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)({
     "data-slider-type": sliderType,
-    "data-arrow-type": arrowType
+    "data-arrow-type": arrowType,
+    id: `utk-slider-${clientId}-${sliderType}`
   });
   const ALLOWED_MEDIA_TYPES = ["image"];
+  console.log(clientId);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, {
     key: `setting-${clientId}`
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
@@ -322,7 +118,8 @@ function Edit({
     }],
     onChange: val => {
       setAttributes({
-        sliderType: val
+        sliderType: val,
+        clientId
       });
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
@@ -330,7 +127,8 @@ function Edit({
     checked: showArrows,
     onChange: val => {
       setAttributes({
-        showArrows: val
+        showArrows: val,
+        clientId
       });
     }
   }), showArrows && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
@@ -348,14 +146,16 @@ function Edit({
     }],
     onChange: val => {
       setAttributes({
-        arrowType: val
+        arrowType: val,
+        clientId
       });
     }
   }))), galleryImages && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUploadCheck, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUpload, {
     multiple: true,
     onSelect: val => {
       setAttributes({
-        galleryImages: val
+        galleryImages: val,
+        clientId
       });
     },
     gallery: true,
@@ -371,8 +171,7 @@ function Edit({
       });
     }
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    ...blockProps,
-    id: `utk-slider-${clientId}`
+    ...blockProps
   }, galleryImages ? galleryImages.map(image => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     key: image.id,
     className: "utk-gallery-single"
@@ -383,12 +182,14 @@ function Edit({
     multiple: true,
     onSelect: val => {
       setAttributes({
-        galleryImages: val
+        galleryImages: val,
+        clientId
       });
     },
     onFilesPreUpload: val => {
       setAttributes({
-        galleryImages: val
+        galleryImages: val,
+        clientId
       });
     },
     onSelectURL: false,
@@ -500,287 +301,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// export default function save({ attributes }) {
-// 	const { galleryImages, sliderType, showArrows } = attributes;
-//     // console.log(showArrows, 't');
-// 	const blockProps = useBlockProps.save();
-// 	return (
-// 		<>
-// 			<div {...blockProps}>
-// 				{galleryImages &&
-// 					galleryImages.map((image) => (
-// 						<div key={image.id} className="utk-gallery-single">
-// 							<img
-// 								src={image.url}
-// 								alt={image.alt ? image.alt : "Gallery Image"}
-// 							/>
-// 						</div>
-// 					))}
-// 			</div>
-// 			<script>
-// 				{`
-//                     jQuery(document).ready(function($) {
-//                         switch ("${sliderType}") {
-//                             case 'simple':
-//                                 $('.wp-block-create-block-gutenberg-media-carousel').slick({
-//                                     arrows:${showArrows}
-//                                 });
-//                                 break;
-//                             case 'carousel':
-//                                 $('.wp-block-create-block-gutenberg-media-carousel').slick({
-//                                     infinite: true,
-//                                     slidesToShow: 3,
-//                                     slidesToScroll: 1,
-//                                     dots: true,
-//                                     arrows:${showArrows}
-//                                 });
-//                                 break;
-//                             case 'fade':
-//                                 $('.wp-block-create-block-gutenberg-media-carousel').slick({
-//                                     dots: true,
-//                                     infinite: true,
-//                                     speed: 500,
-//                                     fade: true,
-//                                     cssEase: 'linear',
-//                                     arrows:${showArrows}
-//                                 });
-//                                 break;
-//                             default:
-//                                 $('.wp-block-create-block-gutenberg-media-carousel').slick({
-//                                     slidesToShow: 1,
-//                                     slidesToScroll: 1,
-//                                     autoplay: true,
-//                                     autoplaySpeed: 2000,
-//                                     arrows:${showArrows}
-//                                 });
-//                                 break;
-//                         }
-//                     });
-//                 `}
-// 			</script>
-// 		</>
-// 	);
-// }
-
-// export default function save({ attributes }) {
-//     const { galleryImages, sliderType, showArrows, arrowType } = attributes;
-
-//     const blockProps = useBlockProps.save();
-
-//     // Define getPrevArrow and getNextArrow functions
-//     function getPrevArrow(arrowType) {
-// switch (arrowType) {
-//     case 'custom1':
-//         return ;
-//     case 'custom2':
-//         return ;
-//     case 'custom3':
-//         return ;
-//     default:
-//         return ;
-// }
-//     }
-
-//     function getNextArrow(arrowType) {
-// switch (arrowType) {
-//     case 'custom1':
-//         return ;
-//     case 'custom2':
-//         return;
-//     case 'custom3':
-//         return ;
-//     default:
-//         return ;
-// }
-//     }
-
-//     console.log('this', sliderType);
-//     return (
-//         <>
-//             <div {...blockProps}>
-//             {/* {arrowType} */}
-//                 {galleryImages &&
-//                     galleryImages.map((image) => (
-//                         <div key={image.id} className="utk-gallery-single" data-sliderType={sliderType}>
-//                             <img
-//                                 src={image.url}
-//                                 alt={image.alt ? image.alt : "Gallery Image"}
-//                             />
-//                         </div>
-//                     ))}
-//             </div>
-//             {showArrows && <p>Arrow Type: {arrowType}</p>}
-//             <script>
-
-//                 {`
-//                     jQuery(document).ready(function($) {
-//                         var arrowType = "${arrowType}";
-//                         switch ("${sliderType}") {
-//                             case 'simple':
-//                                 $('.wp-block-create-block-gutenberg-media-carousel').slick({
-//                                     arrows: ${showArrows},
-
-//                                     prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
-//                                     nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
-
-//                                 });
-//                                 break;
-//                             case 'carousel':
-//                                 $('.wp-block-create-block-gutenberg-media-carousel').slick({
-//                                     infinite: true,
-//                                     slidesToShow: 3,
-//                                     slidesToScroll: 1,
-//                                     dots: true,
-//                                     arrows: ${showArrows},
-//                                     prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
-//                                     nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
-
-//                                 });
-//                                 break;
-//                             case 'fade':
-//                                 $('.wp-block-create-block-gutenberg-media-carousel').slick({
-//                                     dots: true,
-//                                     infinite: true,
-//                                     speed: 500,
-//                                     fade: true,
-//                                     cssEase: 'linear',
-//                                     arrows: ${showArrows},
-//                                     prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
-//                                     nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
-
-//                                 });
-//                                 break;
-//                             default:
-//                                 $('.wp-block-create-block-gutenberg-media-carousel').slick({
-//                                     slidesToShow: 1,
-//                                     slidesToScroll: 1,
-//                                     autoplay: true,
-//                                     autoplaySpeed: 2000,
-//                                     arrows: ${showArrows},
-//                                     prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
-//                                     nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
-
-//                                 });
-//                                 break;
-//                         }
-//                     });
-//                 `}
-//             </script>
-//         </>
-//     );
-// }
-
-// export default function save({ attributes, clientId }) {
-//     const { galleryImages, sliderType, showArrows, arrowType } = attributes;
-
-//     const blockProps = useBlockProps.save();
-
-//     // Define getPrevArrow and getNextArrow functions
-//     function getPrevArrow(arrowType) {
-//         switch (arrowType) {
-//             case 'custom1':
-//                 return ;
-//             case 'custom2':
-//                 return ;
-//             case 'custom3':
-//                 return ;
-//             default:
-//                 return ;
-//         }
-//     }
-
-//     function getNextArrow(arrowType) {
-//         switch (arrowType) {
-//             case 'custom1':
-//                 return ;
-//             case 'custom2':
-//                 return;
-//             case 'custom3':
-//                 return ;
-//             default:
-//                 return ;
-//         }
-//     }
-//     console.log(clientId);
-//     console.log(sliderType);
-//     return (
-//         <>
-//             <div {...blockProps} id={`utk-slider-${sliderType}`}>
-//                 {galleryImages &&
-//                     galleryImages.map((image) => (
-//                         <div key={image.id} className="utk-gallery-single">
-//                             <img
-//                                 src={image.url}
-//                                 alt={image.alt ? image.alt : "Gallery Image"}
-//                             />
-//                         </div>
-//                     ))}
-//             </div>
-//             {showArrows && <p>Arrow Type: {arrowType}</p>}
-//             <script>
-//                 {`
-//                     jQuery(document).ready(function($) {
-//                         var sliderId = "#utk-slider-${sliderType}";
-
-//                         switch ("${sliderType}") {
-//                             case 'simple':
-//                                 $(sliderId).slick({
-//                                     arrows: ${showArrows},
-//                                     prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
-//                                     nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
-//                                 });
-//                                 break;
-//                             case 'carousel':
-//                                 $(sliderId).slick({
-//                                     infinite: true,
-//                                     slidesToShow: 3,
-//                                     slidesToScroll: 1,
-//                                     dots: true,
-//                                     arrows: ${showArrows},
-//                                     prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
-//                                     nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
-//                                 });
-//                                 break;
-//                             case 'fade':
-//                                 $(sliderId).slick({
-//                                     dots: true,
-//                                     infinite: true,
-//                                     speed: 500,
-//                                     fade: true,
-//                                     cssEase: 'linear',
-//                                     arrows: ${showArrows},
-//                                     prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
-//                                     nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
-//                                 });
-//                                 break;
-//                             default:
-//                                 $(sliderId).slick({
-//                                     slidesToShow: 1,
-//                                     slidesToScroll: 1,
-//                                     autoplay: true,
-//                                     autoplaySpeed: 2000,
-//                                     arrows: ${showArrows},
-//                                     prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
-//                                     nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
-//                                 });
-//                                 break;
-//                         }
-//                     });
-//                 `}
-//             </script>
-//         </>
-//     );
-// }
 
 function save({
-  attributes,
-  clientId
+  attributes
 }) {
   const {
     galleryImages,
     sliderType,
     showArrows,
-    arrowType
+    arrowType,
+    clientId
   } = attributes;
 
   // Define getPrevArrow and getNextArrow functions
@@ -809,6 +339,7 @@ function save({
     }
   }
   console.log(clientId);
+  console.log(sliderType);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save(),
     id: `utk-slider-${clientId}-${sliderType}`
@@ -4038,7 +3569,7 @@ module.exports = window["wp"]["i18n"];
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"0.1.0","title":"Gutenberg Media Carousel","category":"widgets","icon":"smiley","description":"A custom block for uploading multiple images with sliding effect.","example":{},"attributes":{"galleryId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simple"},"showArrows":{"type":"boolean","default":true},"arrowType":{"type":"string","default":"custom1"}},"supports":{"html":false,"align":["wide","full"],"sliderType":true},"textdomain":"gutenberg-media-carousel","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"0.1.0","title":"Gutenberg Media Carousel","category":"widgets","icon":"smiley","description":"A custom block for uploading multiple images with sliding effect.","example":{},"attributes":{"galleryId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simple"},"showArrows":{"type":"boolean","default":true},"arrowType":{"type":"string","default":"custom1"},"clientId":{"type":"string"}},"supports":{"html":false,"align":["wide","full"]},"textdomain":"gutenberg-media-carousel","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

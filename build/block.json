@@ -26,6 +26,9 @@
     "arrowType": {
       "type": "string",
       "default": "custom1"
+    },
+    "clientId": {
+      "type": "string"
     }
   },
   "supports": {
@@ -33,8 +36,7 @@
     "align": [
       "wide",
       "full"
-    ],
-    "sliderType": true
+    ]
   },
   "textdomain": "gutenberg-media-carousel",
   "editorScript": "file:./index.js",

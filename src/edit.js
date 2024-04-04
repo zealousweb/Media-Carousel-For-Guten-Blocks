@@ -64,12 +64,13 @@ import "slick-carousel/slick/slick.js";
 export default function Edit({ attributes, setAttributes, clientId }) {
     const { galleryImages, sliderType, showArrows, arrowType } = attributes;
     const blockProps = useBlockProps({
-        "data-slider-type": sliderType,
+        "data-slider-type": sliderType, 
         "data-arrow-type": arrowType,
+       id: `utk-slider-${clientId}-${sliderType}`,
     });
 
     const ALLOWED_MEDIA_TYPES = ["image"];
-
+    console.log(clientId);
     return (
         <>
             <InspectorControls key={`setting-${clientId}`}>
@@ -84,14 +85,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             { label: "Fade", value: "fade" },
                         ]}
                         onChange={(val) => {
-                            setAttributes({ sliderType: val });
+                            setAttributes({ sliderType: val, clientId  });
                         }}
                     />
                     <ToggleControl
                         label={__("Show Arrows", "utk-unified-blocks")}
                         checked={showArrows}
                         onChange={(val) => {
-                            setAttributes({ showArrows: val });
+                            setAttributes({ showArrows: val, clientId });
                         }}
                     />
                     {showArrows && (
@@ -104,7 +105,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                 { label: "Arrow 3", value: "custom3" },
                             ]}
                             onChange={(val) => {
-                                setAttributes({ arrowType: val });
+                                setAttributes({ arrowType: val, clientId });
                             }}
                         />
                     )}
@@ -118,7 +119,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             <MediaUpload
                                 multiple={true}
                                 onSelect={(val) => {
-                                    setAttributes({ galleryImages: val });
+                                    setAttributes({ galleryImages: val, clientId });
                                 }}
                                 gallery={true}
                                 allowedTypes={["image"]}
@@ -138,7 +139,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 </BlockControls>
             )}
 
-            <div {...blockProps} id={`utk-slider-${clientId}`}>
+            <div {...blockProps}>
                 {galleryImages ? (
                     galleryImages.map((image) => (
                         <div key={image.id} className="utk-gallery-single">
@@ -152,10 +153,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     <MediaPlaceholder
                         multiple={true}
                         onSelect={(val) => {
-                            setAttributes({ galleryImages: val });
+                            setAttributes({ galleryImages: val, clientId });
                         }}
                         onFilesPreUpload={(val) => {
-                            setAttributes({ galleryImages: val });
+                            setAttributes({ galleryImages: val, clientId });
                         }}
                         onSelectURL={false}
                         allowedTypes={ALLOWED_MEDIA_TYPES}

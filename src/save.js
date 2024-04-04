@@ -17,11 +17,12 @@ import { InnerBlocks, useBlockProps } from "@wordpress/block-editor";
  */
 
 import $ from "jquery";
+import React from 'react';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.js";
-export default function save({ attributes, clientId }) {
-    const { galleryImages, sliderType, showArrows, arrowType } = attributes;
+export default function save({ attributes}) {
+    const { galleryImages, sliderType, showArrows, arrowType , clientId} = attributes;
 
     // Define getPrevArrow and getNextArrow functions
     function getPrevArrow(arrowType) {
@@ -50,6 +51,7 @@ export default function save({ attributes, clientId }) {
         }
     }
     console.log(clientId);
+    console.log(sliderType);
     return (
         <>
             <div {...useBlockProps.save()} id={`utk-slider-${clientId}-${sliderType}`}>
