@@ -60,23 +60,28 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.js";
 
-
 export default function Edit({ attributes, setAttributes }) {
     const { galleryImages, sliderType, showArrows, arrowType } = attributes;
 
-    const [sliderId, setSliderId] = useState('');
+    const [sliderId, setSliderId] = useState(attributes.sliderId || '');
 
     useEffect(() => {
-        setSliderId(`utk-slider-${sliderType}-${Math.floor(Math.random() * 1000)}`);
-    }, [sliderType]);
-    console.log('hello',galleryImages);
-    console.log(sliderId);
+        if (!sliderId) {
+            setSliderId(`utk-slider-${sliderType}-${Math.floor(Math.random() * 1000)}`);
+        }
+    }, [sliderType, sliderId]);
+        // Update setAttributes to include sliderId
+        useEffect(() => {
+            setAttributes({ ...attributes, sliderId });
+        }, [sliderId]);
+
+        console.log("edit",sliderId);
     return (
         <>
-            <InspectorControls key={`setting`}>
-                <PanelBody title={__("Gallery Settings", "utk-unified-blocks")}>
+            <InspectorControls>
+                <PanelBody title={__("Gallery Settings")}>
                     <SelectControl
-                        label={__("Slider Type", "utk-unified-blocks")}
+                        label={__("Slider Type")}
                         value={sliderType}
                         options={[
                             { label: "Simple", value: "simple" },
@@ -88,7 +93,7 @@ export default function Edit({ attributes, setAttributes }) {
                         }}
                     />
                     <ToggleControl
-                        label={__("Show Arrows", "utk-unified-blocks")}
+                        label={__("Show Arrows")}
                         checked={showArrows}
                         onChange={(val) => {
                             setAttributes({ showArrows: val });
@@ -96,7 +101,7 @@ export default function Edit({ attributes, setAttributes }) {
                     />
                     {showArrows && (
                         <SelectControl
-                            label={__("Arrow Type", "utk-unified-blocks")}
+                            label={__("Arrow Type")}
                             value={arrowType}
                             options={[
                                 { label: "Arrow 1", value: "custom1" },
@@ -117,8 +122,8 @@ export default function Edit({ attributes, setAttributes }) {
                         <MediaUploadCheck>
                             <MediaUpload
                                 multiple={true}
-                                onSelect={(val) => {
-                                    setAttributes({ galleryImages: val });
+                                onSelect={(media) => {
+                                    setAttributes({ galleryImages: media.id });
                                 }}
                                 gallery={true}
                                 allowedTypes={['image', 'video']}
@@ -126,7 +131,7 @@ export default function Edit({ attributes, setAttributes }) {
                                 render={({ open }) => {
                                     return (
                                         <ToolbarButton
-                                            label={__("Edit Media", "utk-unified-blocks")}
+                                            label={__("Edit Media")}
                                             onClick={open}
                                             icon="edit"
                                         />

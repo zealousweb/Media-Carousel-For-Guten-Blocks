@@ -91,18 +91,24 @@ function Edit({
     showArrows,
     arrowType
   } = attributes;
-  const [sliderId, setSliderId] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)('');
+  const [sliderId, setSliderId] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(attributes.sliderId || '');
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
-    setSliderId(`utk-slider-${sliderType}-${Math.floor(Math.random() * 1000)}`);
-  }, [sliderType]);
-  console.log('hello', galleryImages);
-  console.log(sliderId);
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, {
-    key: `setting`
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gallery Settings", "utk-unified-blocks")
+    if (!sliderId) {
+      setSliderId(`utk-slider-${sliderType}-${Math.floor(Math.random() * 1000)}`);
+    }
+  }, [sliderType, sliderId]);
+  // Update setAttributes to include sliderId
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
+    setAttributes({
+      ...attributes,
+      sliderId
+    });
+  }, [sliderId]);
+  console.log("edit", sliderId);
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gallery Settings")
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slider Type", "utk-unified-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slider Type"),
     value: sliderType,
     options: [{
       label: "Simple",
@@ -120,7 +126,7 @@ function Edit({
       });
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Show Arrows", "utk-unified-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Show Arrows"),
     checked: showArrows,
     onChange: val => {
       setAttributes({
@@ -128,7 +134,7 @@ function Edit({
       });
     }
   }), showArrows && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arrow Type", "utk-unified-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arrow Type"),
     value: arrowType,
     options: [{
       label: "Arrow 1",
@@ -147,9 +153,9 @@ function Edit({
     }
   }))), galleryImages && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUploadCheck, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUpload, {
     multiple: true,
-    onSelect: val => {
+    onSelect: media => {
       setAttributes({
-        galleryImages: val
+        galleryImages: media.id
       });
     },
     gallery: true,
@@ -159,7 +165,7 @@ function Edit({
       open
     }) => {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarButton, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Edit Media", "utk-unified-blocks"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Edit Media"),
         onClick: open,
         icon: "edit"
       });
@@ -317,11 +323,9 @@ function save({
     galleryImages,
     sliderType,
     showArrows,
-    arrowType
+    arrowType,
+    sliderId
   } = attributes;
-
-  // Generate a unique ID for each slider instance
-  const sliderId = `utk-slider-${sliderType}-${Math.floor(Math.random() * 1000)}`;
 
   // Define getPrevArrow and getNextArrow functions
   function getPrevArrow(arrowType) {
@@ -348,10 +352,8 @@ function save({
         return;
     }
   }
-  console.log(sliderId);
-  console.log(galleryImages);
+  console.log("save", sliderId);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save(),
     id: sliderId
   }, galleryImages && galleryImages.map(media => {
     if (media.type === 'image') {
@@ -382,8 +384,8 @@ function save({
                             case 'simple':
                                 $(sliderId).slick({
                                     arrows: ${showArrows},
-                                    prevArrow: ${showArrows && arrowType ? 'getPrevArrow(arrowType)' : 'null'},
-                                    nextArrow: ${showArrows && arrowType ? 'getNextArrow(arrowType)' : 'null'}
+                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
+                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
                                 });
                                 break;
                             case 'carousel':
@@ -393,8 +395,8 @@ function save({
                                     slidesToScroll: 1,
                                     dots: true,
                                     arrows: ${showArrows},
-                                    prevArrow: ${showArrows && arrowType ? 'getPrevArrow(arrowType)' : 'null'},
-                                    nextArrow: ${showArrows && arrowType ? 'getNextArrow(arrowType)' : 'null'}
+                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
+                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
                                 });
                                 break;
                             case 'fade':
@@ -405,8 +407,8 @@ function save({
                                     fade: true,
                                     cssEase: 'linear',
                                     arrows: ${showArrows},
-                                    prevArrow: ${showArrows && arrowType ? 'getPrevArrow(arrowType)' : 'null'},
-                                    nextArrow: ${showArrows && arrowType ? 'getNextArrow(arrowType)' : 'null'}
+                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
+                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
                                 });
                                 break;
                             default:
@@ -416,8 +418,8 @@ function save({
                                     autoplay: true,
                                     autoplaySpeed: 2000,
                                     arrows: ${showArrows},
-                                    prevArrow: ${showArrows && arrowType ? 'getPrevArrow(arrowType)' : 'null'},
-                                    nextArrow: ${showArrows && arrowType ? 'getNextArrow(arrowType)' : 'null'}
+                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
+                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
                                 });
                                 break;
                         }
