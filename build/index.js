@@ -95,6 +95,8 @@ function Edit({
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
     setSliderId(`utk-slider-${sliderType}-${Math.floor(Math.random() * 1000)}`);
   }, [sliderType]);
+  console.log('hello', galleryImages);
+  console.log(sliderId);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, {
     key: `setting`
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
@@ -151,13 +153,13 @@ function Edit({
       });
     },
     gallery: true,
-    allowedTypes: ["image"],
-    value: attributes.galleryImages.map(image => image.id),
+    allowedTypes: ['image', 'video'],
+    value: attributes.galleryImages.map(media => media.id),
     render: ({
       open
     }) => {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarButton, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Edit Images", "utk-unified-blocks"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Edit Media", "utk-unified-blocks"),
         onClick: open,
         icon: "edit"
       });
@@ -165,13 +167,28 @@ function Edit({
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)(),
     id: sliderId
-  }, galleryImages ? galleryImages.map(image => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    key: image.id,
-    className: "utk-gallery-single"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    src: image.url,
-    alt: image.alt ? image.alt : "Gallery Image"
-  }))) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaPlaceholder, {
+  }, galleryImages ? galleryImages.map(media => {
+    if (media.type === 'image') {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        key: media.id,
+        className: "utk-gallery-single"
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+        src: media.url,
+        alt: media.alt ? media.alt : "Gallery Image"
+      }));
+    } else if (media.type === 'video') {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        key: media.id,
+        className: "utk-gallery-single"
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("video", {
+        controls: true
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("source", {
+        src: media.url,
+        type: media.mime
+      }), "Your browser does not support the video tag."));
+    }
+    return null;
+  }) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaPlaceholder, {
     multiple: true,
     onSelect: val => {
       setAttributes({
@@ -184,9 +201,9 @@ function Edit({
       });
     },
     onSelectURL: false,
-    allowedTypes: ["image"],
+    allowedTypes: ["image", "video"],
     labels: {
-      title: "Add Gallery Images"
+      title: "Add Gallery Images and Video"
     }
   })));
 }
@@ -332,16 +349,32 @@ function save({
     }
   }
   console.log(sliderId);
+  console.log(galleryImages);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save(),
     id: sliderId
-  }, galleryImages && galleryImages.map(image => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    key: image.id,
-    className: "utk-gallery-single"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    src: image.url,
-    alt: image.alt ? image.alt : "Gallery Image"
-  })))), showArrows && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Arrow Type: ", arrowType), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("script", null, `
+  }, galleryImages && galleryImages.map(media => {
+    if (media.type === 'image') {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        key: media.id,
+        className: "utk-gallery-single"
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+        src: media.url,
+        alt: media.alt ? media.alt : "Gallery Image"
+      }));
+    } else if (media.type === 'video') {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        key: media.id,
+        className: "utk-gallery-single"
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("video", {
+        controls: true
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("source", {
+        src: media.url,
+        type: media.mime
+      }), "Your browser does not support the video tag."));
+    }
+    return null;
+  })), showArrows && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Arrow Type: ", arrowType), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("script", null, `
                     jQuery(document).ready(function($) {
                         var sliderId = "#${sliderId}";
 
@@ -349,8 +382,8 @@ function save({
                             case 'simple':
                                 $(sliderId).slick({
                                     arrows: ${showArrows},
-                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
-                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
+                                    prevArrow: ${showArrows && arrowType ? 'getPrevArrow(arrowType)' : 'null'},
+                                    nextArrow: ${showArrows && arrowType ? 'getNextArrow(arrowType)' : 'null'}
                                 });
                                 break;
                             case 'carousel':
@@ -360,8 +393,8 @@ function save({
                                     slidesToScroll: 1,
                                     dots: true,
                                     arrows: ${showArrows},
-                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
-                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
+                                    prevArrow: ${showArrows && arrowType ? 'getPrevArrow(arrowType)' : 'null'},
+                                    nextArrow: ${showArrows && arrowType ? 'getNextArrow(arrowType)' : 'null'}
                                 });
                                 break;
                             case 'fade':
@@ -372,8 +405,8 @@ function save({
                                     fade: true,
                                     cssEase: 'linear',
                                     arrows: ${showArrows},
-                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
-                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
+                                    prevArrow: ${showArrows && arrowType ? 'getPrevArrow(arrowType)' : 'null'},
+                                    nextArrow: ${showArrows && arrowType ? 'getNextArrow(arrowType)' : 'null'}
                                 });
                                 break;
                             default:
@@ -383,8 +416,8 @@ function save({
                                     autoplay: true,
                                     autoplaySpeed: 2000,
                                     arrows: ${showArrows},
-                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
-                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
+                                    prevArrow: ${showArrows && arrowType ? 'getPrevArrow(arrowType)' : 'null'},
+                                    nextArrow: ${showArrows && arrowType ? 'getNextArrow(arrowType)' : 'null'}
                                 });
                                 break;
                         }
@@ -3561,7 +3594,7 @@ module.exports = window["wp"]["i18n"];
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"0.1.0","title":"Gutenberg Media Carousel","category":"widgets","icon":"smiley","description":"A custom block for uploading multiple images with sliding effect.","example":{},"attributes":{"galleryId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simple"},"showArrows":{"type":"boolean","default":true},"arrowType":{"type":"string","default":"custom1"},"clientId":{"type":"string"}},"supports":{"html":false,"align":["wide","full"]},"textdomain":"gutenberg-media-carousel","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"0.1.0","title":"Gutenberg Media Carousel","category":"widgets","icon":"smiley","description":"A custom block for uploading multiple images with sliding effect.","example":{},"attributes":{"id":{"type":"string"},"sliderId":{"type":"string"},"galleryId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simple"},"showArrows":{"type":"boolean","default":true},"arrowType":{"type":"string","default":"custom1"},"clientId":{"type":"string"}},"supports":{"html":false,"align":["wide","full"]},"textdomain":"gutenberg-media-carousel","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

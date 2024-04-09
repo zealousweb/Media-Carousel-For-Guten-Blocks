@@ -28,7 +28,7 @@ export default function save({ attributes }) {
     // Generate a unique ID for each slider instance
     const sliderId = `utk-slider-${sliderType}-${Math.floor(Math.random() * 1000)}`;
 
-    // Define getPrevArrow and getNextArrow functions
+	// Define getPrevArrow and getNextArrow functions
     function getPrevArrow(arrowType) {
         switch (arrowType) {
             case 'custom1':
@@ -56,22 +56,37 @@ export default function save({ attributes }) {
     }
 
     console.log(sliderId);
+    console.log(galleryImages);
     return (
         <>
-           <div {...useBlockProps.save()} id={sliderId}>
+            <div {...useBlockProps.save()} id={sliderId}>
                 {galleryImages &&
-                    galleryImages.map((image) => (
-                        <div key={image.id} className="utk-gallery-single">
-                            <img
-                                src={image.url}
-                                alt={image.alt ? image.alt : "Gallery Image"}
-                            />
-                        </div>
-                    ))}
+                    galleryImages.map((media) => {
+                        if (media.type === 'image') {
+                            return (
+                                <div key={media.id} className="utk-gallery-single">
+                                    <img
+                                        src={media.url}
+                                        alt={media.alt ? media.alt : "Gallery Image"}
+                                    />
+                                </div>
+                            );
+                        } else if (media.type === 'video') {
+                            return (
+                                <div key={media.id} className="utk-gallery-single">
+                                    <video controls>
+                                        <source src={media.url} type={media.mime} />
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                            );
+                        }
+                        return null;
+                    })}
             </div>
             {showArrows && <p>Arrow Type: {arrowType}</p>}
             <script>
-            {`
+                {`
                     jQuery(document).ready(function($) {
                         var sliderId = "#${sliderId}";
 
@@ -79,8 +94,8 @@ export default function save({ attributes }) {
                             case 'simple':
                                 $(sliderId).slick({
                                     arrows: ${showArrows},
-                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
-                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
+                                    prevArrow: ${showArrows && arrowType ? 'getPrevArrow(arrowType)' : 'null'},
+                                    nextArrow: ${showArrows && arrowType ? 'getNextArrow(arrowType)' : 'null'}
                                 });
                                 break;
                             case 'carousel':
@@ -90,8 +105,8 @@ export default function save({ attributes }) {
                                     slidesToScroll: 1,
                                     dots: true,
                                     arrows: ${showArrows},
-                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
-                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
+                                    prevArrow: ${showArrows && arrowType ? 'getPrevArrow(arrowType)' : 'null'},
+                                    nextArrow: ${showArrows && arrowType ? 'getNextArrow(arrowType)' : 'null'}
                                 });
                                 break;
                             case 'fade':
@@ -102,8 +117,8 @@ export default function save({ attributes }) {
                                     fade: true,
                                     cssEase: 'linear',
                                     arrows: ${showArrows},
-                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
-                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
+                                    prevArrow: ${showArrows && arrowType ? 'getPrevArrow(arrowType)' : 'null'},
+                                    nextArrow: ${showArrows && arrowType ? 'getNextArrow(arrowType)' : 'null'}
                                 });
                                 break;
                             default:
@@ -113,8 +128,8 @@ export default function save({ attributes }) {
                                     autoplay: true,
                                     autoplaySpeed: 2000,
                                     arrows: ${showArrows},
-                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
-                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
+                                    prevArrow: ${showArrows && arrowType ? 'getPrevArrow(arrowType)' : 'null'},
+                                    nextArrow: ${showArrows && arrowType ? 'getNextArrow(arrowType)' : 'null'}
                                 });
                                 break;
                         }

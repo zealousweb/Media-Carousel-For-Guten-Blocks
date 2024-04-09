@@ -9,6 +9,12 @@
   "description": "A custom block for uploading multiple images with sliding effect.",
   "example": {},
   "attributes": {
+    "id": {
+      "type": "string"
+    },
+    "sliderId": {
+      "type": "string"
+    },
     "galleryId": {
       "type": "string"
     },

@@ -60,6 +60,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.js";
 
+
 export default function Edit({ attributes, setAttributes }) {
     const { galleryImages, sliderType, showArrows, arrowType } = attributes;
 
@@ -68,7 +69,8 @@ export default function Edit({ attributes, setAttributes }) {
     useEffect(() => {
         setSliderId(`utk-slider-${sliderType}-${Math.floor(Math.random() * 1000)}`);
     }, [sliderType]);
-
+    console.log('hello',galleryImages);
+    console.log(sliderId);
     return (
         <>
             <InspectorControls key={`setting`}>
@@ -119,12 +121,12 @@ export default function Edit({ attributes, setAttributes }) {
                                     setAttributes({ galleryImages: val });
                                 }}
                                 gallery={true}
-                                allowedTypes={["image"]}
-                                value={attributes.galleryImages.map((image) => image.id)}
+                                allowedTypes={['image', 'video']}
+                                value={attributes.galleryImages.map((media) => media.id)}
                                 render={({ open }) => {
                                     return (
                                         <ToolbarButton
-                                            label={__("Edit Images", "utk-unified-blocks")}
+                                            label={__("Edit Media", "utk-unified-blocks")}
                                             onClick={open}
                                             icon="edit"
                                         />
@@ -138,14 +140,28 @@ export default function Edit({ attributes, setAttributes }) {
 
             <div {...useBlockProps()} id={sliderId}>
                 {galleryImages ? (
-                    galleryImages.map((image) => (
-                        <div key={image.id} className="utk-gallery-single">
-                            <img
-                                src={image.url}
-                                alt={image.alt ? image.alt : "Gallery Image"}
-                            />
-                        </div>
-                    ))
+                    galleryImages.map((media) => {
+                        if (media.type === 'image') {
+                            return (
+                                <div key={media.id} className="utk-gallery-single">
+                                    <img
+                                        src={media.url}
+                                        alt={media.alt ? media.alt : "Gallery Image"}
+                                    />
+                                </div>
+                            );
+                        } else if (media.type === 'video') {
+                            return (
+                                <div key={media.id} className="utk-gallery-single">
+                                    <video controls>
+                                        <source src={media.url} type={media.mime} />
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                            );
+                        }
+                        return null;
+                    })
                 ) : (
                     <MediaPlaceholder
                         multiple={true}
@@ -156,9 +172,9 @@ export default function Edit({ attributes, setAttributes }) {
                             setAttributes({ galleryImages: val });
                         }}
                         onSelectURL={false}
-                        allowedTypes={["image"]}
+                        allowedTypes={["image", "video"]}
                         labels={{
-                            title: "Add Gallery Images",
+                            title: "Add Gallery Images and Video",
                         }}
                     />
                 )}
