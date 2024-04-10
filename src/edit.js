@@ -76,6 +76,7 @@ export default function Edit({ attributes, setAttributes }) {
         }, [sliderId]);
 
         console.log("edit",sliderId);
+        console.log(galleryImages);
     return (
         <>
             <InspectorControls>
@@ -120,14 +121,15 @@ export default function Edit({ attributes, setAttributes }) {
                 <BlockControls>
                     <ToolbarGroup>
                         <MediaUploadCheck>
-                            <MediaUpload
+                            <MediaUpload 
                                 multiple={true}
-                                onSelect={(media) => {
-                                    setAttributes({ galleryImages: media.id });
+                                onSelect={(val) => {
+                                    setAttributes({ galleryImages: val });
+                                    console.log(galleryImages);
                                 }}
-                                gallery={true}
+                                // gallery={true}
                                 allowedTypes={['image', 'video']}
-                                value={attributes.galleryImages.map((media) => media.id)}
+                                value={attributes.galleryImages.map((val) => val.id)}
                                 render={({ open }) => {
                                     return (
                                         <ToolbarButton
