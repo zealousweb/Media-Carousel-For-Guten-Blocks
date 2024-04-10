@@ -158,7 +158,6 @@ function Edit({
       setAttributes({
         galleryImages: val
       });
-      console.log(galleryImages);
     }
     // gallery={true}
     ,

@@ -125,7 +125,6 @@ export default function Edit({ attributes, setAttributes }) {
                                 multiple={true}
                                 onSelect={(val) => {
                                     setAttributes({ galleryImages: val });
-                                    console.log(galleryImages);
                                 }}
                                 // gallery={true}
                                 allowedTypes={['image', 'video']}
