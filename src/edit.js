@@ -15,12 +15,12 @@ const { useSelect } = wp.data;
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
 import {
-	BlockControls,
-	useBlockProps,
-	InspectorControls,
-	MediaPlaceholder,
-	MediaUpload,
-	MediaUploadCheck,
+    BlockControls,
+    useBlockProps,
+    InspectorControls,
+    MediaPlaceholder,
+    MediaUpload,
+    MediaUploadCheck,
 } from "@wordpress/block-editor";
 
 /**
@@ -30,11 +30,11 @@ import {
  * @see https://developer.wordpress.org/block-editor/reference-guides/components/panel/#panelbody
  */
 import {
-	ToolbarGroup,
-	ToolbarButton,
-	PanelBody,
-	SelectControl,
-    ToggleControl 
+    ToolbarGroup,
+    ToolbarButton,
+    PanelBody,
+    SelectControl,
+    ToggleControl
 } from "@wordpress/components";
 
 /**
@@ -60,8 +60,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.js";
 
+
 export default function Edit({ attributes, setAttributes }) {
-    const { galleryImages, sliderType, showArrows, arrowType } = attributes;
+    const { galleryImages = [], sliderType, showArrows, arrowType } = attributes;
 
     const [sliderId, setSliderId] = useState(attributes.sliderId || '');
 
@@ -70,13 +71,21 @@ export default function Edit({ attributes, setAttributes }) {
             setSliderId(`utk-slider-${sliderType}-${Math.floor(Math.random() * 1000)}`);
         }
     }, [sliderType, sliderId]);
-        // Update setAttributes to include sliderId
-        useEffect(() => {
-            setAttributes({ ...attributes, sliderId });
-        }, [sliderId]);
 
-        console.log("edit",sliderId);
-        console.log(galleryImages);
+    useEffect(() => {
+        setAttributes({ ...attributes, sliderId });
+    }, [sliderId]);
+
+    const handleRemove = (mediaId) => {
+        const updatedGallery = galleryImages.filter((media) => media.id !== mediaId);
+        setAttributes({ galleryImages: updatedGallery });
+    };
+
+    const handleBulkRemove = (mediaIds) => {
+        const updatedGallery = galleryImages.filter((media) => !mediaIds.includes(media.id));
+        setAttributes({ galleryImages: updatedGallery });
+    };
+
     return (
         <>
             <InspectorControls>
@@ -117,58 +126,62 @@ export default function Edit({ attributes, setAttributes }) {
                 </PanelBody>
             </InspectorControls>
 
-            {galleryImages && (
-                <BlockControls>
-                    <ToolbarGroup>
-                        <MediaUploadCheck>
-                            <MediaUpload 
-                                multiple={true}
-                                onSelect={(val) => {
-                                    setAttributes({ galleryImages: val });
-                                }}
-                                // gallery={true}
-                                allowedTypes={['image', 'video']}
-                                value={attributes.galleryImages.map((val) => val.id)}
-                                render={({ open }) => {
-                                    return (
-                                        <ToolbarButton
-                                            label={__("Edit Media")}
-                                            onClick={open}
-                                            icon="edit"
-                                        />
-                                    );
-                                }}
-                            />
-                        </MediaUploadCheck>
-                    </ToolbarGroup>
-                </BlockControls>
-            )}
+            <BlockControls>
+                <ToolbarGroup>
+                    <MediaUploadCheck>
+                        <MediaUpload
+                            multiple={true}
+                            onSelect={(val) => {
+                                const filteredVal = val.filter((newMedia) => {
+                                    return !galleryImages.some((existingMedia) => existingMedia.id === newMedia.id);
+                                });
+
+                                if (filteredVal.length > 0) {
+                                    setAttributes({ galleryImages: [...galleryImages, ...filteredVal] });
+                                }
+                            }}
+                            onRemove={(removedId) => handleRemove(removedId)}
+                            onBulkRemove={(removedIds) => handleBulkRemove(removedIds)}
+                            allowedTypes={['image', 'video']}
+                            value={galleryImages.map((val) => val.id)}
+                            render={({ open }) => {
+                                return (
+                                    <ToolbarButton
+                                        label={__("Edit Media")}
+                                        onClick={open}
+                                        icon="edit"
+                                    />
+                                );
+                            }}
+                        />
+                    </MediaUploadCheck>
+                </ToolbarGroup>
+            </BlockControls>
 
             <div {...useBlockProps()} id={sliderId}>
-                {galleryImages ? (
-                    galleryImages.map((media) => {
-                        if (media.type === 'image') {
-                            return (
-                                <div key={media.id} className="utk-gallery-single">
-                                    <img
-                                        src={media.url}
-                                        alt={media.alt ? media.alt : "Gallery Image"}
-                                    />
+                {galleryImages && galleryImages.map((media) => (
+                    <div key={media.id} className="utk-gallery-single">
+                        {media.type === 'image' ? (
+                            <>
+                                <img src={media.url} alt={media.alt ? media.alt : "Gallery Image"} />
+                                <div>
+                                    <button onClick={() => handleRemove(media.id)}>{__("Remove")}</button>
                                 </div>
-                            );
-                        } else if (media.type === 'video') {
-                            return (
-                                <div key={media.id} className="utk-gallery-single">
-                                    <video controls>
-                                        <source src={media.url} type={media.mime} />
-                                        Your browser does not support the video tag.
-                                    </video>
+                            </>
+                        ) : (
+                            <>
+                                <video controls>
+                                    <source src={media.url} type={media.mime} />
+                                    Your browser does not support the video tag.
+                                </video>
+                                <div>
+                                    <button onClick={() => handleRemove(media.id)}>{__("Remove")}</button>
                                 </div>
-                            );
-                        }
-                        return null;
-                    })
-                ) : (
+                            </>
+                        )}
+                    </div>
+                ))}
+                {galleryImages.length === 0 && (
                     <MediaPlaceholder
                         multiple={true}
                         onSelect={(val) => {
@@ -180,7 +193,7 @@ export default function Edit({ attributes, setAttributes }) {
                         onSelectURL={false}
                         allowedTypes={["image", "video"]}
                         labels={{
-                            title: "Add Gallery Images and Video",
+                            title: "Add Gallery Image or Video",
                         }}
                     />
                 )}

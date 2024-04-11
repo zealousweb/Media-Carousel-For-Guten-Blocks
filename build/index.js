@@ -86,7 +86,7 @@ function Edit({
   setAttributes
 }) {
   const {
-    galleryImages,
+    galleryImages = [],
     sliderType,
     showArrows,
     arrowType
@@ -97,15 +97,24 @@ function Edit({
       setSliderId(`utk-slider-${sliderType}-${Math.floor(Math.random() * 1000)}`);
     }
   }, [sliderType, sliderId]);
-  // Update setAttributes to include sliderId
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
     setAttributes({
       ...attributes,
       sliderId
     });
   }, [sliderId]);
-  console.log("edit", sliderId);
-  console.log(galleryImages);
+  const handleRemove = mediaId => {
+    const updatedGallery = galleryImages.filter(media => media.id !== mediaId);
+    setAttributes({
+      galleryImages: updatedGallery
+    });
+  };
+  const handleBulkRemove = mediaIds => {
+    const updatedGallery = galleryImages.filter(media => !mediaIds.includes(media.id));
+    setAttributes({
+      galleryImages: updatedGallery
+    });
+  };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gallery Settings")
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
@@ -152,17 +161,22 @@ function Edit({
         arrowType: val
       });
     }
-  }))), galleryImages && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUploadCheck, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUpload, {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUploadCheck, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUpload, {
     multiple: true,
     onSelect: val => {
-      setAttributes({
-        galleryImages: val
+      const filteredVal = val.filter(newMedia => {
+        return !galleryImages.some(existingMedia => existingMedia.id === newMedia.id);
       });
-    }
-    // gallery={true}
-    ,
+      if (filteredVal.length > 0) {
+        setAttributes({
+          galleryImages: [...galleryImages, ...filteredVal]
+        });
+      }
+    },
+    onRemove: removedId => handleRemove(removedId),
+    onBulkRemove: removedIds => handleBulkRemove(removedIds),
     allowedTypes: ['image', 'video'],
-    value: attributes.galleryImages.map(val => val.id),
+    value: galleryImages.map(val => val.id),
     render: ({
       open
     }) => {
@@ -175,28 +189,22 @@ function Edit({
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)(),
     id: sliderId
-  }, galleryImages ? galleryImages.map(media => {
-    if (media.type === 'image') {
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-        key: media.id,
-        className: "utk-gallery-single"
-      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-        src: media.url,
-        alt: media.alt ? media.alt : "Gallery Image"
-      }));
-    } else if (media.type === 'video') {
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-        key: media.id,
-        className: "utk-gallery-single"
-      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("video", {
-        controls: true
-      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("source", {
-        src: media.url,
-        type: media.mime
-      }), "Your browser does not support the video tag."));
-    }
-    return null;
-  }) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaPlaceholder, {
+  }, galleryImages && galleryImages.map(media => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    key: media.id,
+    className: "utk-gallery-single"
+  }, media.type === 'image' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: media.url,
+    alt: media.alt ? media.alt : "Gallery Image"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    onClick: () => handleRemove(media.id)
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Remove")))) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("video", {
+    controls: true
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("source", {
+    src: media.url,
+    type: media.mime
+  }), "Your browser does not support the video tag."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    onClick: () => handleRemove(media.id)
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Remove")))))), galleryImages.length === 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaPlaceholder, {
     multiple: true,
     onSelect: val => {
       setAttributes({
@@ -211,7 +219,7 @@ function Edit({
     onSelectURL: false,
     allowedTypes: ["image", "video"],
     labels: {
-      title: "Add Gallery Images and Video"
+      title: "Add Gallery Image or Video"
     }
   })));
 }
