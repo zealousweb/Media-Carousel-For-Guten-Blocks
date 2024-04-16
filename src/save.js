@@ -58,7 +58,7 @@ export default function save({ attributes,  }) {
             <div id={sliderId}>
                 {galleryImages &&
                     galleryImages.map((media,index) => {
-                        if (media.type === 'image') {
+                        {/* if (media.type === 'image') {
                             return (
                                 <div key={media.id} className="utk-gallery-single">
                                     <img
@@ -66,8 +66,14 @@ export default function save({ attributes,  }) {
                                         alt={media.alt ? media.alt : "Gallery Image"}
                                     />
                                      {youtubeUrls[index] && (
-                                        <iframe width="560" height="315" src={youtubeUrls[index]} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                        <div className="youtube-embed" dangerouslySetInnerHTML={{ __html: `<div class="youtube-container"><iframe class="youtube-player" type="text/html" src={youtubeUrls[index]} frameborder="0"></iframe></div>` }} />
                                 )}
+                                </div>
+                            ); */}
+                            if (media.type === 'image') {
+                            return (
+                                <div key={media.id} className="utk-gallery-single">
+                                    <a href={youtubeUrls[index]} target="_blank" rel="noopener noreferrer">{youtubeUrls[index]}</a>
                                 </div>
                             );
                         } else if (media.type === 'video') {

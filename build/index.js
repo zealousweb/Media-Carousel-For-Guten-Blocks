@@ -370,23 +370,27 @@ function save({
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: sliderId
   }, galleryImages && galleryImages.map((media, index) => {
+    {/* if (media.type === 'image') {
+        return (
+            <div key={media.id} className="utk-gallery-single">
+                <img
+                    src={media.url}
+                    alt={media.alt ? media.alt : "Gallery Image"}
+                />
+                 {youtubeUrls[index] && (
+                    <div className="youtube-embed" dangerouslySetInnerHTML={{ __html: `<div class="youtube-container"><iframe class="youtube-player" type="text/html" src={youtubeUrls[index]} frameborder="0"></iframe></div>` }} />
+            )}
+            </div>
+        ); */}
     if (media.type === 'image') {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         key: media.id,
         className: "utk-gallery-single"
-      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-        src: media.url,
-        alt: media.alt ? media.alt : "Gallery Image"
-      }), youtubeUrls[index] && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("iframe", {
-        width: "560",
-        height: "315",
-        src: youtubeUrls[index],
-        title: "YouTube video player",
-        frameborder: "0",
-        allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
-        referrerpolicy: "strict-origin-when-cross-origin",
-        allowfullscreen: true
-      }));
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+        href: youtubeUrls[index],
+        target: "_blank",
+        rel: "noopener noreferrer"
+      }, youtubeUrls[index]));
     } else if (media.type === 'video') {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         key: media.id,
