@@ -73,7 +73,12 @@ export default function save({ attributes,  }) {
                             if (media.type === 'image') {
                             return (
                                 <div key={media.id} className="utk-gallery-single">
-                                    <a href={youtubeUrls[index]} target="_blank" rel="noopener noreferrer">{youtubeUrls[index]}</a>
+                                    <a href={youtubeUrls[index]} target="_blank" rel="noopener noreferrer">
+                                        <img
+                                            src={media.url}
+                                            alt={media.alt ? media.alt : "Gallery Image"}
+                                        />
+                                    </a>
                                 </div>
                             );
                         } else if (media.type === 'video') {

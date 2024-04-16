@@ -390,7 +390,10 @@ function save({
         href: youtubeUrls[index],
         target: "_blank",
         rel: "noopener noreferrer"
-      }, youtubeUrls[index]));
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+        src: media.url,
+        alt: media.alt ? media.alt : "Gallery Image"
+      })));
     } else if (media.type === 'video') {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         key: media.id,
