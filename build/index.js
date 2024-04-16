@@ -196,7 +196,7 @@ function Edit({
   }), "Your browser does not support the video tag."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     onClick: () => handleRemove(media.id)
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Remove")))))), galleryImages.length === 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaPlaceholder, {
-    multiple: true,
+    multiple: "add",
     onSelect: val => {
       setAttributes({
         galleryImages: val

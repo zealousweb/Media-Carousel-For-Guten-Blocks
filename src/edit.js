@@ -172,7 +172,7 @@ export default function Edit({ attributes, setAttributes }) {
                 ))}
                 {galleryImages.length === 0 && (
                     <MediaPlaceholder
-                        multiple={true}
+                        multiple="add"
                         onSelect={(val) => {
                             setAttributes({ galleryImages: val });
                         }}
