@@ -125,10 +125,9 @@ export default function Edit({ attributes, setAttributes }) {
                 <ToolbarGroup>
                     <MediaUploadCheck>
                         <MediaUpload
-                            multiple={true}
+                            multiple="add"
                             onSelect={(val) => {
-                                const updatedGallery = [...galleryImages, ...val];
-                                setAttributes({ galleryImages: updatedGallery });
+                                setAttributes({ galleryImages: val });
                             }}
                             allowedTypes={['image', 'video']}
                             value={galleryImages.map((val) => val.id)}

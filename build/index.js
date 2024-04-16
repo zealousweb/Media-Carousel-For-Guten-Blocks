@@ -156,11 +156,10 @@ function Edit({
       });
     }
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUploadCheck, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUpload, {
-    multiple: true,
+    multiple: "add",
     onSelect: val => {
-      const updatedGallery = [...galleryImages, ...val];
       setAttributes({
-        galleryImages: updatedGallery
+        galleryImages: val
       });
     },
     allowedTypes: ['image', 'video'],
