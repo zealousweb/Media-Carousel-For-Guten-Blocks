@@ -81,11 +81,6 @@ export default function Edit({ attributes, setAttributes }) {
         setAttributes({ galleryImages: updatedGallery });
     };
 
-    const handleBulkRemove = (mediaIds) => {
-        const updatedGallery = galleryImages.filter((media) => !mediaIds.includes(media.id));
-        setAttributes({ galleryImages: updatedGallery });
-    };
-
     return (
         <>
             <InspectorControls>
@@ -132,27 +127,22 @@ export default function Edit({ attributes, setAttributes }) {
                         <MediaUpload
                             multiple={true}
                             onSelect={(val) => {
-                                const filteredVal = val.filter((newMedia) => {
-                                    return !galleryImages.some((existingMedia) => existingMedia.id === newMedia.id);
-                                });
-
-                                if (filteredVal.length > 0) {
-                                    setAttributes({ galleryImages: [...galleryImages, ...filteredVal] });
-                                }
+                                const updatedGallery = [...galleryImages, ...val];
+                                setAttributes({ galleryImages: updatedGallery });
                             }}
-                            onRemove={(removedId) => handleRemove(removedId)}
-                            onBulkRemove={(removedIds) => handleBulkRemove(removedIds)}
                             allowedTypes={['image', 'video']}
                             value={galleryImages.map((val) => val.id)}
-                            render={({ open }) => {
-                                return (
-                                    <ToolbarButton
-                                        label={__("Edit Media")}
-                                        onClick={open}
-                                        icon="edit"
-                                    />
-                                );
-                            }}
+                            render={({ open }) => (
+                                <ToolbarButton
+                                    label={__("Edit Images")}
+                                    onClick={() => {
+                                        open();
+                                        // Optionally, you can clear the existing galleryImages state here
+                                        setAttributes({ galleryImages: [] });
+                                    }}
+                                    icon="edit"
+                                />
+                            )}
                         />
                     </MediaUploadCheck>
                 </ToolbarGroup>

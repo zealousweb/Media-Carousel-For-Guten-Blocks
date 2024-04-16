@@ -109,12 +109,6 @@ function Edit({
       galleryImages: updatedGallery
     });
   };
-  const handleBulkRemove = mediaIds => {
-    const updatedGallery = galleryImages.filter(media => !mediaIds.includes(media.id));
-    setAttributes({
-      galleryImages: updatedGallery
-    });
-  };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gallery Settings")
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
@@ -164,28 +158,26 @@ function Edit({
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUploadCheck, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUpload, {
     multiple: true,
     onSelect: val => {
-      const filteredVal = val.filter(newMedia => {
-        return !galleryImages.some(existingMedia => existingMedia.id === newMedia.id);
+      const updatedGallery = [...galleryImages, ...val];
+      setAttributes({
+        galleryImages: updatedGallery
       });
-      if (filteredVal.length > 0) {
-        setAttributes({
-          galleryImages: [...galleryImages, ...filteredVal]
-        });
-      }
     },
-    onRemove: removedId => handleRemove(removedId),
-    onBulkRemove: removedIds => handleBulkRemove(removedIds),
     allowedTypes: ['image', 'video'],
     value: galleryImages.map(val => val.id),
     render: ({
       open
-    }) => {
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarButton, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Edit Media"),
-        onClick: open,
-        icon: "edit"
-      });
-    }
+    }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarButton, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Edit Images"),
+      onClick: () => {
+        open();
+        // Optionally, you can clear the existing galleryImages state here
+        setAttributes({
+          galleryImages: []
+        });
+      },
+      icon: "edit"
+    })
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)(),
     id: sliderId
@@ -3606,7 +3598,7 @@ module.exports = window["wp"]["i18n"];
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"0.1.0","title":"Gutenberg Media Carousel","category":"widgets","icon":"smiley","description":"A custom block for uploading multiple images with sliding effect.","example":{},"attributes":{"id":{"type":"string"},"sliderId":{"type":"string"},"galleryId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simple"},"showArrows":{"type":"boolean","default":true},"arrowType":{"type":"string","default":"custom1"},"clientId":{"type":"string"}},"supports":{"html":false,"align":["wide","full"]},"textdomain":"gutenberg-media-carousel","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"0.1.0","title":"Gutenberg Media Carousel","category":"widgets","icon":"smiley","description":"A custom block for uploading multiple images with sliding effect.","example":{},"attributes":{"id":{"type":"string"},"sliderId":{"type":"string"},"galleryId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simple"},"showArrows":{"type":"boolean","default":true},"arrowType":{"type":"string","default":"custom1"}},"supports":{"html":false,"align":["wide","full"],"video":true},"textdomain":"gutenberg-media-carousel","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 
