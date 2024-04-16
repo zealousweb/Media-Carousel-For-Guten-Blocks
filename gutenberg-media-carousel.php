@@ -57,27 +57,27 @@ function enqueue_slick_slider() {
 add_action('wp_enqueue_scripts', 'enqueue_slick_slider');
 
 
-// // Add custom text/textarea attachment field
-// function add_custom_text_field_to_attachment_fields_to_edit( $form_fields, $post ) {
-//     $text_field = get_post_meta($post->ID, 'text_field', true);
-//     $form_fields['text_field'] = array(
-//         'label' => 'YouTube URL',
-//         'input' => 'url', // you may alos use 'textarea' field
-//         'value' => $text_field
-//     );
-//     return $form_fields;
-// }
-// add_filter('attachment_fields_to_edit', 'add_custom_text_field_to_attachment_fields_to_edit', null, 2); 
+// Add custom text/textarea attachment field
+function add_custom_text_field_to_attachment_fields_to_edit( $form_fields, $post ) {
+    $text_field = get_post_meta($post->ID, 'text_field', true);
+    $form_fields['text_field'] = array(
+        'label' => 'YouTube URL',
+        'input' => 'url', // you may alos use 'textarea' field
+        'value' => $text_field
+    );
+    return $form_fields;
+}
+add_filter('attachment_fields_to_edit', 'add_custom_text_field_to_attachment_fields_to_edit', null, 2); 
 
-// // Save custom text/textarea attachment field
-// function save_custom_text_attachment_field($post, $attachment) {  
-//     if( isset($attachment['text_field']) ){  
-//         update_post_meta($post['ID'], 'text_field', sanitize_text_field( $attachment['text_field'] ) );  
-//     }else{
-//          delete_post_meta($post['ID'], 'text_field' );
-//     }
-//     return $post;  
-// }
-// add_filter('attachment_fields_to_save', 'save_custom_text_attachment_field', null, 2);
+// Save custom text/textarea attachment field
+function save_custom_text_attachment_field($post, $attachment) {  
+    if( isset($attachment['text_field']) ){  
+        update_post_meta($post['ID'], 'text_field', sanitize_text_field( $attachment['text_field'] ) );  
+    }else{
+         delete_post_meta($post['ID'], 'text_field' );
+    }
+    return $post;  
+}
+add_filter('attachment_fields_to_save', 'save_custom_text_attachment_field', null, 2);
 
 ?>

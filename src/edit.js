@@ -136,8 +136,6 @@ export default function Edit({ attributes, setAttributes }) {
                                     label={__("Edit Images")}
                                     onClick={() => {
                                         open();
-                                        // Optionally, you can clear the existing galleryImages state here
-                                        setAttributes({ galleryImages: [] });
                                     }}
                                     icon="edit"
                                 />

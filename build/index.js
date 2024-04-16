@@ -170,10 +170,6 @@ function Edit({
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Edit Images"),
       onClick: () => {
         open();
-        // Optionally, you can clear the existing galleryImages state here
-        setAttributes({
-          galleryImages: []
-        });
       },
       icon: "edit"
     })
