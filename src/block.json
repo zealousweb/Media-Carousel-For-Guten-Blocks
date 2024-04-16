@@ -30,9 +30,15 @@
 			"default": true
 		},
 		"arrowType": {
-            "type": "string",
-            "default": "custom1"
-        }
+			"type": "string",
+			"default": "custom1"
+		},
+		"youtubeUrls": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			}
+		}
 	},
 	"supports": {
 		"html": false,

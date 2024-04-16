@@ -34,7 +34,9 @@ import {
     ToolbarButton,
     PanelBody,
     SelectControl,
-    ToggleControl
+    ToggleControl,
+    TextControl
+
 } from "@wordpress/components";
 
 /**
@@ -62,7 +64,7 @@ import "slick-carousel/slick/slick.js";
 
 
 export default function Edit({ attributes, setAttributes }) {
-    const { galleryImages = [], sliderType, showArrows, arrowType } = attributes;
+    const { galleryImages = [],  youtubeUrls = [], sliderType, showArrows, arrowType, youtubeLink } = attributes;
 
     const [sliderId, setSliderId] = useState(attributes.sliderId || '');
 
@@ -79,6 +81,12 @@ export default function Edit({ attributes, setAttributes }) {
     const handleRemove = (mediaId) => {
         const updatedGallery = galleryImages.filter((media) => media.id !== mediaId);
         setAttributes({ galleryImages: updatedGallery });
+    };
+     // Function to handle changes in YouTube URL
+     const handleYoutubeUrlChange = (index, url) => {
+        const updatedUrls = [...youtubeUrls];
+        updatedUrls[index] = url;
+        setAttributes({ youtubeUrls: updatedUrls });
     };
 
     return (
@@ -146,26 +154,32 @@ export default function Edit({ attributes, setAttributes }) {
             </BlockControls>
 
             <div {...useBlockProps()} id={sliderId}>
-                {galleryImages && galleryImages.map((media) => (
+                {galleryImages && galleryImages.map((media, index) => (
                     <div key={media.id} className="utk-gallery-single">
                         {media.type === 'image' ? (
                             <>
                                 <img src={media.url} alt={media.alt ? media.alt : "Gallery Image"} />
                                 <div>
-                                    <button onClick={() => handleRemove(media.id)}>{__("Remove")}</button>
+                                    <button onClick={() => handleRemove(media.id)}>Remove</button>
                                 </div>
+                                <input
+                                    type="text"
+                                    value={youtubeUrls[index] || ''}
+                                    onChange={(event) => handleYoutubeUrlChange(index, event.target.value)}
+                                    placeholder="Enter YouTube video URL"
+                                />
                             </>
-                        ) : (
+                        ) : media.type === 'video' ? (
                             <>
                                 <video controls>
                                     <source src={media.url} type={media.mime} />
                                     Your browser does not support the video tag.
                                 </video>
                                 <div>
-                                    <button onClick={() => handleRemove(media.id)}>{__("Remove")}</button>
+                                    <button onClick={() => handleRemove(media.id)}>Remove</button>
                                 </div>
                             </>
-                        )}
+                        ) : null}
                     </div>
                 ))}
                 {galleryImages.length === 0 && (

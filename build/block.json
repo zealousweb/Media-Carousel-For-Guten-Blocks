@@ -32,6 +32,12 @@
     "arrowType": {
       "type": "string",
       "default": "custom1"
+    },
+    "youtubeUrls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     }
   },
   "supports": {

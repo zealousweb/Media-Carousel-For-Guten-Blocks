@@ -23,7 +23,8 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.js";
 
 export default function save({ attributes,  }) {
-    const { galleryImages, sliderType, showArrows, arrowType,sliderId } = attributes;
+    const { galleryImages, sliderType, showArrows, arrowType,sliderId,youtubeUrls } = attributes;
+    console.log(youtubeUrls);
 
     // Define getPrevArrow and getNextArrow functions
     function getPrevArrow(arrowType) {
@@ -56,7 +57,7 @@ export default function save({ attributes,  }) {
         <>
             <div id={sliderId}>
                 {galleryImages &&
-                    galleryImages.map((media) => {
+                    galleryImages.map((media,index) => {
                         if (media.type === 'image') {
                             return (
                                 <div key={media.id} className="utk-gallery-single">
@@ -64,6 +65,9 @@ export default function save({ attributes,  }) {
                                         src={media.url}
                                         alt={media.alt ? media.alt : "Gallery Image"}
                                     />
+                                     {youtubeUrls[index] && (
+                                        <iframe width="560" height="315" src={youtubeUrls[index]} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                )}
                                 </div>
                             );
                         } else if (media.type === 'video') {

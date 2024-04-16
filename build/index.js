@@ -87,9 +87,11 @@ function Edit({
 }) {
   const {
     galleryImages = [],
+    youtubeUrls = [],
     sliderType,
     showArrows,
-    arrowType
+    arrowType,
+    youtubeLink
   } = attributes;
   const [sliderId, setSliderId] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(attributes.sliderId || '');
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
@@ -107,6 +109,14 @@ function Edit({
     const updatedGallery = galleryImages.filter(media => media.id !== mediaId);
     setAttributes({
       galleryImages: updatedGallery
+    });
+  };
+  // Function to handle changes in YouTube URL
+  const handleYoutubeUrlChange = (index, url) => {
+    const updatedUrls = [...youtubeUrls];
+    updatedUrls[index] = url;
+    setAttributes({
+      youtubeUrls: updatedUrls
     });
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
@@ -176,7 +186,7 @@ function Edit({
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)(),
     id: sliderId
-  }, galleryImages && galleryImages.map(media => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, galleryImages && galleryImages.map((media, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     key: media.id,
     className: "utk-gallery-single"
   }, media.type === 'image' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
@@ -184,14 +194,19 @@ function Edit({
     alt: media.alt ? media.alt : "Gallery Image"
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     onClick: () => handleRemove(media.id)
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Remove")))) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("video", {
+  }, "Remove")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    type: "text",
+    value: youtubeUrls[index] || '',
+    onChange: event => handleYoutubeUrlChange(index, event.target.value),
+    placeholder: "Enter YouTube video URL"
+  })) : media.type === 'video' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("video", {
     controls: true
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("source", {
     src: media.url,
     type: media.mime
   }), "Your browser does not support the video tag."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     onClick: () => handleRemove(media.id)
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Remove")))))), galleryImages.length === 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaPlaceholder, {
+  }, "Remove"))) : null)), galleryImages.length === 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaPlaceholder, {
     multiple: "add",
     onSelect: val => {
       setAttributes({
@@ -321,8 +336,10 @@ function save({
     sliderType,
     showArrows,
     arrowType,
-    sliderId
+    sliderId,
+    youtubeUrls
   } = attributes;
+  console.log(youtubeUrls);
 
   // Define getPrevArrow and getNextArrow functions
   function getPrevArrow(arrowType) {
@@ -352,7 +369,7 @@ function save({
   console.log("save", sliderId);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: sliderId
-  }, galleryImages && galleryImages.map(media => {
+  }, galleryImages && galleryImages.map((media, index) => {
     if (media.type === 'image') {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         key: media.id,
@@ -360,6 +377,15 @@ function save({
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
         src: media.url,
         alt: media.alt ? media.alt : "Gallery Image"
+      }), youtubeUrls[index] && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("iframe", {
+        width: "560",
+        height: "315",
+        src: youtubeUrls[index],
+        title: "YouTube video player",
+        frameborder: "0",
+        allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
+        referrerpolicy: "strict-origin-when-cross-origin",
+        allowfullscreen: true
       }));
     } else if (media.type === 'video') {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -3593,7 +3619,7 @@ module.exports = window["wp"]["i18n"];
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"0.1.0","title":"Gutenberg Media Carousel","category":"widgets","icon":"smiley","description":"A custom block for uploading multiple images with sliding effect.","example":{},"attributes":{"id":{"type":"string"},"sliderId":{"type":"string"},"galleryId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simple"},"showArrows":{"type":"boolean","default":true},"arrowType":{"type":"string","default":"custom1"}},"supports":{"html":false,"align":["wide","full"],"video":true},"textdomain":"gutenberg-media-carousel","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"0.1.0","title":"Gutenberg Media Carousel","category":"widgets","icon":"smiley","description":"A custom block for uploading multiple images with sliding effect.","example":{},"attributes":{"id":{"type":"string"},"sliderId":{"type":"string"},"galleryId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simple"},"showArrows":{"type":"boolean","default":true},"arrowType":{"type":"string","default":"custom1"},"youtubeUrls":{"type":"array","items":{"type":"string"}}},"supports":{"html":false,"align":["wide","full"],"video":true},"textdomain":"gutenberg-media-carousel","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 
