@@ -426,17 +426,41 @@ function save({
     console.log(youtubeUrls[index]);
     if (media.type === 'image') {
       if (fancybox == true) {
-        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          key: media.id,
-          className: "utk-gallery-single"
-        }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-          href: youtubeUrls[index],
-          "data-fancybox": "gallery",
-          "data-caption": media.alt ? media.alt : "Gallery Image"
-        }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-          src: media.url,
-          alt: media.alt ? media.alt : "Gallery Image"
-        })));
+        {/* return (
+            <div key={media.id} className="utk-gallery-single">
+                <a href={youtubeUrls[index]} data-fancybox="gallery" data-caption={media.alt ? media.alt : "Gallery Image"}>
+                    <img
+                        src={media.url}
+                        alt={media.alt ? media.alt : "Gallery Image"}
+                    />
+                </a>
+            </div>
+         ); */}
+        if (youtubeUrls[index] == "") {
+          return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+            key: media.id,
+            className: "utk-gallery-single"
+          }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+            src: media.url,
+            alt: media.alt ? media.alt : "Gallery Image"
+          }));
+        } else {
+          // Extracting video ID from YouTube URL
+          const videoID = youtubeUrls[index].match(/[?&]v=([^&]+)/)[1];
+          return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+            key: media.id,
+            className: "utk-gallery-single"
+          }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("iframe", {
+            width: "560",
+            height: "315",
+            src: `https://www.youtube.com/embed/${videoID}`,
+            title: "YouTube video player",
+            frameborder: "0",
+            allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
+            referrerpolicy: "strict-origin-when-cross-origin",
+            allowfullscreen: true
+          }));
+        }
       } else {
         if (youtubeUrls[index] == "") {
           return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
