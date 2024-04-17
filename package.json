@@ -19,8 +19,11 @@
 		"@wordpress/scripts": "^27.4.0"
 	},
 	"dependencies": {
+		"@fancyapps/fancybox": "^3.5.7",
+		"@fancyapps/ui": "^5.0.36",
 		"axios": "^1.6.8",
 		"jquery": "^3.7.1",
+		"react-fancybox": "^0.2.5",
 		"react-responsive-carousel": "^3.2.23",
 		"react-slick": "^0.30.2",
 		"slick-carousel": "^1.8.1",

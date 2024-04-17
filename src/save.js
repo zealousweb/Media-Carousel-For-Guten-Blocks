@@ -21,6 +21,8 @@ import React from 'react';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.js";
+import 'react-fancybox/lib/fancybox.css';
+import ReactFancyBox from 'react-fancybox';
 
 export default function save({ attributes,  }) {
     const { galleryImages, sliderType, showArrows, arrowType,sliderId,youtubeUrls } = attributes;
@@ -52,28 +54,15 @@ export default function save({ attributes,  }) {
                 return;
         }
     }
-    console.log("save",sliderId);
     return (
         <>
             <div id={sliderId}>
                 {galleryImages &&
                     galleryImages.map((media,index) => {
-                        {/* if (media.type === 'image') {
+                           if (media.type === 'image') {
                             return (
                                 <div key={media.id} className="utk-gallery-single">
-                                    <img
-                                        src={media.url}
-                                        alt={media.alt ? media.alt : "Gallery Image"}
-                                    />
-                                     {youtubeUrls[index] && (
-                                        <div className="youtube-embed" dangerouslySetInnerHTML={{ __html: `<div class="youtube-container"><iframe class="youtube-player" type="text/html" src={youtubeUrls[index]} frameborder="0"></iframe></div>` }} />
-                                )}
-                                </div>
-                            ); */}
-                            if (media.type === 'image') {
-                            return (
-                                <div key={media.id} className="utk-gallery-single">
-                                    <a href={youtubeUrls[index]} target="_blank" rel="noopener noreferrer">
+                                    <a href={youtubeUrls[index]} data-fancybox="gallery" data-caption={media.alt ? media.alt : "Gallery Image"}>
                                         <img
                                             src={media.url}
                                             alt={media.alt ? media.alt : "Gallery Image"}
@@ -83,7 +72,7 @@ export default function save({ attributes,  }) {
                             );
                         } else if (media.type === 'video') {
                             return (
-                                <div key={media.id} className="utk-gallery-single">
+                                <div key={media.id} className="utk-gallery-single" >
                                     <video controls>
                                         <source src={media.url} type={media.mime} />
                                         Your browser does not support the video tag.
@@ -98,8 +87,12 @@ export default function save({ attributes,  }) {
             <script>
                 {`
                     jQuery(document).ready(function($) {
+                        $('[data-fancybox="gallery"]').fancybox({
+                            loop: false,
+                            protect: true
+                        });
                         var sliderId = "#${sliderId}";
-
+                        
                         switch ("${sliderType}") {
                             case 'simple':
                                 $(sliderId).slick({
@@ -146,6 +139,9 @@ export default function save({ attributes,  }) {
                     });
                 `}
             </script>
+            <style>
+                
+            </style>
         </>
     );
 }
