@@ -24,9 +24,11 @@ import "slick-carousel/slick/slick.js";
 import 'react-fancybox/lib/fancybox.css';
 import ReactFancyBox from 'react-fancybox';
 
-export default function save({ attributes,  }) {
-    const { galleryImages, sliderType, showArrows, arrowType,sliderId,youtubeUrls } = attributes;
-    console.log(youtubeUrls);
+export default function save({ attributes }) {
+    const { galleryImages, sliderType, showArrows, arrowType, sliderId, youtubeUrls, fancybox } = attributes;
+    // console.log(youtubeUrls);
+    console.log("save", fancybox);
+
 
     // Define getPrevArrow and getNextArrow functions
     function getPrevArrow(arrowType) {
@@ -58,18 +60,44 @@ export default function save({ attributes,  }) {
         <>
             <div id={sliderId}>
                 {galleryImages &&
-                    galleryImages.map((media,index) => {
-                           if (media.type === 'image') {
-                            return (
-                                <div key={media.id} className="utk-gallery-single">
-                                    <a href={youtubeUrls[index]} data-fancybox="gallery" data-caption={media.alt ? media.alt : "Gallery Image"}>
-                                        <img
-                                            src={media.url}
-                                            alt={media.alt ? media.alt : "Gallery Image"}
-                                        />
-                                    </a>
-                                </div>
-                            );
+                    galleryImages.map((media, index) => {
+                        console.log(youtubeUrls[index]);
+                        if (media.type === 'image') {
+
+                            if (fancybox == true) {
+                                return (
+                                    <div key={media.id} className="utk-gallery-single">
+                                        <a href={youtubeUrls[index]} data-fancybox="gallery" data-caption={media.alt ? media.alt : "Gallery Image"}>
+                                            <img
+                                                src={media.url}
+                                                alt={media.alt ? media.alt : "Gallery Image"}
+                                            />
+                                        </a>
+                                    </div>
+                                );
+                            } else {
+                                if (youtubeUrls[index] == "") {
+                                    return (
+                                        <div key={media.id} className="utk-gallery-single">
+                                            <img
+                                                src={media.url}
+                                                alt={media.alt ? media.alt : "Gallery Image"}
+                                            />
+                                        </div>
+                                    );
+                                } else {
+                                    // Extracting video ID from YouTube URL
+                                    const videoID = youtubeUrls[index].match(/[?&]v=([^&]+)/)[1];
+                                    return (
+                                        <div key={media.id} className="utk-gallery-single">
+                                            <iframe width="560" height="315" src={`https://www.youtube.com/embed/${videoID}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                        </div>
+                                    );
+                                }
+
+                            }
+
+
                         } else if (media.type === 'video') {
                             return (
                                 <div key={media.id} className="utk-gallery-single" >
@@ -97,7 +125,7 @@ export default function save({ attributes,  }) {
                             case 'simple':
                                 $(sliderId).slick({
                                     arrows: ${showArrows},
-                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType): null},
+                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
                                     nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
                                 });
                                 break;
@@ -139,9 +167,6 @@ export default function save({ attributes,  }) {
                     });
                 `}
             </script>
-            <style>
-                
-            </style>
         </>
     );
 }

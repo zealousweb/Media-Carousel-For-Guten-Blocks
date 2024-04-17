@@ -129,8 +129,10 @@ function Edit({
     sliderType,
     showArrows,
     arrowType,
-    youtubeLink
+    youtubeLink,
+    fancybox
   } = attributes;
+  console.log(fancybox);
   const [sliderId, setSliderId] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(attributes.sliderId || '');
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
     if (!sliderId) {
@@ -159,7 +161,15 @@ function Edit({
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gallery Settings")
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Enable FancyBox"),
+    checked: fancybox,
+    onChange: val => {
+      setAttributes({
+        fancybox: val
+      });
+    }
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slider Type"),
     value: sliderType,
     options: [{
@@ -379,9 +389,11 @@ function save({
     showArrows,
     arrowType,
     sliderId,
-    youtubeUrls
+    youtubeUrls,
+    fancybox
   } = attributes;
-  console.log(youtubeUrls);
+  // console.log(youtubeUrls);
+  console.log("save", fancybox);
 
   // Define getPrevArrow and getNextArrow functions
   function getPrevArrow(arrowType) {
@@ -411,18 +423,47 @@ function save({
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: sliderId
   }, galleryImages && galleryImages.map((media, index) => {
+    console.log(youtubeUrls[index]);
     if (media.type === 'image') {
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-        key: media.id,
-        className: "utk-gallery-single"
-      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-        href: youtubeUrls[index],
-        "data-fancybox": "gallery",
-        "data-caption": media.alt ? media.alt : "Gallery Image"
-      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-        src: media.url,
-        alt: media.alt ? media.alt : "Gallery Image"
-      })));
+      if (fancybox == true) {
+        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+          key: media.id,
+          className: "utk-gallery-single"
+        }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+          href: youtubeUrls[index],
+          "data-fancybox": "gallery",
+          "data-caption": media.alt ? media.alt : "Gallery Image"
+        }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+          src: media.url,
+          alt: media.alt ? media.alt : "Gallery Image"
+        })));
+      } else {
+        if (youtubeUrls[index] == "") {
+          return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+            key: media.id,
+            className: "utk-gallery-single"
+          }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+            src: media.url,
+            alt: media.alt ? media.alt : "Gallery Image"
+          }));
+        } else {
+          // Extracting video ID from YouTube URL
+          const videoID = youtubeUrls[index].match(/[?&]v=([^&]+)/)[1];
+          return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+            key: media.id,
+            className: "utk-gallery-single"
+          }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("iframe", {
+            width: "560",
+            height: "315",
+            src: `https://www.youtube.com/embed/${videoID}`,
+            title: "YouTube video player",
+            frameborder: "0",
+            allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
+            referrerpolicy: "strict-origin-when-cross-origin",
+            allowfullscreen: true
+          }));
+        }
+      }
     } else if (media.type === 'video') {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         key: media.id,
@@ -487,7 +528,7 @@ function save({
                                 break;
                         }
                     });
-                `), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", null));
+                `));
 }
 
 /***/ }),

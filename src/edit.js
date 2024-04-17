@@ -64,7 +64,8 @@ import "slick-carousel/slick/slick.js";
 
 
 export default function Edit({ attributes, setAttributes }) {
-    const { galleryImages = [],  youtubeUrls = [], sliderType, showArrows, arrowType, youtubeLink } = attributes;
+    const { galleryImages = [],  youtubeUrls = [], sliderType, showArrows, arrowType, youtubeLink,fancybox } = attributes;
+    console.log(fancybox);
 
     const [sliderId, setSliderId] = useState(attributes.sliderId || '');
 
@@ -93,6 +94,13 @@ export default function Edit({ attributes, setAttributes }) {
         <>
             <InspectorControls>
                 <PanelBody title={__("Gallery Settings")}>
+                <ToggleControl
+                        label={__("Enable FancyBox")}
+                        checked={fancybox}
+                        onChange={(val) => {
+                            setAttributes({ fancybox: val });
+                        }}
+                    />
                     <SelectControl
                         label={__("Slider Type")}
                         value={sliderType}
