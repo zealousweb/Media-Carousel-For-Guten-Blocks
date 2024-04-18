@@ -129,7 +129,6 @@ function Edit({
     sliderType,
     showArrows,
     arrowType,
-    youtubeLink,
     fancybox
   } = attributes;
   const [sliderId, setSliderId] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(attributes.sliderId || '');
@@ -148,13 +147,6 @@ function Edit({
     const updatedGallery = galleryImages.filter(media => media.id !== mediaId);
     setAttributes({
       galleryImages: updatedGallery
-    });
-  };
-  const handleYoutubeUrlChange = (index, url) => {
-    const updatedUrls = [...youtubeUrls];
-    updatedUrls[index] = url;
-    setAttributes({
-      youtubeUrls: updatedUrls
     });
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
@@ -242,8 +234,14 @@ function Edit({
     onClick: () => handleRemove(media.id)
   }, "Remove")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "text",
-    value: youtubeUrls && youtubeUrls[index] ? youtubeUrls[index] : '',
-    onChange: event => handleYoutubeUrlChange(index, event.target.value),
+    value: youtubeUrls.map((url, idx) => idx === index ? url : '').join(''),
+    onChange: event => {
+      const updatedUrls = [...youtubeUrls];
+      updatedUrls[index] = event.target.value;
+      setAttributes({
+        youtubeUrls: updatedUrls
+      });
+    },
     placeholder: "Enter YouTube video URL"
   })) : media.type === 'video' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("video", {
     controls: true
@@ -390,6 +388,8 @@ function save({
     youtubeUrls,
     fancybox
   } = attributes;
+
+  // Define getPrevArrow and getNextArrow functions
   function getPrevArrow(arrowType) {
     switch (arrowType) {
       case 'custom1':
@@ -418,8 +418,9 @@ function save({
     id: sliderId
   }, galleryImages && galleryImages.map((media, index) => {
     if (media.type === 'image') {
-      if (fancybox == true) {
-        if (youtubeUrls && youtubeUrls[index] == "") {
+      const youtubeUrl = youtubeUrls && youtubeUrls[index] ? youtubeUrls[index] : "";
+      if (fancybox) {
+        if (youtubeUrl === "") {
           return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
             key: media.id,
             className: "utk-gallery-single"
@@ -432,7 +433,7 @@ function save({
             key: media.id,
             className: "utk-gallery-single"
           }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-            href: youtubeUrls && youtubeUrls[index],
+            href: youtubeUrl,
             "data-fancybox": "gallery",
             "data-caption": media.alt ? media.alt : "Gallery Image"
           }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
@@ -441,7 +442,7 @@ function save({
           })));
         }
       } else {
-        if (youtubeUrls && youtubeUrls[index] == "") {
+        if (youtubeUrl === "") {
           return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
             key: media.id,
             className: "utk-gallery-single"
@@ -450,7 +451,8 @@ function save({
             alt: media.alt ? media.alt : "Gallery Image"
           }));
         } else {
-          const videoID = youtubeUrls && youtubeUrls[index] ? youtubeUrls[index].match(/[?&]v=([^&]+)/)[1] : '';
+          // Extracting video ID from YouTube URL
+          const videoID = youtubeUrl.match(/[?&]v=([^&]+)/)[1];
           return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
             key: media.id,
             className: "utk-gallery-single"

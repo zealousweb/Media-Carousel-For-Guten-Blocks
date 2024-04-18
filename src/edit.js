@@ -64,7 +64,8 @@ import "slick-carousel/slick/slick.js";
 
 
 export default function Edit({ attributes, setAttributes }) {
-    const { galleryImages = [],  youtubeUrls = [], sliderType, showArrows, arrowType, youtubeLink, fancybox } = attributes;
+    const { galleryImages = [], youtubeUrls = [], sliderType, showArrows, arrowType, fancybox } = attributes;
+
 
     const [sliderId, setSliderId] = useState(attributes.sliderId || '');
 
@@ -83,12 +84,6 @@ export default function Edit({ attributes, setAttributes }) {
         setAttributes({ galleryImages: updatedGallery });
     };
     
-    const handleYoutubeUrlChange = (index, url) => {
-        const updatedUrls = [...youtubeUrls];
-        updatedUrls[index] = url;
-        setAttributes({ youtubeUrls: updatedUrls });
-    };
-
     return (
         <>
             <InspectorControls>
@@ -171,8 +166,12 @@ export default function Edit({ attributes, setAttributes }) {
                                 </div>
                                 <input
                                     type="text"
-                                    value={youtubeUrls && youtubeUrls[index] ? youtubeUrls[index] : ''}
-                                    onChange={(event) => handleYoutubeUrlChange(index, event.target.value)}
+                                    value={youtubeUrls.map((url, idx) => idx === index ? url : '').join('')}
+                                    onChange={(event) => {
+                                        const updatedUrls = [...youtubeUrls];
+                                        updatedUrls[index] = event.target.value;
+                                        setAttributes({ youtubeUrls: updatedUrls });
+                                    }}
                                     placeholder="Enter YouTube video URL"
                                 />
                             </>
