@@ -64,8 +64,7 @@ import "slick-carousel/slick/slick.js";
 
 
 export default function Edit({ attributes, setAttributes }) {
-    const { galleryImages = [],  youtubeUrls = [], sliderType, showArrows, arrowType, youtubeLink,fancybox } = attributes;
-    console.log(fancybox);
+    const { galleryImages = [],  youtubeUrls = [], sliderType, showArrows, arrowType, youtubeLink, fancybox } = attributes;
 
     const [sliderId, setSliderId] = useState(attributes.sliderId || '');
 
@@ -83,8 +82,8 @@ export default function Edit({ attributes, setAttributes }) {
         const updatedGallery = galleryImages.filter((media) => media.id !== mediaId);
         setAttributes({ galleryImages: updatedGallery });
     };
-     // Function to handle changes in YouTube URL
-     const handleYoutubeUrlChange = (index, url) => {
+    
+    const handleYoutubeUrlChange = (index, url) => {
         const updatedUrls = [...youtubeUrls];
         updatedUrls[index] = url;
         setAttributes({ youtubeUrls: updatedUrls });
@@ -94,7 +93,7 @@ export default function Edit({ attributes, setAttributes }) {
         <>
             <InspectorControls>
                 <PanelBody title={__("Gallery Settings")}>
-                <ToggleControl
+                    <ToggleControl
                         label={__("Enable FancyBox")}
                         checked={fancybox}
                         onChange={(val) => {
@@ -172,7 +171,7 @@ export default function Edit({ attributes, setAttributes }) {
                                 </div>
                                 <input
                                     type="text"
-                                    value={youtubeUrls[index] || ''}
+                                    value={youtubeUrls && youtubeUrls[index] ? youtubeUrls[index] : ''}
                                     onChange={(event) => handleYoutubeUrlChange(index, event.target.value)}
                                     placeholder="Enter YouTube video URL"
                                 />

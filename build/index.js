@@ -132,7 +132,6 @@ function Edit({
     youtubeLink,
     fancybox
   } = attributes;
-  console.log(fancybox);
   const [sliderId, setSliderId] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(attributes.sliderId || '');
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
     if (!sliderId) {
@@ -151,7 +150,6 @@ function Edit({
       galleryImages: updatedGallery
     });
   };
-  // Function to handle changes in YouTube URL
   const handleYoutubeUrlChange = (index, url) => {
     const updatedUrls = [...youtubeUrls];
     updatedUrls[index] = url;
@@ -244,7 +242,7 @@ function Edit({
     onClick: () => handleRemove(media.id)
   }, "Remove")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "text",
-    value: youtubeUrls[index] || '',
+    value: youtubeUrls && youtubeUrls[index] ? youtubeUrls[index] : '',
     onChange: event => handleYoutubeUrlChange(index, event.target.value),
     placeholder: "Enter YouTube video URL"
   })) : media.type === 'video' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("video", {
@@ -392,10 +390,6 @@ function save({
     youtubeUrls,
     fancybox
   } = attributes;
-  // console.log(youtubeUrls);
-  console.log("save", fancybox);
-
-  // Define getPrevArrow and getNextArrow functions
   function getPrevArrow(arrowType) {
     switch (arrowType) {
       case 'custom1':
@@ -423,20 +417,9 @@ function save({
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: sliderId
   }, galleryImages && galleryImages.map((media, index) => {
-    console.log(youtubeUrls[index]);
     if (media.type === 'image') {
       if (fancybox == true) {
-        {/* return (
-            <div key={media.id} className="utk-gallery-single">
-                <a href={youtubeUrls[index]} data-fancybox="gallery" data-caption={media.alt ? media.alt : "Gallery Image"}>
-                    <img
-                        src={media.url}
-                        alt={media.alt ? media.alt : "Gallery Image"}
-                    />
-                </a>
-            </div>
-         ); */}
-        if (youtubeUrls[index] == "") {
+        if (youtubeUrls && youtubeUrls[index] == "") {
           return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
             key: media.id,
             className: "utk-gallery-single"
@@ -445,24 +428,20 @@ function save({
             alt: media.alt ? media.alt : "Gallery Image"
           }));
         } else {
-          // Extracting video ID from YouTube URL
-          const videoID = youtubeUrls[index].match(/[?&]v=([^&]+)/)[1];
           return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
             key: media.id,
             className: "utk-gallery-single"
-          }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("iframe", {
-            width: "560",
-            height: "315",
-            src: `https://www.youtube.com/embed/${videoID}`,
-            title: "YouTube video player",
-            frameborder: "0",
-            allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
-            referrerpolicy: "strict-origin-when-cross-origin",
-            allowfullscreen: true
-          }));
+          }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+            href: youtubeUrls && youtubeUrls[index],
+            "data-fancybox": "gallery",
+            "data-caption": media.alt ? media.alt : "Gallery Image"
+          }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+            src: media.url,
+            alt: media.alt ? media.alt : "Gallery Image"
+          })));
         }
       } else {
-        if (youtubeUrls[index] == "") {
+        if (youtubeUrls && youtubeUrls[index] == "") {
           return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
             key: media.id,
             className: "utk-gallery-single"
@@ -471,8 +450,7 @@ function save({
             alt: media.alt ? media.alt : "Gallery Image"
           }));
         } else {
-          // Extracting video ID from YouTube URL
-          const videoID = youtubeUrls[index].match(/[?&]v=([^&]+)/)[1];
+          const videoID = youtubeUrls && youtubeUrls[index] ? youtubeUrls[index].match(/[?&]v=([^&]+)/)[1] : '';
           return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
             key: media.id,
             className: "utk-gallery-single"

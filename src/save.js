@@ -26,11 +26,7 @@ import ReactFancyBox from 'react-fancybox';
 
 export default function save({ attributes }) {
     const { galleryImages, sliderType, showArrows, arrowType, sliderId, youtubeUrls, fancybox } = attributes;
-    // console.log(youtubeUrls);
-    console.log("save", fancybox);
 
-
-    // Define getPrevArrow and getNextArrow functions
     function getPrevArrow(arrowType) {
         switch (arrowType) {
             case 'custom1':
@@ -61,21 +57,10 @@ export default function save({ attributes }) {
             <div id={sliderId}>
                 {galleryImages &&
                     galleryImages.map((media, index) => {
-                        console.log(youtubeUrls[index]);
                         if (media.type === 'image') {
 
                             if (fancybox == true) {
-                                {/* return (
-                                    <div key={media.id} className="utk-gallery-single">
-                                        <a href={youtubeUrls[index]} data-fancybox="gallery" data-caption={media.alt ? media.alt : "Gallery Image"}>
-                                            <img
-                                                src={media.url}
-                                                alt={media.alt ? media.alt : "Gallery Image"}
-                                            />
-                                        </a>
-                                    </div>
-                                ); */}
-                                if (youtubeUrls[index] == "") {
+                                if (youtubeUrls && youtubeUrls[index] == "") {
                                     return (
                                         <div key={media.id} className="utk-gallery-single">
                                             <img
@@ -85,16 +70,19 @@ export default function save({ attributes }) {
                                         </div>
                                     );
                                 } else {
-                                    // Extracting video ID from YouTube URL
-                                    const videoID = youtubeUrls[index].match(/[?&]v=([^&]+)/)[1];
                                     return (
                                         <div key={media.id} className="utk-gallery-single">
-                                            <iframe width="560" height="315" src={`https://www.youtube.com/embed/${videoID}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                            <a href={youtubeUrls && youtubeUrls[index]} data-fancybox="gallery" data-caption={media.alt ? media.alt : "Gallery Image"}>
+                                                <img
+                                                    src={media.url}
+                                                    alt={media.alt ? media.alt : "Gallery Image"}
+                                                />
+                                            </a>
                                         </div>
                                     );
                                 }
                             } else {
-                                if (youtubeUrls[index] == "") {
+                                if (youtubeUrls && youtubeUrls[index] == "") {
                                     return (
                                         <div key={media.id} className="utk-gallery-single">
                                             <img
@@ -104,8 +92,7 @@ export default function save({ attributes }) {
                                         </div>
                                     );
                                 } else {
-                                    // Extracting video ID from YouTube URL
-                                    const videoID = youtubeUrls[index].match(/[?&]v=([^&]+)/)[1];
+                                    const videoID = youtubeUrls && youtubeUrls[index] ? youtubeUrls[index].match(/[?&]v=([^&]+)/)[1] : '';
                                     return (
                                         <div key={media.id} className="utk-gallery-single">
                                             <iframe width="560" height="315" src={`https://www.youtube.com/embed/${videoID}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
