@@ -207,7 +207,13 @@ function Edit({
     multiple: "add",
     onSelect: val => {
       setAttributes({
-        galleryImages: val
+        galleryImages: val.map(media => ({
+          id: media.id,
+          url: media.url,
+          alt: media.alt,
+          type: media.type,
+          caption: media.caption // Include the caption field
+        }))
       });
     },
     allowedTypes: ['image', 'video'],
@@ -243,14 +249,14 @@ function Edit({
       });
     },
     placeholder: "Enter YouTube video URL"
-  })) : media.type === 'video' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("video", {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, media.caption), " ") : media.type === 'video' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("video", {
     controls: true
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("source", {
     src: media.url,
     type: media.mime
   }), "Your browser does not support the video tag."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     onClick: () => handleRemove(media.id)
-  }, "Remove"))) : null)), galleryImages.length === 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaPlaceholder, {
+  }, "Remove")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, media.caption), " ") : null)), galleryImages.length === 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaPlaceholder, {
     multiple: "add",
     onSelect: val => {
       setAttributes({
@@ -417,6 +423,8 @@ function save({
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: sliderId
   }, galleryImages && galleryImages.map((media, index) => {
+    const caption = media.caption ? media.caption : ''; // Get the caption
+    console.log(caption);
     if (media.type === 'image') {
       const youtubeUrl = youtubeUrls && youtubeUrls[index] ? youtubeUrls[index] : "";
       if (fancybox) {
@@ -427,7 +435,7 @@ function save({
           }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
             src: media.url,
             alt: media.alt ? media.alt : "Gallery Image"
-          }));
+          }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, caption));
         } else {
           return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
             key: media.id,
@@ -439,7 +447,7 @@ function save({
           }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
             src: media.url,
             alt: media.alt ? media.alt : "Gallery Image"
-          })));
+          }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, caption)));
         }
       } else {
         if (youtubeUrl === "") {
@@ -449,7 +457,7 @@ function save({
           }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
             src: media.url,
             alt: media.alt ? media.alt : "Gallery Image"
-          }));
+          }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, caption));
         } else {
           // Extracting video ID from YouTube URL
           const videoID = youtubeUrl.match(/[?&]v=([^&]+)/)[1];
@@ -477,7 +485,7 @@ function save({
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("source", {
         src: media.url,
         type: media.mime
-      }), "Your browser does not support the video tag."));
+      }), "Your browser does not support the video tag."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, caption));
     }
     return null;
   })), showArrows && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Arrow Type: ", arrowType), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("script", null, `

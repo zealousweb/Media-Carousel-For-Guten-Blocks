@@ -24,9 +24,10 @@ import "slick-carousel/slick/slick.js";
 import 'react-fancybox/lib/fancybox.css';
 import ReactFancyBox from 'react-fancybox';
 
+
 export default function save({ attributes }) {
     const { galleryImages, sliderType, showArrows, arrowType, sliderId, youtubeUrls, fancybox } = attributes;
-
+ 
     // Define getPrevArrow and getNextArrow functions
     function getPrevArrow(arrowType) {
         switch (arrowType) {
@@ -40,7 +41,7 @@ export default function save({ attributes }) {
                 return;
         }
     }
-
+ 
     function getNextArrow(arrowType) {
         switch (arrowType) {
             case 'custom1':
@@ -57,6 +58,8 @@ export default function save({ attributes }) {
         <>
             <div id={sliderId}>
                 {galleryImages && galleryImages.map((media, index) => {
+                    const caption = media.caption ? media.caption : ''; // Get the caption
+                    console.log(caption);
                     if (media.type === 'image') {
                         const youtubeUrl = youtubeUrls && youtubeUrls[index] ? youtubeUrls[index] : "";
                         if (fancybox) {
@@ -67,6 +70,7 @@ export default function save({ attributes }) {
                                             src={media.url}
                                             alt={media.alt ? media.alt : "Gallery Image"}
                                         />
+                                          <div>{caption}</div>
                                     </div>
                                 );
                             } else {
@@ -77,6 +81,7 @@ export default function save({ attributes }) {
                                                 src={media.url}
                                                 alt={media.alt ? media.alt : "Gallery Image"}
                                             />
+                                              <div>{caption}</div> 
                                         </a>
                                     </div>
                                 );
@@ -89,6 +94,7 @@ export default function save({ attributes }) {
                                             src={media.url}
                                             alt={media.alt ? media.alt : "Gallery Image"}
                                         />
+                                          <div>{caption}</div> 
                                     </div>
                                 );
                             } else {
@@ -108,6 +114,7 @@ export default function save({ attributes }) {
                                     <source src={media.url} type={media.mime} />
                                     Your browser does not support the video tag.
                                 </video>
+                                <div>{caption}</div>
                             </div>
                         );
                     }
@@ -172,4 +179,4 @@ export default function save({ attributes }) {
             </script>
         </>
     );
-}
+ }

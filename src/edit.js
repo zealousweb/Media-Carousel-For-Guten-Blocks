@@ -66,7 +66,6 @@ import "slick-carousel/slick/slick.js";
 export default function Edit({ attributes, setAttributes }) {
     const { galleryImages = [], youtubeUrls = [], sliderType, showArrows, arrowType, fancybox } = attributes;
 
-
     const [sliderId, setSliderId] = useState(attributes.sliderId || '');
 
     useEffect(() => {
@@ -137,7 +136,13 @@ export default function Edit({ attributes, setAttributes }) {
                         <MediaUpload
                             multiple="add"
                             onSelect={(val) => {
-                                setAttributes({ galleryImages: val });
+                                setAttributes({ galleryImages: val.map((media) => ({
+                                    id: media.id,
+                                    url: media.url,
+                                    alt: media.alt,
+                                    type: media.type,
+                                    caption: media.caption, // Include the caption field
+                                })) });
                             }}
                             allowedTypes={['image', 'video']}
                             value={galleryImages.map((val) => val.id)}
@@ -174,6 +179,7 @@ export default function Edit({ attributes, setAttributes }) {
                                     }}
                                     placeholder="Enter YouTube video URL"
                                 />
+                                <div>{media.caption}</div> {/* Display the caption */}
                             </>
                         ) : media.type === 'video' ? (
                             <>
@@ -184,6 +190,7 @@ export default function Edit({ attributes, setAttributes }) {
                                 <div>
                                     <button onClick={() => handleRemove(media.id)}>Remove</button>
                                 </div>
+                                <div>{media.caption}</div> {/* Display the caption */}
                             </>
                         ) : null}
                     </div>
