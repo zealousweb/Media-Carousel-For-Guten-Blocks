@@ -62,7 +62,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.js";
 
-
 export default function Edit({ attributes, setAttributes }) {
     const { galleryImages = [], youtubeUrls = [], sliderType, showArrows, arrowType, fancybox } = attributes;
 
@@ -179,7 +178,16 @@ export default function Edit({ attributes, setAttributes }) {
                                     }}
                                     placeholder="Enter YouTube video URL"
                                 />
-                                <div>{media.caption}</div> {/* Display the caption */}
+                                <input
+                                    type="text"
+                                    value={media.caption || ''} // Display original caption or an empty string if none
+                                    onChange={(event) => {
+                                        const updatedGallery = [...galleryImages];
+                                        updatedGallery[index].caption = event.target.value; // Override the caption
+                                        setAttributes({ galleryImages: updatedGallery });
+                                    }}
+                                    placeholder="Enter Caption"
+                                />
                             </>
                         ) : media.type === 'video' ? (
                             <>
@@ -190,7 +198,16 @@ export default function Edit({ attributes, setAttributes }) {
                                 <div>
                                     <button onClick={() => handleRemove(media.id)}>Remove</button>
                                 </div>
-                                <div>{media.caption}</div> {/* Display the caption */}
+                                <input
+                                    type="text"
+                                    value={media.caption || ''} // Display original caption or an empty string if none
+                                    onChange={(event) => {
+                                        const updatedGallery = [...galleryImages];
+                                        updatedGallery[index].caption = event.target.value; // Override the caption
+                                        setAttributes({ galleryImages: updatedGallery });
+                                    }}
+                                    placeholder="Enter Caption"
+                                />
                             </>
                         ) : null}
                     </div>

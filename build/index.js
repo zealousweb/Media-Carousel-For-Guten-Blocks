@@ -249,14 +249,38 @@ function Edit({
       });
     },
     placeholder: "Enter YouTube video URL"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, media.caption), " ") : media.type === 'video' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("video", {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    type: "text",
+    value: media.caption || '' // Display original caption or an empty string if none
+    ,
+    onChange: event => {
+      const updatedGallery = [...galleryImages];
+      updatedGallery[index].caption = event.target.value; // Override the caption
+      setAttributes({
+        galleryImages: updatedGallery
+      });
+    },
+    placeholder: "Enter Caption"
+  })) : media.type === 'video' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("video", {
     controls: true
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("source", {
     src: media.url,
     type: media.mime
   }), "Your browser does not support the video tag."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     onClick: () => handleRemove(media.id)
-  }, "Remove")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, media.caption), " ") : null)), galleryImages.length === 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaPlaceholder, {
+  }, "Remove")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    type: "text",
+    value: media.caption || '' // Display original caption or an empty string if none
+    ,
+    onChange: event => {
+      const updatedGallery = [...galleryImages];
+      updatedGallery[index].caption = event.target.value; // Override the caption
+      setAttributes({
+        galleryImages: updatedGallery
+      });
+    },
+    placeholder: "Enter Caption"
+  })) : null)), galleryImages.length === 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaPlaceholder, {
     multiple: "add",
     onSelect: val => {
       setAttributes({
