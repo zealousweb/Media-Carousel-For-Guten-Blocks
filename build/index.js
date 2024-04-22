@@ -61,14 +61,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/editor.scss");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! jquery */ "jquery");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var slick_carousel_slick_slick_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! slick-carousel/slick/slick.css */ "./node_modules/slick-carousel/slick/slick.css");
-/* harmony import */ var slick_carousel_slick_slick_theme_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! slick-carousel/slick/slick-theme.css */ "./node_modules/slick-carousel/slick/slick-theme.css");
-/* harmony import */ var slick_carousel_slick_slick_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! slick-carousel/slick/slick.js */ "./node_modules/slick-carousel/slick/slick.js");
-/* harmony import */ var slick_carousel_slick_slick_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(slick_carousel_slick_slick_js__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! jquery */ "jquery");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var slick_carousel_slick_slick_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! slick-carousel/slick/slick.css */ "./node_modules/slick-carousel/slick/slick.css");
+/* harmony import */ var slick_carousel_slick_slick_theme_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! slick-carousel/slick/slick-theme.css */ "./node_modules/slick-carousel/slick/slick-theme.css");
+/* harmony import */ var slick_carousel_slick_slick_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! slick-carousel/slick/slick.js */ "./node_modules/slick-carousel/slick/slick.js");
+/* harmony import */ var slick_carousel_slick_slick_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(slick_carousel_slick_slick_js__WEBPACK_IMPORTED_MODULE_9__);
 
 /**
  * Retrieves the translation of text.
@@ -129,15 +127,17 @@ function Edit({
     sliderType,
     showArrows,
     arrowType,
-    fancybox
+    fancybox,
+    simpleType,
+    carouselType
   } = attributes;
-  const [sliderId, setSliderId] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(attributes.sliderId || '');
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
+  const [sliderId, setSliderId] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(attributes.sliderId || '');
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     if (!sliderId) {
       setSliderId(`utk-slider-${sliderType}-${Math.floor(Math.random() * 1000)}`);
     }
   }, [sliderType, sliderId]);
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     setAttributes({
       ...attributes,
       sliderId
@@ -159,25 +159,58 @@ function Edit({
         fancybox: val
       });
     }
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RadioControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slider Type"),
-    value: sliderType,
+    selected: sliderType,
     options: [{
-      label: "Simple",
-      value: "simple"
+      label: "Simple Type",
+      value: "simpleType"
     }, {
-      label: "Carousel",
-      value: "carousel"
-    }, {
-      label: "Fade",
-      value: "fade"
+      label: "Carousel Type",
+      value: "carouselType"
     }],
     onChange: val => {
       setAttributes({
         sliderType: val
       });
     }
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
+  }), sliderType && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, sliderType === "simpleType" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Simple Slider Type"),
+    values: simpleType,
+    options: [{
+      label: "Simple",
+      value: "simple"
+    }, {
+      label: "Fade",
+      value: "fade"
+    }, {
+      label: "Adaptive Height",
+      value: "adaptiveheight"
+    }],
+    onChange: val => {
+      setAttributes({
+        simpleType: val
+      });
+    }
+  }), sliderType === "carouselType" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Carousel Slider Type"),
+    values: carouselType,
+    options: [{
+      label: "Carousel",
+      value: "carousel"
+    }, {
+      label: "Center Mode",
+      value: "centermode"
+    }, {
+      label: "Lazy Loading",
+      value: "lazyloading"
+    }],
+    onChange: val => {
+      setAttributes({
+        carouselType: val
+      });
+    }
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Show Arrows"),
     checked: showArrows,
     onChange: val => {
@@ -366,7 +399,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ save)
+/* harmony export */   "default": () => (/* binding */ Save)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
@@ -406,7 +439,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function save({
+function Save({
   attributes
 }) {
   const {
@@ -416,10 +449,10 @@ function save({
     arrowType,
     sliderId,
     youtubeUrls,
-    fancybox
+    fancybox,
+    simpleType,
+    carouselType
   } = attributes;
-
-  // Define getPrevArrow and getNextArrow functions
   function getPrevArrow(arrowType) {
     switch (arrowType) {
       case 'custom1':
@@ -447,8 +480,7 @@ function save({
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: sliderId
   }, galleryImages && galleryImages.map((media, index) => {
-    const caption = media.caption ? media.caption : ''; // Get the caption
-    console.log(caption);
+    const caption = media.caption ? media.caption : '';
     if (media.type === 'image') {
       const youtubeUrl = youtubeUrls && youtubeUrls[index] ? youtubeUrls[index] : "";
       if (fancybox) {
@@ -483,7 +515,6 @@ function save({
             alt: media.alt ? media.alt : "Gallery Image"
           }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, caption));
         } else {
-          // Extracting video ID from YouTube URL
           const videoID = youtubeUrl.match(/[?&]v=([^&]+)/)[1];
           return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
             key: media.id,
@@ -512,59 +543,114 @@ function save({
       }), "Your browser does not support the video tag."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, caption));
     }
     return null;
-  })), showArrows && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Arrow Type: ", arrowType), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("script", null, `
-                    jQuery(document).ready(function($) {
-                        $('[data-fancybox="gallery"]').fancybox({
-                            loop: false,
-                            protect: true
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("script", null, `
+                        jQuery(document).ready(function($) {
+                            var sliderId = "#${sliderId}";
+                            switch ("${sliderType}") {
+                                case 'simpleType':
+                                    switch("${simpleType}") {
+                                        case 'simple':
+                                            $(sliderId).slick({
+                                                arrows: ${showArrows},
+                                                prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
+                                                nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
+                                            });
+                                            break;
+                                        case 'fade':
+                                            $(sliderId).slick({
+                                                dots: true,
+                                                infinite: true,
+                                                speed: 500,
+                                                fade: true,
+                                                cssEase: 'linear',
+                                                arrows: ${showArrows},
+                                                prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
+                                                nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
+                                            });
+                                            break;
+                                        case 'adaptiveheight':
+                                            $(sliderId).slick({
+                                                dots: true,
+                                                infinite: true,
+                                                speed: 300,
+                                                slidesToShow: 1,
+                                                adaptiveHeight: true,
+                                                arrows: ${showArrows},
+                                                prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
+                                                nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
+                                            });
+                                            break;
+                                    }
+                                    break;
+                                case 'carouselType':
+                                    switch("${carouselType}") {
+                                        case 'carousel':
+                                            $(sliderId).slick({
+                                                infinite: true,
+                                                slidesToShow: 3,
+                                                slidesToScroll: 3,
+                                                dots: true,
+                                                arrows: ${showArrows},
+                                                prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
+                                                nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
+                                            });
+                                            break;
+                                        case 'centermode':
+                                            $(sliderId).slick({
+                                                centerMode: true,
+                                                centerPadding: '60px',
+                                                slidesToShow: 3,
+                                                responsive: [
+                                                    {
+                                                        breakpoint: 768,
+                                                        settings: {
+                                                            arrows: false,
+                                                            centerMode: true,
+                                                            centerPadding: '40px',
+                                                            slidesToShow: 3
+                                                        }
+                                                    },
+                                                    {
+                                                        breakpoint: 480,
+                                                        settings: {
+                                                            arrows: false,
+                                                            centerMode: true,
+                                                            centerPadding: '40px',
+                                                            slidesToShow: 1
+                                                        }
+                                                    }
+                                                ],
+                                                arrows: ${showArrows},
+                                                prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
+                                                nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
+                                            });
+                                            break;
+                                        case 'lazyloading':
+                                            $(sliderId).slick({
+                                                lazyLoad: 'ondemand',
+                                                slidesToShow: 3,
+                                                slidesToScroll: 1,
+                                                arrows: ${showArrows},
+                                                prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
+                                                nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
+                                            });
+                                            break;
+                                    }
+                                    break;
+                                default:
+                                    $(sliderId).slick({
+                                        slidesToShow: 1,
+                                        slidesToScroll: 1,
+                                        autoplay: true,
+                                        autoplaySpeed: 2000,
+                                        arrows: ${showArrows},
+                                        prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
+                                        nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
+                                    });
+                                    break;
+                            }
                         });
-                        var sliderId = "#${sliderId}";
-                        
-                        switch ("${sliderType}") {
-                            case 'simple':
-                                $(sliderId).slick({
-                                    arrows: ${showArrows},
-                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
-                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
-                                });
-                                break;
-                            case 'carousel':
-                                $(sliderId).slick({
-                                    infinite: true,
-                                    slidesToShow: 3,
-                                    slidesToScroll: 1,
-                                    dots: true,
-                                    arrows: ${showArrows},
-                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
-                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
-                                });
-                                break;
-                            case 'fade':
-                                $(sliderId).slick({
-                                    dots: true,
-                                    infinite: true,
-                                    speed: 500,
-                                    fade: true,
-                                    cssEase: 'linear',
-                                    arrows: ${showArrows},
-                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
-                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
-                                });
-                                break;
-                            default:
-                                $(sliderId).slick({
-                                    slidesToShow: 1,
-                                    slidesToScroll: 1,
-                                    autoplay: true,
-                                    autoplaySpeed: 2000,
-                                    arrows: ${showArrows},
-                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
-                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
-                                });
-                                break;
-                        }
-                    });
-                `));
+                    `));
 }
 
 /***/ }),
@@ -6165,17 +6251,6 @@ module.exports = window["wp"]["data"];
 
 /***/ }),
 
-/***/ "@wordpress/element":
-/*!*********************************!*\
-  !*** external ["wp","element"] ***!
-  \*********************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = window["wp"]["element"];
-
-/***/ }),
-
 /***/ "@wordpress/i18n":
 /*!******************************!*\
   !*** external ["wp","i18n"] ***!
@@ -6209,7 +6284,7 @@ module.exports = _interopRequireDefault, module.exports.__esModule = true, modul
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"0.1.0","title":"Gutenberg Media Carousel","category":"widgets","icon":"smiley","description":"A custom block for uploading multiple images with sliding effect.","example":{},"attributes":{"id":{"type":"string"},"sliderId":{"type":"string"},"galleryId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simple"},"showArrows":{"type":"boolean","default":true},"arrowType":{"type":"string","default":"custom1"},"youtubeUrls":{"type":"array","items":{"type":"string"}}},"supports":{"html":false,"align":["wide","full"],"video":true},"textdomain":"gutenberg-media-carousel","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"0.1.0","title":"Gutenberg Media Carousel","category":"widgets","icon":"smiley","description":"A custom block for uploading multiple images with sliding effect.","example":{},"attributes":{"id":{"type":"string"},"sliderId":{"type":"string"},"galleryId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simple"},"showArrows":{"type":"boolean"},"arrowType":{"type":"string","default":"custom1"},"youtubeUrls":{"type":"array","items":{"type":"string"}},"simpleType":{"type":"string","default":"simple"},"carouselType":{"type":"string","default":"carousel"}},"supports":{"html":false,"align":["wide","full"],"video":true},"textdomain":"gutenberg-media-carousel","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

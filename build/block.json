@@ -26,8 +26,7 @@
       "default": "simple"
     },
     "showArrows": {
-      "type": "boolean",
-      "default": true
+      "type": "boolean"
     },
     "arrowType": {
       "type": "string",
@@ -38,6 +37,14 @@
       "items": {
         "type": "string"
       }
+    },
+    "simpleType": {
+      "type": "string",
+      "default": "simple"
+    },
+    "carouselType": {
+      "type": "string",
+      "default": "carousel"
     }
   },
   "supports": {

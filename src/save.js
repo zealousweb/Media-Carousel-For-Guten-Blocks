@@ -24,11 +24,9 @@ import "slick-carousel/slick/slick.js";
 import 'react-fancybox/lib/fancybox.css';
 import ReactFancyBox from 'react-fancybox';
 
+export default function Save({ attributes }) {
+    const { galleryImages, sliderType, showArrows, arrowType, sliderId, youtubeUrls, fancybox, simpleType, carouselType } = attributes;
 
-export default function save({ attributes }) {
-    const { galleryImages, sliderType, showArrows, arrowType, sliderId, youtubeUrls, fancybox } = attributes;
- 
-    // Define getPrevArrow and getNextArrow functions
     function getPrevArrow(arrowType) {
         switch (arrowType) {
             case 'custom1':
@@ -41,7 +39,7 @@ export default function save({ attributes }) {
                 return;
         }
     }
- 
+
     function getNextArrow(arrowType) {
         switch (arrowType) {
             case 'custom1':
@@ -54,12 +52,12 @@ export default function save({ attributes }) {
                 return;
         }
     }
+
     return (
         <>
             <div id={sliderId}>
                 {galleryImages && galleryImages.map((media, index) => {
-                    const caption = media.caption ? media.caption : ''; // Get the caption
-                    console.log(caption);
+                    const caption = media.caption ? media.caption : '';
                     if (media.type === 'image') {
                         const youtubeUrl = youtubeUrls && youtubeUrls[index] ? youtubeUrls[index] : "";
                         if (fancybox) {
@@ -70,7 +68,7 @@ export default function save({ attributes }) {
                                             src={media.url}
                                             alt={media.alt ? media.alt : "Gallery Image"}
                                         />
-                                          <div>{caption}</div>
+                                        <div>{caption}</div>
                                     </div>
                                 );
                             } else {
@@ -81,7 +79,7 @@ export default function save({ attributes }) {
                                                 src={media.url}
                                                 alt={media.alt ? media.alt : "Gallery Image"}
                                             />
-                                              <div>{caption}</div> 
+                                            <div>{caption}</div> 
                                         </a>
                                     </div>
                                 );
@@ -94,11 +92,10 @@ export default function save({ attributes }) {
                                             src={media.url}
                                             alt={media.alt ? media.alt : "Gallery Image"}
                                         />
-                                          <div>{caption}</div> 
+                                        <div>{caption}</div> 
                                     </div>
                                 );
                             } else {
-                                // Extracting video ID from YouTube URL
                                 const videoID = youtubeUrl.match(/[?&]v=([^&]+)/)[1];
                                 return (
                                     <div key={media.id} className="utk-gallery-single">
@@ -121,62 +118,119 @@ export default function save({ attributes }) {
                     return null;
                 })}
             </div>
-            {showArrows && <p>Arrow Type: {arrowType}</p>}
-            <script>
-                {`
-                    jQuery(document).ready(function($) {
-                        $('[data-fancybox="gallery"]').fancybox({
-                            loop: false,
-                            protect: true
+            
+     
+                <script>
+                    {`
+                        jQuery(document).ready(function($) {
+                            var sliderId = "#${sliderId}";
+                            switch ("${sliderType}") {
+                                case 'simpleType':
+                                    switch("${simpleType}") {
+                                        case 'simple':
+                                            $(sliderId).slick({
+                                                arrows: ${showArrows},
+                                                prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
+                                                nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
+                                            });
+                                            break;
+                                        case 'fade':
+                                            $(sliderId).slick({
+                                                dots: true,
+                                                infinite: true,
+                                                speed: 500,
+                                                fade: true,
+                                                cssEase: 'linear',
+                                                arrows: ${showArrows},
+                                                prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
+                                                nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
+                                            });
+                                            break;
+                                        case 'adaptiveheight':
+                                            $(sliderId).slick({
+                                                dots: true,
+                                                infinite: true,
+                                                speed: 300,
+                                                slidesToShow: 1,
+                                                adaptiveHeight: true,
+                                                arrows: ${showArrows},
+                                                prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
+                                                nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
+                                            });
+                                            break;
+                                    }
+                                    break;
+                                case 'carouselType':
+                                    switch("${carouselType}") {
+                                        case 'carousel':
+                                            $(sliderId).slick({
+                                                infinite: true,
+                                                slidesToShow: 3,
+                                                slidesToScroll: 3,
+                                                dots: true,
+                                                arrows: ${showArrows},
+                                                prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
+                                                nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
+                                            });
+                                            break;
+                                        case 'centermode':
+                                            $(sliderId).slick({
+                                                centerMode: true,
+                                                centerPadding: '60px',
+                                                slidesToShow: 3,
+                                                responsive: [
+                                                    {
+                                                        breakpoint: 768,
+                                                        settings: {
+                                                            arrows: false,
+                                                            centerMode: true,
+                                                            centerPadding: '40px',
+                                                            slidesToShow: 3
+                                                        }
+                                                    },
+                                                    {
+                                                        breakpoint: 480,
+                                                        settings: {
+                                                            arrows: false,
+                                                            centerMode: true,
+                                                            centerPadding: '40px',
+                                                            slidesToShow: 1
+                                                        }
+                                                    }
+                                                ],
+                                                arrows: ${showArrows},
+                                                prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
+                                                nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
+                                            });
+                                            break;
+                                        case 'lazyloading':
+                                            $(sliderId).slick({
+                                                lazyLoad: 'ondemand',
+                                                slidesToShow: 3,
+                                                slidesToScroll: 1,
+                                                arrows: ${showArrows},
+                                                prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
+                                                nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
+                                            });
+                                            break;
+                                    }
+                                    break;
+                                default:
+                                    $(sliderId).slick({
+                                        slidesToShow: 1,
+                                        slidesToScroll: 1,
+                                        autoplay: true,
+                                        autoplaySpeed: 2000,
+                                        arrows: ${showArrows},
+                                        prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
+                                        nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
+                                    });
+                                    break;
+                            }
                         });
-                        var sliderId = "#${sliderId}";
-                        
-                        switch ("${sliderType}") {
-                            case 'simple':
-                                $(sliderId).slick({
-                                    arrows: ${showArrows},
-                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
-                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
-                                });
-                                break;
-                            case 'carousel':
-                                $(sliderId).slick({
-                                    infinite: true,
-                                    slidesToShow: 3,
-                                    slidesToScroll: 1,
-                                    dots: true,
-                                    arrows: ${showArrows},
-                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
-                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
-                                });
-                                break;
-                            case 'fade':
-                                $(sliderId).slick({
-                                    dots: true,
-                                    infinite: true,
-                                    speed: 500,
-                                    fade: true,
-                                    cssEase: 'linear',
-                                    arrows: ${showArrows},
-                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
-                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
-                                });
-                                break;
-                            default:
-                                $(sliderId).slick({
-                                    slidesToShow: 1,
-                                    slidesToScroll: 1,
-                                    autoplay: true,
-                                    autoplaySpeed: 2000,
-                                    arrows: ${showArrows},
-                                    prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
-                                    nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
-                                });
-                                break;
-                        }
-                    });
-                `}
-            </script>
+                    `}
+                </script>
+     
         </>
     );
- }
+} 

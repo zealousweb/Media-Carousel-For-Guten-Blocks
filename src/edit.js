@@ -35,7 +35,8 @@ import {
     PanelBody,
     SelectControl,
     ToggleControl,
-    TextControl
+    TextControl,
+    RadioControl
 
 } from "@wordpress/components";
 
@@ -56,14 +57,14 @@ import "./editor.scss";
  * @return {WPElement} Element to render.
  */
 
-import { useState, useEffect } from "@wordpress/element";
+import { useState, useEffect } from "react";
 import $ from "jquery";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.js";
 
 export default function Edit({ attributes, setAttributes }) {
-    const { galleryImages = [], youtubeUrls = [], sliderType, showArrows, arrowType, fancybox } = attributes;
+    const { galleryImages = [], youtubeUrls = [], sliderType, showArrows, arrowType, fancybox, simpleType, carouselType } = attributes;
 
     const [sliderId, setSliderId] = useState(attributes.sliderId || '');
 
@@ -81,8 +82,8 @@ export default function Edit({ attributes, setAttributes }) {
         const updatedGallery = galleryImages.filter((media) => media.id !== mediaId);
         setAttributes({ galleryImages: updatedGallery });
     };
-    
-    return (
+
+    return ( 
         <>
             <InspectorControls>
                 <PanelBody title={__("Gallery Settings")}>
@@ -93,18 +94,52 @@ export default function Edit({ attributes, setAttributes }) {
                             setAttributes({ fancybox: val });
                         }}
                     />
-                    <SelectControl
+                    <RadioControl
                         label={__("Slider Type")}
-                        value={sliderType}
+                        selected={sliderType}
                         options={[
-                            { label: "Simple", value: "simple" },
-                            { label: "Carousel", value: "carousel" },
-                            { label: "Fade", value: "fade" },
+                            { label: "Simple Type", value: "simpleType" },
+                            { label: "Carousel Type", value: "carouselType" },
                         ]}
                         onChange={(val) => {
                             setAttributes({ sliderType: val });
                         }}
                     />
+                    {sliderType && (
+                        <>
+                            {sliderType === "simpleType" && (
+                                <SelectControl
+                                    label={__("Simple Slider Type")}
+                                    values={simpleType}
+                                    options={[
+                                        { label: "Simple", value: "simple" },
+                                        { label: "Fade", value: "fade" },
+                                        { label: "Adaptive Height", value: "adaptiveheight" },
+                                    ]}
+                                    onChange={(val) => {
+                                        setAttributes({ simpleType: val });
+                                    }}
+                                />
+                            )}
+                            {sliderType === "carouselType" && (
+                                <SelectControl
+                                    label={__("Carousel Slider Type")}
+                                    values={carouselType}
+                                    options={[
+                                        { label: "Carousel", value: "carousel" },
+                                        { label: "Center Mode", value: "centermode" },
+                                        { label: "Lazy Loading", value: "lazyloading" },
+                                    ]}
+                                    onChange={(val) => {
+                                        setAttributes({ carouselType: val });
+                                    }}
+                                
+
+                                />
+                            )}
+                        </>
+                    )}
+                    
                     <ToggleControl
                         label={__("Show Arrows")}
                         checked={showArrows}
@@ -135,13 +170,15 @@ export default function Edit({ attributes, setAttributes }) {
                         <MediaUpload
                             multiple="add"
                             onSelect={(val) => {
-                                setAttributes({ galleryImages: val.map((media) => ({
-                                    id: media.id,
-                                    url: media.url,
-                                    alt: media.alt,
-                                    type: media.type,
-                                    caption: media.caption, // Include the caption field
-                                })) });
+                                setAttributes({
+                                    galleryImages: val.map((media) => ({
+                                        id: media.id,
+                                        url: media.url,
+                                        alt: media.alt,
+                                        type: media.type,
+                                        caption: media.caption, // Include the caption field
+                                    }))
+                                });
                             }}
                             allowedTypes={['image', 'video']}
                             value={galleryImages.map((val) => val.id)}
