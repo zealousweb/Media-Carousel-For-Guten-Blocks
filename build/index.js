@@ -543,7 +543,7 @@ function Save({
       }), "Your browser does not support the video tag."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, caption));
     }
     return null;
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("script", null, `
+  })), showArrows && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Arrow Type: ", arrowType), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("script", null, `
                         jQuery(document).ready(function($) {
                             var sliderId = "#${sliderId}";
                             switch ("${sliderType}") {

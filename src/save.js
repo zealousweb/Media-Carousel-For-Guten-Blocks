@@ -79,7 +79,7 @@ export default function Save({ attributes }) {
                                                 src={media.url}
                                                 alt={media.alt ? media.alt : "Gallery Image"}
                                             />
-                                            <div>{caption}</div> 
+                                            <div>{caption}</div>
                                         </a>
                                     </div>
                                 );
@@ -92,7 +92,7 @@ export default function Save({ attributes }) {
                                             src={media.url}
                                             alt={media.alt ? media.alt : "Gallery Image"}
                                         />
-                                        <div>{caption}</div> 
+                                        <div>{caption}</div>
                                     </div>
                                 );
                             } else {
@@ -118,10 +118,9 @@ export default function Save({ attributes }) {
                     return null;
                 })}
             </div>
-            
-     
-                <script>
-                    {`
+            {showArrows && <p>Arrow Type: {arrowType}</p>}
+            <script>
+                {`
                         jQuery(document).ready(function($) {
                             var sliderId = "#${sliderId}";
                             switch ("${sliderType}") {
@@ -229,8 +228,8 @@ export default function Save({ attributes }) {
                             }
                         });
                     `}
-                </script>
-     
+            </script>
+
         </>
     );
 } 
