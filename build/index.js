@@ -122,8 +122,6 @@ function Edit({
   setAttributes
 }) {
   const {
-    galleryImages = [],
-    youtubeUrls = [],
     sliderType,
     showArrows,
     arrowType,
@@ -132,6 +130,8 @@ function Edit({
     carouselType
   } = attributes;
   const [sliderId, setSliderId] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(attributes.sliderId || '');
+  const [galleryImages, setGalleryImages] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(attributes.galleryImages || []);
+  const [youtubeUrls, setYoutubeUrls] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(attributes.youtubeUrls || []);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     if (!sliderId) {
       setSliderId(`utk-slider-${sliderType}-${Math.floor(Math.random() * 1000)}`);
@@ -148,6 +148,159 @@ function Edit({
     setAttributes({
       galleryImages: updatedGallery
     });
+  };
+  const [isSlickInitialized, setIsSlickInitialized] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (!sliderId || isSlickInitialized) {
+      console.log("hello");
+      return;
+    }
+    if (!window.jQuery || !window.jQuery.fn.slick) {
+      // Slick library not available, exit
+      console.log("Slick library not available");
+      return;
+    }
+    const $ = window.jQuery;
+    try {
+      $(document).ready(function () {
+        console.log("Slider ID:", sliderId); // Debug: Check if sliderId is set correctly
+        console.log("Slider Type:", sliderType); // Debug: Check if sliderType is set correctly
+        switch (sliderType) {
+          case 'simpleType':
+            switch (simpleType) {
+              case 'simple':
+                $(`#${sliderId}`).slick({
+                  arrows: showArrows,
+                  prevArrow: showArrows && arrowType ? getPrevArrow(arrowType) : null,
+                  nextArrow: showArrows && arrowType ? getNextArrow(arrowType) : null
+                });
+                break;
+              case 'fade':
+                $(`#${sliderId}`).slick({
+                  dots: true,
+                  infinite: true,
+                  speed: 500,
+                  fade: true,
+                  cssEase: 'linear',
+                  arrows: showArrows,
+                  prevArrow: showArrows && arrowType ? getPrevArrow(arrowType) : null,
+                  nextArrow: showArrows && arrowType ? getNextArrow(arrowType) : null
+                });
+                break;
+              case 'adaptiveheight':
+                $(`#${sliderId}`).slick({
+                  dots: true,
+                  infinite: true,
+                  speed: 300,
+                  slidesToShow: 1,
+                  adaptiveHeight: true,
+                  arrows: showArrows,
+                  prevArrow: showArrows && arrowType ? getPrevArrow(arrowType) : null,
+                  nextArrow: showArrows && arrowType ? getNextArrow(arrowType) : null
+                });
+                break;
+            }
+            break;
+          case 'carouselType':
+            switch (carouselType) {
+              case 'carousel':
+                $(`#${sliderId}`).slick({
+                  infinite: true,
+                  slidesToShow: 3,
+                  slidesToScroll: 3,
+                  dots: true,
+                  arrows: showArrows,
+                  prevArrow: showArrows && arrowType ? getPrevArrow(arrowType) : null,
+                  nextArrow: showArrows && arrowType ? getNextArrow(arrowType) : null
+                });
+                break;
+              case 'centermode':
+                $(`#${sliderId}`).slick({
+                  centerMode: true,
+                  centerPadding: '60px',
+                  slidesToShow: 3,
+                  responsive: [{
+                    breakpoint: 768,
+                    settings: {
+                      arrows: false,
+                      centerMode: true,
+                      centerPadding: '40px',
+                      slidesToShow: 3
+                    }
+                  }, {
+                    breakpoint: 480,
+                    settings: {
+                      arrows: false,
+                      centerMode: true,
+                      centerPadding: '40px',
+                      slidesToShow: 1
+                    }
+                  }],
+                  arrows: showArrows,
+                  prevArrow: showArrows && arrowType ? getPrevArrow(arrowType) : null,
+                  nextArrow: showArrows && arrowType ? getNextArrow(arrowType) : null
+                });
+                break;
+              case 'lazyloading':
+                $(`#${sliderId}`).slick({
+                  lazyLoad: 'ondemand',
+                  slidesToShow: 3,
+                  slidesToScroll: 1,
+                  arrows: showArrows,
+                  prevArrow: showArrows && arrowType ? getPrevArrow(arrowType) : null,
+                  nextArrow: showArrows && arrowType ? getNextArrow(arrowType) : null
+                });
+                break;
+            }
+            break;
+          default:
+            $(`#${sliderId}`).slick({
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              autoplay: true,
+              autoplaySpeed: 2000,
+              arrows: showArrows,
+              prevArrow: showArrows && arrowType ? getPrevArrow(arrowType) : null,
+              nextArrow: showArrows && arrowType ? getNextArrow(arrowType) : null
+            });
+            break;
+        }
+        // Set the flag to indicate initialization
+        setIsSlickInitialized(true);
+      });
+    } catch (error) {
+      console.error('Error initializing Slick slider:', error);
+    }
+  }, [sliderId, sliderType, showArrows, arrowType, simpleType, carouselType, isSlickInitialized]);
+  const getPrevArrow = arrowType => {
+    switch (arrowType) {
+      case 'custom1':
+        // Return custom arrow 1
+        break;
+      case 'custom2':
+        // Return custom arrow 2
+        break;
+      case 'custom3':
+        // Return custom arrow 3
+        break;
+      default:
+        return null;
+    }
+  };
+  const getNextArrow = arrowType => {
+    switch (arrowType) {
+      case 'custom1':
+        // Return custom arrow 1
+        break;
+      case 'custom2':
+        // Return custom arrow 2
+        break;
+      case 'custom3':
+        // Return custom arrow 3
+        break;
+      default:
+        return null;
+    }
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gallery Settings")
@@ -261,7 +414,8 @@ function Edit({
       icon: "edit"
     })
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)(),
+    ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)()
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: sliderId
   }, galleryImages && galleryImages.map((media, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     key: media.id,
@@ -316,11 +470,13 @@ function Edit({
   })) : null)), galleryImages.length === 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaPlaceholder, {
     multiple: "add",
     onSelect: val => {
+      // setGalleryImages(val);
       setAttributes({
         galleryImages: val
       });
     },
     onFilesPreUpload: val => {
+      // setGalleryImages(val);
       setAttributes({
         galleryImages: val
       });
@@ -330,7 +486,7 @@ function Edit({
     labels: {
       title: "Add Gallery Image or Video"
     }
-  })));
+  }))));
 }
 
 /***/ }),
