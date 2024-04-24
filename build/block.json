@@ -23,7 +23,7 @@
     },
     "sliderType": {
       "type": "string",
-      "default": "simple"
+      "default": "simpleType"
     },
     "showArrows": {
       "type": "boolean"
