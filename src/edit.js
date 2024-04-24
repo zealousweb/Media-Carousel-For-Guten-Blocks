@@ -92,6 +92,10 @@ export default function Edit({ attributes, setAttributes }) {
     useEffect(() => {
         if (!sliderId || isSlickInitialized) {
             console.log("hello");
+            console.log("Slider ID:", sliderId);
+            console.log("Slider Type:", sliderType);
+            console.log("Show Arrows:", showArrows);
+            console.log("Arrow Type:", arrowType);
             return;
         }
 
@@ -104,8 +108,10 @@ export default function Edit({ attributes, setAttributes }) {
         const $ = window.jQuery;
         try {
             $(document).ready(function () {
-                console.log("Slider ID:", sliderId); // Debug: Check if sliderId is set correctly
-                console.log("Slider Type:", sliderType); // Debug: Check if sliderType is set correctly
+                // console.log("Slider ID:", sliderId);
+                // console.log("Slider Type:", sliderType);
+                // console.log("Show Arrows:", showArrows);
+                // console.log("Arrow Type:", arrowType);
                 switch (sliderType) {
                     case 'simpleType':
                         switch (simpleType) {
