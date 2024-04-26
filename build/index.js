@@ -61,18 +61,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/editor.scss");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! jquery */ "jquery");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var slick_carousel_slick_slick_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! slick-carousel/slick/slick.css */ "./node_modules/slick-carousel/slick/slick.css");
-/* harmony import */ var slick_carousel_slick_slick_theme_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! slick-carousel/slick/slick-theme.css */ "./node_modules/slick-carousel/slick/slick-theme.css");
-/* harmony import */ var slick_carousel_slick_slick_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! slick-carousel/slick/slick.js */ "./node_modules/slick-carousel/slick/slick.js");
-/* harmony import */ var slick_carousel_slick_slick_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(slick_carousel_slick_slick_js__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! jquery */ "jquery");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var slick_carousel_slick_slick_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! slick-carousel/slick/slick.css */ "./node_modules/slick-carousel/slick/slick.css");
+/* harmony import */ var slick_carousel_slick_slick_theme_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! slick-carousel/slick/slick-theme.css */ "./node_modules/slick-carousel/slick/slick-theme.css");
+/* harmony import */ var slick_carousel_slick_slick_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! slick-carousel/slick/slick.js */ "./node_modules/slick-carousel/slick/slick.js");
+/* harmony import */ var slick_carousel_slick_slick_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(slick_carousel_slick_slick_js__WEBPACK_IMPORTED_MODULE_10__);
 
 /**
- * Retrieves the translation of text.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
- */
+* Retrieves the translation of text.
+*
+* @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
+*/
 
 
 const {
@@ -122,190 +124,38 @@ function Edit({
   setAttributes
 }) {
   const {
+    galleryImages = [],
+    youtubeUrls = [],
     sliderType,
     showArrows,
     arrowType,
     fancybox,
     simpleType,
-    carouselType,
-    youtubeUrls = []
+    carouselType
   } = attributes;
-  const [sliderId, setSliderId] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(attributes.sliderId || '');
-  const [galleryImages, setGalleryImages] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(attributes.galleryImages || []);
-  // const [youtubeUrls, setYoutubeUrls] = useState(attributes.youtubeUrls || []);
-
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+  const [sliderId, setSliderId] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(attributes.sliderId || '');
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
     if (!sliderId) {
       setSliderId(`utk-slider-${sliderType}-${Math.floor(Math.random() * 1000)}`);
     }
   }, [sliderType, sliderId]);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
     setAttributes({
       ...attributes,
       sliderId
     });
   }, [sliderId]);
-  const [isSlickInitialized, setIsSlickInitialized] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    if (!sliderId || isSlickInitialized) {
-      console.log("hello");
-      console.log("Slider ID:", sliderId);
-      console.log("Slider Type:", sliderType);
-      console.log("Show Arrows:", showArrows);
-      console.log("Arrow Type:", arrowType);
-      return;
-    }
-    if (!window.jQuery || !window.jQuery.fn.slick) {
-      // Slick library not available, exit
-      console.log("Slick library not available");
-      return;
-    }
-    const $ = window.jQuery;
-    try {
-      $(document).ready(function () {
-        switch (sliderType) {
-          case 'simpleType':
-            switch (simpleType) {
-              case 'simple':
-                $(`#${sliderId}`).slick({
-                  arrows: showArrows,
-                  prevArrow: showArrows && arrowType ? getPrevArrow(arrowType) : null,
-                  nextArrow: showArrows && arrowType ? getNextArrow(arrowType) : null
-                });
-                break;
-              case 'fade':
-                $(`#${sliderId}`).slick({
-                  dots: true,
-                  infinite: true,
-                  speed: 500,
-                  fade: true,
-                  cssEase: 'linear',
-                  arrows: showArrows,
-                  prevArrow: showArrows && arrowType ? getPrevArrow(arrowType) : null,
-                  nextArrow: showArrows && arrowType ? getNextArrow(arrowType) : null
-                });
-                break;
-              case 'adaptiveheight':
-                $(`#${sliderId}`).slick({
-                  dots: true,
-                  infinite: true,
-                  speed: 300,
-                  slidesToShow: 1,
-                  adaptiveHeight: true,
-                  arrows: showArrows,
-                  prevArrow: showArrows && arrowType ? getPrevArrow(arrowType) : null,
-                  nextArrow: showArrows && arrowType ? getNextArrow(arrowType) : null
-                });
-                break;
-            }
-            break;
-          case 'carouselType':
-            switch (carouselType) {
-              case 'carousel':
-                $(`#${sliderId}`).slick({
-                  infinite: true,
-                  slidesToShow: 3,
-                  slidesToScroll: 3,
-                  dots: true,
-                  arrows: showArrows,
-                  prevArrow: showArrows && arrowType ? getPrevArrow(arrowType) : null,
-                  nextArrow: showArrows && arrowType ? getNextArrow(arrowType) : null
-                });
-                break;
-              case 'centermode':
-                $(`#${sliderId}`).slick({
-                  centerMode: true,
-                  centerPadding: '60px',
-                  slidesToShow: 3,
-                  responsive: [{
-                    breakpoint: 768,
-                    settings: {
-                      arrows: false,
-                      centerMode: true,
-                      centerPadding: '40px',
-                      slidesToShow: 3
-                    }
-                  }, {
-                    breakpoint: 480,
-                    settings: {
-                      arrows: false,
-                      centerMode: true,
-                      centerPadding: '40px',
-                      slidesToShow: 1
-                    }
-                  }],
-                  arrows: showArrows,
-                  prevArrow: showArrows && arrowType ? getPrevArrow(arrowType) : null,
-                  nextArrow: showArrows && arrowType ? getNextArrow(arrowType) : null
-                });
-                break;
-              case 'lazyloading':
-                $(`#${sliderId}`).slick({
-                  lazyLoad: 'ondemand',
-                  slidesToShow: 3,
-                  slidesToScroll: 1,
-                  arrows: showArrows,
-                  prevArrow: showArrows && arrowType ? getPrevArrow(arrowType) : null,
-                  nextArrow: showArrows && arrowType ? getNextArrow(arrowType) : null
-                });
-                break;
-            }
-            break;
-          default:
-            $(`#${sliderId}`).slick({
-              slidesToShow: 1,
-              slidesToScroll: 1,
-              autoplay: true,
-              autoplaySpeed: 2000,
-              arrows: showArrows,
-              prevArrow: showArrows && arrowType ? getPrevArrow(arrowType) : null,
-              nextArrow: showArrows && arrowType ? getNextArrow(arrowType) : null
-            });
-            break;
-        }
-        // Set the flag to indicate initialization
-        setIsSlickInitialized(true);
-      });
-    } catch (error) {
-      console.error('Error initializing Slick slider:', error);
-    }
-  }, [sliderId, sliderType, showArrows, arrowType, simpleType, carouselType, isSlickInitialized]);
-  const getPrevArrow = arrowType => {
-    switch (arrowType) {
-      case 'custom1':
-        // Return custom arrow 1
-        break;
-      case 'custom2':
-        // Return custom arrow 2
-        break;
-      case 'custom3':
-        // Return custom arrow 3
-        break;
-      default:
-        return null;
-    }
+  const handleRemove = mediaId => {
+    const updatedGallery = galleryImages.filter(media => media.id !== mediaId);
+    setAttributes({
+      galleryImages: updatedGallery
+    });
   };
-  const getNextArrow = arrowType => {
-    switch (arrowType) {
-      case 'custom1':
-        // Return custom arrow 1
-        break;
-      case 'custom2':
-        // Return custom arrow 2
-        break;
-      case 'custom3':
-        // Return custom arrow 3
-        break;
-      default:
-        return null;
-    }
-  };
-  console.log(galleryImages);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gallery Settings")
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Enable FancyBox"),
-    checked: fancybox,
+    checked: attributes.fancybox,
     onChange: val => {
       setAttributes({
         fancybox: val
@@ -325,11 +175,10 @@ function Edit({
       setAttributes({
         sliderType: val
       });
-      jquery__WEBPACK_IMPORTED_MODULE_6___default()(`#${sliderId}`).slick('reinit');
     }
   }), sliderType && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, sliderType === "simpleType" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Simple Slider Type"),
-    values: simpleType,
+    value: simpleType,
     options: [{
       label: "Simple",
       value: "simple"
@@ -344,11 +193,10 @@ function Edit({
       setAttributes({
         simpleType: val
       });
-      jquery__WEBPACK_IMPORTED_MODULE_6___default()(`#${sliderId}`).slick('reinit');
     }
   }), sliderType === "carouselType" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Carousel Slider Type"),
-    values: carouselType,
+    value: carouselType,
     options: [{
       label: "Carousel",
       value: "carousel"
@@ -363,7 +211,6 @@ function Edit({
       setAttributes({
         carouselType: val
       });
-      jquery__WEBPACK_IMPORTED_MODULE_6___default()(`#${sliderId}`).slick('reinit');
     }
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Show Arrows"),
@@ -372,7 +219,6 @@ function Edit({
       setAttributes({
         showArrows: val
       });
-      jquery__WEBPACK_IMPORTED_MODULE_6___default()(`#${sliderId}`).slick('reinit');
     }
   }), showArrows && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arrow Type"),
@@ -391,7 +237,6 @@ function Edit({
       setAttributes({
         arrowType: val
       });
-      jquery__WEBPACK_IMPORTED_MODULE_6___default()(`#${sliderId}`).slick('reinit');
     }
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUploadCheck, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUpload, {
     multiple: "add",
@@ -407,7 +252,7 @@ function Edit({
       });
     },
     allowedTypes: ['image', 'video'],
-    value: galleryImages && galleryImages.map(val => val.id) || [],
+    value: galleryImages.map(val => val.id),
     render: ({
       open
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarButton, {
@@ -417,17 +262,18 @@ function Edit({
       },
       icon: "edit"
     })
-  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Slider Type: ", attributes.sliderType)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)()
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)(),
     id: sliderId
-  }, galleryImages.map((media, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, galleryImages && galleryImages.map((media, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     key: media.id,
     className: "utk-gallery-single"
   }, media.type === 'image' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: media.url,
     alt: media.alt ? media.alt : "Gallery Image"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    onClick: () => handleRemove(media.id)
+  }, "Remove")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "text",
     value: youtubeUrls.map((url, idx) => idx === index ? url : '').join(''),
     onChange: event => {
@@ -469,30 +315,16 @@ function Edit({
       });
     },
     placeholder: "Enter Caption"
-  })) : null))), (!galleryImages || galleryImages.length === 0) && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaPlaceholder, {
+  })) : null)), galleryImages.length === 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaPlaceholder, {
     multiple: "add",
     onSelect: val => {
-      const updatedGallery = [...galleryImages, ...val.map(media => ({
-        id: media.id,
-        url: media.url,
-        alt: media.alt,
-        type: media.type,
-        caption: media.caption // Include the caption field
-      }))];
       setAttributes({
-        galleryImages: updatedGallery
+        galleryImages: val
       });
     },
     onFilesPreUpload: val => {
-      const updatedGallery = [...galleryImages, ...val.map(media => ({
-        id: media.id,
-        url: media.url,
-        alt: media.alt,
-        type: media.type,
-        caption: media.caption // Include the caption field
-      }))];
       setAttributes({
-        galleryImages: updatedGallery
+        galleryImages: val
       });
     },
     onSelectURL: false,
@@ -500,7 +332,7 @@ function Edit({
     labels: {
       title: "Add Gallery Image or Video"
     }
-  }))));
+  })));
 }
 
 /***/ }),
@@ -6418,6 +6250,17 @@ module.exports = window["wp"]["components"];
 
 "use strict";
 module.exports = window["wp"]["data"];
+
+/***/ }),
+
+/***/ "@wordpress/element":
+/*!*********************************!*\
+  !*** external ["wp","element"] ***!
+  \*********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = window["wp"]["element"];
 
 /***/ }),
 
