@@ -65,12 +65,12 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.js";
 
 export default function Edit({ attributes, setAttributes }) {
-    const { sliderType, showArrows, arrowType, fancybox, simpleType, carouselType } = attributes;
+    const { sliderType, showArrows, arrowType, fancybox, simpleType, carouselType, youtubeUrls = [] } = attributes;
 
     const [sliderId, setSliderId] = useState(attributes.sliderId || '');
 
     const [galleryImages, setGalleryImages] = useState(attributes.galleryImages || []);
-    const [youtubeUrls, setYoutubeUrls] = useState(attributes.youtubeUrls || []);
+    // const [youtubeUrls, setYoutubeUrls] = useState(attributes.youtubeUrls || []);
 
     useEffect(() => {
         if (!sliderId) {
@@ -81,11 +81,6 @@ export default function Edit({ attributes, setAttributes }) {
     useEffect(() => {
         setAttributes({ ...attributes, sliderId });
     }, [sliderId]);
-
-    const handleRemove = (mediaId) => {
-        const updatedGallery = galleryImages.filter((media) => media.id !== mediaId);
-        setAttributes({ galleryImages: updatedGallery });
-    };
 
     const [isSlickInitialized, setIsSlickInitialized] = useState(false);
 
@@ -108,10 +103,6 @@ export default function Edit({ attributes, setAttributes }) {
         const $ = window.jQuery;
         try {
             $(document).ready(function () {
-                // console.log("Slider ID:", sliderId);
-                // console.log("Slider Type:", sliderType);
-                // console.log("Show Arrows:", showArrows);
-                // console.log("Arrow Type:", arrowType);
                 switch (sliderType) {
                     case 'simpleType':
                         switch (simpleType) {
@@ -222,7 +213,7 @@ export default function Edit({ attributes, setAttributes }) {
         catch (error) {
             console.error('Error initializing Slick slider:', error);
         }
-    }, [sliderId, sliderType, showArrows, arrowType, simpleType, carouselType,isSlickInitialized]);
+    }, [sliderId, sliderType, showArrows, arrowType, simpleType, carouselType, isSlickInitialized]);
 
     const getPrevArrow = (arrowType) => {
         switch (arrowType) {
@@ -255,6 +246,8 @@ export default function Edit({ attributes, setAttributes }) {
                 return null;
         }
     }
+
+    console.log(galleryImages);
     return (
         <>
             <InspectorControls>
@@ -275,6 +268,7 @@ export default function Edit({ attributes, setAttributes }) {
                         ]}
                         onChange={(val) => {
                             setAttributes({ sliderType: val });
+                            $(`#${sliderId}`).slick('reinit');
                         }}
                     />
                     {sliderType && (
@@ -290,6 +284,7 @@ export default function Edit({ attributes, setAttributes }) {
                                     ]}
                                     onChange={(val) => {
                                         setAttributes({ simpleType: val });
+                                        $(`#${sliderId}`).slick('reinit');
                                     }}
                                 />
                             )}
@@ -304,19 +299,21 @@ export default function Edit({ attributes, setAttributes }) {
                                     ]}
                                     onChange={(val) => {
                                         setAttributes({ carouselType: val });
+                                        $(`#${sliderId}`).slick('reinit');
                                     }}
-                                
+
 
                                 />
                             )}
                         </>
                     )}
-                    
+
                     <ToggleControl
                         label={__("Show Arrows")}
                         checked={showArrows}
                         onChange={(val) => {
                             setAttributes({ showArrows: val });
+                            $(`#${sliderId}`).slick('reinit');
                         }}
                     />
                     {showArrows && (
@@ -330,6 +327,7 @@ export default function Edit({ attributes, setAttributes }) {
                             ]}
                             onChange={(val) => {
                                 setAttributes({ arrowType: val });
+                                $(`#${sliderId}`).slick('reinit');
                             }}
                         />
                     )}
@@ -353,7 +351,7 @@ export default function Edit({ attributes, setAttributes }) {
                                 });
                             }}
                             allowedTypes={['image', 'video']}
-                            value={galleryImages.map((val) => val.id)}
+                            value={(galleryImages && galleryImages.map((val) => val.id)) || []}
                             render={({ open }) => (
                                 <ToolbarButton
                                     label={__("Edit Images")}
@@ -367,81 +365,86 @@ export default function Edit({ attributes, setAttributes }) {
                     </MediaUploadCheck>
                 </ToolbarGroup>
             </BlockControls>
+            <div>
+                <p>Slider Type: {attributes.sliderType}</p>
+            </div>
             <div {...useBlockProps()}>
                 <div id={sliderId}>
-                    {galleryImages && galleryImages.map((media, index) => (
-                        <div key={media.id} className="utk-gallery-single">
-                            {media.type === 'image' ? (
-                                <>
-                                    <img src={media.url} alt={media.alt ? media.alt : "Gallery Image"} />
-                                    <div>
-                                        <button onClick={() => handleRemove(media.id)}>Remove</button>
-                                    </div>
-                                    <input
-                                        type="text"
-                                        value={youtubeUrls.map((url, idx) => idx === index ? url : '').join('')}
-                                        onChange={(event) => {
-                                            const updatedUrls = [...youtubeUrls];
-                                            updatedUrls[index] = event.target.value;
-                                            setAttributes({ youtubeUrls: updatedUrls });
-                                        }}
-                                        placeholder="Enter YouTube video URL"
-                                    />
-                                    {/* <input
-                                        type="text"
-                                        value={youtubeUrls[index] || ''}
-                                        onChange={(event) => {
-                                            const updatedUrls = [...youtubeUrls];
-                                            updatedUrls[index] = event.target.value;
-                                            setYoutubeUrls(updatedUrls);
-                                            setAttributes({ youtubeUrls: updatedUrls });
-                                        }}
-                                        placeholder="Enter YouTube video URL"
-                                    /> */}
-                                    <input
-                                        type="text"
-                                        value={media.caption || ''} // Display original caption or an empty string if none
-                                        onChange={(event) => {
-                                            const updatedGallery = [...galleryImages];
-                                            updatedGallery[index].caption = event.target.value; // Override the caption
-                                            setAttributes({ galleryImages: updatedGallery });
-                                        }}
-                                        placeholder="Enter Caption"
-                                    />
-                                </>
-                            ) : media.type === 'video' ? (
-                                <>
-                                    <video controls>
-                                        <source src={media.url} type={media.mime} />
-                                        Your browser does not support the video tag.
-                                    </video>
-                                    <div>
-                                        <button onClick={() => handleRemove(media.id)}>Remove</button>
-                                    </div>
-                                    <input
-                                        type="text"
-                                        value={media.caption || ''} // Display original caption or an empty string if none
-                                        onChange={(event) => {
-                                            const updatedGallery = [...galleryImages];
-                                            updatedGallery[index].caption = event.target.value; // Override the caption
-                                            setAttributes({ galleryImages: updatedGallery });
-                                        }}
-                                        placeholder="Enter Caption"
-                                    />
-                                </>
-                            ) : null}
-                        </div>
+
+                    {galleryImages.map((media, index) => (
+                        <>
+                            <div key={media.id} className="utk-gallery-single">
+                                {media.type === 'image' ? (
+                                    <>
+                                        <img src={media.url} alt={media.alt ? media.alt : "Gallery Image"} />
+                                        <input
+                                            type="text"
+                                            value={youtubeUrls.map((url, idx) => idx === index ? url : '').join('')}
+                                            onChange={(event) => {
+                                                const updatedUrls = [...youtubeUrls];
+                                                updatedUrls[index] = event.target.value;
+                                                setAttributes({ youtubeUrls: updatedUrls });
+                                            }}
+                                            placeholder="Enter YouTube video URL"
+                                        />
+                                        <input
+                                            type="text"
+                                            value={media.caption || ''} // Display original caption or an empty string if none
+                                            onChange={(event) => {
+                                                const updatedGallery = [...galleryImages];
+                                                updatedGallery[index].caption = event.target.value; // Override the caption
+                                                setAttributes({ galleryImages: updatedGallery });
+                                            }}
+                                            placeholder="Enter Caption"
+                                        />
+                                    </>
+                                ) : media.type === 'video' ? (
+                                    <>
+                                        <video controls>
+                                            <source src={media.url} type={media.mime} />
+                                            Your browser does not support the video tag.
+                                        </video>
+                                        <div>
+                                            <button onClick={() => handleRemove(media.id)}>Remove</button>
+                                        </div>
+                                        <input
+                                            type="text"
+                                            value={media.caption || ''} // Display original caption or an empty string if none
+                                            onChange={(event) => {
+                                                const updatedGallery = [...galleryImages];
+                                                updatedGallery[index].caption = event.target.value; // Override the caption
+                                                setAttributes({ galleryImages: updatedGallery });
+                                            }}
+                                            placeholder="Enter Caption"
+                                        />
+                                    </>
+                                ) : null}
+                            </div>
+                        </>
+
                     ))}
-                    {galleryImages.length === 0 && (
+                    {(!galleryImages || galleryImages.length === 0) && (
                         <MediaPlaceholder
                             multiple="add"
                             onSelect={(val) => {
-                                // setGalleryImages(val);
-                                setAttributes({ galleryImages: val });
+                                const updatedGallery = [...galleryImages, ...val.map((media) => ({
+                                    id: media.id,
+                                    url: media.url,
+                                    alt: media.alt,
+                                    type: media.type,
+                                    caption: media.caption, // Include the caption field
+                                }))];
+                                setAttributes({ galleryImages: updatedGallery });
                             }}
                             onFilesPreUpload={(val) => {
-                                // setGalleryImages(val);
-                                setAttributes({ galleryImages: val });
+                                const updatedGallery = [...galleryImages, ...val.map((media) => ({
+                                    id: media.id,
+                                    url: media.url,
+                                    alt: media.alt,
+                                    type: media.type,
+                                    caption: media.caption, // Include the caption field
+                                }))];
+                                setAttributes({ galleryImages: updatedGallery });
                             }}
                             onSelectURL={false}
                             allowedTypes={["image", "video"]}

@@ -127,11 +127,13 @@ function Edit({
     arrowType,
     fancybox,
     simpleType,
-    carouselType
+    carouselType,
+    youtubeUrls = []
   } = attributes;
   const [sliderId, setSliderId] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(attributes.sliderId || '');
   const [galleryImages, setGalleryImages] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(attributes.galleryImages || []);
-  const [youtubeUrls, setYoutubeUrls] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(attributes.youtubeUrls || []);
+  // const [youtubeUrls, setYoutubeUrls] = useState(attributes.youtubeUrls || []);
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     if (!sliderId) {
       setSliderId(`utk-slider-${sliderType}-${Math.floor(Math.random() * 1000)}`);
@@ -143,12 +145,6 @@ function Edit({
       sliderId
     });
   }, [sliderId]);
-  const handleRemove = mediaId => {
-    const updatedGallery = galleryImages.filter(media => media.id !== mediaId);
-    setAttributes({
-      galleryImages: updatedGallery
-    });
-  };
   const [isSlickInitialized, setIsSlickInitialized] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     if (!sliderId || isSlickInitialized) {
@@ -167,10 +163,6 @@ function Edit({
     const $ = window.jQuery;
     try {
       $(document).ready(function () {
-        // console.log("Slider ID:", sliderId);
-        // console.log("Slider Type:", sliderType);
-        // console.log("Show Arrows:", showArrows);
-        // console.log("Arrow Type:", arrowType);
         switch (sliderType) {
           case 'simpleType':
             switch (simpleType) {
@@ -308,6 +300,7 @@ function Edit({
         return null;
     }
   };
+  console.log(galleryImages);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gallery Settings")
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
@@ -332,6 +325,7 @@ function Edit({
       setAttributes({
         sliderType: val
       });
+      jquery__WEBPACK_IMPORTED_MODULE_6___default()(`#${sliderId}`).slick('reinit');
     }
   }), sliderType && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, sliderType === "simpleType" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Simple Slider Type"),
@@ -350,6 +344,7 @@ function Edit({
       setAttributes({
         simpleType: val
       });
+      jquery__WEBPACK_IMPORTED_MODULE_6___default()(`#${sliderId}`).slick('reinit');
     }
   }), sliderType === "carouselType" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Carousel Slider Type"),
@@ -368,6 +363,7 @@ function Edit({
       setAttributes({
         carouselType: val
       });
+      jquery__WEBPACK_IMPORTED_MODULE_6___default()(`#${sliderId}`).slick('reinit');
     }
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Show Arrows"),
@@ -376,6 +372,7 @@ function Edit({
       setAttributes({
         showArrows: val
       });
+      jquery__WEBPACK_IMPORTED_MODULE_6___default()(`#${sliderId}`).slick('reinit');
     }
   }), showArrows && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arrow Type"),
@@ -394,6 +391,7 @@ function Edit({
       setAttributes({
         arrowType: val
       });
+      jquery__WEBPACK_IMPORTED_MODULE_6___default()(`#${sliderId}`).slick('reinit');
     }
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUploadCheck, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUpload, {
     multiple: "add",
@@ -409,7 +407,7 @@ function Edit({
       });
     },
     allowedTypes: ['image', 'video'],
-    value: galleryImages.map(val => val.id),
+    value: galleryImages && galleryImages.map(val => val.id) || [],
     render: ({
       open
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarButton, {
@@ -419,19 +417,17 @@ function Edit({
       },
       icon: "edit"
     })
-  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Slider Type: ", attributes.sliderType)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)()
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: sliderId
-  }, galleryImages && galleryImages.map((media, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, galleryImages.map((media, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     key: media.id,
     className: "utk-gallery-single"
   }, media.type === 'image' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: media.url,
     alt: media.alt ? media.alt : "Gallery Image"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    onClick: () => handleRemove(media.id)
-  }, "Remove")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "text",
     value: youtubeUrls.map((url, idx) => idx === index ? url : '').join(''),
     onChange: event => {
@@ -473,18 +469,30 @@ function Edit({
       });
     },
     placeholder: "Enter Caption"
-  })) : null)), galleryImages.length === 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaPlaceholder, {
+  })) : null))), (!galleryImages || galleryImages.length === 0) && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaPlaceholder, {
     multiple: "add",
     onSelect: val => {
-      // setGalleryImages(val);
+      const updatedGallery = [...galleryImages, ...val.map(media => ({
+        id: media.id,
+        url: media.url,
+        alt: media.alt,
+        type: media.type,
+        caption: media.caption // Include the caption field
+      }))];
       setAttributes({
-        galleryImages: val
+        galleryImages: updatedGallery
       });
     },
     onFilesPreUpload: val => {
-      // setGalleryImages(val);
+      const updatedGallery = [...galleryImages, ...val.map(media => ({
+        id: media.id,
+        url: media.url,
+        alt: media.alt,
+        type: media.type,
+        caption: media.caption // Include the caption field
+      }))];
       setAttributes({
-        galleryImages: val
+        galleryImages: updatedGallery
       });
     },
     onSelectURL: false,
