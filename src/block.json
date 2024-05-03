@@ -15,9 +15,6 @@
 		"sliderId": {
 			"type": "string"
 		},
-		"galleryId": {
-			"type": "string"
-		},
 		"galleryImages": {
 			"type": "array"
 		},
