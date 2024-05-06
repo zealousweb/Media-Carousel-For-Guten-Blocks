@@ -52,16 +52,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery */ "jquery");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var slick_carousel_slick_slick_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! slick-carousel/slick/slick.css */ "./node_modules/slick-carousel/slick/slick.css");
-/* harmony import */ var slick_carousel_slick_slick_theme_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! slick-carousel/slick/slick-theme.css */ "./node_modules/slick-carousel/slick/slick-theme.css");
-/* harmony import */ var slick_carousel_slick_slick_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! slick-carousel/slick/slick.js */ "./node_modules/slick-carousel/slick/slick.js");
-/* harmony import */ var slick_carousel_slick_slick_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(slick_carousel_slick_slick_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var react_fancybox_lib_fancybox_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-fancybox/lib/fancybox.css */ "./node_modules/react-fancybox/lib/fancybox.css");
-/* harmony import */ var react_fancybox__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-fancybox */ "./node_modules/react-fancybox/lib/ReactFancyBox.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/editor.scss");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! jquery */ "jquery");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var slick_carousel_slick_slick_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! slick-carousel/slick/slick.css */ "./node_modules/slick-carousel/slick/slick.css");
+/* harmony import */ var slick_carousel_slick_slick_theme_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! slick-carousel/slick/slick-theme.css */ "./node_modules/slick-carousel/slick/slick-theme.css");
+/* harmony import */ var slick_carousel_slick_slick_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! slick-carousel/slick/slick.js */ "./node_modules/slick-carousel/slick/slick.js");
+/* harmony import */ var slick_carousel_slick_slick_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(slick_carousel_slick_slick_js__WEBPACK_IMPORTED_MODULE_10__);
+
+/**
+* Retrieves the translation of text.
+*
+* @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
+*/
+
+
+const {
+  useSelect
+} = wp.data;
 
 /**
  * React hook that is used to mark the block wrapper element.
@@ -72,16 +90,29 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /**
- * The save function defines the way in which the different attributes should
- * be combined into the final markup, which is then serialized by the block
- * editor into `post_content`.
+ * React hook that is used creates a collapsible container that can be toggled open or closed.
+ * It provides all the necessary props like the class name.
  *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#save
- *
- * @return {WPElement} Element to render.
+ * @see https://developer.wordpress.org/block-editor/reference-guides/components/panel/#panelbody
  */
 
 
+/**
+ * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
+ * Those files can contain any CSS code that gets applied to the editor.
+ *
+ * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
+ */
+
+
+/**
+ * The edit function describes the structure of your block in the context of the
+ * editor. This represents what the editor will render when the block is used.
+ *
+ * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
+ *
+ * @return {WPElement} Element to render.
+ */
 
 
 
@@ -98,64 +129,115 @@ function Edit({
     sliderType,
     showArrows,
     arrowType,
-    fancybox
+    fancybox,
+    simpleType,
+    carouselType,
+    speed,
+    autoplay,
+    infinite,
+    caption,
+    dotsType,
+    dots
   } = attributes;
-  const [sliderId, setSliderId] = useState(attributes.sliderId || '');
-  useEffect(() => {
+  // console.log("maitri", caption);
+
+  const [sliderId, setSliderId] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(attributes.sliderId || '');
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
     if (!sliderId) {
       setSliderId(`utk-slider-${sliderType}-${Math.floor(Math.random() * 1000)}`);
     }
   }, [sliderType, sliderId]);
-  useEffect(() => {
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
     setAttributes({
       ...attributes,
       sliderId
     });
   }, [sliderId]);
-  const handleRemove = mediaId => {
-    const updatedGallery = galleryImages.filter(media => media.id !== mediaId);
-    setAttributes({
-      galleryImages: updatedGallery
-    });
-  };
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(PanelBody, {
-    title: __("Gallery Settings")
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(ToggleControl, {
-    label: __("Enable FancyBox"),
-    checked: fancybox,
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
+    // If autoplay is enabled, disable infinite scrolling
+    if (autoplay) {
+      setAttributes({
+        infinite: false
+      });
+    }
+    // If infinite scrolling is enabled, disable autoplay
+    if (infinite) {
+      setAttributes({
+        autoplay: false
+      });
+    }
+  }, [autoplay, infinite]);
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gallery Settings")
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Enable FancyBox"),
+    checked: attributes.fancybox,
     onChange: val => {
       setAttributes({
         fancybox: val
       });
     }
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SelectControl, {
-    label: __("Slider Type"),
-    value: sliderType,
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RadioControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slider Type"),
+    selected: sliderType,
     options: [{
-      label: "Simple",
-      value: "simple"
+      label: "Simple Type",
+      value: "simpleType"
     }, {
-      label: "Carousel",
-      value: "carousel"
-    }, {
-      label: "Fade",
-      value: "fade"
+      label: "Carousel Type",
+      value: "carouselType"
     }],
     onChange: val => {
       setAttributes({
         sliderType: val
       });
     }
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(ToggleControl, {
-    label: __("Show Arrows"),
+  }), sliderType && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, sliderType === "simpleType" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Simple Slider Type"),
+    value: simpleType,
+    options: [{
+      label: "Simple",
+      value: "simple"
+    }, {
+      label: "Fade",
+      value: "fade"
+    }, {
+      label: "Adaptive Height",
+      value: "adaptiveheight"
+    }],
+    onChange: val => {
+      setAttributes({
+        simpleType: val
+      });
+    }
+  }), sliderType === "carouselType" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Carousel Slider Type"),
+    value: carouselType,
+    options: [{
+      label: "Carousel",
+      value: "carousel"
+    }, {
+      label: "Center Mode",
+      value: "centermode"
+    }, {
+      label: "Lazy Loading",
+      value: "lazyloading"
+    }],
+    onChange: val => {
+      setAttributes({
+        carouselType: val
+      });
+    }
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Show Arrows"),
     checked: showArrows,
     onChange: val => {
       setAttributes({
         showArrows: val
       });
     }
-  }), showArrows && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SelectControl, {
-    label: __("Arrow Type"),
+  }), showArrows && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arrow Type"),
     value: arrowType,
     options: [{
       label: "Arrow 1",
@@ -172,7 +254,62 @@ function Edit({
         arrowType: val
       });
     }
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(MediaUploadCheck, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(MediaUpload, {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
+    label: "Speed of Slider",
+    value: speed,
+    onChange: value => setAttributes({
+      speed: value
+    }),
+    min: 1000,
+    max: 5000
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Auto Play"),
+    checked: autoplay,
+    onChange: val => {
+      setAttributes({
+        autoplay: val
+      });
+    }
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Infinite"),
+    checked: infinite,
+    onChange: val => {
+      setAttributes({
+        infinite: val
+      });
+    }
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Caption"),
+    checked: caption,
+    onChange: val => {
+      setAttributes({
+        caption: val
+      });
+    }
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dots"),
+    checked: dots,
+    onChange: val => {
+      setAttributes({
+        dots: val
+      });
+    }
+  }), dots && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dots Type"),
+    value: dotsType,
+    options: [{
+      label: "Normal Dots",
+      value: "ndots"
+    }, {
+      label: "Number",
+      value: "number"
+    }],
+    onChange: val => {
+      setAttributes({
+        dotsType: val
+      });
+    }
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUploadCheck, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUpload, {
     multiple: "add",
     onSelect: val => {
       setAttributes({
@@ -189,15 +326,15 @@ function Edit({
     value: galleryImages.map(val => val.id),
     render: ({
       open
-    }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(ToolbarButton, {
-      label: __("Edit Images"),
+    }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarButton, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Edit Images"),
       onClick: () => {
         open();
       },
       icon: "edit"
     })
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)(),
+    ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)(),
     id: sliderId
   }, galleryImages && galleryImages.map((media, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     key: media.id,
@@ -205,9 +342,7 @@ function Edit({
   }, media.type === 'image' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: media.url,
     alt: media.alt ? media.alt : "Gallery Image"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    onClick: () => handleRemove(media.id)
-  }, "Remove")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "text",
     value: youtubeUrls.map((url, idx) => idx === index ? url : '').join(''),
     onChange: event => {
@@ -235,9 +370,7 @@ function Edit({
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("source", {
     src: media.url,
     type: media.mime
-  }), "Your browser does not support the video tag."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    onClick: () => handleRemove(media.id)
-  }, "Remove")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+  }), "Your browser does not support the video tag."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "text",
     value: media.caption || '' // Display original caption or an empty string if none
     ,
@@ -249,7 +382,7 @@ function Edit({
       });
     },
     placeholder: "Enter Caption"
-  })) : null)), galleryImages.length === 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(MediaPlaceholder, {
+  })) : null)), galleryImages.length === 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaPlaceholder, {
     multiple: "add",
     onSelect: val => {
       setAttributes({
@@ -387,8 +520,16 @@ function Save({
     youtubeUrls,
     fancybox,
     simpleType,
-    carouselType
+    carouselType,
+    speed,
+    autoplay,
+    infinite,
+    caption,
+    dotsType,
+    dots
   } = attributes;
+  console.log(dotsType);
+  console.log(dots);
   function getPrevArrow(arrowType) {
     switch (arrowType) {
       case 'custom1':
@@ -416,7 +557,8 @@ function Save({
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: sliderId
   }, galleryImages && galleryImages.map((media, index) => {
-    const caption = media.caption ? media.caption : '';
+    {/* const caption = media.caption ? media.caption : ''; */}
+    const currentCaption = caption ? media.caption : ''; // Conditionally include caption based on the 'caption' attribute
     if (media.type === 'image') {
       const youtubeUrl = youtubeUrls && youtubeUrls[index] ? youtubeUrls[index] : "";
       if (fancybox) {
@@ -427,7 +569,7 @@ function Save({
           }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
             src: media.url,
             alt: media.alt ? media.alt : "Gallery Image"
-          }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, caption));
+          }), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, currentCaption), " ");
         } else {
           return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
             key: media.id,
@@ -439,7 +581,7 @@ function Save({
           }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
             src: media.url,
             alt: media.alt ? media.alt : "Gallery Image"
-          }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, caption)));
+          }), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, currentCaption), " "));
         }
       } else {
         if (youtubeUrl === "") {
@@ -449,7 +591,7 @@ function Save({
           }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
             src: media.url,
             alt: media.alt ? media.alt : "Gallery Image"
-          }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, caption));
+          }), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, currentCaption), " ");
         } else {
           const videoID = youtubeUrl.match(/[?&]v=([^&]+)/)[1];
           return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -476,7 +618,7 @@ function Save({
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("source", {
         src: media.url,
         type: media.mime
-      }), "Your browser does not support the video tag."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, caption));
+      }), "Your browser does not support the video tag."), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, currentCaption), " ");
     }
     return null;
   })), showArrows && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Arrow Type: ", arrowType), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("script", null, `
@@ -488,30 +630,48 @@ function Save({
                                         case 'simple':
                                             $(sliderId).slick({
                                                 arrows: ${showArrows},
+                                                speed:${speed},
+                                                autoplaySpeed:${speed},
+                                                autoplay:${autoplay},
+                                                infinite:${infinite},
+                                                dots:${dots},
+                                                customPaging: function(sliderId, i) {
+                                                    if ("${dotsType}" === "number") { 
+                                                        alert(1);
+                                                        return i + 1;
+                                                    } 
+                                                },
                                                 prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
                                                 nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
+                                               
                                             });
                                             break;
                                         case 'fade':
                                             $(sliderId).slick({
-                                                dots: true,
+                                                dots:${dots},
                                                 infinite: true,
-                                                speed: 500,
+                                                speed:${speed},
+                                                autoplay:${autoplay},
                                                 fade: true,
                                                 cssEase: 'linear',
                                                 arrows: ${showArrows},
+                                                autoplaySpeed:${speed},
+                                                infinite:${infinite},
                                                 prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
                                                 nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
                                             });
                                             break;
                                         case 'adaptiveheight':
                                             $(sliderId).slick({
-                                                dots: true,
+                                                dots:${dots},
                                                 infinite: true,
-                                                speed: 300,
+                                                speed:${speed},
+                                                autoplay:${autoplay},
                                                 slidesToShow: 1,
                                                 adaptiveHeight: true,
                                                 arrows: ${showArrows},
+                                                autoplaySpeed:${speed},
+                                                infinite:${infinite},
                                                 prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
                                                 nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
                                             });
@@ -525,8 +685,12 @@ function Save({
                                                 infinite: true,
                                                 slidesToShow: 3,
                                                 slidesToScroll: 3,
-                                                dots: true,
+                                                dots:${dots},
+                                                speed:${speed},
+                                                autoplay:${autoplay},
                                                 arrows: ${showArrows},
+                                                autoplaySpeed:${speed},
+                                                infinite:${infinite},
                                                 prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
                                                 nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
                                             });
@@ -536,6 +700,9 @@ function Save({
                                                 centerMode: true,
                                                 centerPadding: '60px',
                                                 slidesToShow: 3,
+                                                speed:${speed},
+                                                autoplay:${autoplay},
+                                                infinite:${infinite},
                                                 responsive: [
                                                     {
                                                         breakpoint: 768,
@@ -557,6 +724,8 @@ function Save({
                                                     }
                                                 ],
                                                 arrows: ${showArrows},
+                                                autoplaySpeed:${speed},
+                                                dots:${dots},
                                                 prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
                                                 nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
                                             });
@@ -566,7 +735,13 @@ function Save({
                                                 lazyLoad: 'ondemand',
                                                 slidesToShow: 3,
                                                 slidesToScroll: 1,
+                                                speed:${speed},
+                                                autoplay:${autoplay},
+                                                autoplay:true,
                                                 arrows: ${showArrows},
+                                                autoplaySpeed:${speed},
+                                                infinite:${infinite},
+                                                dots:${dots},
                                                 prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
                                                 nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
                                             });
@@ -577,9 +752,12 @@ function Save({
                                     $(sliderId).slick({
                                         slidesToShow: 1,
                                         slidesToScroll: 1,
-                                        autoplay: true,
-                                        autoplaySpeed: 2000,
+                                        speed:${speed}, 
+                                        autoplay:${autoplay},
+                                        autoplaySpeed:${speed},
                                         arrows: ${showArrows},
+                                        infinite:${infinite},
+                                        dots:${dots},
                                         prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
                                         nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
                                     });
@@ -899,6 +1077,19 @@ __webpack_require__.r(__webpack_exports__);
 /*!*****************************************************!*\
   !*** ./node_modules/slick-carousel/slick/slick.css ***!
   \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/editor.scss":
+/*!*************************!*\
+  !*** ./src/editor.scss ***!
+  \*************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -6152,6 +6343,50 @@ module.exports = window["wp"]["blocks"];
 
 /***/ }),
 
+/***/ "@wordpress/components":
+/*!************************************!*\
+  !*** external ["wp","components"] ***!
+  \************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = window["wp"]["components"];
+
+/***/ }),
+
+/***/ "@wordpress/data":
+/*!******************************!*\
+  !*** external ["wp","data"] ***!
+  \******************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = window["wp"]["data"];
+
+/***/ }),
+
+/***/ "@wordpress/element":
+/*!*********************************!*\
+  !*** external ["wp","element"] ***!
+  \*********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = window["wp"]["element"];
+
+/***/ }),
+
+/***/ "@wordpress/i18n":
+/*!******************************!*\
+  !*** external ["wp","i18n"] ***!
+  \******************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = window["wp"]["i18n"];
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js":
 /*!**********************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/interopRequireDefault.js ***!
@@ -6174,7 +6409,7 @@ module.exports = _interopRequireDefault, module.exports.__esModule = true, modul
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"0.1.0","title":"Gutenberg Media Carousel","category":"widgets","icon":"smiley","description":"A custom block for uploading multiple images with sliding effect.","example":{},"attributes":{"id":{"type":"string"},"sliderId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simpleType"},"showArrows":{"type":"boolean"},"arrowType":{"type":"string","default":"custom1"},"youtubeUrls":{"type":"array","items":{"type":"string"}},"simpleType":{"type":"string","default":"simple"},"carouselType":{"type":"string","default":"carousel"}},"supports":{"html":false,"align":["wide","full"],"video":true},"textdomain":"gutenberg-media-carousel","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"0.1.0","title":"Gutenberg Media Carousel","category":"widgets","icon":"smiley","description":"A custom block for uploading multiple images with sliding effect.","example":{},"attributes":{"id":{"type":"string"},"sliderId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simpleType"},"showArrows":{"type":"boolean"},"arrowType":{"type":"string","default":"custom1"},"youtubeUrls":{"type":"array","items":{"type":"string"}},"simpleType":{"type":"string","default":"simple"},"carouselType":{"type":"string","default":"carousel"},"speed":{"type":"number","minimum":1000,"maximum":5000},"autoplay":{"type":"boolean"},"infinite":{"type":"boolean"},"dots":{"type":"boolean"},"dotsType":{"type":"string","default":"ndots"}},"supports":{"html":false,"align":["wide","full"],"video":true},"textdomain":"gutenberg-media-carousel","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

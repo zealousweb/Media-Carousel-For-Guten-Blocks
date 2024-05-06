@@ -42,6 +42,24 @@
 		"carouselType": {
 			"type": "string",
 			"default": "carousel"
+		},
+		"speed": {
+			"type": "number",
+			"minimum": 1000,
+			"maximum": 5000
+		},
+		"autoplay": {
+			"type": "boolean"
+		},
+		"infinite": {
+			"type": "boolean"
+		},
+		"dots":{
+			"type": "boolean"
+		},
+		"dotsType":{
+			"type": "string",
+			"default": "ndots"
 		}
 		
 	},

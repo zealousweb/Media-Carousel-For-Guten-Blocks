@@ -25,7 +25,9 @@ import 'react-fancybox/lib/fancybox.css';
 import ReactFancyBox from 'react-fancybox';
 
 export default function Save({ attributes }) {
-    const { galleryImages, sliderType, showArrows, arrowType, sliderId, youtubeUrls, fancybox, simpleType, carouselType } = attributes;
+    const { galleryImages, sliderType, showArrows, arrowType, sliderId, youtubeUrls, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots } = attributes;
+    console.log(dotsType);
+    console.log(dots)
 
     function getPrevArrow(arrowType) {
         switch (arrowType) {
@@ -57,7 +59,8 @@ export default function Save({ attributes }) {
         <>
             <div id={sliderId}>
                 {galleryImages && galleryImages.map((media, index) => {
-                    const caption = media.caption ? media.caption : '';
+                    {/* const caption = media.caption ? media.caption : ''; */ }
+                    const currentCaption = caption ? media.caption : ''; // Conditionally include caption based on the 'caption' attribute
                     if (media.type === 'image') {
                         const youtubeUrl = youtubeUrls && youtubeUrls[index] ? youtubeUrls[index] : "";
                         if (fancybox) {
@@ -68,7 +71,8 @@ export default function Save({ attributes }) {
                                             src={media.url}
                                             alt={media.alt ? media.alt : "Gallery Image"}
                                         />
-                                        <div>{caption}</div>
+                                        {/* <div>{caption}</div> */}
+                                        {currentCaption && <div>{currentCaption}</div>} {/* Conditionally render caption */}
                                     </div>
                                 );
                             } else {
@@ -79,7 +83,8 @@ export default function Save({ attributes }) {
                                                 src={media.url}
                                                 alt={media.alt ? media.alt : "Gallery Image"}
                                             />
-                                            <div>{caption}</div>
+                                            {/* <div>{caption}</div> */}
+                                            {currentCaption && <div>{currentCaption}</div>} {/* Conditionally render caption */}
                                         </a>
                                     </div>
                                 );
@@ -92,7 +97,8 @@ export default function Save({ attributes }) {
                                             src={media.url}
                                             alt={media.alt ? media.alt : "Gallery Image"}
                                         />
-                                        <div>{caption}</div>
+                                        {/* <div>{caption}</div> */}
+                                        {currentCaption && <div>{currentCaption}</div>} {/* Conditionally render caption */}
                                     </div>
                                 );
                             } else {
@@ -111,7 +117,8 @@ export default function Save({ attributes }) {
                                     <source src={media.url} type={media.mime} />
                                     Your browser does not support the video tag.
                                 </video>
-                                <div>{caption}</div>
+                                {/* <div>{caption}</div> */}
+                                {currentCaption && <div>{currentCaption}</div>} {/* Conditionally render caption */}
                             </div>
                         );
                     }
@@ -129,30 +136,48 @@ export default function Save({ attributes }) {
                                         case 'simple':
                                             $(sliderId).slick({
                                                 arrows: ${showArrows},
+                                                speed:${speed},
+                                                autoplaySpeed:${speed},
+                                                autoplay:${autoplay},
+                                                infinite:${infinite},
+                                                dots:${dots},
+                                                customPaging: function(sliderId, i) {
+                                                    if ("${dotsType}" === "number") { 
+                                                        alert(1);
+                                                        return i + 1;
+                                                    } 
+                                                },
                                                 prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
                                                 nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
+                                               
                                             });
                                             break;
                                         case 'fade':
                                             $(sliderId).slick({
-                                                dots: true,
+                                                dots:${dots},
                                                 infinite: true,
-                                                speed: 500,
+                                                speed:${speed},
+                                                autoplay:${autoplay},
                                                 fade: true,
                                                 cssEase: 'linear',
                                                 arrows: ${showArrows},
+                                                autoplaySpeed:${speed},
+                                                infinite:${infinite},
                                                 prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
                                                 nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
                                             });
                                             break;
                                         case 'adaptiveheight':
                                             $(sliderId).slick({
-                                                dots: true,
+                                                dots:${dots},
                                                 infinite: true,
-                                                speed: 300,
+                                                speed:${speed},
+                                                autoplay:${autoplay},
                                                 slidesToShow: 1,
                                                 adaptiveHeight: true,
                                                 arrows: ${showArrows},
+                                                autoplaySpeed:${speed},
+                                                infinite:${infinite},
                                                 prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
                                                 nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
                                             });
@@ -166,8 +191,12 @@ export default function Save({ attributes }) {
                                                 infinite: true,
                                                 slidesToShow: 3,
                                                 slidesToScroll: 3,
-                                                dots: true,
+                                                dots:${dots},
+                                                speed:${speed},
+                                                autoplay:${autoplay},
                                                 arrows: ${showArrows},
+                                                autoplaySpeed:${speed},
+                                                infinite:${infinite},
                                                 prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
                                                 nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
                                             });
@@ -177,6 +206,9 @@ export default function Save({ attributes }) {
                                                 centerMode: true,
                                                 centerPadding: '60px',
                                                 slidesToShow: 3,
+                                                speed:${speed},
+                                                autoplay:${autoplay},
+                                                infinite:${infinite},
                                                 responsive: [
                                                     {
                                                         breakpoint: 768,
@@ -198,6 +230,8 @@ export default function Save({ attributes }) {
                                                     }
                                                 ],
                                                 arrows: ${showArrows},
+                                                autoplaySpeed:${speed},
+                                                dots:${dots},
                                                 prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
                                                 nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
                                             });
@@ -207,7 +241,13 @@ export default function Save({ attributes }) {
                                                 lazyLoad: 'ondemand',
                                                 slidesToShow: 3,
                                                 slidesToScroll: 1,
+                                                speed:${speed},
+                                                autoplay:${autoplay},
+                                                autoplay:true,
                                                 arrows: ${showArrows},
+                                                autoplaySpeed:${speed},
+                                                infinite:${infinite},
+                                                dots:${dots},
                                                 prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
                                                 nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
                                             });
@@ -218,9 +258,12 @@ export default function Save({ attributes }) {
                                     $(sliderId).slick({
                                         slidesToShow: 1,
                                         slidesToScroll: 1,
-                                        autoplay: true,
-                                        autoplaySpeed: 2000,
+                                        speed:${speed}, 
+                                        autoplay:${autoplay},
+                                        autoplaySpeed:${speed},
                                         arrows: ${showArrows},
+                                        infinite:${infinite},
+                                        dots:${dots},
                                         prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
                                         nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
                                     });

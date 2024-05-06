@@ -11,4 +11,12 @@
   color: black !important;
 }
 
+a.number {
+  padding: 10px 10px;
+}
+
+a.number:hover {
+  background: #ddd;
+}
+
 /*# sourceMappingURL=style-index.css.map*/
