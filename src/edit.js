@@ -93,6 +93,8 @@ export default function Edit({ attributes, setAttributes }) {
     }, [autoplay, infinite]);
 
     return (
+
+        
         <>
             <InspectorControls>
                 <PanelBody title={__("Gallery Settings")}>

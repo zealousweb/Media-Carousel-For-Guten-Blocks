@@ -142,10 +142,11 @@ export default function Save({ attributes }) {
                                                 infinite:${infinite},
                                                 dots:${dots},
                                                 customPaging: function(sliderId, i) {
-                                                    if ("${dotsType}" === "number") { 
-                                                        alert(1);
+                                                    if ("${dotsType}" === "number") {
                                                         return i + 1;
-                                                    } 
+                                                    } else {
+                                                        return '.';
+                                                    }
                                                 },
                                                 prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
                                                 nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
@@ -155,6 +156,13 @@ export default function Save({ attributes }) {
                                         case 'fade':
                                             $(sliderId).slick({
                                                 dots:${dots},
+                                                customPaging: function(sliderId, i) {
+                                                    if ("${dotsType}" === "number") { 
+                                                        return i + 1;
+                                                    } else {
+                                                        return '.';
+                                                    }
+                                                },
                                                 infinite: true,
                                                 speed:${speed},
                                                 autoplay:${autoplay},
@@ -170,6 +178,13 @@ export default function Save({ attributes }) {
                                         case 'adaptiveheight':
                                             $(sliderId).slick({
                                                 dots:${dots},
+                                                customPaging: function(sliderId, i) {
+                                                    if ("${dotsType}" === "number") {
+                                                        return i + 1;
+                                                    } else {
+                                                        return '.';
+                                                    }
+                                                },
                                                 infinite: true,
                                                 speed:${speed},
                                                 autoplay:${autoplay},
@@ -192,6 +207,13 @@ export default function Save({ attributes }) {
                                                 slidesToShow: 3,
                                                 slidesToScroll: 3,
                                                 dots:${dots},
+                                                customPaging: function(sliderId, i) {
+                                                    if ("${dotsType}" === "number") {
+                                                        return i + 1;
+                                                    } else {
+                                                        return '.';
+                                                    }
+                                                },
                                                 speed:${speed},
                                                 autoplay:${autoplay},
                                                 arrows: ${showArrows},
@@ -232,6 +254,13 @@ export default function Save({ attributes }) {
                                                 arrows: ${showArrows},
                                                 autoplaySpeed:${speed},
                                                 dots:${dots},
+                                                customPaging: function(sliderId, i) {
+                                                    if ("${dotsType}" === "number") { 
+                                                        return i + 1;
+                                                    } else {
+                                                        return '.';
+                                                    }
+                                                },
                                                 prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
                                                 nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
                                             });
@@ -248,6 +277,13 @@ export default function Save({ attributes }) {
                                                 autoplaySpeed:${speed},
                                                 infinite:${infinite},
                                                 dots:${dots},
+                                                customPaging: function(sliderId, i) {
+                                                    if ("${dotsType}" === "number") { 
+                                                        return i + 1;
+                                                    } else {
+                                                        return '.';
+                                                    }
+                                                },
                                                 prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
                                                 nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
                                             });
@@ -263,7 +299,10 @@ export default function Save({ attributes }) {
                                         autoplaySpeed:${speed},
                                         arrows: ${showArrows},
                                         infinite:${infinite},
-                                        dots:${dots},
+                                       
+                                       
+
+                                       
                                         prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
                                         nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
                                     });

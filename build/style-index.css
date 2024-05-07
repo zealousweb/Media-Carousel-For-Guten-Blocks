@@ -11,12 +11,17 @@
   color: black !important;
 }
 
-a.number {
-  padding: 10px 10px;
+.slick-dots li {
+  font-size: 30px !important;
+  opacity: 0.5;
 }
 
-a.number:hover {
-  background: #ddd;
+.slick-dots li.slick-active {
+  opacity: 1;
+}
+
+.slick-dots li:hover {
+  opacity: 1;
 }
 
 /*# sourceMappingURL=style-index.css.map*/

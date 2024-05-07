@@ -7,10 +7,13 @@
  .slick-next:before, .slick-prev:before {
     color: black !important;
 }
-a.number{
-    padding:10px 10px;
-  }
-  a.number:hover{
-    
-    background:#ddd;
-  }
+.slick-dots li {
+  font-size: 30px !important;
+  opacity: 0.5;
+}
+.slick-dots li.slick-active{
+ opacity: 1;
+}
+.slick-dots li:hover{
+  opacity: 1;
+}
