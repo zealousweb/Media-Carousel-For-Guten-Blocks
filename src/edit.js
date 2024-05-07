@@ -65,7 +65,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.js";
 
 export default function Edit({ attributes, setAttributes }) {
-    const { galleryImages = [], youtubeUrls = [], sliderType, showArrows, arrowType, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType,dots } = attributes;
+    const { galleryImages = [], urls = [], sliderType, showArrows, arrowType, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType,dots } = attributes;
     // console.log("maitri", caption);
 
 
@@ -94,7 +94,7 @@ export default function Edit({ attributes, setAttributes }) {
 
     return (
 
-        
+
         <>
             <InspectorControls>
                 <PanelBody title={__("Gallery Settings")}>
@@ -263,11 +263,11 @@ export default function Edit({ attributes, setAttributes }) {
                                 </div>
                                 <input
                                     type="text"
-                                    value={youtubeUrls.map((url, idx) => idx === index ? url : '').join('')}
+                                    value={urls.map((url, idx) => idx === index ? url : '').join('')}
                                     onChange={(event) => {
-                                        const updatedUrls = [...youtubeUrls];
+                                        const updatedUrls = [...urls];
                                         updatedUrls[index] = event.target.value;
-                                        setAttributes({ youtubeUrls: updatedUrls });
+                                        setAttributes({ urls: updatedUrls });
                                     }}
                                     placeholder="Enter YouTube video URL"
                                 />

@@ -125,7 +125,7 @@ function Edit({
 }) {
   const {
     galleryImages = [],
-    youtubeUrls = [],
+    urls = [],
     sliderType,
     showArrows,
     arrowType,
@@ -344,12 +344,12 @@ function Edit({
     alt: media.alt ? media.alt : "Gallery Image"
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "text",
-    value: youtubeUrls.map((url, idx) => idx === index ? url : '').join(''),
+    value: urls.map((url, idx) => idx === index ? url : '').join(''),
     onChange: event => {
-      const updatedUrls = [...youtubeUrls];
+      const updatedUrls = [...urls];
       updatedUrls[index] = event.target.value;
       setAttributes({
-        youtubeUrls: updatedUrls
+        urls: updatedUrls
       });
     },
     placeholder: "Enter YouTube video URL"
@@ -517,7 +517,7 @@ function Save({
     showArrows,
     arrowType,
     sliderId,
-    youtubeUrls,
+    urls,
     fancybox,
     simpleType,
     carouselType,
@@ -557,10 +557,9 @@ function Save({
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: sliderId
   }, galleryImages && galleryImages.map((media, index) => {
-    {/* const caption = media.caption ? media.caption : ''; */}
-    const currentCaption = caption ? media.caption : ''; // Conditionally include caption based on the 'caption' attribute
+    const currentCaption = caption ? media.caption : '';
     if (media.type === 'image') {
-      const youtubeUrl = youtubeUrls && youtubeUrls[index] ? youtubeUrls[index] : "";
+      const youtubeUrl = urls && urls[index] ? urls[index] : "";
       if (fancybox) {
         if (youtubeUrl === "") {
           return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -569,7 +568,7 @@ function Save({
           }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
             src: media.url,
             alt: media.alt ? media.alt : "Gallery Image"
-          }), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, currentCaption), " ");
+          }), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, currentCaption));
         } else {
           return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
             key: media.id,
@@ -581,7 +580,7 @@ function Save({
           }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
             src: media.url,
             alt: media.alt ? media.alt : "Gallery Image"
-          }), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, currentCaption), " "));
+          }), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, currentCaption)));
         }
       } else {
         if (youtubeUrl === "") {
@@ -591,7 +590,7 @@ function Save({
           }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
             src: media.url,
             alt: media.alt ? media.alt : "Gallery Image"
-          }), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, currentCaption), " ");
+          }), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, currentCaption));
         } else {
           const videoID = youtubeUrl.match(/[?&]v=([^&]+)/)[1];
           return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -618,7 +617,7 @@ function Save({
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("source", {
         src: media.url,
         type: media.mime
-      }), "Your browser does not support the video tag."), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, currentCaption), " ");
+      }), "Your browser does not support the video tag."), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, currentCaption));
     }
     return null;
   })), showArrows && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Arrow Type: ", arrowType), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("script", null, `

@@ -25,7 +25,7 @@ import 'react-fancybox/lib/fancybox.css';
 import ReactFancyBox from 'react-fancybox';
 
 export default function Save({ attributes }) {
-    const { galleryImages, sliderType, showArrows, arrowType, sliderId, youtubeUrls, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots } = attributes;
+    const { galleryImages, sliderType, showArrows, arrowType, sliderId, urls, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots } = attributes;
     console.log(dotsType);
     console.log(dots)
 
@@ -59,10 +59,9 @@ export default function Save({ attributes }) {
         <>
             <div id={sliderId}>
                 {galleryImages && galleryImages.map((media, index) => {
-                    {/* const caption = media.caption ? media.caption : ''; */ }
-                    const currentCaption = caption ? media.caption : ''; // Conditionally include caption based on the 'caption' attribute
+                    const currentCaption = caption ? media.caption : ''; 
                     if (media.type === 'image') {
-                        const youtubeUrl = youtubeUrls && youtubeUrls[index] ? youtubeUrls[index] : "";
+                        const youtubeUrl = urls && urls[index] ? urls[index] : "";
                         if (fancybox) {
                             if (youtubeUrl === "") {
                                 return (
@@ -71,8 +70,7 @@ export default function Save({ attributes }) {
                                             src={media.url}
                                             alt={media.alt ? media.alt : "Gallery Image"}
                                         />
-                                        {/* <div>{caption}</div> */}
-                                        {currentCaption && <div>{currentCaption}</div>} {/* Conditionally render caption */}
+                                        {currentCaption && <div>{currentCaption}</div>}
                                     </div>
                                 );
                             } else {
@@ -83,8 +81,7 @@ export default function Save({ attributes }) {
                                                 src={media.url}
                                                 alt={media.alt ? media.alt : "Gallery Image"}
                                             />
-                                            {/* <div>{caption}</div> */}
-                                            {currentCaption && <div>{currentCaption}</div>} {/* Conditionally render caption */}
+                                            {currentCaption && <div>{currentCaption}</div>} 
                                         </a>
                                     </div>
                                 );
@@ -97,8 +94,7 @@ export default function Save({ attributes }) {
                                             src={media.url}
                                             alt={media.alt ? media.alt : "Gallery Image"}
                                         />
-                                        {/* <div>{caption}</div> */}
-                                        {currentCaption && <div>{currentCaption}</div>} {/* Conditionally render caption */}
+                                        {currentCaption && <div>{currentCaption}</div>}
                                     </div>
                                 );
                             } else {
@@ -117,8 +113,7 @@ export default function Save({ attributes }) {
                                     <source src={media.url} type={media.mime} />
                                     Your browser does not support the video tag.
                                 </video>
-                                {/* <div>{caption}</div> */}
-                                {currentCaption && <div>{currentCaption}</div>} {/* Conditionally render caption */}
+                                {currentCaption && <div>{currentCaption}</div>} 
                             </div>
                         );
                     }
