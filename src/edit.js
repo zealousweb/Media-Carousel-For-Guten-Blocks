@@ -269,7 +269,7 @@ export default function Edit({ attributes, setAttributes }) {
                                         updatedUrls[index] = event.target.value;
                                         setAttributes({ urls: updatedUrls });
                                     }}
-                                    placeholder="Enter YouTube video URL"
+                                    placeholder="Enter URL "
                                 />
                                 <input
                                     type="text"

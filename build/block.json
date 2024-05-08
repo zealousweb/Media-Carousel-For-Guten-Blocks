@@ -29,7 +29,7 @@
       "type": "string",
       "default": "custom1"
     },
-    "youtubeUrls": {
+    "urls": {
       "type": "array",
       "items": {
         "type": "string"

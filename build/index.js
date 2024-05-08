@@ -352,7 +352,7 @@ function Edit({
         urls: updatedUrls
       });
     },
-    placeholder: "Enter YouTube video URL"
+    placeholder: "Enter URL "
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "text",
     value: media.caption || '' // Display original caption or an empty string if none
@@ -528,8 +528,7 @@ function Save({
     dotsType,
     dots
   } = attributes;
-  console.log(dotsType);
-  console.log(dots);
+  console.log(urls);
   function getPrevArrow(arrowType) {
     switch (arrowType) {
       case 'custom1':
@@ -560,6 +559,7 @@ function Save({
     const currentCaption = caption ? media.caption : '';
     if (media.type === 'image') {
       const youtubeUrl = urls && urls[index] ? urls[index] : "";
+      console.log("Yotube", youtubeUrl);
       if (fancybox) {
         if (youtubeUrl === "") {
           return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -6447,7 +6447,7 @@ module.exports = _interopRequireDefault, module.exports.__esModule = true, modul
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"0.1.0","title":"Gutenberg Media Carousel","category":"widgets","icon":"smiley","description":"A custom block for uploading multiple images with sliding effect.","example":{},"attributes":{"id":{"type":"string"},"sliderId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simpleType"},"showArrows":{"type":"boolean"},"arrowType":{"type":"string","default":"custom1"},"youtubeUrls":{"type":"array","items":{"type":"string"}},"simpleType":{"type":"string","default":"simple"},"carouselType":{"type":"string","default":"carousel"},"speed":{"type":"number","minimum":1000,"maximum":5000},"autoplay":{"type":"boolean"},"infinite":{"type":"boolean"},"dots":{"type":"boolean"},"dotsType":{"type":"string","default":"ndots"}},"supports":{"html":false,"align":["wide","full"],"video":true},"textdomain":"gutenberg-media-carousel","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"0.1.0","title":"Gutenberg Media Carousel","category":"widgets","icon":"smiley","description":"A custom block for uploading multiple images with sliding effect.","example":{},"attributes":{"id":{"type":"string"},"sliderId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simpleType"},"showArrows":{"type":"boolean"},"arrowType":{"type":"string","default":"custom1"},"urls":{"type":"array","items":{"type":"string"}},"simpleType":{"type":"string","default":"simple"},"carouselType":{"type":"string","default":"carousel"},"speed":{"type":"number","minimum":1000,"maximum":5000},"autoplay":{"type":"boolean"},"infinite":{"type":"boolean"},"dots":{"type":"boolean"},"dotsType":{"type":"string","default":"ndots"}},"supports":{"html":false,"align":["wide","full"],"video":true},"textdomain":"gutenberg-media-carousel","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

@@ -26,8 +26,7 @@ import ReactFancyBox from 'react-fancybox';
 
 export default function Save({ attributes }) {
     const { galleryImages, sliderType, showArrows, arrowType, sliderId, urls, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots } = attributes;
-    console.log(dotsType);
-    console.log(dots)
+    console.log(urls);
 
     function getPrevArrow(arrowType) {
         switch (arrowType) {
@@ -62,6 +61,7 @@ export default function Save({ attributes }) {
                     const currentCaption = caption ? media.caption : ''; 
                     if (media.type === 'image') {
                         const youtubeUrl = urls && urls[index] ? urls[index] : "";
+                        console.log("Yotube",youtubeUrl);
                         if (fancybox) {
                             if (youtubeUrl === "") {
                                 return (
