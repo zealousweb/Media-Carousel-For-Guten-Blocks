@@ -139,8 +139,6 @@ function Edit({
     dotsType,
     dots
   } = attributes;
-  // console.log("maitri", caption);
-
   const [sliderId, setSliderId] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(attributes.sliderId || '');
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
     if (!sliderId) {
@@ -528,7 +526,6 @@ function Save({
     dotsType,
     dots
   } = attributes;
-  console.log(urls);
   function getPrevArrow(arrowType) {
     switch (arrowType) {
       case 'custom1':
@@ -557,56 +554,56 @@ function Save({
     id: sliderId
   }, galleryImages && galleryImages.map((media, index) => {
     const currentCaption = caption ? media.caption : '';
+    const url = urls && urls[index] ? urls[index] : "";
+    const isYouTubeUrl = url.includes("youtube.com");
+    const isWebsiteUrl = url.startsWith("http");
     if (media.type === 'image') {
-      const youtubeUrl = urls && urls[index] ? urls[index] : "";
-      console.log("Yotube", youtubeUrl);
-      if (fancybox) {
-        if (youtubeUrl === "") {
-          return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-            key: media.id,
-            className: "utk-gallery-single"
-          }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-            src: media.url,
-            alt: media.alt ? media.alt : "Gallery Image"
-          }), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, currentCaption));
-        } else {
-          return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-            key: media.id,
-            className: "utk-gallery-single"
-          }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-            href: youtubeUrl,
-            "data-fancybox": "gallery",
-            "data-caption": media.alt ? media.alt : "Gallery Image"
-          }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-            src: media.url,
-            alt: media.alt ? media.alt : "Gallery Image"
-          }), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, currentCaption)));
-        }
+      if (fancybox && isYouTubeUrl && url != '') {
+        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+          key: media.id,
+          className: "utk-gallery-single"
+        }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+          href: url,
+          "data-fancybox": "gallery",
+          "data-caption": media.alt ? media.alt : "Gallery Image"
+        }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+          src: media.url,
+          alt: media.alt ? media.alt : "Gallery Image"
+        }), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, currentCaption)));
+      } else if (!fancybox && isYouTubeUrl && url != '') {
+        const videoID = url.match(/[?&]v=([^&]+)/)[1];
+        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+          key: media.id,
+          className: "utk-gallery-single"
+        }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("iframe", {
+          width: "560",
+          height: "315",
+          src: `https://www.youtube.com/embed/${videoID}`,
+          title: "YouTube video player",
+          frameborder: "0",
+          allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
+          referrerpolicy: "strict-origin-when-cross-origin",
+          allowfullscreen: true
+        }));
+      } else if (!isYouTubeUrl && isWebsiteUrl && url != '') {
+        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+          key: media.id,
+          className: "utk-gallery-single"
+        }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+          href: url,
+          target: "_blank"
+        }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+          src: media.url,
+          alt: media.alt ? media.alt : "Gallery Image"
+        }), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, currentCaption)));
       } else {
-        if (youtubeUrl === "") {
-          return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-            key: media.id,
-            className: "utk-gallery-single"
-          }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-            src: media.url,
-            alt: media.alt ? media.alt : "Gallery Image"
-          }), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, currentCaption));
-        } else {
-          const videoID = youtubeUrl.match(/[?&]v=([^&]+)/)[1];
-          return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-            key: media.id,
-            className: "utk-gallery-single"
-          }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("iframe", {
-            width: "560",
-            height: "315",
-            src: `https://www.youtube.com/embed/${videoID}`,
-            title: "YouTube video player",
-            frameborder: "0",
-            allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
-            referrerpolicy: "strict-origin-when-cross-origin",
-            allowfullscreen: true
-          }));
-        }
+        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+          key: media.id,
+          className: "utk-gallery-single"
+        }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+          src: media.url,
+          alt: media.alt ? media.alt : "Gallery Image"
+        }), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, currentCaption));
       }
     } else if (media.type === 'video') {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -792,10 +789,6 @@ function Save({
                                         autoplaySpeed:${speed},
                                         arrows: ${showArrows},
                                         infinite:${infinite},
-                                       
-                                       
-
-                                       
                                         prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
                                         nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
                                     });

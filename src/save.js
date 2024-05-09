@@ -26,7 +26,6 @@ import ReactFancyBox from 'react-fancybox';
 
 export default function Save({ attributes }) {
     const { galleryImages, sliderType, showArrows, arrowType, sliderId, urls, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots } = attributes;
-    console.log(urls);
 
     function getPrevArrow(arrowType) {
         switch (arrowType) {
@@ -40,7 +39,6 @@ export default function Save({ attributes }) {
                 return;
         }
     }
-
     function getNextArrow(arrowType) {
         switch (arrowType) {
             case 'custom1':
@@ -58,54 +56,57 @@ export default function Save({ attributes }) {
         <>
             <div id={sliderId}>
                 {galleryImages && galleryImages.map((media, index) => {
-                    const currentCaption = caption ? media.caption : ''; 
+                    const currentCaption = caption ? media.caption : '';
+                    const url = urls && urls[index] ? urls[index] : "";
+                    const isYouTubeUrl = url.includes("youtube.com");
+                    const isWebsiteUrl = url.startsWith("http");
+
                     if (media.type === 'image') {
-                        const youtubeUrl = urls && urls[index] ? urls[index] : "";
-                        console.log("Yotube",youtubeUrl);
-                        if (fancybox) {
-                            if (youtubeUrl === "") {
-                                return (
-                                    <div key={media.id} className="utk-gallery-single">
+                        if (fancybox && isYouTubeUrl && url != '') {
+                            return (
+                                <div key={media.id} className="utk-gallery-single">
+                                    <a href={url} data-fancybox="gallery" data-caption={media.alt ? media.alt : "Gallery Image"}>
                                         <img
                                             src={media.url}
                                             alt={media.alt ? media.alt : "Gallery Image"}
                                         />
                                         {currentCaption && <div>{currentCaption}</div>}
-                                    </div>
-                                );
-                            } else {
-                                return (
-                                    <div key={media.id} className="utk-gallery-single">
-                                        <a href={youtubeUrl} data-fancybox="gallery" data-caption={media.alt ? media.alt : "Gallery Image"}>
-                                            <img
-                                                src={media.url}
-                                                alt={media.alt ? media.alt : "Gallery Image"}
-                                            />
-                                            {currentCaption && <div>{currentCaption}</div>} 
-                                        </a>
-                                    </div>
-                                );
-                            }
+                                    </a>
+                                </div>
+                            );
+                        } else if (!fancybox && isYouTubeUrl && url != '') {
+                            const videoID = url.match(/[?&]v=([^&]+)/)[1];
+                            return (
+                                <div key={media.id} className="utk-gallery-single">
+                                    <iframe width="560" height="315" src={`https://www.youtube.com/embed/${videoID}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                </div>
+                            );
+
+                        } else if (!isYouTubeUrl && isWebsiteUrl && url != '') {
+                            return (
+                                <div key={media.id} className="utk-gallery-single">
+                                    <a href={url} target="_blank">
+                                        <img
+                                            src={media.url}
+                                            alt={media.alt ? media.alt : "Gallery Image"}
+                                        />
+                                        {currentCaption && <div>{currentCaption}</div>}
+                                    </a>
+                                </div>
+                            );
                         } else {
-                            if (youtubeUrl === "") {
-                                return (
-                                    <div key={media.id} className="utk-gallery-single">
-                                        <img
-                                            src={media.url}
-                                            alt={media.alt ? media.alt : "Gallery Image"}
-                                        />
-                                        {currentCaption && <div>{currentCaption}</div>}
-                                    </div>
-                                );
-                            } else {
-                                const videoID = youtubeUrl.match(/[?&]v=([^&]+)/)[1];
-                                return (
-                                    <div key={media.id} className="utk-gallery-single">
-                                        <iframe width="560" height="315" src={`https://www.youtube.com/embed/${videoID}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                                    </div>
-                                );
-                            }
+                            return (
+                                <div key={media.id} className="utk-gallery-single">
+                                    <img
+                                        src={media.url}
+                                        alt={media.alt ? media.alt : "Gallery Image"}
+                                    />
+                                    {currentCaption && <div>{currentCaption}</div>}
+
+                                </div>
+                            );
                         }
+
                     } else if (media.type === 'video') {
                         return (
                             <div key={media.id} className="utk-gallery-single" >
@@ -113,7 +114,7 @@ export default function Save({ attributes }) {
                                     <source src={media.url} type={media.mime} />
                                     Your browser does not support the video tag.
                                 </video>
-                                {currentCaption && <div>{currentCaption}</div>} 
+                                {currentCaption && <div>{currentCaption}</div>}
                             </div>
                         );
                     }
@@ -294,10 +295,6 @@ export default function Save({ attributes }) {
                                         autoplaySpeed:${speed},
                                         arrows: ${showArrows},
                                         infinite:${infinite},
-                                       
-                                       
-
-                                       
                                         prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
                                         nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
                                     });
@@ -306,7 +303,6 @@ export default function Save({ attributes }) {
                         });
                     `}
             </script>
-
         </>
     );
 } 
