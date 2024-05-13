@@ -85,7 +85,7 @@ export default function Save({ attributes }) {
                         } else if (!isYouTubeUrl && isWebsiteUrl && url != '') {
                             return (
                                 <div key={media.id} className="utk-gallery-single">
-                                    <a href={url} target="_blank">
+                                    <a href={url}>
                                         <img
                                             src={media.url}
                                             alt={media.alt ? media.alt : "Gallery Image"}

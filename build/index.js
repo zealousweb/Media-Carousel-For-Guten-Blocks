@@ -616,8 +616,7 @@ function Save({
           key: media.id,
           className: "utk-gallery-single"
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-          href: url,
-          target: "_blank"
+          href: url
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
           src: media.url,
           alt: media.alt ? media.alt : "Gallery Image"
