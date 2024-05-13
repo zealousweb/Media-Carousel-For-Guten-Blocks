@@ -137,7 +137,10 @@ function Edit({
     infinite,
     caption,
     dotsType,
-    dots
+    dots,
+    arrowColor,
+    dotsColor,
+    borderRadius
   } = attributes;
   const [sliderId, setSliderId] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(attributes.sliderId || '');
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
@@ -252,6 +255,12 @@ function Edit({
         arrowType: val
       });
     }
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPalette, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arrow Color"),
+    value: arrowColor,
+    onChange: color => setAttributes({
+      arrowColor: color
+    })
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
     label: "Speed of Slider",
     value: speed,
@@ -307,6 +316,20 @@ function Edit({
         dotsType: val
       });
     }
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPalette, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dots Color"),
+    value: dotsColor,
+    onChange: color => setAttributes({
+      dotsColor: color
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Radius"),
+    value: borderRadius,
+    onChange: value => setAttributes({
+      borderRadius: value
+    }),
+    min: 0,
+    max: 50
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUploadCheck, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUpload, {
     multiple: "add",
     onSelect: val => {
@@ -524,7 +547,10 @@ function Save({
     infinite,
     caption,
     dotsType,
-    dots
+    dots,
+    arrowColor,
+    dotsColor,
+    borderRadius
   } = attributes;
   function getPrevArrow(arrowType) {
     switch (arrowType) {
@@ -617,7 +643,22 @@ function Save({
       }), "Your browser does not support the video tag."), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, currentCaption));
     }
     return null;
-  })), showArrows && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Arrow Type: ", arrowType), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("script", null, `
+  })), showArrows && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Arrow Type: ", arrowType), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", null, `
+            /* CSS for arrows */
+            
+            .slick-next:before, .slick-prev:before {
+                color:${arrowColor} !important;
+            }
+
+            /* CSS for dots */
+            .slick-dots li {
+                color: ${dotsColor}; // Apply dots color
+            }
+            .utk-gallery-single iframe , .utk-gallery-single img ,.utk-gallery-single video {
+                border-radius:${borderRadius}px;
+            }
+            
+        `), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("script", null, `
                         jQuery(document).ready(function($) {
                             var sliderId = "#${sliderId}";
                             switch ("${sliderType}") {
@@ -6440,7 +6481,7 @@ module.exports = _interopRequireDefault, module.exports.__esModule = true, modul
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"0.1.0","title":"Gutenberg Media Carousel","category":"widgets","icon":"smiley","description":"A custom block for uploading multiple images with sliding effect.","example":{},"attributes":{"id":{"type":"string"},"sliderId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simpleType"},"showArrows":{"type":"boolean"},"arrowType":{"type":"string","default":"custom1"},"urls":{"type":"array","items":{"type":"string"}},"simpleType":{"type":"string","default":"simple"},"carouselType":{"type":"string","default":"carousel"},"speed":{"type":"number","minimum":1000,"maximum":5000},"autoplay":{"type":"boolean"},"infinite":{"type":"boolean"},"dots":{"type":"boolean"},"dotsType":{"type":"string","default":"ndots"}},"supports":{"html":false,"align":["wide","full"],"video":true},"textdomain":"gutenberg-media-carousel","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"0.1.0","title":"Gutenberg Media Carousel","category":"widgets","icon":"smiley","description":"A custom block for uploading multiple images with sliding effect.","example":{},"attributes":{"id":{"type":"string"},"sliderId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simpleType"},"showArrows":{"type":"boolean"},"arrowType":{"type":"string","default":"custom1"},"urls":{"type":"array","items":{"type":"string"}},"simpleType":{"type":"string","default":"simple"},"carouselType":{"type":"string","default":"carousel"},"speed":{"type":"number","minimum":1000,"maximum":5000},"autoplay":{"type":"boolean"},"infinite":{"type":"boolean"},"dots":{"type":"boolean"},"dotsType":{"type":"string","default":"ndots"},"arrowColor":{"type":"string","default":"#000000"},"dotsColor":{"type":"string","default":"#000000"},"borderRadius":{"type":"number","default":0,"minimum":0,"maximum":50}},"supports":{"html":false,"align":["wide","full"],"video":true},"textdomain":"gutenberg-media-carousel","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

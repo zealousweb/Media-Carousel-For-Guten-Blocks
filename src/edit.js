@@ -37,7 +37,8 @@ import {
     ToggleControl,
     TextControl,
     RadioControl,
-    RangeControl
+    RangeControl,
+    ColorPalette 
 
 } from "@wordpress/components";
 
@@ -65,7 +66,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.js";
 
 export default function Edit({ attributes, setAttributes }) {
-    const { galleryImages = [], urls = [], sliderType, showArrows, arrowType, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType,dots } = attributes;
+    const { galleryImages = [], urls = [], sliderType, showArrows, arrowType, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots,arrowColor,dotsColor,borderRadius } = attributes;
     const [sliderId, setSliderId] = useState(attributes.sliderId || '');
 
     useEffect(() => {
@@ -165,6 +166,11 @@ export default function Edit({ attributes, setAttributes }) {
                             }}
                         />
                     )}
+                    <ColorPalette
+                        label={__("Arrow Color")}
+                        value={arrowColor}
+                        onChange={(color) => setAttributes({ arrowColor: color })}
+                    />
                     <RangeControl
                         label="Speed of Slider"
                         value={speed}
@@ -211,8 +217,20 @@ export default function Edit({ attributes, setAttributes }) {
                             onChange={(val) => {
                                 setAttributes({ dotsType: val });
                             }}
-                        />
-                    )}
+                        />  
+                    )}  
+                    <ColorPalette
+                        label={__("Dots Color")}
+                        value={dotsColor}
+                        onChange={(color) => setAttributes({ dotsColor: color })}
+                    />
+                    <RangeControl
+                        label={__("Border Radius")}
+                        value={borderRadius}
+                        onChange={(value) => setAttributes({ borderRadius: value })}
+                        min={0}
+                        max={50} 
+                    />
                 </PanelBody>
             </InspectorControls>
 

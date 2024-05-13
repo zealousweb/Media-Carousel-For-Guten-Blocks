@@ -25,8 +25,8 @@ import 'react-fancybox/lib/fancybox.css';
 import ReactFancyBox from 'react-fancybox';
 
 export default function Save({ attributes }) {
-    const { galleryImages, sliderType, showArrows, arrowType, sliderId, urls, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots } = attributes;
-
+    const { galleryImages, sliderType, showArrows, arrowType, sliderId, urls, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius } = attributes;
+    
     function getPrevArrow(arrowType) {
         switch (arrowType) {
             case 'custom1':
@@ -122,6 +122,22 @@ export default function Save({ attributes }) {
                 })}
             </div>
             {showArrows && <p>Arrow Type: {arrowType}</p>}
+            <style>{`
+            /* CSS for arrows */
+            
+            .slick-next:before, .slick-prev:before {
+                color:${arrowColor} !important;
+            }
+
+            /* CSS for dots */
+            .slick-dots li {
+                color: ${dotsColor}; // Apply dots color
+            }
+            .utk-gallery-single iframe , .utk-gallery-single img ,.utk-gallery-single video {
+                border-radius:${borderRadius}px;
+            }
+            
+        `}</style>
             <script>
                 {`
                         jQuery(document).ready(function($) {

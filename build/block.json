@@ -60,6 +60,20 @@
     "dotsType": {
       "type": "string",
       "default": "ndots"
+    },
+    "arrowColor": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "dotsColor": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "borderRadius": {
+      "type": "number",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 50
     }
   },
   "supports": {
