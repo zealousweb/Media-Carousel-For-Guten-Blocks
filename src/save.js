@@ -54,7 +54,7 @@ export default function Save({ attributes }) {
 
     return (
         <>
-            <div id={sliderId}>
+            <div id={sliderId} class={arrowType}>
                 {galleryImages && galleryImages.map((media, index) => {
                     const currentCaption = caption ? media.caption : '';
                     const url = urls && urls[index] ? urls[index] : "";
@@ -126,7 +126,7 @@ export default function Save({ attributes }) {
             /* CSS for arrows */
             
             .slick-next:before, .slick-prev:before {
-                color:${arrowColor} !important;
+                background-color:${arrowColor} !important;
             }
 
             /* CSS for dots */
@@ -135,6 +135,7 @@ export default function Save({ attributes }) {
             }
             .utk-gallery-single iframe , .utk-gallery-single img ,.utk-gallery-single video {
                 border-radius:${borderRadius}px;
+                width:100%;
             }
             
         `}</style>

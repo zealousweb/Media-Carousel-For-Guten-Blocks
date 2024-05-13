@@ -577,7 +577,8 @@ function Save({
     }
   }
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    id: sliderId
+    id: sliderId,
+    class: arrowType
   }, galleryImages && galleryImages.map((media, index) => {
     const currentCaption = caption ? media.caption : '';
     const url = urls && urls[index] ? urls[index] : "";
@@ -646,7 +647,7 @@ function Save({
             /* CSS for arrows */
             
             .slick-next:before, .slick-prev:before {
-                color:${arrowColor} !important;
+                background-color:${arrowColor} !important;
             }
 
             /* CSS for dots */
@@ -655,6 +656,7 @@ function Save({
             }
             .utk-gallery-single iframe , .utk-gallery-single img ,.utk-gallery-single video {
                 border-radius:${borderRadius}px;
+                width:100%;
             }
             
         `), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("script", null, `
