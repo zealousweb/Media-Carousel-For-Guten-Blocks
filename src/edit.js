@@ -38,7 +38,7 @@ import {
     TextControl,
     RadioControl,
     RangeControl,
-    ColorPalette 
+    ColorPalette
 
 } from "@wordpress/components";
 
@@ -66,12 +66,12 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.js";
 
 export default function Edit({ attributes, setAttributes }) {
-    const { galleryImages = [], urls = [], sliderType, showArrows, arrowType, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots,arrowColor,dotsColor,borderRadius } = attributes;
+    const { galleryImages = [], urls = [], sliderType, showArrows, arrowType, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius } = attributes;
     const [sliderId, setSliderId] = useState(attributes.sliderId || '');
 
     useEffect(() => {
         if (!sliderId) {
-            setSliderId(`utk-slider-${sliderType}-${Math.floor(Math.random() * 1000)}`);
+            setSliderId(`mcfgb-slider-${sliderType}-${Math.floor(Math.random() * 1000)}`);
         }
     }, [sliderType, sliderId]);
 
@@ -217,8 +217,8 @@ export default function Edit({ attributes, setAttributes }) {
                             onChange={(val) => {
                                 setAttributes({ dotsType: val });
                             }}
-                        />  
-                    )}  
+                        />
+                    )}
                     <ColorPalette
                         label={__("Dots Color")}
                         value={dotsColor}
@@ -229,7 +229,7 @@ export default function Edit({ attributes, setAttributes }) {
                         value={borderRadius}
                         onChange={(value) => setAttributes({ borderRadius: value })}
                         min={0}
-                        max={50} 
+                        max={50}
                     />
                 </PanelBody>
             </InspectorControls>
@@ -268,7 +268,7 @@ export default function Edit({ attributes, setAttributes }) {
 
             <div {...useBlockProps()} id={sliderId}>
                 {galleryImages && galleryImages.map((media, index) => (
-                    <div key={media.id} className="utk-gallery-single">
+                    <div key={media.id} className="mcfgb-gallery-single">
                         {media.type === 'image' ? (
                             <>
                                 <img src={media.url} alt={media.alt ? media.alt : "Gallery Image"} />

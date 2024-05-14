@@ -145,7 +145,7 @@ function Edit({
   const [sliderId, setSliderId] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(attributes.sliderId || '');
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
     if (!sliderId) {
-      setSliderId(`utk-slider-${sliderType}-${Math.floor(Math.random() * 1000)}`);
+      setSliderId(`mcfgb-slider-${sliderType}-${Math.floor(Math.random() * 1000)}`);
     }
   }, [sliderType, sliderId]);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
@@ -359,7 +359,7 @@ function Edit({
     id: sliderId
   }, galleryImages && galleryImages.map((media, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     key: media.id,
-    className: "utk-gallery-single"
+    className: "mcfgb-gallery-single"
   }, media.type === 'image' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: media.url,
     alt: media.alt ? media.alt : "Gallery Image"
@@ -588,7 +588,7 @@ function Save({
       if (fancybox && isYouTubeUrl && url != '') {
         return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           key: media.id,
-          className: "utk-gallery-single"
+          className: "mcfgb-gallery-single"
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
           href: url,
           "data-fancybox": "gallery",
@@ -601,7 +601,7 @@ function Save({
         const videoID = url.match(/[?&]v=([^&]+)/)[1];
         return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           key: media.id,
-          className: "utk-gallery-single"
+          className: "mcfgb-gallery-single"
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("iframe", {
           width: "560",
           height: "315",
@@ -615,7 +615,7 @@ function Save({
       } else if (!isYouTubeUrl && isWebsiteUrl && url != '') {
         return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           key: media.id,
-          className: "utk-gallery-single"
+          className: "mcfgb-gallery-single"
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
           href: url
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
@@ -625,7 +625,7 @@ function Save({
       } else {
         return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           key: media.id,
-          className: "utk-gallery-single"
+          className: "mcfgb-gallery-single"
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
           src: media.url,
           alt: media.alt ? media.alt : "Gallery Image"
@@ -634,7 +634,7 @@ function Save({
     } else if (media.type === 'video') {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         key: media.id,
-        className: "utk-gallery-single"
+        className: "mcfgb-gallery-single"
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("video", {
         controls: true
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("source", {
@@ -654,7 +654,7 @@ function Save({
             .slick-dots li {
                 color: ${dotsColor}; // Apply dots color
             }
-            .utk-gallery-single iframe , .utk-gallery-single img ,.utk-gallery-single video {
+            .mcfgb-gallery-single iframe , .mcfgb-gallery-single img ,.mcfgb-gallery-single video {
                 border-radius:${borderRadius}px;
                 width:100%;
             }

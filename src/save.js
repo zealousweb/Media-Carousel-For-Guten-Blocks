@@ -64,7 +64,7 @@ export default function Save({ attributes }) {
                     if (media.type === 'image') {
                         if (fancybox && isYouTubeUrl && url != '') {
                             return (
-                                <div key={media.id} className="utk-gallery-single">
+                                <div key={media.id} className="mcfgb-gallery-single">
                                     <a href={url} data-fancybox="gallery" data-caption={media.alt ? media.alt : "Gallery Image"}>
                                         <img
                                             src={media.url}
@@ -77,14 +77,14 @@ export default function Save({ attributes }) {
                         } else if (!fancybox && isYouTubeUrl && url != '') {
                             const videoID = url.match(/[?&]v=([^&]+)/)[1];
                             return (
-                                <div key={media.id} className="utk-gallery-single">
+                                <div key={media.id} className="mcfgb-gallery-single">
                                     <iframe width="560" height="315" src={`https://www.youtube.com/embed/${videoID}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                                 </div>
                             );
 
                         } else if (!isYouTubeUrl && isWebsiteUrl && url != '') {
                             return (
-                                <div key={media.id} className="utk-gallery-single">
+                                <div key={media.id} className="mcfgb-gallery-single">
                                     <a href={url}>
                                         <img
                                             src={media.url}
@@ -96,7 +96,7 @@ export default function Save({ attributes }) {
                             );
                         } else {
                             return (
-                                <div key={media.id} className="utk-gallery-single">
+                                <div key={media.id} className="mcfgb-gallery-single">
                                     <img
                                         src={media.url}
                                         alt={media.alt ? media.alt : "Gallery Image"}
@@ -109,7 +109,7 @@ export default function Save({ attributes }) {
 
                     } else if (media.type === 'video') {
                         return (
-                            <div key={media.id} className="utk-gallery-single" >
+                            <div key={media.id} className="mcfgb-gallery-single" >
                                 <video controls>
                                     <source src={media.url} type={media.mime} />
                                     Your browser does not support the video tag.
@@ -133,7 +133,7 @@ export default function Save({ attributes }) {
             .slick-dots li {
                 color: ${dotsColor}; // Apply dots color
             }
-            .utk-gallery-single iframe , .utk-gallery-single img ,.utk-gallery-single video {
+            .mcfgb-gallery-single iframe , .mcfgb-gallery-single img ,.mcfgb-gallery-single video {
                 border-radius:${borderRadius}px;
                 width:100%;
             }
