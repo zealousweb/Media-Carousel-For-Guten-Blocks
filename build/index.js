@@ -681,7 +681,7 @@ function Save({
                         jQuery(document).ready(function($) {
 
                             $('[data-fancybox="gallery"]').fancybox();
-                            $('.mcfgb-gallery-single').on('click', function() {
+                            $('[data-fancybox="gallery"]').on('click', function() {
                                 $(this).attr('data-fancybox', 'gallery');
                                 if ($.fancybox.getInstance()) {
                                     $('body.fancybox-active .fancybox-bg').css('background', '${fancyboxBgColor}');
