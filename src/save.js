@@ -25,8 +25,8 @@ import 'react-fancybox/lib/fancybox.css';
 import ReactFancyBox from 'react-fancybox';
 
 export default function Save({ attributes }) {
-    const { galleryImages, sliderType, showArrows, arrowType, sliderId, urls, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius } = attributes;
-    
+    const { galleryImages, sliderType, showArrows, arrowType, sliderId, urls, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, fancyboxBgColor, fancyboxWidth } = attributes;
+
     function getPrevArrow(arrowType) {
         switch (arrowType) {
             case 'custom1':
@@ -140,8 +140,18 @@ export default function Save({ attributes }) {
             
         `}</style>
             <script>
-                {`
+                {`              
                         jQuery(document).ready(function($) {
+
+                            $('[data-fancybox="gallery"]').fancybox();
+                            $('.mcfgb-gallery-single').on('click', function() {
+                                $(this).attr('data-fancybox', 'gallery');
+                                if ($.fancybox.getInstance()) {
+                                    $('body.fancybox-active .fancybox-bg').css('background', '${fancyboxBgColor}');
+                                    $('body.fancybox-active .fancybox-container .fancybox-content').css('width', '${fancyboxWidth}');
+                                }
+                            });
+                            
                             var sliderId = "#${sliderId}";
                             switch ("${sliderType}") {
                                 case 'simpleType':

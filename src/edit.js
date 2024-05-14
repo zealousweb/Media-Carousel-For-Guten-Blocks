@@ -66,7 +66,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.js";
 
 export default function Edit({ attributes, setAttributes }) {
-    const { galleryImages = [], urls = [], sliderType, showArrows, arrowType, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius } = attributes;
+    const { galleryImages = [], urls = [], sliderType, showArrows, arrowType, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, fancyboxBgColor, fancyboxWidth } = attributes;
     const [sliderId, setSliderId] = useState(attributes.sliderId || '');
 
     useEffect(() => {
@@ -100,6 +100,18 @@ export default function Edit({ attributes, setAttributes }) {
                         onChange={(val) => {
                             setAttributes({ fancybox: val });
                         }}
+                    />
+                    <ColorPalette
+                        label={__("FancyBox Background Color")}
+                        value={fancyboxBgColor}
+                        onChange={(color) => setAttributes({ fancyboxBgColor: color })}
+                    />
+                    <RangeControl
+                        label={__("FancyBox Width")}
+                        value={fancyboxWidth}
+                        onChange={(value) => setAttributes({ fancyboxWidth: value })}
+                        min={200}
+                        max={1200}
                     />
                     <RadioControl
                         label={__("Slider Type")}
