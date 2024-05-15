@@ -101,8 +101,8 @@ export default function Edit({ attributes, setAttributes }) {
                             setAttributes({ fancybox: val });
                         }}
                     />
+                    <span className="color">FancyBox Background Color</span>
                     <ColorPalette
-                        label={__("FancyBox Background Color")}
                         value={fancyboxBgColor}
                         onChange={(color) => setAttributes({ fancyboxBgColor: color })}
                     />
@@ -178,8 +178,8 @@ export default function Edit({ attributes, setAttributes }) {
                             }}
                         />
                     )}
+                    <span className="color">Arrow Color</span>
                     <ColorPalette
-                        label={__("Arrow Color")}
                         value={arrowColor}
                         onChange={(color) => setAttributes({ arrowColor: color })}
                     />
@@ -231,8 +231,8 @@ export default function Edit({ attributes, setAttributes }) {
                             }}
                         />
                     )}
+                    <span className="color">Dots Color</span>
                     <ColorPalette
-                        label={__("Dots Color")}
                         value={dotsColor}
                         onChange={(color) => setAttributes({ dotsColor: color })}
                     />
