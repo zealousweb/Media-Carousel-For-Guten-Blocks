@@ -609,7 +609,7 @@ function Save({
           className: "mcfgb-gallery-single"
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
           href: url,
-          "data-fancybox": "gallery",
+          "data-fancybox": `gallery-${sliderId}`,
           "data-caption": media.alt ? media.alt : "Gallery Image"
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
           src: media.url,
@@ -680,9 +680,9 @@ function Save({
         `), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("script", null, `              
                         jQuery(document).ready(function($) {
 
-                            $('[data-fancybox="gallery"]').fancybox();
-                            $('[data-fancybox="gallery"]').on('click', function() {
-                                $(this).attr('data-fancybox', 'gallery');
+                            $('[data-fancybox="gallery-${sliderId}"]').fancybox();
+                            $('[data-fancybox="gallery-${sliderId}"]').on('click', function() {
+                                $(this).attr('data-fancybox', 'gallery-${sliderId}');
                                 if ($.fancybox.getInstance()) {
                                     $('body.fancybox-active .fancybox-bg').css('background', '${fancyboxBgColor}');
                                     $('body.fancybox-active .fancybox-container .fancybox-content').css('width', '${fancyboxWidth}');

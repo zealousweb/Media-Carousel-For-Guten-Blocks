@@ -65,7 +65,7 @@ export default function Save({ attributes }) {
                         if (fancybox && isYouTubeUrl && url != '') {
                             return (
                                 <div key={media.id} className="mcfgb-gallery-single">
-                                    <a href={url} data-fancybox="gallery" data-caption={media.alt ? media.alt : "Gallery Image"}>
+                                    <a href={url} data-fancybox={`gallery-${sliderId}`}  data-caption={media.alt ? media.alt : "Gallery Image"}>
                                         <img
                                             src={media.url}
                                             alt={media.alt ? media.alt : "Gallery Image"}
@@ -143,9 +143,9 @@ export default function Save({ attributes }) {
                 {`              
                         jQuery(document).ready(function($) {
 
-                            $('[data-fancybox="gallery"]').fancybox();
-                            $('[data-fancybox="gallery"]').on('click', function() {
-                                $(this).attr('data-fancybox', 'gallery');
+                            $('[data-fancybox="gallery-${sliderId}"]').fancybox();
+                            $('[data-fancybox="gallery-${sliderId}"]').on('click', function() {
+                                $(this).attr('data-fancybox', 'gallery-${sliderId}');
                                 if ($.fancybox.getInstance()) {
                                     $('body.fancybox-active .fancybox-bg').css('background', '${fancyboxBgColor}');
                                     $('body.fancybox-active .fancybox-container .fancybox-content').css('width', '${fancyboxWidth}');
