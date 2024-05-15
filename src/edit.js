@@ -66,7 +66,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.js";
 
 export default function Edit({ attributes, setAttributes }) {
-    const { galleryImages = [], urls = [], sliderType, showArrows, arrowType, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, fancyboxBgColor, fancyboxWidth } = attributes;
+    const { galleryImages = [], urls = [], sliderType, showArrows, arrowType, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, fancyboxBgColor, fancyboxWidth, fancyboxOpacity } = attributes;
     const [sliderId, setSliderId] = useState(attributes.sliderId || '');
 
     useEffect(() => {
@@ -101,18 +101,29 @@ export default function Edit({ attributes, setAttributes }) {
                             setAttributes({ fancybox: val });
                         }}
                     />
-                    <span className="color">FancyBox Background Color</span>
-                    <ColorPalette
-                        value={fancyboxBgColor}
-                        onChange={(color) => setAttributes({ fancyboxBgColor: color })}
-                    />
-                    <RangeControl
-                        label={__("FancyBox Width")}
-                        value={fancyboxWidth}
-                        onChange={(value) => setAttributes({ fancyboxWidth: value })}
-                        min={200}
-                        max={1200}
-                    />
+                    {attributes.fancybox &&
+                        <>
+                            <span className="color">FancyBox Background Color</span>
+                            <ColorPalette
+                                value={fancyboxBgColor}
+                                onChange={(color) => setAttributes({ fancyboxBgColor: color })}
+                            />
+                            <RangeControl
+                                label={__("FancyBox Width")}
+                                value={fancyboxWidth}
+                                onChange={(value) => setAttributes({ fancyboxWidth: value })}
+                                min={200}
+                                max={1200}
+                            />
+                            <RangeControl   
+                                label={__("FancyBox Opacity")}
+                                value={fancyboxOpacity}
+                                onChange={(value) => setAttributes({ fancyboxOpacity: value })}
+                                min={0}
+                                max={100}
+                            />
+                        </>
+                    }
                     <RadioControl
                         label={__("Slider Type")}
                         selected={sliderType}
@@ -165,24 +176,27 @@ export default function Edit({ attributes, setAttributes }) {
                         }}
                     />
                     {showArrows && (
-                        <SelectControl
-                            label={__("Arrow Type")}
-                            value={arrowType}
-                            options={[
-                                { label: "Arrow 1", value: "custom1" },
-                                { label: "Arrow 2", value: "custom2" },
-                                { label: "Arrow 3", value: "custom3" },
-                            ]}
-                            onChange={(val) => {
-                                setAttributes({ arrowType: val });
-                            }}
-                        />
+                        <>
+                            <SelectControl
+                                label={__("Arrow Type")}
+                                value={arrowType}
+                                options={[
+                                    { label: "Arrow 1", value: "custom1" },
+                                    { label: "Arrow 2", value: "custom2" },
+                                    { label: "Arrow 3", value: "custom3" },
+                                ]}
+                                onChange={(val) => {
+                                    setAttributes({ arrowType: val });
+                                }}
+                            />
+                            <span className="color">Arrow Color</span>
+                            <ColorPalette
+                                value={arrowColor}
+                                onChange={(color) => setAttributes({ arrowColor: color })}
+                            />
+                        </>
                     )}
-                    <span className="color">Arrow Color</span>
-                    <ColorPalette
-                        value={arrowColor}
-                        onChange={(color) => setAttributes({ arrowColor: color })}
-                    />
+
                     <RangeControl
                         label="Speed of Slider"
                         value={speed}
@@ -219,23 +233,26 @@ export default function Edit({ attributes, setAttributes }) {
                         }}
                     />
                     {dots && (
-                        <SelectControl
-                            label={__("Dots Type")}
-                            value={dotsType}
-                            options={[
-                                { label: "Normal Dots", value: "ndots" },
-                                { label: "Number", value: "number" },
-                            ]}
-                            onChange={(val) => {
-                                setAttributes({ dotsType: val });
-                            }}
-                        />
+                        <>
+                            <SelectControl
+                                label={__("Dots Type")}
+                                value={dotsType}
+                                options={[
+                                    { label: "Normal Dots", value: "ndots" },
+                                    { label: "Number", value: "number" },
+                                ]}
+                                onChange={(val) => {
+                                    setAttributes({ dotsType: val });
+                                }}
+                            />
+                            <span className="color">Dots Color</span>
+                            <ColorPalette
+                                value={dotsColor}
+                                onChange={(color) => setAttributes({ dotsColor: color })}
+                            />
+                        </>
                     )}
-                    <span className="color">Dots Color</span>
-                    <ColorPalette
-                        value={dotsColor}
-                        onChange={(color) => setAttributes({ dotsColor: color })}
-                    />
+
                     <RangeControl
                         label={__("Border Radius")}
                         value={borderRadius}
@@ -279,73 +296,75 @@ export default function Edit({ attributes, setAttributes }) {
             </BlockControls>
 
             <div {...useBlockProps()} id={sliderId}>
-                {galleryImages && galleryImages.map((media, index) => (
-                    <div key={media.id} className="mcfgb-gallery-single">
-                        {media.type === 'image' ? (
-                            <>
-                                <img src={media.url} alt={media.alt ? media.alt : "Gallery Image"} />
-                                <div>
-                                </div>
-                                <input
-                                    type="text"
-                                    value={urls.map((url, idx) => idx === index ? url : '').join('')}
-                                    onChange={(event) => {
-                                        const updatedUrls = [...urls];
-                                        updatedUrls[index] = event.target.value;
-                                        setAttributes({ urls: updatedUrls });
-                                    }}
-                                    placeholder="Enter URL "
-                                />
-                                <input
-                                    type="text"
-                                    value={media.caption || ''} // Display original caption or an empty string if none
-                                    onChange={(event) => {
-                                        const updatedGallery = [...galleryImages];
-                                        updatedGallery[index].caption = event.target.value; // Override the caption
-                                        setAttributes({ galleryImages: updatedGallery });
-                                    }}
-                                    placeholder="Enter Caption"
-                                />
-                            </>
-                        ) : media.type === 'video' ? (
-                            <>
-                                <video controls>
-                                    <source src={media.url} type={media.mime} />
-                                    Your browser does not support the video tag.
-                                </video>
-                                <div>
+                <div class="slider-boxwrap">
+                    {galleryImages && galleryImages.map((media, index) => (
+                        <div key={media.id} className="mcfgb-gallery-single">
+                            {media.type === 'image' ? (
+                                <>
+                                    <img src={media.url} alt={media.alt ? media.alt : "Gallery Image"} />
+                                    <div>
+                                    </div>
+                                    <input
+                                        type="text"
+                                        value={urls.map((url, idx) => idx === index ? url : '').join('')}
+                                        onChange={(event) => {
+                                            const updatedUrls = [...urls];
+                                            updatedUrls[index] = event.target.value;
+                                            setAttributes({ urls: updatedUrls });
+                                        }}
+                                        placeholder="Enter URL "
+                                    />
+                                    <input
+                                        type="text"
+                                        value={media.caption || ''} // Display original caption or an empty string if none
+                                        onChange={(event) => {
+                                            const updatedGallery = [...galleryImages];
+                                            updatedGallery[index].caption = event.target.value; // Override the caption
+                                            setAttributes({ galleryImages: updatedGallery });
+                                        }}
+                                        placeholder="Enter Caption"
+                                    />
+                                </>
+                            ) : media.type === 'video' ? (
+                                <>
+                                    <video controls>
+                                        <source src={media.url} type={media.mime} />
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <div>
 
-                                </div>
-                                <input
-                                    type="text"
-                                    value={media.caption || ''} // Display original caption or an empty string if none
-                                    onChange={(event) => {
-                                        const updatedGallery = [...galleryImages];
-                                        updatedGallery[index].caption = event.target.value; // Override the caption
-                                        setAttributes({ galleryImages: updatedGallery });
-                                    }}
-                                    placeholder="Enter Caption"
-                                />
-                            </>
-                        ) : null}
-                    </div>
-                ))}
-                {galleryImages.length === 0 && (
-                    <MediaPlaceholder
-                        multiple="add"
-                        onSelect={(val) => {
-                            setAttributes({ galleryImages: val });
-                        }}
-                        onFilesPreUpload={(val) => {
-                            setAttributes({ galleryImages: val });
-                        }}
-                        onSelectURL={false}
-                        allowedTypes={["image", "video"]}
-                        labels={{
-                            title: "Add Gallery Image or Video",
-                        }}
-                    />
-                )}
+                                    </div>
+                                    <input
+                                        type="text"
+                                        value={media.caption || ''} // Display original caption or an empty string if none
+                                        onChange={(event) => {
+                                            const updatedGallery = [...galleryImages];
+                                            updatedGallery[index].caption = event.target.value; // Override the caption
+                                            setAttributes({ galleryImages: updatedGallery });
+                                        }}
+                                        placeholder="Enter Caption"
+                                    />
+                                </>
+                            ) : null}
+                        </div>
+                    ))}
+                    {galleryImages.length === 0 && (
+                        <MediaPlaceholder
+                            multiple="add"
+                            onSelect={(val) => {
+                                setAttributes({ galleryImages: val });
+                            }}
+                            onFilesPreUpload={(val) => {
+                                setAttributes({ galleryImages: val });
+                            }}
+                            onSelectURL={false}
+                            allowedTypes={["image", "video"]}
+                            labels={{
+                                title: "Add Gallery Image or Video",
+                            }}
+                        />
+                    )}
+                </div>
             </div>
         </>
     );

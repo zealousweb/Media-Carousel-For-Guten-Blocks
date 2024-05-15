@@ -142,7 +142,8 @@ function Edit({
     dotsColor,
     borderRadius,
     fancyboxBgColor,
-    fancyboxWidth
+    fancyboxWidth,
+    fancyboxOpacity
   } = attributes;
   const [sliderId, setSliderId] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(attributes.sliderId || '');
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
@@ -180,7 +181,7 @@ function Edit({
         fancybox: val
       });
     }
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+  }), attributes.fancybox && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "color"
   }, "FancyBox Background Color"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPalette, {
     value: fancyboxBgColor,
@@ -195,7 +196,15 @@ function Edit({
     }),
     min: 200,
     max: 1200
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RadioControl, {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("FancyBox Opacity"),
+    value: fancyboxOpacity,
+    onChange: value => setAttributes({
+      fancyboxOpacity: value
+    }),
+    min: 0,
+    max: 100
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RadioControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slider Type"),
     selected: sliderType,
     options: [{
@@ -254,7 +263,7 @@ function Edit({
         showArrows: val
       });
     }
-  }), showArrows && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
+  }), showArrows && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arrow Type"),
     value: arrowType,
     options: [{
@@ -279,7 +288,7 @@ function Edit({
     onChange: color => setAttributes({
       arrowColor: color
     })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
     label: "Speed of Slider",
     value: speed,
     onChange: value => setAttributes({
@@ -319,7 +328,7 @@ function Edit({
         dots: val
       });
     }
-  }), dots && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
+  }), dots && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dots Type"),
     value: dotsType,
     options: [{
@@ -341,7 +350,7 @@ function Edit({
     onChange: color => setAttributes({
       dotsColor: color
     })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Radius"),
     value: borderRadius,
     onChange: value => setAttributes({
@@ -376,6 +385,8 @@ function Edit({
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)(),
     id: sliderId
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "slider-boxwrap"
   }, galleryImages && galleryImages.map((media, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     key: media.id,
     className: "mcfgb-gallery-single"
@@ -439,7 +450,7 @@ function Edit({
     labels: {
       title: "Add Gallery Image or Video"
     }
-  })));
+  }))));
 }
 
 /***/ }),
@@ -571,7 +582,8 @@ function Save({
     dotsColor,
     borderRadius,
     fancyboxBgColor,
-    fancyboxWidth
+    fancyboxWidth,
+    fancyboxOpacity
   } = attributes;
   function getPrevArrow(arrowType) {
     switch (arrowType) {
@@ -668,7 +680,7 @@ function Save({
             /* CSS for arrows */
             
             .slick-next:before, .slick-prev:before {
-                background-color:${arrowColor};
+                background-color:${arrowColor} !important;
             }
 
             /* CSS for dots */
@@ -689,6 +701,8 @@ function Save({
                                 if ($.fancybox.getInstance()) {
                                     $('body.fancybox-active .fancybox-bg').css('background', '${fancyboxBgColor}');
                                     $('body.fancybox-active .fancybox-container .fancybox-content').css('width', '${fancyboxWidth}');
+                                    $('body.fancybox-active .fancybox-bg').css('opacity', '${fancyboxOpacity}%');
+                                    
                                 }
                             });
                             
@@ -6513,7 +6527,7 @@ module.exports = _interopRequireDefault, module.exports.__esModule = true, modul
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"0.1.0","title":"Gutenberg Media Carousel","category":"widgets","icon":"smiley","description":"A custom block for uploading multiple images with sliding effect.","example":{},"attributes":{"id":{"type":"string"},"sliderId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simpleType"},"showArrows":{"type":"boolean"},"arrowType":{"type":"string","default":"custom1"},"urls":{"type":"array","items":{"type":"string"}},"simpleType":{"type":"string","default":"simple"},"carouselType":{"type":"string","default":"carousel"},"speed":{"type":"number","minimum":1000,"maximum":5000},"autoplay":{"type":"boolean"},"infinite":{"type":"boolean"},"dots":{"type":"boolean"},"dotsType":{"type":"string","default":"ndots"},"arrowColor":{"type":"string","default":"#000000"},"dotsColor":{"type":"string","default":"#000000"},"borderRadius":{"type":"number","default":0,"minimum":0,"maximum":50},"fancyboxBgColor":{"type":"string","default":"#000000"},"fancyboxWidth":{"type":"number"}},"supports":{"html":false,"align":["wide","full"],"video":true},"textdomain":"gutenberg-media-carousel","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"0.1.0","title":"Gutenberg Media Carousel","category":"widgets","icon":"smiley","description":"A custom block for uploading multiple images with sliding effect.","example":{},"attributes":{"id":{"type":"string"},"sliderId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simpleType"},"showArrows":{"type":"boolean"},"arrowType":{"type":"string","default":"custom1"},"urls":{"type":"array","items":{"type":"string"}},"simpleType":{"type":"string","default":"simple"},"carouselType":{"type":"string","default":"carousel"},"speed":{"type":"number","minimum":1000,"maximum":5000},"autoplay":{"type":"boolean"},"infinite":{"type":"boolean"},"dots":{"type":"boolean"},"dotsType":{"type":"string","default":"ndots"},"arrowColor":{"type":"string","default":"#000000"},"dotsColor":{"type":"string","default":"#000000"},"borderRadius":{"type":"number","default":0,"minimum":0,"maximum":50},"fancyboxBgColor":{"type":"string","default":"#000000"},"fancyboxWidth":{"type":"number"},"fancyboxOpacity":{"type":"number"}},"supports":{"html":false,"align":["wide","full"],"video":true},"textdomain":"gutenberg-media-carousel","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

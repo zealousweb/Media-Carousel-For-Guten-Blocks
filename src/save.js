@@ -25,7 +25,8 @@ import 'react-fancybox/lib/fancybox.css';
 import ReactFancyBox from 'react-fancybox';
 
 export default function Save({ attributes }) {
-    const { galleryImages, sliderType, showArrows, arrowType, sliderId, urls, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, fancyboxBgColor, fancyboxWidth } = attributes;
+    const { galleryImages, sliderType, showArrows, arrowType, sliderId, urls, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, fancyboxBgColor, fancyboxWidth ,fancyboxOpacity} = attributes;
+
 
     function getPrevArrow(arrowType) {
         switch (arrowType) {
@@ -126,7 +127,7 @@ export default function Save({ attributes }) {
             /* CSS for arrows */
             
             .slick-next:before, .slick-prev:before {
-                background-color:${arrowColor};
+                background-color:${arrowColor} !important;
             }
 
             /* CSS for dots */
@@ -149,6 +150,8 @@ export default function Save({ attributes }) {
                                 if ($.fancybox.getInstance()) {
                                     $('body.fancybox-active .fancybox-bg').css('background', '${fancyboxBgColor}');
                                     $('body.fancybox-active .fancybox-container .fancybox-content').css('width', '${fancyboxWidth}');
+                                    $('body.fancybox-active .fancybox-bg').css('opacity', '${fancyboxOpacity}%');
+                                    
                                 }
                             });
                             

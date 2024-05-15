@@ -54,10 +54,10 @@
 		"infinite": {
 			"type": "boolean"
 		},
-		"dots":{
+		"dots": {
 			"type": "boolean"
 		},
-		"dotsType":{
+		"dotsType": {
 			"type": "string",
 			"default": "ndots"
 		},
@@ -67,22 +67,24 @@
 		},
 		"dotsColor": {
 			"type": "string",
-			"default": "#000000" 
+			"default": "#000000"
 		},
 		"borderRadius": {
 			"type": "number",
-			"default": 0, 
+			"default": 0,
 			"minimum": 0,
-			"maximum": 50 
+			"maximum": 50
 		},
-		"fancyboxBgColor":{
+		"fancyboxBgColor": {
 			"type": "string",
-			"default": "#000000" 
+			"default": "#000000"
 		},
-		"fancyboxWidth":{
+		"fancyboxWidth": {
+			"type": "number"
+		},
+		"fancyboxOpacity": {
 			"type": "number"
 		}
-		
 	},
 	"supports": {
 		"html": false,
