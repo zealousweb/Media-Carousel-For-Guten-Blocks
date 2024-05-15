@@ -665,12 +665,12 @@ function Save({
             /* CSS for arrows */
             
             .slick-next:before, .slick-prev:before {
-                background-color:${arrowColor} !important;
+                background-color:${arrowColor};
             }
 
             /* CSS for dots */
             .slick-dots li {
-                color: ${dotsColor}; // Apply dots color
+                color: ${dotsColor};
             }
             .mcfgb-gallery-single iframe , .mcfgb-gallery-single img ,.mcfgb-gallery-single video {
                 border-radius:${borderRadius}px;
