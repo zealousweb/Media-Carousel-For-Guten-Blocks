@@ -93,9 +93,9 @@ export default function Edit({ attributes, setAttributes }) {
     return (
         <>
             <InspectorControls>
-                <PanelBody title={__("Gallery Settings")}>
+                <PanelBody title={__("Media Carousel Settings")}>
                     <ToggleControl
-                        label={__("Enable FancyBox")}
+                        label={__("Enable FancyBox", "media-carousel-for-guten-blocks")}
                         checked={attributes.fancybox}
                         onChange={(val) => {
                             setAttributes({ fancybox: val });
@@ -109,14 +109,14 @@ export default function Edit({ attributes, setAttributes }) {
                                 onChange={(color) => setAttributes({ fancyboxBgColor: color })}
                             />
                             <RangeControl
-                                label={__("FancyBox Width")}
+                                label={__("FancyBox Width", "media-carousel-for-guten-blocks")}
                                 value={fancyboxWidth}
                                 onChange={(value) => setAttributes({ fancyboxWidth: value })}
                                 min={200}
                                 max={1200}
                             />
-                            <RangeControl   
-                                label={__("FancyBox Opacity")}
+                            <RangeControl
+                                label={__("FancyBox Opacity", "media-carousel-for-guten-blocks")}
                                 value={fancyboxOpacity}
                                 onChange={(value) => setAttributes({ fancyboxOpacity: value })}
                                 min={0}
@@ -125,7 +125,7 @@ export default function Edit({ attributes, setAttributes }) {
                         </>
                     }
                     <RadioControl
-                        label={__("Slider Type")}
+                        label={__("Slider Type", "media-carousel-for-guten-blocks")}
                         selected={sliderType}
                         options={[
                             { label: "Simple Type", value: "simpleType" },
@@ -139,7 +139,7 @@ export default function Edit({ attributes, setAttributes }) {
                         <>
                             {sliderType === "simpleType" && (
                                 <SelectControl
-                                    label={__("Simple Slider Type")}
+                                    label={__("Simple Slider Type", "media-carousel-for-guten-blocks")}
                                     value={simpleType}
                                     options={[
                                         { label: "Simple", value: "simple" },
@@ -153,7 +153,7 @@ export default function Edit({ attributes, setAttributes }) {
                             )}
                             {sliderType === "carouselType" && (
                                 <SelectControl
-                                    label={__("Carousel Slider Type")}
+                                    label={__("Carousel Slider Type", "media-carousel-for-guten-blocks")}
                                     value={carouselType}
                                     options={[
                                         { label: "Carousel", value: "carousel" },
@@ -169,7 +169,7 @@ export default function Edit({ attributes, setAttributes }) {
                     )}
 
                     <ToggleControl
-                        label={__("Show Arrows")}
+                        label={__("Show Arrows", "media-carousel-for-guten-blocks")}
                         checked={showArrows}
                         onChange={(val) => {
                             setAttributes({ showArrows: val });
@@ -178,7 +178,7 @@ export default function Edit({ attributes, setAttributes }) {
                     {showArrows && (
                         <>
                             <SelectControl
-                                label={__("Arrow Type")}
+                                label={__("Arrow Type", "media-carousel-for-guten-blocks")}
                                 value={arrowType}
                                 options={[
                                     { label: "Arrow 1", value: "custom1" },
@@ -198,35 +198,35 @@ export default function Edit({ attributes, setAttributes }) {
                     )}
 
                     <RangeControl
-                        label="Speed of Slider"
+                        label={__("Speed of Slider", "media-carousel-for-guten-blocks")}
                         value={speed}
                         onChange={(value) => setAttributes({ speed: value })}
                         min={1000}
                         max={5000}
                     />
                     <ToggleControl
-                        label={__("Auto Play")}
+                        label={__("Auto Play", "media-carousel-for-guten-blocks")}
                         checked={autoplay}
                         onChange={(val) => {
                             setAttributes({ autoplay: val });
                         }}
                     />
                     <ToggleControl
-                        label={__("Infinite")}
+                        label={__("Infinite", "media-carousel-for-guten-blocks")}
                         checked={infinite}
                         onChange={(val) => {
                             setAttributes({ infinite: val });
                         }}
                     />
                     <ToggleControl
-                        label={__("Caption")}
+                        label={__("Caption", "media-carousel-for-guten-blocks")}
                         checked={caption}
                         onChange={(val) => {
                             setAttributes({ caption: val });
                         }}
                     />
                     <ToggleControl
-                        label={__("Dots")}
+                        label={__("Dots", "media-carousel-for-guten-blocks")}
                         checked={dots}
                         onChange={(val) => {
                             setAttributes({ dots: val });
@@ -235,7 +235,7 @@ export default function Edit({ attributes, setAttributes }) {
                     {dots && (
                         <>
                             <SelectControl
-                                label={__("Dots Type")}
+                                label={__("Dots Type", "media-carousel-for-guten-blocks")}
                                 value={dotsType}
                                 options={[
                                     { label: "Normal Dots", value: "ndots" },
@@ -254,7 +254,7 @@ export default function Edit({ attributes, setAttributes }) {
                     )}
 
                     <RangeControl
-                        label={__("Border Radius")}
+                        label={__("Border Radius", "media-carousel-for-guten-blocks")}
                         value={borderRadius}
                         onChange={(value) => setAttributes({ borderRadius: value })}
                         min={0}

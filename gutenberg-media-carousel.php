@@ -1,20 +1,26 @@
 <?php
 /**
- * Plugin Name:       Gutenberg Media Carousel
- * Description:       Example block scaffolded with Create Block tool.
+ * Plugin Name:       Media Carousel for Guten blocks
+ * Description:       Media Carousel.
  * Requires at least: 6.1
  * Requires PHP:      7.0
  * Version:           0.1.0
- * Author:            The WordPress Contributors
+ * Author:            <a href="https://www.zealousweb.com/">ZealousWeb</a>
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       gutenberg-media-carousel
+ * Text Domain:       media-carousel-for-guten-blocks
  *
- * @package           create-block
+ *
+ * @category  ZealBlocks
+ * @package   Media-Carousel-for-Guten-Blocks
+ * @author    ZealousWeb <support@zealousweb.com>
+ * @copyright 2024 ZealousWeb
+ * @license   GPL-2.0-or-later
+ * @link      https://www.gnu.org/licenses/gpl-2.0.html
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly.
 }
 
 /**
@@ -24,14 +30,16 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
-function gutenberg_media_carousel_gutenberg_media_carousel_block_init() {
-	register_block_type( __DIR__ . '/build' );
+function mcfgb_init()
+{
+    register_block_type(__DIR__ . '/build');
 }
-add_action( 'init', 'gutenberg_media_carousel_gutenberg_media_carousel_block_init' );
+add_action('init', 'mcfgb_init');
 
 
 
-function enqueue_slick_slider() {
+function enqueue_slick_slider()
+{
     wp_enqueue_style(
         'slick-slider-css',
         'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css',
@@ -55,15 +63,14 @@ function enqueue_slick_slider() {
     );
 }
 add_action('wp_enqueue_scripts', 'enqueue_slick_slider');
-function enqueue_fancybox() {
+function enqueue_fancybox()
+{
     // Enqueue Fancybox JavaScript
-    wp_enqueue_script( 'fancybox', 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js', array('jquery'), '5.0', true );
+    wp_enqueue_script('fancybox', 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js', array('jquery'), '5.0', true);
 
     // Enqueue Fancybox CSS
-    wp_enqueue_style( 'fancybox-css', 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css', array(), '5.0' );
+    wp_enqueue_style('fancybox-css', 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css', array(), '5.0');
 }
 
-add_action( 'wp_enqueue_scripts', 'enqueue_fancybox' );
-
-?>
+add_action('wp_enqueue_scripts', 'enqueue_fancybox');
 

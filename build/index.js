@@ -172,9 +172,9 @@ function Edit({
     }
   }, [autoplay, infinite]);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gallery Settings")
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Media Carousel Settings")
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Enable FancyBox"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Enable FancyBox", "media-carousel-for-guten-blocks"),
     checked: attributes.fancybox,
     onChange: val => {
       setAttributes({
@@ -189,7 +189,7 @@ function Edit({
       fancyboxBgColor: color
     })
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("FancyBox Width"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("FancyBox Width", "media-carousel-for-guten-blocks"),
     value: fancyboxWidth,
     onChange: value => setAttributes({
       fancyboxWidth: value
@@ -197,7 +197,7 @@ function Edit({
     min: 200,
     max: 1200
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("FancyBox Opacity"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("FancyBox Opacity", "media-carousel-for-guten-blocks"),
     value: fancyboxOpacity,
     onChange: value => setAttributes({
       fancyboxOpacity: value
@@ -205,7 +205,7 @@ function Edit({
     min: 0,
     max: 100
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RadioControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slider Type"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slider Type", "media-carousel-for-guten-blocks"),
     selected: sliderType,
     options: [{
       label: "Simple Type",
@@ -220,7 +220,7 @@ function Edit({
       });
     }
   }), sliderType && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, sliderType === "simpleType" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Simple Slider Type"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Simple Slider Type", "media-carousel-for-guten-blocks"),
     value: simpleType,
     options: [{
       label: "Simple",
@@ -238,7 +238,7 @@ function Edit({
       });
     }
   }), sliderType === "carouselType" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Carousel Slider Type"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Carousel Slider Type", "media-carousel-for-guten-blocks"),
     value: carouselType,
     options: [{
       label: "Carousel",
@@ -256,7 +256,7 @@ function Edit({
       });
     }
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Show Arrows"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Show Arrows", "media-carousel-for-guten-blocks"),
     checked: showArrows,
     onChange: val => {
       setAttributes({
@@ -264,7 +264,7 @@ function Edit({
       });
     }
   }), showArrows && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arrow Type"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arrow Type", "media-carousel-for-guten-blocks"),
     value: arrowType,
     options: [{
       label: "Arrow 1",
@@ -289,7 +289,7 @@ function Edit({
       arrowColor: color
     })
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
-    label: "Speed of Slider",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Speed of Slider", "media-carousel-for-guten-blocks"),
     value: speed,
     onChange: value => setAttributes({
       speed: value
@@ -297,7 +297,7 @@ function Edit({
     min: 1000,
     max: 5000
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Auto Play"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Auto Play", "media-carousel-for-guten-blocks"),
     checked: autoplay,
     onChange: val => {
       setAttributes({
@@ -305,7 +305,7 @@ function Edit({
       });
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Infinite"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Infinite", "media-carousel-for-guten-blocks"),
     checked: infinite,
     onChange: val => {
       setAttributes({
@@ -313,7 +313,7 @@ function Edit({
       });
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Caption"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Caption", "media-carousel-for-guten-blocks"),
     checked: caption,
     onChange: val => {
       setAttributes({
@@ -321,7 +321,7 @@ function Edit({
       });
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dots"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dots", "media-carousel-for-guten-blocks"),
     checked: dots,
     onChange: val => {
       setAttributes({
@@ -329,7 +329,7 @@ function Edit({
       });
     }
   }), dots && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dots Type"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dots Type", "media-carousel-for-guten-blocks"),
     value: dotsType,
     options: [{
       label: "Normal Dots",
@@ -351,7 +351,7 @@ function Edit({
       dotsColor: color
     })
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Radius"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Radius", "media-carousel-for-guten-blocks"),
     value: borderRadius,
     onChange: value => setAttributes({
       borderRadius: value
