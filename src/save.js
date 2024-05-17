@@ -25,7 +25,7 @@ import 'react-fancybox/lib/fancybox.css';
 import ReactFancyBox from 'react-fancybox';
 
 export default function Save({ attributes }) {
-    const { galleryImages, sliderType, showArrows, arrowType, sliderId, urls, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, fancyboxBgColor, fancyboxWidth ,fancyboxOpacity} = attributes;
+    const { galleryImages, sliderType, showArrows, arrowType, sliderId, urls, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, fancyboxBgColor, fancyboxWidth, fancyboxOpacity } = attributes;
 
 
     function getPrevArrow(arrowType) {
@@ -61,12 +61,11 @@ export default function Save({ attributes }) {
                     const url = urls && urls[index] ? urls[index] : "";
                     const isYouTubeUrl = url.includes("youtube.com");
                     const isWebsiteUrl = url.startsWith("http");
-
                     if (media.type === 'image') {
                         if (fancybox && isYouTubeUrl && url != '') {
                             return (
                                 <div key={media.id} className="mcfgb-gallery-single">
-                                    <a href={url} data-fancybox={`gallery-${sliderId}`}  data-caption={media.alt ? media.alt : "Gallery Image"}>
+                                    <a href={url} data-fancybox={`gallery-${sliderId}`} data-caption={media.alt ? media.alt : "Gallery Image"}>
                                         <img
                                             src={media.url}
                                             alt={media.alt ? media.alt : "Gallery Image"}

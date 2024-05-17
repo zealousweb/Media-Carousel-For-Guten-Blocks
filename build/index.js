@@ -387,7 +387,9 @@ function Edit({
     id: sliderId
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "slider-boxwrap"
-  }, galleryImages && galleryImages.map((media, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, galleryImages && galleryImages.length > 0 ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "slider-boxwrap"
+  }, galleryImages.map((media, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     key: media.id,
     className: "mcfgb-gallery-single"
   }, media.type === 'image' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
@@ -433,24 +435,32 @@ function Edit({
       });
     },
     placeholder: "Enter Caption"
-  })) : null)), galleryImages.length === 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaPlaceholder, {
+  })) : null))) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Placeholder, {
+    icon: "format-image",
+    label: "Add Gallery Image or Video",
+    instructions: "Upload images or videos by clicking the button below."
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUploadCheck, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUpload, {
     multiple: "add",
     onSelect: val => {
       setAttributes({
-        galleryImages: val
+        galleryImages: val.map(media => ({
+          id: media.id,
+          url: media.url,
+          alt: media.alt,
+          type: media.type,
+          caption: media.caption // Include the caption field
+        }))
       });
     },
-    onFilesPreUpload: val => {
-      setAttributes({
-        galleryImages: val
-      });
-    },
-    onSelectURL: false,
-    allowedTypes: ["image", "video"],
-    labels: {
-      title: "Add Gallery Image or Video"
-    }
-  }))));
+    allowedTypes: ['image', 'video'],
+    value: galleryImages.map(val => val.id),
+    render: ({
+      open
+    }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
+      onClick: open,
+      isPrimary: true
+    }, "Upload Media")
+  }))))));
 }
 
 /***/ }),

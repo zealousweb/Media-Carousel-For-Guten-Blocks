@@ -38,7 +38,9 @@ import {
     TextControl,
     RadioControl,
     RangeControl,
-    ColorPalette
+    ColorPalette,
+    Placeholder,
+    Button
 
 } from "@wordpress/components";
 
@@ -297,72 +299,87 @@ export default function Edit({ attributes, setAttributes }) {
 
             <div {...useBlockProps()} id={sliderId}>
                 <div class="slider-boxwrap">
-                    {galleryImages && galleryImages.map((media, index) => (
-                        <div key={media.id} className="mcfgb-gallery-single">
-                            {media.type === 'image' ? (
-                                <>
-                                    <img src={media.url} alt={media.alt ? media.alt : "Gallery Image"} />
-                                    <div>
-                                    </div>
-                                    <input
-                                        type="text"
-                                        value={urls.map((url, idx) => idx === index ? url : '').join('')}
-                                        onChange={(event) => {
-                                            const updatedUrls = [...urls];
-                                            updatedUrls[index] = event.target.value;
-                                            setAttributes({ urls: updatedUrls });
-                                        }}
-                                        placeholder="Enter URL "
-                                    />
-                                    <input
-                                        type="text"
-                                        value={media.caption || ''} // Display original caption or an empty string if none
-                                        onChange={(event) => {
-                                            const updatedGallery = [...galleryImages];
-                                            updatedGallery[index].caption = event.target.value; // Override the caption
-                                            setAttributes({ galleryImages: updatedGallery });
-                                        }}
-                                        placeholder="Enter Caption"
-                                    />
-                                </>
-                            ) : media.type === 'video' ? (
-                                <>
-                                    <video controls>
-                                        <source src={media.url} type={media.mime} />
-                                        Your browser does not support the video tag.
-                                    </video>
-                                    <div>
-
-                                    </div>
-                                    <input
-                                        type="text"
-                                        value={media.caption || ''} // Display original caption or an empty string if none
-                                        onChange={(event) => {
-                                            const updatedGallery = [...galleryImages];
-                                            updatedGallery[index].caption = event.target.value; // Override the caption
-                                            setAttributes({ galleryImages: updatedGallery });
-                                        }}
-                                        placeholder="Enter Caption"
-                                    />
-                                </>
-                            ) : null}
+                    {galleryImages && galleryImages.length > 0 ? (
+                        <div class="slider-boxwrap">
+                            {galleryImages.map((media, index) => (
+                                <div key={media.id} className="mcfgb-gallery-single">
+                                    {media.type === 'image' ? (
+                                        <>
+                                            <img src={media.url} alt={media.alt ? media.alt : "Gallery Image"} />
+                                            <div></div>
+                                            <input
+                                                type="text"
+                                                value={urls.map((url, idx) => idx === index ? url : '').join('')}
+                                                onChange={(event) => {
+                                                    const updatedUrls = [...urls];
+                                                    updatedUrls[index] = event.target.value;
+                                                    setAttributes({ urls: updatedUrls });
+                                                }}
+                                                placeholder="Enter URL "
+                                            />
+                                            <input
+                                                type="text"
+                                                value={media.caption || ''} // Display original caption or an empty string if none
+                                                onChange={(event) => {
+                                                    const updatedGallery = [...galleryImages];
+                                                    updatedGallery[index].caption = event.target.value; // Override the caption
+                                                    setAttributes({ galleryImages: updatedGallery });
+                                                }}
+                                                placeholder="Enter Caption"
+                                            />
+                                        </>
+                                    ) : media.type === 'video' ? (
+                                        <>
+                                            <video controls>
+                                                <source src={media.url} type={media.mime} />
+                                                Your browser does not support the video tag.
+                                            </video>
+                                            <div></div>
+                                            <input
+                                                type="text"
+                                                value={media.caption || ''} // Display original caption or an empty string if none
+                                                onChange={(event) => {
+                                                    const updatedGallery = [...galleryImages];
+                                                    updatedGallery[index].caption = event.target.value; // Override the caption
+                                                    setAttributes({ galleryImages: updatedGallery });
+                                                }}
+                                                placeholder="Enter Caption"
+                                            />
+                                        </>
+                                    ) : null}
+                                </div>
+                            ))}
                         </div>
-                    ))}
-                    {galleryImages.length === 0 && (
-                        <MediaPlaceholder
-                            multiple="add"
-                            onSelect={(val) => {
-                                setAttributes({ galleryImages: val });
-                            }}
-                            onFilesPreUpload={(val) => {
-                                setAttributes({ galleryImages: val });
-                            }}
-                            onSelectURL={false}
-                            allowedTypes={["image", "video"]}
-                            labels={{
-                                title: "Add Gallery Image or Video",
-                            }}
-                        />
+                    ) : (
+                        <Placeholder
+                            icon="format-image"
+                            label="Add Gallery Image or Video"
+                            instructions="Upload images or videos by clicking the button below."
+                        >
+                            <MediaUploadCheck>
+                                <MediaUpload
+                                    multiple="add"
+                                    onSelect={(val) => {
+                                        setAttributes({
+                                            galleryImages: val.map((media) => ({
+                                                id: media.id,
+                                                url: media.url,
+                                                alt: media.alt,
+                                                type: media.type,
+                                                caption: media.caption, // Include the caption field
+                                            }))
+                                        });
+                                    }}
+                                    allowedTypes={['image', 'video']}
+                                    value={galleryImages.map((val) => val.id)}
+                                    render={({ open }) => (
+                                        <Button onClick={open} isPrimary>
+                                            Upload Media
+                                        </Button>
+                                    )}
+                                />
+                            </MediaUploadCheck>
+                        </Placeholder>
                     )}
                 </div>
             </div>
