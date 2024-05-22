@@ -129,7 +129,6 @@ function Edit({
     sliderType,
     showArrows,
     arrowType,
-    fancybox,
     simpleType,
     carouselType,
     speed,
@@ -157,20 +156,6 @@ function Edit({
       sliderId
     });
   }, [sliderId]);
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
-    // If autoplay is enabled, disable infinite scrolling
-    if (autoplay) {
-      setAttributes({
-        infinite: false
-      });
-    }
-    // If infinite scrolling is enabled, disable autoplay
-    if (infinite) {
-      setAttributes({
-        autoplay: false
-      });
-    }
-  }, [autoplay, infinite]);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Media Carousel Settings")
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
@@ -183,7 +168,7 @@ function Edit({
     }
   }), attributes.fancybox && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "color"
-  }, "FancyBox Background Color"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPalette, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("FancyBox Background Color", "media-carousel-for-guten-blocks")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPalette, {
     value: fancyboxBgColor,
     onChange: color => setAttributes({
       fancyboxBgColor: color
@@ -208,10 +193,10 @@ function Edit({
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slider Type", "media-carousel-for-guten-blocks"),
     selected: sliderType,
     options: [{
-      label: "Simple Type",
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Simple Type", "media-carousel-for-guten-blocks"),
       value: "simpleType"
     }, {
-      label: "Carousel Type",
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Carousel Type", "media-carousel-for-guten-blocks"),
       value: "carouselType"
     }],
     onChange: val => {
@@ -223,13 +208,13 @@ function Edit({
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Simple Slider Type", "media-carousel-for-guten-blocks"),
     value: simpleType,
     options: [{
-      label: "Simple",
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Simple", "media-carousel-for-guten-blocks"),
       value: "simple"
     }, {
-      label: "Fade",
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fade", "media-carousel-for-guten-blocks"),
       value: "fade"
     }, {
-      label: "Adaptive Height",
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Adaptive Height", "media-carousel-for-guten-blocks"),
       value: "adaptiveheight"
     }],
     onChange: val => {
@@ -241,13 +226,13 @@ function Edit({
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Carousel Slider Type", "media-carousel-for-guten-blocks"),
     value: carouselType,
     options: [{
-      label: "Carousel",
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Carousel", "media-carousel-for-guten-blocks"),
       value: "carousel"
     }, {
-      label: "Center Mode",
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Center Mode", "media-carousel-for-guten-blocks"),
       value: "centermode"
     }, {
-      label: "Lazy Loading",
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lazy Loading", "media-carousel-for-guten-blocks"),
       value: "lazyloading"
     }],
     onChange: val => {
@@ -267,13 +252,13 @@ function Edit({
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arrow Type", "media-carousel-for-guten-blocks"),
     value: arrowType,
     options: [{
-      label: "Arrow 1",
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arrow 1", "media-carousel-for-guten-blocks"),
       value: "custom1"
     }, {
-      label: "Arrow 2",
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arrow 2", "media-carousel-for-guten-blocks"),
       value: "custom2"
     }, {
-      label: "Arrow 3",
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arrow 3", "media-carousel-for-guten-blocks"),
       value: "custom3"
     }],
     onChange: val => {
@@ -283,7 +268,7 @@ function Edit({
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "color"
-  }, "Arrow Color"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPalette, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arrow Color", "media-carousel-for-guten-blocks")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPalette, {
     value: arrowColor,
     onChange: color => setAttributes({
       arrowColor: color
@@ -300,17 +285,23 @@ function Edit({
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Auto Play", "media-carousel-for-guten-blocks"),
     checked: autoplay,
     onChange: val => {
-      setAttributes({
-        autoplay: val
-      });
+      if (val) {
+        setAttributes({
+          autoplay: true,
+          infinite: false
+        });
+      }
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Infinite", "media-carousel-for-guten-blocks"),
     checked: infinite,
     onChange: val => {
-      setAttributes({
-        infinite: val
-      });
+      if (val) {
+        setAttributes({
+          infinite: true,
+          autoplay: false
+        });
+      }
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Caption", "media-carousel-for-guten-blocks"),
@@ -345,7 +336,7 @@ function Edit({
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "color"
-  }, "Dots Color"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPalette, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dots Color", "media-carousel-for-guten-blocks")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPalette, {
     value: dotsColor,
     onChange: color => setAttributes({
       dotsColor: color
@@ -406,13 +397,12 @@ function Edit({
       });
     },
     placeholder: "Enter URL "
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+  }), caption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "text",
-    value: media.caption || '' // Display original caption or an empty string if none
-    ,
+    value: media.caption || '',
     onChange: event => {
       const updatedGallery = [...galleryImages];
-      updatedGallery[index].caption = event.target.value; // Override the caption
+      updatedGallery[index].caption = event.target.value;
       setAttributes({
         galleryImages: updatedGallery
       });
@@ -423,13 +413,12 @@ function Edit({
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("source", {
     src: media.url,
     type: media.mime
-  }), "Your browser does not support the video tag."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Your browser does not support the video tag.", "media-carousel-for-guten-blocks")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null), caption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "text",
-    value: media.caption || '' // Display original caption or an empty string if none
-    ,
+    value: media.caption || '',
     onChange: event => {
       const updatedGallery = [...galleryImages];
-      updatedGallery[index].caption = event.target.value; // Override the caption
+      updatedGallery[index].caption = event.target.value;
       setAttributes({
         galleryImages: updatedGallery
       });
@@ -459,7 +448,7 @@ function Edit({
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
       onClick: open,
       isPrimary: true
-    }, "Upload Media")
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Upload Media", "media-carousel-for-guten-blocks"))
   }))))));
 }
 
@@ -683,19 +672,19 @@ function Save({
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("source", {
         src: media.url,
         type: media.mime
-      }), "Your browser does not support the video tag."), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, currentCaption));
+      }), __("Your browser does not support the video tag.", "media-carousel-for-guten-blocks")), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, currentCaption));
     }
     return null;
-  })), showArrows && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Arrow Type: ", arrowType), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", null, `
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", null, `
             /* CSS for arrows */
             
-            .slick-next:before, .slick-prev:before {
-                background-color:${arrowColor} !important;
+            .slick-next, .slick-prev {
+                background:${arrowColor} !important;
             }
 
             /* CSS for dots */
             .slick-dots li {
-                color: ${dotsColor};
+                color: ${dotsColor} !important;
             }
             .mcfgb-gallery-single iframe , .mcfgb-gallery-single img ,.mcfgb-gallery-single video {
                 border-radius:${borderRadius}px;
@@ -6537,7 +6526,7 @@ module.exports = _interopRequireDefault, module.exports.__esModule = true, modul
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"0.1.0","title":"Gutenberg Media Carousel","category":"widgets","icon":"smiley","description":"A custom block for uploading multiple images with sliding effect.","example":{},"attributes":{"id":{"type":"string"},"sliderId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simpleType"},"showArrows":{"type":"boolean"},"arrowType":{"type":"string","default":"custom1"},"urls":{"type":"array","items":{"type":"string"}},"simpleType":{"type":"string","default":"simple"},"carouselType":{"type":"string","default":"carousel"},"speed":{"type":"number","minimum":1000,"maximum":5000},"autoplay":{"type":"boolean"},"infinite":{"type":"boolean"},"dots":{"type":"boolean"},"dotsType":{"type":"string","default":"ndots"},"arrowColor":{"type":"string","default":"#000000"},"dotsColor":{"type":"string","default":"#000000"},"borderRadius":{"type":"number","default":0,"minimum":0,"maximum":50},"fancyboxBgColor":{"type":"string","default":"#000000"},"fancyboxWidth":{"type":"number"},"fancyboxOpacity":{"type":"number"}},"supports":{"html":false,"align":["wide","full"],"video":true},"textdomain":"gutenberg-media-carousel","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"0.1.0","title":"Media Carousel for Guten Blocks","category":"widgets","icon":"smiley","description":"Elevate our WordPress site with our custom Gutenberg Media Carousel Block, featuring elegant Fancybox overlays, dynamic sliders, customizable navigation, autoplay, infinity loop, captivating captions, intuitive dots, and stylish border radius options.","example":{},"attributes":{"sliderId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simpleType"},"showArrows":{"type":"boolean"},"arrowType":{"type":"string","default":"custom1"},"urls":{"type":"array","items":{"type":"string"}},"simpleType":{"type":"string","default":"simple"},"carouselType":{"type":"string","default":"carousel"},"speed":{"type":"number","minimum":1000,"maximum":5000},"autoplay":{"type":"boolean"},"infinite":{"type":"boolean"},"dots":{"type":"boolean"},"dotsType":{"type":"string","default":"ndots"},"arrowColor":{"type":"string","default":"#000000"},"dotsColor":{"type":"string","default":"#000000"},"borderRadius":{"type":"number","default":0,"minimum":0,"maximum":50},"fancyboxBgColor":{"type":"string","default":"#000000"},"fancyboxWidth":{"type":"number"},"fancyboxOpacity":{"type":"number"}},"supports":{"html":false,"align":["wide","full"],"video":true},"textdomain":"gutenberg-media-carousel","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

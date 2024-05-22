@@ -27,7 +27,6 @@ import ReactFancyBox from 'react-fancybox';
 export default function Save({ attributes }) {
     const { galleryImages, sliderType, showArrows, arrowType, sliderId, urls, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, fancyboxBgColor, fancyboxWidth, fancyboxOpacity } = attributes;
 
-
     function getPrevArrow(arrowType) {
         switch (arrowType) {
             case 'custom1':
@@ -112,7 +111,7 @@ export default function Save({ attributes }) {
                             <div key={media.id} className="mcfgb-gallery-single" >
                                 <video controls>
                                     <source src={media.url} type={media.mime} />
-                                    Your browser does not support the video tag.
+                                    {__("Your browser does not support the video tag.", "media-carousel-for-guten-blocks")}
                                 </video>
                                 {currentCaption && <div>{currentCaption}</div>}
                             </div>
@@ -121,17 +120,16 @@ export default function Save({ attributes }) {
                     return null;
                 })}
             </div>
-            {showArrows && <p>Arrow Type: {arrowType}</p>}
             <style>{`
             /* CSS for arrows */
             
-            .slick-next:before, .slick-prev:before {
-                background-color:${arrowColor} !important;
+            .slick-next, .slick-prev {
+                background:${arrowColor} !important;
             }
 
             /* CSS for dots */
             .slick-dots li {
-                color: ${dotsColor};
+                color: ${dotsColor} !important;
             }
             .mcfgb-gallery-single iframe , .mcfgb-gallery-single img ,.mcfgb-gallery-single video {
                 border-radius:${borderRadius}px;

@@ -35,7 +35,6 @@ import {
     PanelBody,
     SelectControl,
     ToggleControl,
-    TextControl,
     RadioControl,
     RangeControl,
     ColorPalette,
@@ -68,7 +67,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.js";
 
 export default function Edit({ attributes, setAttributes }) {
-    const { galleryImages = [], urls = [], sliderType, showArrows, arrowType, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, fancyboxBgColor, fancyboxWidth, fancyboxOpacity } = attributes;
+    const { galleryImages = [], urls = [], sliderType, showArrows, arrowType, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, fancyboxBgColor, fancyboxWidth, fancyboxOpacity } = attributes;
     const [sliderId, setSliderId] = useState(attributes.sliderId || '');
 
     useEffect(() => {
@@ -80,17 +79,6 @@ export default function Edit({ attributes, setAttributes }) {
     useEffect(() => {
         setAttributes({ ...attributes, sliderId });
     }, [sliderId]);
-
-    useEffect(() => {
-        // If autoplay is enabled, disable infinite scrolling
-        if (autoplay) {
-            setAttributes({ infinite: false });
-        }
-        // If infinite scrolling is enabled, disable autoplay
-        if (infinite) {
-            setAttributes({ autoplay: false });
-        }
-    }, [autoplay, infinite]);
 
     return (
         <>
@@ -105,7 +93,7 @@ export default function Edit({ attributes, setAttributes }) {
                     />
                     {attributes.fancybox &&
                         <>
-                            <span className="color">FancyBox Background Color</span>
+                            <span className="color">{__("FancyBox Background Color", "media-carousel-for-guten-blocks")}</span>
                             <ColorPalette
                                 value={fancyboxBgColor}
                                 onChange={(color) => setAttributes({ fancyboxBgColor: color })}
@@ -130,8 +118,8 @@ export default function Edit({ attributes, setAttributes }) {
                         label={__("Slider Type", "media-carousel-for-guten-blocks")}
                         selected={sliderType}
                         options={[
-                            { label: "Simple Type", value: "simpleType" },
-                            { label: "Carousel Type", value: "carouselType" },
+                            { label: __("Simple Type", "media-carousel-for-guten-blocks"), value: "simpleType" },
+                            { label: __("Carousel Type", "media-carousel-for-guten-blocks"), value: "carouselType" },
                         ]}
                         onChange={(val) => {
                             setAttributes({ sliderType: val });
@@ -144,9 +132,9 @@ export default function Edit({ attributes, setAttributes }) {
                                     label={__("Simple Slider Type", "media-carousel-for-guten-blocks")}
                                     value={simpleType}
                                     options={[
-                                        { label: "Simple", value: "simple" },
-                                        { label: "Fade", value: "fade" },
-                                        { label: "Adaptive Height", value: "adaptiveheight" },
+                                        { label: __("Simple", "media-carousel-for-guten-blocks"), value: "simple" },
+                                        { label: __("Fade", "media-carousel-for-guten-blocks"), value: "fade" },
+                                        { label: __("Adaptive Height", "media-carousel-for-guten-blocks"), value: "adaptiveheight" },
                                     ]}
                                     onChange={(val) => {
                                         setAttributes({ simpleType: val });
@@ -158,9 +146,9 @@ export default function Edit({ attributes, setAttributes }) {
                                     label={__("Carousel Slider Type", "media-carousel-for-guten-blocks")}
                                     value={carouselType}
                                     options={[
-                                        { label: "Carousel", value: "carousel" },
-                                        { label: "Center Mode", value: "centermode" },
-                                        { label: "Lazy Loading", value: "lazyloading" },
+                                        { label: __("Carousel", "media-carousel-for-guten-blocks"), value: "carousel" },
+                                        { label: __("Center Mode", "media-carousel-for-guten-blocks"), value: "centermode" },
+                                        { label: __("Lazy Loading", "media-carousel-for-guten-blocks"), value: "lazyloading" },
                                     ]}
                                     onChange={(val) => {
                                         setAttributes({ carouselType: val });
@@ -183,15 +171,15 @@ export default function Edit({ attributes, setAttributes }) {
                                 label={__("Arrow Type", "media-carousel-for-guten-blocks")}
                                 value={arrowType}
                                 options={[
-                                    { label: "Arrow 1", value: "custom1" },
-                                    { label: "Arrow 2", value: "custom2" },
-                                    { label: "Arrow 3", value: "custom3" },
+                                    { label: __("Arrow 1", "media-carousel-for-guten-blocks"), value: "custom1" },
+                                    { label: __("Arrow 2", "media-carousel-for-guten-blocks"), value: "custom2" },
+                                    { label: __("Arrow 3", "media-carousel-for-guten-blocks"), value: "custom3" },
                                 ]}
                                 onChange={(val) => {
                                     setAttributes({ arrowType: val });
                                 }}
                             />
-                            <span className="color">Arrow Color</span>
+                            <span className="color">{__("Arrow Color", "media-carousel-for-guten-blocks")}</span>
                             <ColorPalette
                                 value={arrowColor}
                                 onChange={(color) => setAttributes({ arrowColor: color })}
@@ -210,16 +198,21 @@ export default function Edit({ attributes, setAttributes }) {
                         label={__("Auto Play", "media-carousel-for-guten-blocks")}
                         checked={autoplay}
                         onChange={(val) => {
-                            setAttributes({ autoplay: val });
+                            if (val) {
+                                setAttributes({ autoplay: true, infinite: false });
+                            } 
                         }}
                     />
                     <ToggleControl
                         label={__("Infinite", "media-carousel-for-guten-blocks")}
                         checked={infinite}
                         onChange={(val) => {
-                            setAttributes({ infinite: val });
+                            if (val) {
+                                setAttributes({ infinite: true, autoplay: false });
+                            } 
                         }}
                     />
+
                     <ToggleControl
                         label={__("Caption", "media-carousel-for-guten-blocks")}
                         checked={caption}
@@ -247,7 +240,7 @@ export default function Edit({ attributes, setAttributes }) {
                                     setAttributes({ dotsType: val });
                                 }}
                             />
-                            <span className="color">Dots Color</span>
+                            <span className="color">{__("Dots Color", "media-carousel-for-guten-blocks")}</span>
                             <ColorPalette
                                 value={dotsColor}
                                 onChange={(color) => setAttributes({ dotsColor: color })}
@@ -298,7 +291,7 @@ export default function Edit({ attributes, setAttributes }) {
             </BlockControls>
 
             <div {...useBlockProps()} id={sliderId}>
-                <div class="slider-boxwrap">
+                <div class="slider-boxwrap">    
                     {galleryImages && galleryImages.length > 0 ? (
                         <div class="slider-boxwrap">
                             {galleryImages.map((media, index) => (
@@ -317,34 +310,40 @@ export default function Edit({ attributes, setAttributes }) {
                                                 }}
                                                 placeholder="Enter URL "
                                             />
-                                            <input
-                                                type="text"
-                                                value={media.caption || ''} // Display original caption or an empty string if none
-                                                onChange={(event) => {
-                                                    const updatedGallery = [...galleryImages];
-                                                    updatedGallery[index].caption = event.target.value; // Override the caption
-                                                    setAttributes({ galleryImages: updatedGallery });
-                                                }}
-                                                placeholder="Enter Caption"
-                                            />
+                                            {caption && (
+                                                <input
+                                                    type="text"
+                                                    value={media.caption || ''}
+                                                    onChange={(event) => {
+                                                        const updatedGallery = [...galleryImages];
+                                                        updatedGallery[index].caption = event.target.value;
+                                                        setAttributes({ galleryImages: updatedGallery });
+                                                    }}
+                                                    placeholder="Enter Caption"
+                                                />
+                                            )}
+
                                         </>
                                     ) : media.type === 'video' ? (
                                         <>
                                             <video controls>
                                                 <source src={media.url} type={media.mime} />
-                                                Your browser does not support the video tag.
+                                                {__("Your browser does not support the video tag.", "media-carousel-for-guten-blocks")}
                                             </video>
                                             <div></div>
-                                            <input
-                                                type="text"
-                                                value={media.caption || ''} // Display original caption or an empty string if none
-                                                onChange={(event) => {
-                                                    const updatedGallery = [...galleryImages];
-                                                    updatedGallery[index].caption = event.target.value; // Override the caption
-                                                    setAttributes({ galleryImages: updatedGallery });
-                                                }}
-                                                placeholder="Enter Caption"
-                                            />
+                                            {caption && (
+                                                <input
+                                                    type="text"
+                                                    value={media.caption || ''}
+                                                    onChange={(event) => {
+                                                        const updatedGallery = [...galleryImages];
+                                                        updatedGallery[index].caption = event.target.value;
+                                                        setAttributes({ galleryImages: updatedGallery });
+                                                    }}
+                                                    placeholder="Enter Caption"
+                                                />
+                                            )}
+
                                         </>
                                     ) : null}
                                 </div>
@@ -374,7 +373,7 @@ export default function Edit({ attributes, setAttributes }) {
                                     value={galleryImages.map((val) => val.id)}
                                     render={({ open }) => (
                                         <Button onClick={open} isPrimary>
-                                            Upload Media
+                                            {__("Upload Media", "media-carousel-for-guten-blocks")}
                                         </Button>
                                     )}
                                 />

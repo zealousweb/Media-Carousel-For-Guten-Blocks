@@ -3,15 +3,12 @@
 	"apiVersion": 3,
 	"name": "create-block/gutenberg-media-carousel",
 	"version": "0.1.0",
-	"title": "Gutenberg Media Carousel",
+	"title": "Media Carousel for Guten Blocks",
 	"category": "widgets",
 	"icon": "smiley",
-	"description": "A custom block for uploading multiple images with sliding effect.",
+	"description": "Elevate our WordPress site with our custom Gutenberg Media Carousel Block, featuring elegant Fancybox overlays, dynamic sliders, customizable navigation, autoplay, infinity loop, captivating captions, intuitive dots, and stylish border radius options.",
 	"example": {},
 	"attributes": {
-		"id": {
-			"type": "string"
-		},
 		"sliderId": {
 			"type": "string"
 		},

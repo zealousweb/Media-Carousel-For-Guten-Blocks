@@ -3,20 +3,16 @@
  * Plugin Name:       Media Carousel for Guten blocks
  * Description:       Media Carousel.
  * Requires at least: 6.1
- * Requires PHP:      7.0
- * Version:           0.1.0
+ * Requires PHP:      7.4
+ * Version:           1.0.0
  * Author:            <a href="https://www.zealousweb.com/">ZealousWeb</a>
- * License:           GPL-2.0-or-later
- * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * License:           GPL-3.0-or-later
+ * License URI:       http://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain:       media-carousel-for-guten-blocks
  *
  *
- * @category  ZealBlocks
  * @package   Media-Carousel-for-Guten-Blocks
  * @author    ZealousWeb <support@zealousweb.com>
- * @copyright 2024 ZealousWeb
- * @license   GPL-2.0-or-later
- * @link      https://www.gnu.org/licenses/gpl-2.0.html
  */
 
 if (!defined('ABSPATH')) {
