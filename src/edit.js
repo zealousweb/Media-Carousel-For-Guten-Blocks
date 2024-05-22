@@ -180,18 +180,20 @@ export default function Edit({ attributes, setAttributes }) {
                     />
                     {showArrows && (
                         <>
-                            <SelectControl
+                            <RadioControl
+                                className="arrowclass"
                                 label={__("Arrow Type", "media-carousel-for-guten-blocks")}
-                                value={arrowType}
+                                selected={arrowType}
                                 options={[
-                                    { label: __("Arrow 1", "media-carousel-for-guten-blocks"), value: "custom1" },
-                                    { label: __("Arrow 2", "media-carousel-for-guten-blocks"), value: "custom2" },
-                                    { label: __("Arrow 3", "media-carousel-for-guten-blocks"), value: "custom3" },
+                                    { label: <><img src="https://www.svgrepo.com/show/379969/chevrons-left-arrows.svg" alt="Arrow 1" /> {__("Arrow 1", "media-carousel-for-guten-blocks")}</>, value: "custom1" },
+                                    { label: <><img src="https://www.svgrepo.com/show/247754/left-arrow-back.svg" alt="Arrow 2" /> {__("Arrow 2", "media-carousel-for-guten-blocks")}</>, value: "custom2" },
+                                    { label: <><img src="https://www.svgrepo.com/show/247768/left-arrow-back.svg" alt="Arrow 3" /> {__("Arrow 3", "media-carousel-for-guten-blocks")}</>, value: "custom3" },
                                 ]}
                                 onChange={(val) => {
                                     setAttributes({ arrowType: val });
                                 }}
                             />
+
                             <span className="color">{__("Arrow Color", "media-carousel-for-guten-blocks")}</span>
                             <ColorPalette
                                 value={arrowColor}

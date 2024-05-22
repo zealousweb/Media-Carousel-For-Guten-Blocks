@@ -38,6 +38,23 @@
   -o-object-fit: cover;
      object-fit: cover;
 }
+
+.arrowclass .components-radio-control__option {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.arrowclass .components-radio-control__option label {
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.arrowclass .components-radio-control__option label img {
+  max-width: 20px !important;
+}
 /*!*************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./node_modules/slick-carousel/slick/slick.css ***!
   \*************************************************************************************************************************************************************************************************/
