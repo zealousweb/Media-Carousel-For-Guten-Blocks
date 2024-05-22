@@ -156,6 +156,25 @@ function Edit({
       sliderId
     });
   }, [sliderId]);
+  const colors = [{
+    color: '#F9F9F9'
+  }, {
+    color: '#A4A4A4'
+  }, {
+    color: '#636363'
+  }, {
+    color: '#111111'
+  }, {
+    color: '#FFFFFF'
+  }, {
+    color: '#C2A990'
+  }, {
+    color: '#CFCABE'
+  }, {
+    color: '#D8613C'
+  }, {
+    color: '#B1C5A4'
+  }];
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Media Carousel Settings")
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
@@ -172,7 +191,8 @@ function Edit({
     value: fancyboxBgColor,
     onChange: color => setAttributes({
       fancyboxBgColor: color
-    })
+    }),
+    colors: colors
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("FancyBox Width", "media-carousel-for-guten-blocks"),
     value: fancyboxWidth,
@@ -272,7 +292,8 @@ function Edit({
     value: arrowColor,
     onChange: color => setAttributes({
       arrowColor: color
-    })
+    }),
+    colors: colors
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Speed of Slider", "media-carousel-for-guten-blocks"),
     value: speed,
@@ -340,7 +361,8 @@ function Edit({
     value: dotsColor,
     onChange: color => setAttributes({
       dotsColor: color
-    })
+    }),
+    colors: colors
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Radius for Image and Video ", "media-carousel-for-guten-blocks"),
     value: borderRadius,
@@ -6526,7 +6548,7 @@ module.exports = _interopRequireDefault, module.exports.__esModule = true, modul
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"1.0.0","title":"Media Carousel for Guten Blocks","category":"zealblocks","icon":"<svg viewBox=\\"0 0 24 24\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\"><g id=\\"SVGRepo_bgCarrier\\" stroke-width=\\"0\\"></g><g id=\\"SVGRepo_tracerCarrier\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\"></g><g id=\\"SVGRepo_iconCarrier\\"> <path d=\\"M18 6L12.2907 11.7093V11.7093C12.1302 11.8698 12.1302 12.1302 12.2907 12.2907V12.2907L18 18\\" stroke=\\"#323232\\" stroke-width=\\"2\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\"></path> <path d=\\"M13 6L7.25078 11.7492V11.7492C7.11228 11.8877 7.11228 12.1123 7.25078 12.2508V12.2508L13 18\\" stroke=\\"#323232\\" stroke-width=\\"2\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\"></path> </g></svg>","description":"Elevate our WordPress site with our custom Gutenberg Media Carousel Block, featuring elegant Fancybox overlays, dynamic sliders, customizable navigation, autoplay, infinity loop, captivating captions, intuitive dots, and stylish border radius options.","example":{},"attributes":{"sliderId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simpleType"},"showArrows":{"type":"boolean"},"arrowType":{"type":"string","default":"custom1"},"urls":{"type":"array","items":{"type":"string"}},"simpleType":{"type":"string","default":"simple"},"carouselType":{"type":"string","default":"carousel"},"speed":{"type":"number","minimum":1000,"maximum":5000},"autoplay":{"type":"boolean"},"infinite":{"type":"boolean"},"dots":{"type":"boolean"},"dotsType":{"type":"string","default":"ndots"},"arrowColor":{"type":"string","default":"#000000"},"dotsColor":{"type":"string","default":"#000000"},"borderRadius":{"type":"number","default":0,"minimum":0,"maximum":50},"fancyboxBgColor":{"type":"string","default":"#000000"},"fancyboxWidth":{"type":"number"},"fancyboxOpacity":{"type":"number"}},"supports":{"html":false,"align":["wide","full"],"video":true},"textdomain":"media-carousel-for-guten-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"1.0.0","title":"Media Carousel for Guten Blocks","category":"zealblocks","icon":"format-image","example":{},"attributes":{"sliderId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simpleType"},"showArrows":{"type":"boolean"},"arrowType":{"type":"string","default":"custom1"},"urls":{"type":"array","items":{"type":"string"}},"simpleType":{"type":"string","default":"simple"},"carouselType":{"type":"string","default":"carousel"},"speed":{"type":"number","minimum":1000,"maximum":5000},"autoplay":{"type":"boolean"},"infinite":{"type":"boolean"},"dots":{"type":"boolean"},"dotsType":{"type":"string","default":"ndots"},"arrowColor":{"type":"string","default":"#000000"},"dotsColor":{"type":"string","default":"#000000"},"borderRadius":{"type":"number","default":0,"minimum":0,"maximum":50},"fancyboxBgColor":{"type":"string","default":"#000000"},"fancyboxWidth":{"type":"number"},"fancyboxOpacity":{"type":"number"}},"supports":{"html":false,"align":["wide","full"],"video":true},"textdomain":"media-carousel-for-guten-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

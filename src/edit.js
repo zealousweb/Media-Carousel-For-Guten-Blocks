@@ -80,6 +80,18 @@ export default function Edit({ attributes, setAttributes }) {
         setAttributes({ ...attributes, sliderId });
     }, [sliderId]);
 
+    const colors = [
+        { color: '#F9F9F9' },
+        { color: '#A4A4A4' },
+        { color: '#636363' },
+        { color: '#111111' },
+        { color: '#FFFFFF' },
+        { color: '#C2A990' },
+        { color: '#CFCABE' },
+        { color: '#D8613C' },
+        { color: '#B1C5A4' },
+    ];
+
     return (
         <>
             <InspectorControls>
@@ -97,6 +109,7 @@ export default function Edit({ attributes, setAttributes }) {
                             <ColorPalette
                                 value={fancyboxBgColor}
                                 onChange={(color) => setAttributes({ fancyboxBgColor: color })}
+                                colors={colors}
                             />
                             <RangeControl
                                 label={__("FancyBox Width", "media-carousel-for-guten-blocks")}
@@ -183,6 +196,7 @@ export default function Edit({ attributes, setAttributes }) {
                             <ColorPalette
                                 value={arrowColor}
                                 onChange={(color) => setAttributes({ arrowColor: color })}
+                                colors={colors}
                             />
                         </>
                     )}
@@ -200,7 +214,7 @@ export default function Edit({ attributes, setAttributes }) {
                         onChange={(val) => {
                             if (val) {
                                 setAttributes({ autoplay: true, infinite: false });
-                            } 
+                            }
                         }}
                     />
                     <ToggleControl
@@ -209,7 +223,7 @@ export default function Edit({ attributes, setAttributes }) {
                         onChange={(val) => {
                             if (val) {
                                 setAttributes({ infinite: true, autoplay: false });
-                            } 
+                            }
                         }}
                     />
 
@@ -244,6 +258,7 @@ export default function Edit({ attributes, setAttributes }) {
                             <ColorPalette
                                 value={dotsColor}
                                 onChange={(color) => setAttributes({ dotsColor: color })}
+                                colors={colors}
                             />
                         </>
                     )}
@@ -291,7 +306,7 @@ export default function Edit({ attributes, setAttributes }) {
             </BlockControls>
 
             <div {...useBlockProps()} id={sliderId}>
-                <div class="slider-boxwrap">    
+                <div class="slider-boxwrap">
                     {galleryImages && galleryImages.length > 0 ? (
                         <div class="slider-boxwrap">
                             {galleryImages.map((media, index) => (
