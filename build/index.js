@@ -321,6 +321,10 @@ function Edit({
           autoplay: true,
           infinite: false
         });
+      } else {
+        setAttributes({
+          autoplay: false
+        });
       }
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
@@ -331,6 +335,10 @@ function Edit({
         setAttributes({
           infinite: true,
           autoplay: false
+        });
+      } else {
+        setAttributes({
+          infinite: false
         });
       }
     }

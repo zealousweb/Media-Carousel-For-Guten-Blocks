@@ -217,6 +217,9 @@ export default function Edit({ attributes, setAttributes }) {
                             if (val) {
                                 setAttributes({ autoplay: true, infinite: false });
                             }
+                            else {
+                                setAttributes({ autoplay: false });
+                            }
                         }}
                     />
                     <ToggleControl
@@ -225,6 +228,8 @@ export default function Edit({ attributes, setAttributes }) {
                         onChange={(val) => {
                             if (val) {
                                 setAttributes({ infinite: true, autoplay: false });
+                            } else {
+                                setAttributes({ infinite: false });
                             }
                         }}
                     />
