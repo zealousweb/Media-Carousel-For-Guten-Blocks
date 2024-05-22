@@ -2,10 +2,10 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "create-block/gutenberg-media-carousel",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "title": "Media Carousel for Guten Blocks",
-  "category": "widgets",
-  "icon": "smiley",
+  "category": "zealblocks",
+  "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><g id=\"SVGRepo_bgCarrier\" stroke-width=\"0\"></g><g id=\"SVGRepo_tracerCarrier\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></g><g id=\"SVGRepo_iconCarrier\"> <path d=\"M18 6L12.2907 11.7093V11.7093C12.1302 11.8698 12.1302 12.1302 12.2907 12.2907V12.2907L18 18\" stroke=\"#323232\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <path d=\"M13 6L7.25078 11.7492V11.7492C7.11228 11.8877 7.11228 12.1123 7.25078 12.2508V12.2508L13 18\" stroke=\"#323232\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> </g></svg>",
   "description": "Elevate our WordPress site with our custom Gutenberg Media Carousel Block, featuring elegant Fancybox overlays, dynamic sliders, customizable navigation, autoplay, infinity loop, captivating captions, intuitive dots, and stylish border radius options.",
   "example": {},
   "attributes": {
@@ -91,7 +91,7 @@
     ],
     "video": true
   },
-  "textdomain": "gutenberg-media-carousel",
+  "textdomain": "media-carousel-for-guten-blocks",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css",

@@ -249,7 +249,7 @@ export default function Edit({ attributes, setAttributes }) {
                     )}
 
                     <RangeControl
-                        label={__("Border Radius", "media-carousel-for-guten-blocks")}
+                        label={__("Border Radius for Image and Video ", "media-carousel-for-guten-blocks")}
                         value={borderRadius}
                         onChange={(value) => setAttributes({ borderRadius: value })}
                         min={0}

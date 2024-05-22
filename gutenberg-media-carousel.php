@@ -6,8 +6,8 @@
  * Requires PHP:      7.4
  * Version:           1.0.0
  * Author:            <a href="https://www.zealousweb.com/">ZealousWeb</a>
- * License:           GPL-3.0-or-later
- * License URI:       http://www.gnu.org/licenses/gpl-3.0.html
+ * License:           GPL-1.0-or-later
+ * License URI:       http://www.gnu.org/licenses/gpl-1.0.html
  * Text Domain:       media-carousel-for-guten-blocks
  *
  *
