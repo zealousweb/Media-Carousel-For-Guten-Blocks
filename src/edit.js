@@ -18,7 +18,6 @@ import {
     BlockControls,
     useBlockProps,
     InspectorControls,
-    MediaPlaceholder,
     MediaUpload,
     MediaUploadCheck,
 } from "@wordpress/block-editor";

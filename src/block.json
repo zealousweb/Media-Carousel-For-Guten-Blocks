@@ -5,7 +5,6 @@
 	"version": "1.0.0",
 	"title": "Media Carousel for Guten Blocks",
 	"category": "zealblocks",
-	"icon":"format-image",
 	"example": {},
 	"attributes": {
 		"sliderId": {
