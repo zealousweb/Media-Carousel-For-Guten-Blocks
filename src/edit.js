@@ -372,7 +372,6 @@ export default function Edit({ attributes, setAttributes }) {
                         </div>
                     ) : (
                         <Placeholder
-                            icon="format-image"
                             label="Add Gallery Image or Video"
                             instructions="Upload images or videos by clicking the button below."
                         >
