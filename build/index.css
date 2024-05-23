@@ -26,19 +26,6 @@
   flex-wrap: wrap;
 }
 
-.slider-boxwrap .mcfgb-gallery-single {
-  /* flex: 1; */
-  width: 48%;
-}
-
-.slider-boxwrap .mcfgb-gallery-single img {
-  height: 170px;
-  max-width: 100%;
-  width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
 .arrowclass .components-radio-control__option {
   display: flex;
   align-items: center;
@@ -54,6 +41,113 @@
 
 .arrowclass .components-radio-control__option label img {
   max-width: 20px !important;
+}
+
+.mcfgb-gallery-single {
+  position: relative;
+  cursor: pointer;
+}
+
+.slider-boxwrap .mcfgb-gallery-single {
+  max-height: 220px;
+  width: 48% !important;
+}
+
+input.ytb-url, input.caption, input.caption-video {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  height: 40px;
+  background: transparent;
+  border: 1px solid rgb(255, 255, 255);
+  box-shadow: 5px 5px 10px #fff;
+  color: #fff;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s ease all;
+}
+
+input.ytb-url::-moz-placeholder, input.caption::-moz-placeholder, input.caption-video::-moz-placeholder {
+  color: #fff;
+}
+
+input.ytb-url::placeholder, input.caption::placeholder, input.caption-video::placeholder {
+  color: #fff;
+}
+
+.slider-boxwrap .mcfgb-gallery-single img, .slider-boxwrap .mcfgb-gallery-single video {
+  height: 220px;
+  max-width: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 20px;
+  transition: 0.3s ease all;
+  box-shadow: 0px 0px 10px #8f8f8f;
+}
+
+.slider-boxwrap .mcfgb-gallery-single:hover img, .slider-boxwrap .mcfgb-gallery-single:hover video {
+  filter: blur(4px);
+}
+
+.mcfgb-gallery-single:hover input.ytb-url {
+  opacity: 1;
+  visibility: visible;
+  top: 34%;
+}
+
+.mcfgb-gallery-single:hover input.caption {
+  opacity: 1;
+  visibility: visible;
+  top: 63%;
+}
+
+.mcfgb-gallery-single:hover input.caption-video {
+  opacity: 1;
+  visibility: visible;
+  top: 50%;
+}
+
+.upload-part {
+  position: relative !important;
+  border-radius: 10px !important;
+  text-align: center !important;
+  padding: 20px !important;
+  background: #eb8181 !important;
+  gap: 20px !important;
+  box-shadow: 10px 10px 10px #dba6a6 !important;
+}
+
+.upload-part div {
+  width: 100%;
+  padding: 0;
+  color: #fff;
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: bold !important;
+  font-size: 26px !important;
+  justify-content: center;
+  font-family: cursive;
+}
+
+.upload-part .components-placeholder__instructions {
+  font-size: 16px !important;
+  font-weight: 400 !important;
+}
+
+.upload-part .components-placeholder__fieldset {
+  margin-top: 10px !important;
+}
+
+.upload-part .upload-btn {
+  background: indianred;
+  gap: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  align-items: center;
+  transition: 0.3s ease all;
 }
 /*!*************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./node_modules/slick-carousel/slick/slick.css ***!

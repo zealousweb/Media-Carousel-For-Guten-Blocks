@@ -111,7 +111,7 @@ export default function Save({ attributes }) {
                             <div key={media.id} className="mcfgb-gallery-single" >
                                 <video controls>
                                     <source src={media.url} type={media.mime} />
-                                    {__("Your browser does not support the video tag.", "media-carousel-for-guten-blocks")}
+                                    {/* {__("Your browser does not support the video tag.", "media-carousel-for-guten-blocks")} */}
                                 </video>
                                 {currentCaption && <div>{currentCaption}</div>}
                             </div>

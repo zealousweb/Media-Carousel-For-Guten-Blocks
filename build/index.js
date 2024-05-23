@@ -426,8 +426,9 @@ function Edit({
   }, media.type === 'image' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: media.url,
     alt: media.alt ? media.alt : "Gallery Image"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "text",
+    className: "ytb-url",
     value: urls.map((url, idx) => idx === index ? url : '').join(''),
     onChange: event => {
       const updatedUrls = [...urls];
@@ -439,6 +440,7 @@ function Edit({
     placeholder: "Enter URL "
   }), caption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "text",
+    className: "caption",
     value: media.caption || '',
     onChange: event => {
       const updatedGallery = [...galleryImages];
@@ -453,8 +455,9 @@ function Edit({
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("source", {
     src: media.url,
     type: media.mime
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Your browser does not support the video tag.", "media-carousel-for-guten-blocks")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null), caption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Your browser does not support the video tag.", "media-carousel-for-guten-blocks")), caption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "text",
+    className: "caption-video",
     value: media.caption || '',
     onChange: event => {
       const updatedGallery = [...galleryImages];
@@ -465,6 +468,7 @@ function Edit({
     },
     placeholder: "Enter Caption"
   })) : null))) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Placeholder, {
+    className: "upload-part",
     label: "Add Gallery Image or Video",
     instructions: "Upload images or videos by clicking the button below."
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUploadCheck, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUpload, {
@@ -486,8 +490,19 @@ function Edit({
       open
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
       onClick: open,
-      isPrimary: true
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Upload Media", "media-carousel-for-guten-blocks"))
+      isPrimary: true,
+      className: "upload-btn"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+      viewBox: "0 0 24 24",
+      width: "24"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", null, " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("rect", {
+      x: "0",
+      fill: "none",
+      width: "24",
+      height: "24"
+    }), " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", null, " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+      d: "M23 4v2h-3v3h-2V6h-3V4h3V1h2v3h3zm-8.5 7c.828 0 1.5-.672 1.5-1.5S15.328 8 14.5 8 13 8.672 13 9.5s.672 1.5 1.5 1.5zm3.5 3.234l-.513-.57c-.794-.885-2.18-.885-2.976 0l-.655.73L9 9l-3 3.333V6h7V4H6c-1.105 0-2 .895-2 2v12c0 1.105.895 2 2 2h12c1.105 0 2-.895 2-2v-7h-2v3.234z"
+    }), " "), " ")), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Upload Media", "media-carousel-for-guten-blocks"))
   }))))));
 }
 
@@ -730,7 +745,7 @@ function Save({
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("source", {
         src: media.url,
         type: media.mime
-      }), __("Your browser does not support the video tag.", "media-carousel-for-guten-blocks")), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, currentCaption));
+      })), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, currentCaption));
     }
     return null;
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", null, `
