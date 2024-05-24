@@ -18,9 +18,10 @@
 }
 
 .slider-boxwrap {
-	display: flex;
-	gap: 10px;
-	flex-wrap: wrap;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .arrowclass .components-radio-control__option {
@@ -107,51 +108,11 @@ input.caption-video::placeholder {
 	top: 50%;
 }
 
-// upload
-
-.upload-part {
-	position: relative !important;
-	border-radius: 10px !important;
-	text-align: center !important;
-	padding: 20px !important;
-	background: #eb8181 !important;
-	gap: 20px !important;
-	box-shadow: 10px 10px 10px #dba6a6 !important;
-}
-.upload-part div {
-	width: 100%;
-	padding: 0;
-	color: #fff;
-	margin: 0;
-	text-transform: uppercase;
-	font-weight: bold !important;
-	font-size: 26px !important;
-	justify-content: center;
-	font-family: cursive;
-}
-.upload-part .components-placeholder__instructions {
-	font-size: 16px !important;
-	font-weight: 400 !important;
-}
-
-.upload-part .components-placeholder__fieldset {
-	margin-top: 10px !important;
-}
-
-.upload-part .upload-btn {
-	background: indianred;
-	gap: 10px;
-	font-weight: 500;
-	text-transform: uppercase;
-	align-items: center;
-	transition: 0.3s ease all;
-}
-
 .arrowclass input[type="radio"] {
 	display: none;
 }
 
-.arrowclass input[type="radio"]:checked + label {
+.arrowclass input[type=radio]:checked + label {
 	border-radius: 50%;
 }
 

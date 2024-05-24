@@ -403,9 +403,9 @@ export default function Edit({ attributes, setAttributes }) {
             <style>
                 {
                     `
-                    .arrowclass input[type=radio]:checked + label {
-                        border: 2px solid ${arrowColor} !important;
-                    }
+                        .arrowclass input[type=radio]:checked + label {
+                            border: 2px solid ${arrowColor} !important;
+                        }
                     `
                 }
             </style>
