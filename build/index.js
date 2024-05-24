@@ -136,7 +136,8 @@ function Edit({
     borderRadius,
     fancyboxBgColor,
     fancyboxWidth,
-    fancyboxOpacity
+    fancyboxOpacity,
+    arrowpos
   } = attributes;
   const [sliderId, setSliderId] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(attributes.sliderId || '');
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(() => {
@@ -298,6 +299,22 @@ function Edit({
       arrowColor: color
     }),
     colors: colors
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RadioControl, {
+    className: "arrowpos",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arrow Type", "media-carousel-for-guten-blocks"),
+    selected: arrowpos,
+    options: [{
+      label: "Bottom",
+      value: "bottom"
+    }, {
+      label: "Side",
+      value: "side"
+    }],
+    onChange: val => {
+      setAttributes({
+        arrowpos: val
+      });
+    }
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Speed of Slider", "media-carousel-for-guten-blocks"),
     value: speed,
@@ -651,7 +668,8 @@ function Save({
     borderRadius,
     fancyboxBgColor,
     fancyboxWidth,
-    fancyboxOpacity
+    fancyboxOpacity,
+    arrowpos
   } = attributes;
   function getPrevArrow(arrowType) {
     switch (arrowType) {
@@ -678,7 +696,7 @@ function Save({
     }
   }
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "slider-demo-wrap"
+    className: arrowpos
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: sliderId,
     class: arrowType
@@ -6585,7 +6603,7 @@ module.exports = _interopRequireDefault, module.exports.__esModule = true, modul
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"1.0.0","title":"Media Carousel for Guten Blocks","category":"zealblocks","example":{},"attributes":{"sliderId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simpleType"},"showArrows":{"type":"boolean"},"arrowType":{"type":"string","default":"custom1"},"urls":{"type":"array","items":{"type":"string"}},"simpleType":{"type":"string","default":"simple"},"carouselType":{"type":"string","default":"carousel"},"speed":{"type":"number","minimum":1000,"maximum":5000},"autoplay":{"type":"boolean"},"infinite":{"type":"boolean"},"dots":{"type":"boolean"},"dotsType":{"type":"string","default":"ndots"},"arrowColor":{"type":"string","default":"#000000"},"dotsColor":{"type":"string","default":"#000000"},"borderRadius":{"type":"number","default":0,"minimum":0,"maximum":50},"fancyboxBgColor":{"type":"string","default":"#000000"},"fancyboxWidth":{"type":"number"},"fancyboxOpacity":{"type":"number"}},"supports":{"html":false,"align":["wide","full"],"video":true},"textdomain":"media-carousel-for-guten-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"1.0.0","title":"Media Carousel for Guten Blocks","category":"zealblocks","example":{},"attributes":{"sliderId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simpleType"},"showArrows":{"type":"boolean"},"arrowType":{"type":"string","default":"custom1"},"urls":{"type":"array","items":{"type":"string"}},"simpleType":{"type":"string","default":"simple"},"carouselType":{"type":"string","default":"carousel"},"speed":{"type":"number","minimum":1000,"maximum":5000},"autoplay":{"type":"boolean"},"infinite":{"type":"boolean"},"dots":{"type":"boolean"},"dotsType":{"type":"string","default":"ndots"},"arrowColor":{"type":"string","default":"#000000"},"dotsColor":{"type":"string","default":"#000000"},"borderRadius":{"type":"number","default":0,"minimum":0,"maximum":50},"fancyboxBgColor":{"type":"string","default":"#000000"},"fancyboxWidth":{"type":"number"},"fancyboxOpacity":{"type":"number"},"arrowpos":{"type":"string","default":"side"}},"supports":{"html":false,"align":["wide","full"],"video":true},"textdomain":"media-carousel-for-guten-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

@@ -63,7 +63,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.js";
 
 export default function Edit({ attributes, setAttributes }) {
-    const { galleryImages = [], urls = [], sliderType, showArrows, arrowType, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, fancyboxBgColor, fancyboxWidth, fancyboxOpacity } = attributes;
+    const { galleryImages = [], urls = [], sliderType, showArrows, arrowType, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, fancyboxBgColor, fancyboxWidth, fancyboxOpacity, arrowpos } = attributes;
     const [sliderId, setSliderId] = useState(attributes.sliderId || '');
 
     useEffect(() => {
@@ -196,6 +196,20 @@ export default function Edit({ attributes, setAttributes }) {
                                 onChange={(color) => setAttributes({ arrowColor: color })}
                                 colors={colors}
                             />
+
+                            <RadioControl
+                                className="arrowpos"
+                                label={__("Arrow Type", "media-carousel-for-guten-blocks")}
+                                selected={arrowpos}
+                                options={[
+                                    { label: "Bottom", value: "bottom" },
+                                    { label: "Side", value: "side" },
+                                ]}
+                                onChange={(val) => {
+                                    setAttributes({ arrowpos: val });
+                                }}
+                            />
+
                         </>
                     )}
 
@@ -308,98 +322,99 @@ export default function Edit({ attributes, setAttributes }) {
                 </ToolbarGroup>
             </BlockControls>
 
-            <div {...useBlockProps()} id={sliderId}>
-                {galleryImages && galleryImages.length > 0 ? (
-                    <div class="slider-boxwrap">
-                        {galleryImages.map((media, index) => (
-                            <div key={media.id} className="mcfgb-gallery-single">
-                                {media.type === 'image' ? (
-                                    <>
-                                        <img src={media.url} alt={media.alt ? media.alt : "Gallery Image"} />
-                                        <input
-                                            type="text"
-                                            className="ytb-url"
-                                            value={urls.map((url, idx) => idx === index ? url : '').join('')}
-                                            onChange={(event) => {
-                                                const updatedUrls = [...urls];
-                                                updatedUrls[index] = event.target.value;
-                                                setAttributes({ urls: updatedUrls });
-                                            }}
-                                            placeholder="Enter URL "
-                                        />
-                                        {caption && (
+                <div {...useBlockProps()} id={sliderId}>
+                    {galleryImages && galleryImages.length > 0 ? (
+                        <div class="slider-boxwrap">
+                            {galleryImages.map((media, index) => (
+                                <div key={media.id} className="mcfgb-gallery-single">
+                                    {media.type === 'image' ? (
+                                        <>
+                                            <img src={media.url} alt={media.alt ? media.alt : "Gallery Image"} />
                                             <input
                                                 type="text"
-                                                className="caption"
-                                                value={media.caption || ''}
+                                                className="ytb-url"
+                                                value={urls.map((url, idx) => idx === index ? url : '').join('')}
                                                 onChange={(event) => {
-                                                    const updatedGallery = [...galleryImages];
-                                                    updatedGallery[index].caption = event.target.value;
-                                                    setAttributes({ galleryImages: updatedGallery });
+                                                    const updatedUrls = [...urls];
+                                                    updatedUrls[index] = event.target.value;
+                                                    setAttributes({ urls: updatedUrls });
                                                 }}
-                                                placeholder="Enter Caption"
+                                                placeholder="Enter URL "
                                             />
-                                        )}
+                                            {caption && (
+                                                <input
+                                                    type="text"
+                                                    className="caption"
+                                                    value={media.caption || ''}
+                                                    onChange={(event) => {
+                                                        const updatedGallery = [...galleryImages];
+                                                        updatedGallery[index].caption = event.target.value;
+                                                        setAttributes({ galleryImages: updatedGallery });
+                                                    }}
+                                                    placeholder="Enter Caption"
+                                                />
+                                            )}
 
-                                    </>
-                                ) : media.type === 'video' ? (
-                                    <>
-                                        <video controls>
-                                            <source src={media.url} type={media.mime} />
-                                            {__("Your browser does not support the video tag.", "media-carousel-for-guten-blocks")}
-                                        </video>
-                                        {caption && (
-                                            <input
-                                                type="text"
-                                                className="caption-video"
-                                                value={media.caption || ''}
-                                                onChange={(event) => {
-                                                    const updatedGallery = [...galleryImages];
-                                                    updatedGallery[index].caption = event.target.value;
-                                                    setAttributes({ galleryImages: updatedGallery });
-                                                }}
-                                                placeholder="Enter Caption"
-                                            />
-                                        )}
+                                        </>
+                                    ) : media.type === 'video' ? (
+                                        <>
+                                            <video controls>
+                                                <source src={media.url} type={media.mime} />
+                                                {__("Your browser does not support the video tag.", "media-carousel-for-guten-blocks")}
+                                            </video>
+                                            {caption && (
+                                                <input
+                                                    type="text"
+                                                    className="caption-video"
+                                                    value={media.caption || ''}
+                                                    onChange={(event) => {
+                                                        const updatedGallery = [...galleryImages];
+                                                        updatedGallery[index].caption = event.target.value;
+                                                        setAttributes({ galleryImages: updatedGallery });
+                                                    }}
+                                                    placeholder="Enter Caption"
+                                                />
+                                            )}
 
-                                    </>
-                                ) : null}
-                            </div>
-                        ))}
-                    </div>
-                ) : (
-                    <Placeholder
-                        className="upload-part"
-                        label="Add Gallery Image or Video"
-                        instructions="Upload images or videos by clicking the button below."
-                    >
-                        <MediaUploadCheck>
-                            <MediaUpload
-                                multiple="add"
-                                onSelect={(val) => {
-                                    setAttributes({
-                                        galleryImages: val.map((media) => ({
-                                            id: media.id,
-                                            url: media.url,
-                                            alt: media.alt,
-                                            type: media.type,
-                                            caption: media.caption, // Include the caption field
-                                        }))
-                                    });
-                                }}
-                                allowedTypes={['image', 'video']}
-                                value={galleryImages.map((val) => val.id)}
-                                render={({ open }) => (
-                                    <Button onClick={open} isPrimary className="upload-btn">
-                                        <svg viewBox="0 0 24 24" width="24" ><g> <rect x="0" fill="none" width="24" height="24"></rect> <g> <path d="M23 4v2h-3v3h-2V6h-3V4h3V1h2v3h3zm-8.5 7c.828 0 1.5-.672 1.5-1.5S15.328 8 14.5 8 13 8.672 13 9.5s.672 1.5 1.5 1.5zm3.5 3.234l-.513-.57c-.794-.885-2.18-.885-2.976 0l-.655.73L9 9l-3 3.333V6h7V4H6c-1.105 0-2 .895-2 2v12c0 1.105.895 2 2 2h12c1.105 0 2-.895 2-2v-7h-2v3.234z"></path> </g> </g></svg>
-                                        {__("Upload Media", "media-carousel-for-guten-blocks")}
-                                    </Button>
-                                )}
-                            />
-                        </MediaUploadCheck>
-                    </Placeholder>
-                )}
-            </div>
+                                        </>
+                                    ) : null}
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <Placeholder
+                            className="upload-part"
+                            label="Add Gallery Image or Video"
+                            instructions="Upload images or videos by clicking the button below."
+                        >
+                            <MediaUploadCheck>
+                                <MediaUpload
+                                    multiple="add"
+                                    onSelect={(val) => {
+                                        setAttributes({
+                                            galleryImages: val.map((media) => ({
+                                                id: media.id,
+                                                url: media.url,
+                                                alt: media.alt,
+                                                type: media.type,
+                                                caption: media.caption, // Include the caption field
+                                            }))
+                                        });
+                                    }}
+                                    allowedTypes={['image', 'video']}
+                                    value={galleryImages.map((val) => val.id)}
+                                    render={({ open }) => (
+                                        <Button onClick={open} isPrimary className="upload-btn">
+                                            <svg viewBox="0 0 24 24" width="24" ><g> <rect x="0" fill="none" width="24" height="24"></rect> <g> <path d="M23 4v2h-3v3h-2V6h-3V4h3V1h2v3h3zm-8.5 7c.828 0 1.5-.672 1.5-1.5S15.328 8 14.5 8 13 8.672 13 9.5s.672 1.5 1.5 1.5zm3.5 3.234l-.513-.57c-.794-.885-2.18-.885-2.976 0l-.655.73L9 9l-3 3.333V6h7V4H6c-1.105 0-2 .895-2 2v12c0 1.105.895 2 2 2h12c1.105 0 2-.895 2-2v-7h-2v3.234z"></path> </g> </g></svg>
+                                            {__("Upload Media", "media-carousel-for-guten-blocks")}
+                                        </Button>
+                                    )}
+                                />
+                            </MediaUploadCheck>
+                        </Placeholder>
+                    )}
+                </div>
+
             <style>
                 {
                     `

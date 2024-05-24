@@ -4,14 +4,14 @@
  *
  * Replace them with your own styles or remove the file completely.
  */
-.slider-demo-wrap .slick-dots li {
+.bottom .slick-dots li {
 	font-size: 30px !important;
 	opacity: 0.5;
 }
-.slider-demo-wrap .slick-dots li.slick-active {
+.bottom .slick-dots li.slick-active {
 	opacity: 1;
 }
-.slider-demo-wrap .slick-dots li:hover {
+.bottom .slick-dots li:hover {
 	opacity: 1;
 }
 .custom1 .slick-prev::before {
@@ -74,28 +74,62 @@
 	transform: rotate(180deg);
 }
 
-.slider-demo-wrap .slick-next,
-.slider-demo-wrap .slick-prev {
-	padding: 13px !important;
-	border-radius: 50% !important;
-	width: 50px !important;
-	height: 50px !important;
-	// top: 40% !important;
+.bottom  .slick-next,.bottom  .slick-prev {
+  border-radius: 50% !important;
+  width: 40px !important;
+  height: 40px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.slider-demo-wrap .slick-prev {
+.bottom .slick-prev {
 	left: -56px !important;
 }
-.slider-demo-wrap .slick-next {
+.bottom .slick-next {
 	right: -56px !important;
 }
 
-.slider-demo-wrap .mcfgb-gallery-single {
+
+
+.bottom .slick-prev {
+  bottom: -106px !important;
+  top: unset !important;
+  left: 45% !important;
+  transform: translate(-50%, -50%);
+}
+.bottom .slick-next {
+  bottom: -106px !important;
+  top: unset !important;
+  right: 40% !important;
+  transform: translate(-50%, -50%);
+}
+
+.side .slick-prev {
+  border-radius: 50% !important;
+  width: 40px !important;
+  height: 40px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: -45px !important
+}
+.side .slick-next {
+  border-radius: 50% !important;
+  width: 40px !important;
+  height: 40px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: -45px !important;
+}
+
+.side .mcfgb-gallery-single {
 	position: relative;
 	padding-top: 13%;
 	margin: 0 10px;
 }
-.slider-demo-wrap .mcfgb-gallery-single img,
-.slider-demo-wrap .mcfgb-gallery-single video {
+.side .mcfgb-gallery-single img,
+.side .mcfgb-gallery-single video {
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -103,7 +137,7 @@
 	height: 100%;
 	object-fit: cover;
 }
-.slider-demo-wrap .slick-dots {
-	position: relative !important;
-	bottom: 0px !important;
+.side .slick-dots {
+	// position: relative !important;
+	bottom: -45px!important;
 }

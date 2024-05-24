@@ -25,7 +25,8 @@ import 'react-fancybox/lib/fancybox.css';
 import ReactFancyBox from 'react-fancybox';
 
 export default function Save({ attributes }) {
-    const { galleryImages, sliderType, showArrows, arrowType, sliderId, urls, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, fancyboxBgColor, fancyboxWidth, fancyboxOpacity } = attributes;
+    const { galleryImages, sliderType, showArrows, arrowType, sliderId, urls, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, fancyboxBgColor, fancyboxWidth, fancyboxOpacity, arrowpos } = attributes;
+
 
     function getPrevArrow(arrowType) {
         switch (arrowType) {
@@ -54,7 +55,8 @@ export default function Save({ attributes }) {
 
     return (
         <>
-            <div className="slider-demo-wrap">
+            <div className={arrowpos}>
+                {/* <div className="slider-demo-wrap" > */}
                 <div id={sliderId} class={arrowType}>
                     {galleryImages && galleryImages.map((media, index) => {
                         const currentCaption = caption ? media.caption : '';
@@ -121,6 +123,7 @@ export default function Save({ attributes }) {
                     })}
                 </div>
             </div>
+            {/* </div> */}
             <style>
                 {`
                     /* CSS for arrows */
