@@ -37,13 +37,21 @@
   display: flex;
   align-items: center;
   gap: 15px;
+  padding: 5px;
+  position: relative;
+  width: 50px;
+  height: 50px;
 }
 
 .arrowclass .components-radio-control__option label img {
-  max-width: 20px !important;
+  max-width: 30px !important;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.mcfgb-gallery-single {
+.slider-boxwrap .mcfgb-gallery-single {
   position: relative;
   cursor: pointer;
 }
@@ -53,7 +61,9 @@
   width: 48% !important;
 }
 
-input.ytb-url, input.caption, input.caption-video {
+input.ytb-url,
+input.caption,
+input.caption-video {
   position: absolute;
   left: 50%;
   top: 100%;
@@ -73,11 +83,14 @@ input.ytb-url::-moz-placeholder, input.caption::-moz-placeholder, input.caption-
   color: #fff;
 }
 
-input.ytb-url::placeholder, input.caption::placeholder, input.caption-video::placeholder {
+input.ytb-url::placeholder,
+input.caption::placeholder,
+input.caption-video::placeholder {
   color: #fff;
 }
 
-.slider-boxwrap .mcfgb-gallery-single img, .slider-boxwrap .mcfgb-gallery-single video {
+.slider-boxwrap .mcfgb-gallery-single img,
+.slider-boxwrap .mcfgb-gallery-single video {
   height: 220px;
   max-width: 100%;
   width: 100%;
@@ -88,23 +101,24 @@ input.ytb-url::placeholder, input.caption::placeholder, input.caption-video::pla
   box-shadow: 0px 0px 10px #8f8f8f;
 }
 
-.slider-boxwrap .mcfgb-gallery-single:hover img, .slider-boxwrap .mcfgb-gallery-single:hover video {
+.slider-boxwrap .mcfgb-gallery-single:hover img,
+.slider-boxwrap .mcfgb-gallery-single:hover video {
   filter: blur(4px);
 }
 
-.mcfgb-gallery-single:hover input.ytb-url {
+.slider-boxwrap .mcfgb-gallery-single:hover input.ytb-url {
   opacity: 1;
   visibility: visible;
   top: 34%;
 }
 
-.mcfgb-gallery-single:hover input.caption {
+.slider-boxwrap .mcfgb-gallery-single:hover input.caption {
   opacity: 1;
   visibility: visible;
   top: 63%;
 }
 
-.mcfgb-gallery-single:hover input.caption-video {
+.slider-boxwrap .mcfgb-gallery-single:hover input.caption-video {
   opacity: 1;
   visibility: visible;
   top: 50%;
@@ -148,6 +162,19 @@ input.ytb-url::placeholder, input.caption::placeholder, input.caption-video::pla
   text-transform: uppercase;
   align-items: center;
   transition: 0.3s ease all;
+}
+
+.arrowclass input[type=radio] {
+  display: none;
+}
+
+.arrowclass input[type=radio]:checked + label {
+  border-radius: 50%;
+}
+
+.arrowclass .components-flex {
+  flex-direction: row;
+  justify-content: flex-start;
 }
 /*!*************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./node_modules/slick-carousel/slick/slick.css ***!

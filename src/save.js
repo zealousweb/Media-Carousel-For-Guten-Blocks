@@ -54,89 +54,91 @@ export default function Save({ attributes }) {
 
     return (
         <>
-            <div id={sliderId} class={arrowType}>
-                {galleryImages && galleryImages.map((media, index) => {
-                    const currentCaption = caption ? media.caption : '';
-                    const url = urls && urls[index] ? urls[index] : "";
-                    const isYouTubeUrl = url.includes("youtube.com");
-                    const isWebsiteUrl = url.startsWith("http");
-                    if (media.type === 'image') {
-                        if (fancybox && isYouTubeUrl && url != '') {
-                            return (
-                                <div key={media.id} className="mcfgb-gallery-single">
-                                    <a href={url} data-fancybox={`gallery-${sliderId}`} data-caption={media.alt ? media.alt : "Gallery Image"}>
-                                        <img
-                                            src={media.url}
-                                            alt={media.alt ? media.alt : "Gallery Image"}
-                                        />
-                                        {currentCaption && <div>{currentCaption}</div>}
-                                    </a>
-                                </div>
-                            );
-                        } else if (!fancybox && isYouTubeUrl && url != '') {
-                            const videoID = url.match(/[?&]v=([^&]+)/)[1];
-                            return (
-                                <div key={media.id} className="mcfgb-gallery-single">
-                                    <iframe width="560" height="315" src={`https://www.youtube.com/embed/${videoID}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                                </div>
-                            );
+            <div className="slider-demo-wrap">
+                <div id={sliderId} class={arrowType}>
+                    {galleryImages && galleryImages.map((media, index) => {
+                        const currentCaption = caption ? media.caption : '';
+                        const url = urls && urls[index] ? urls[index] : "";
+                        const isYouTubeUrl = url.includes("youtube.com");
+                        const isWebsiteUrl = url.startsWith("http");
+                        if (media.type === 'image') {
+                            if (fancybox && isYouTubeUrl && url != '') {
+                                return (
+                                    <div key={media.id} className="mcfgb-gallery-single">
+                                        <a href={url} data-fancybox={`gallery-${sliderId}`} data-caption={media.alt ? media.alt : "Gallery Image"}>
+                                            <img
+                                                src={media.url}
+                                                alt={media.alt ? media.alt : "Gallery Image"}
+                                            />
+                                            {currentCaption && <div>{currentCaption}</div>}
+                                        </a>
+                                    </div>
+                                );
+                            } else if (!fancybox && isYouTubeUrl && url != '') {
+                                const videoID = url.match(/[?&]v=([^&]+)/)[1];
+                                return (
+                                    <div key={media.id} className="mcfgb-gallery-single">
+                                        <iframe width="560" height="315" src={`https://www.youtube.com/embed/${videoID}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                    </div>
+                                );
 
-                        } else if (!isYouTubeUrl && isWebsiteUrl && url != '') {
-                            return (
-                                <div key={media.id} className="mcfgb-gallery-single">
-                                    <a href={url}>
+                            } else if (!isYouTubeUrl && isWebsiteUrl && url != '') {
+                                return (
+                                    <div key={media.id} className="mcfgb-gallery-single">
+                                        <a href={url}>
+                                            <img
+                                                src={media.url}
+                                                alt={media.alt ? media.alt : "Gallery Image"}
+                                            />
+                                            {currentCaption && <div>{currentCaption}</div>}
+                                        </a>
+                                    </div>
+                                );
+                            } else {
+                                return (
+                                    <div key={media.id} className="mcfgb-gallery-single">
                                         <img
                                             src={media.url}
                                             alt={media.alt ? media.alt : "Gallery Image"}
                                         />
                                         {currentCaption && <div>{currentCaption}</div>}
-                                    </a>
-                                </div>
-                            );
-                        } else {
+
+                                    </div>
+                                );
+                            }
+
+                        } else if (media.type === 'video') {
                             return (
-                                <div key={media.id} className="mcfgb-gallery-single">
-                                    <img
-                                        src={media.url}
-                                        alt={media.alt ? media.alt : "Gallery Image"}
-                                    />
+                                <div key={media.id} className="mcfgb-gallery-single" >
+                                    <video controls>
+                                        <source src={media.url} type={media.mime} />
+                                    </video>
                                     {currentCaption && <div>{currentCaption}</div>}
-
                                 </div>
                             );
                         }
-
-                    } else if (media.type === 'video') {
-                        return (
-                            <div key={media.id} className="mcfgb-gallery-single" >
-                                <video controls>
-                                    <source src={media.url} type={media.mime} />
-                                    {/* {__("Your browser does not support the video tag.", "media-carousel-for-guten-blocks")} */}
-                                </video>
-                                {currentCaption && <div>{currentCaption}</div>}
-                            </div>
-                        );
-                    }
-                    return null;
-                })}
+                        return null;
+                    })}
+                </div>
             </div>
-            <style>{`
-            /* CSS for arrows */
-            
-            .slick-next, .slick-prev {
-                background:${arrowColor} !important;
-            }
+            <style>
+                {`
+                    /* CSS for arrows */
+                    
+                    .slick-next, .slick-prev {
+                        border:2px solid ${arrowColor} !important;}
 
-            /* CSS for dots */
-            .slick-dots li {
-                color: ${dotsColor} !important;
-            }
-            .mcfgb-gallery-single iframe , .mcfgb-gallery-single img ,.mcfgb-gallery-single video {
-                border-radius:${borderRadius}px;
-                width:100%;
-            }
-            
-        `}</style>
+                    /* CSS for dots */
+                    .slick-dots li {
+                        color: ${dotsColor} !important;
+                    }
+                    .mcfgb-gallery-single iframe , .mcfgb-gallery-single img ,.mcfgb-gallery-single video {
+                        border-radius:${borderRadius}px;
+                        width:100%;
+                    }
+                
+                `}
+            </style>
             <script>
                 {`              
                         jQuery(document).ready(function($) {

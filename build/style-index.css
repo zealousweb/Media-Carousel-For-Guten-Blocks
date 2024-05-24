@@ -7,10 +7,6 @@
  *
  * Replace them with your own styles or remove the file completely.
  */
-.slick-next:before, .slick-prev:before {
-  color: black !important;
-}
-
 .slick-dots li {
   font-size: 30px !important;
   opacity: 0.5;
@@ -85,6 +81,43 @@
   background-size: 20px;
   background-repeat: no-repeat;
   transform: rotate(180deg);
+}
+
+.slick-next,
+.slick-prev {
+  padding: 13px !important;
+  border-radius: 50% !important;
+  width: 50px !important;
+  height: 50px !important;
+}
+
+.slick-prev {
+  left: -56px !important;
+}
+
+.slick-next {
+  right: -56px !important;
+}
+
+.slider-demo-wrap .mcfgb-gallery-single {
+  position: relative;
+  padding-top: 13%;
+  margin: 0 10px;
+}
+
+.slider-demo-wrap .mcfgb-gallery-single img, .slider-demo-wrap .mcfgb-gallery-single video {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.slick-dots {
+  position: relative !important;
+  bottom: 0px !important;
 }
 
 /*# sourceMappingURL=style-index.css.map*/
