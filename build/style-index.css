@@ -20,69 +20,6 @@
   opacity: 1;
 }
 
-.custom1 .slick-prev::before {
-  content: "";
-  width: 20px;
-  height: 20px;
-  background: url(https://www.svgrepo.com/show/379969/chevrons-left-arrows.svg);
-  display: block;
-  background-size: 20px;
-  background-repeat: no-repeat;
-}
-
-.custom1 .slick-next::before {
-  content: "";
-  width: 20px;
-  height: 20px;
-  background: url(https://www.svgrepo.com/show/379969/chevrons-left-arrows.svg);
-  display: block;
-  background-size: 20px;
-  background-repeat: no-repeat;
-  transform: rotate(180deg);
-}
-
-.custom2 .slick-prev::before {
-  content: "";
-  width: 20px;
-  height: 20px;
-  background: url(https://www.svgrepo.com/show/247754/left-arrow-back.svg);
-  display: block;
-  background-size: 20px;
-  background-repeat: no-repeat;
-}
-
-.custom2 .slick-next::before {
-  content: "";
-  width: 20px;
-  height: 20px;
-  background: url(https://www.svgrepo.com/show/247754/left-arrow-back.svg);
-  display: block;
-  background-size: 20px;
-  background-repeat: no-repeat;
-  transform: rotate(180deg);
-}
-
-.custom3 .slick-prev::before {
-  content: "";
-  width: 20px;
-  height: 20px;
-  background: url(https://www.svgrepo.com/show/247768/left-arrow-back.svg);
-  display: block;
-  background-size: 20px;
-  background-repeat: no-repeat;
-}
-
-.custom3 .slick-next::before {
-  content: "";
-  width: 20px;
-  height: 20px;
-  background: url(https://www.svgrepo.com/show/247768/left-arrow-back.svg);
-  display: block;
-  background-size: 20px;
-  background-repeat: no-repeat;
-  transform: rotate(180deg);
-}
-
 .bottom .slick-next, .bottom .slick-prev {
   border-radius: 50% !important;
   width: 40px !important;
@@ -100,6 +37,51 @@
   right: -56px !important;
 }
 
+.prev-btn svg, .next-btn svg {
+  width: 100%;
+  height: 100%;
+}
+
+.prev-btn, .next-btn {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.svg-arrow {
+  display: none;
+}
+
+.custom1 .custom-1.svg-arrow {
+  display: flex !important;
+  justify-content: center;
+  margin-top: 60px;
+  gap: 20px;
+}
+
+.custom2 .custom-2.svg-arrow {
+  display: flex !important;
+  justify-content: center;
+  margin-top: 60px;
+  gap: 20px;
+}
+
+.custom3 .custom-3.svg-arrow {
+  display: flex !important;
+  justify-content: center;
+  margin-top: 60px;
+  gap: 20px;
+}
+
+.next-btn svg {
+  transform: rotate(180deg);
+}
+
+.prev-btn.slick-arrow.slick-disabled, .next-btn.slick-arrow.slick-disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
 .bottom .slick-prev {
   bottom: -106px !important;
   top: unset !important;
@@ -114,7 +96,7 @@
   transform: translate(-50%, -50%);
 }
 
-.side .slick-prev {
+.side .prev-btn {
   border-radius: 50% !important;
   width: 40px !important;
   height: 40px !important;
@@ -124,24 +106,24 @@
   left: -45px !important;
 }
 
-.side .slick-next {
+.side .next-btn {
   border-radius: 50% !important;
   width: 40px !important;
   height: 40px !important;
   display: flex;
   align-items: center;
   justify-content: center;
-  right: -45px !important;
+  right: -65px !important;
 }
 
 .side .mcfgb-gallery-single, .bottom .mcfgb-gallery-single {
   position: relative;
-  padding-top: 13%;
+  padding-top: 70%;
   margin: 0 10px;
 }
 
 .side .mcfgb-gallery-single img,
-.side .mcfgb-gallery-single video, .bottom .mcfgb-gallery-single img, .bottom .mcfgb-gallery-single video {
+.side .mcfgb-gallery-single video, .bottom .mcfgb-gallery-single img, .bottom .mcfgb-gallery-single video, .bottom .mcfgb-gallery-single iframe, .side .mcfgb-gallery-single iframe {
   position: absolute;
   left: 0;
   top: 0;
@@ -153,6 +135,38 @@
 
 .side .slick-dots, .bottom .slick-dots {
   bottom: -45px !important;
+}
+
+.side {
+  position: relative;
+}
+
+.side .prev-btn.slick-arrow {
+  position: absolute;
+  left: 0;
+  top: 45%;
+  transform: translate(-50%, -50%);
+}
+
+.side .next-btn.slick-arrow {
+  position: absolute;
+  right: 0;
+  top: 45%;
+  transform: translate(-50%, -50%);
+}
+
+.side.false #btn-wrap,
+.bottom.false #btn-wrap {
+  display: none;
+}
+
+.mcfgb-gallery-single {
+  position: relative;
+}
+
+.img-caption {
+  text-align: center;
+  padding: 0 10px;
 }
 
 /*# sourceMappingURL=style-index.css.map*/

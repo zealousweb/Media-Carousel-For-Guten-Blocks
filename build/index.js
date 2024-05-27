@@ -268,22 +268,30 @@ function Edit({
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arrow Type", "media-carousel-for-guten-blocks"),
     selected: arrowType,
     options: [{
-      label: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-        src: "https://www.svgrepo.com/show/379969/chevrons-left-arrows.svg",
-        alt: "Arrow 1"
-      }),
+      label: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+        viewBox: "0 0 512 512",
+        fill: "#000000"
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+        d: "M154.52,265.848l90.964,69.014c2.329,1.766,4.674,2.702,6.78,2.702c2.148,0,4.022-0.974,5.276-2.741 c1.199-1.688,1.807-3.99,1.807-6.844v-26.424c0-6.952,5.656-12.608,12.607-12.608h75.036c8.705,0,15.788-7.085,15.788-15.788 v-34.313c0-8.703-7.083-15.788-15.788-15.788h-75.036c-6.951,0-12.607-5.656-12.607-12.608v-26.425 c0-7.065-3.659-9.584-7.082-9.584c-2.106,0-4.451,0.936-6.78,2.702l-90.964,69.014c-3.416,2.59-5.297,6.087-5.297,9.849 C149.223,259.762,151.103,263.259,154.52,265.848z"
+      }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+        d: "M256,0C114.842,0,0.002,114.84,0.002,256S114.842,512,256,512c141.158,0,255.998-114.84,255.998-256 S397.158,0,256,0z M256,66.785c104.334,0,189.216,84.879,189.216,189.215S360.334,445.215,256,445.215S66.783,360.336,66.783,256 S151.667,66.785,256,66.785z"
+      }))),
       value: "custom1"
     }, {
-      label: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-        src: "https://www.svgrepo.com/show/247754/left-arrow-back.svg",
-        alt: "Arrow 2"
-      }),
+      label: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+        viewBox: "0 0 512 512"
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+        d: "M256,5.333C114.88,5.333,0,117.76,0,256s114.88,250.667,256,250.667S512,394.24,512,256S397.12,5.333,256,5.333z M256,485.333C126.613,485.333,21.333,382.4,21.333,256S126.613,26.667,256,26.667S490.667,129.493,490.667,256 S385.387,485.333,256,485.333z"
+      }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+        d: "M337.387,381.013c-0.107-0.107-0.32-0.213-0.427-0.32L167.36,256l169.6-124.8c4.8-3.413,5.76-10.133,2.347-14.827 c-3.52-4.8-10.133-5.76-14.933-2.24L143.04,247.467c-4.693,3.52-5.76,10.133-2.24,14.933c0.64,0.853,1.387,1.6,2.24,2.24 l181.333,133.227c4.693,3.627,11.307,2.773,14.933-1.92C342.933,391.253,342.08,384.64,337.387,381.013z"
+      }))),
       value: "custom2"
     }, {
-      label: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-        src: "https://www.svgrepo.com/show/247768/left-arrow-back.svg",
-        alt: "Arrow 3"
-      }),
+      label: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+        viewBox: "0 0 512.003 512.003"
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+        d: "M351.539,256.002l159.07-242.79c2.108-3.226,1.8-7.467-0.76-10.351c-2.568-2.867-6.741-3.686-10.197-1.963L4.719,248.364 C1.826,249.815,0,252.767,0,256.002s1.826,6.187,4.719,7.637l494.933,247.467c1.22,0.606,2.526,0.896,3.814,0.896 c2.381,0,4.719-0.998,6.383-2.859c2.56-2.884,2.867-7.125,0.76-10.351L351.539,256.002z"
+      }))),
       value: "custom3"
     }],
     onChange: val => {
@@ -513,8 +521,8 @@ function Edit({
       d: "M23 4v2h-3v3h-2V6h-3V4h3V1h2v3h3zm-8.5 7c.828 0 1.5-.672 1.5-1.5S15.328 8 14.5 8 13 8.672 13 9.5s.672 1.5 1.5 1.5zm3.5 3.234l-.513-.57c-.794-.885-2.18-.885-2.976 0l-.655.73L9 9l-3 3.333V6h7V4H6c-1.105 0-2 .895-2 2v12c0 1.105.895 2 2 2h12c1.105 0 2-.895 2-2v-7h-2v3.234z"
     }), " "), " ")), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Upload Media", "media-carousel-for-guten-blocks"))
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", null, `
-                        .arrowclass input[type=radio]:checked + label {
-                            border: 2px solid ${arrowColor} !important;
+                        .arrowclass input[type=radio]:checked + label svg{
+                            fill:${arrowColor} !important;
                         }
                     `));
 }
@@ -671,35 +679,10 @@ function Save({
     fancyboxOpacity,
     arrowpos
   } = attributes;
-  function getPrevArrow(arrowType) {
-    switch (arrowType) {
-      case 'custom1':
-        return;
-      case 'custom2':
-        return;
-      case 'custom3':
-        return;
-      default:
-        return;
-    }
-  }
-  function getNextArrow(arrowType) {
-    switch (arrowType) {
-      case 'custom1':
-        return;
-      case 'custom2':
-        return;
-      case 'custom3':
-        return;
-      default:
-        return;
-    }
-  }
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: arrowpos
+    className: `${arrowpos} ${showArrows}`
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    id: sliderId,
-    class: arrowType
+    id: sliderId
   }, galleryImages && galleryImages.map((media, index) => {
     const currentCaption = caption ? media.caption : '';
     const url = urls && urls[index] ? urls[index] : "";
@@ -708,8 +691,9 @@ function Save({
     if (media.type === 'image') {
       if (fancybox && isYouTubeUrl && url != '') {
         return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          key: media.id,
-          className: "mcfgb-gallery-single"
+          key: media.id
+        }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+          class: "mcfgb-gallery-single"
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
           href: url,
           "data-fancybox": `gallery-${sliderId}`,
@@ -717,11 +701,14 @@ function Save({
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
           src: media.url,
           alt: media.alt ? media.alt : "Gallery Image"
-        }), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, currentCaption)));
+        }))), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+          className: "img-caption"
+        }, currentCaption));
       } else if (!fancybox && isYouTubeUrl && url != '') {
         const videoID = url.match(/[?&]v=([^&]+)/)[1];
         return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          key: media.id,
+          key: media.id
+        }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           className: "mcfgb-gallery-single"
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("iframe", {
           width: "560",
@@ -732,44 +719,107 @@ function Save({
           allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
           referrerpolicy: "strict-origin-when-cross-origin",
           allowfullscreen: true
-        }));
+        })), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+          className: "img-caption"
+        }, currentCaption));
       } else if (!isYouTubeUrl && isWebsiteUrl && url != '') {
         return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          key: media.id,
+          key: media.id
+        }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           className: "mcfgb-gallery-single"
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
           href: url
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
           src: media.url,
           alt: media.alt ? media.alt : "Gallery Image"
-        }), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, currentCaption)));
+        }))), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+          className: "img-caption"
+        }, currentCaption));
       } else {
         return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          key: media.id,
+          key: media.id
+        }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           className: "mcfgb-gallery-single"
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
           src: media.url,
           alt: media.alt ? media.alt : "Gallery Image"
-        }), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, currentCaption));
+        })), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+          className: "img-caption"
+        }, currentCaption));
       }
     } else if (media.type === 'video') {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-        key: media.id,
+        key: media.id
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "mcfgb-gallery-single"
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("video", {
         controls: true
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("source", {
         src: media.url,
         type: media.mime
-      })), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, currentCaption));
+      }))), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "img-caption"
+      }, currentCaption));
     }
     return null;
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", null, `
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    id: "btn-wrap",
+    class: arrowType
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "custom-1 svg-arrow"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "prev-btn"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    viewBox: "0 0 512 512",
+    fill: "#000000"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M154.52,265.848l90.964,69.014c2.329,1.766,4.674,2.702,6.78,2.702c2.148,0,4.022-0.974,5.276-2.741 c1.199-1.688,1.807-3.99,1.807-6.844v-26.424c0-6.952,5.656-12.608,12.607-12.608h75.036c8.705,0,15.788-7.085,15.788-15.788 v-34.313c0-8.703-7.083-15.788-15.788-15.788h-75.036c-6.951,0-12.607-5.656-12.607-12.608v-26.425 c0-7.065-3.659-9.584-7.082-9.584c-2.106,0-4.451,0.936-6.78,2.702l-90.964,69.014c-3.416,2.59-5.297,6.087-5.297,9.849 C149.223,259.762,151.103,263.259,154.52,265.848z"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M256,0C114.842,0,0.002,114.84,0.002,256S114.842,512,256,512c141.158,0,255.998-114.84,255.998-256 S397.158,0,256,0z M256,66.785c104.334,0,189.216,84.879,189.216,189.215S360.334,445.215,256,445.215S66.783,360.336,66.783,256 S151.667,66.785,256,66.785z"
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "next-btn"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    viewBox: "0 0 512 512",
+    fill: "#000000"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M154.52,265.848l90.964,69.014c2.329,1.766,4.674,2.702,6.78,2.702c2.148,0,4.022-0.974,5.276-2.741 c1.199-1.688,1.807-3.99,1.807-6.844v-26.424c0-6.952,5.656-12.608,12.607-12.608h75.036c8.705,0,15.788-7.085,15.788-15.788 v-34.313c0-8.703-7.083-15.788-15.788-15.788h-75.036c-6.951,0-12.607-5.656-12.607-12.608v-26.425 c0-7.065-3.659-9.584-7.082-9.584c-2.106,0-4.451,0.936-6.78,2.702l-90.964,69.014c-3.416,2.59-5.297,6.087-5.297,9.849 C149.223,259.762,151.103,263.259,154.52,265.848z"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M256,0C114.842,0,0.002,114.84,0.002,256S114.842,512,256,512c141.158,0,255.998-114.84,255.998-256 S397.158,0,256,0z M256,66.785c104.334,0,189.216,84.879,189.216,189.215S360.334,445.215,256,445.215S66.783,360.336,66.783,256 S151.667,66.785,256,66.785z"
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "custom-2 svg-arrow"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "prev-btn"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    viewBox: "0 0 512 512"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M256,5.333C114.88,5.333,0,117.76,0,256s114.88,250.667,256,250.667S512,394.24,512,256S397.12,5.333,256,5.333z M256,485.333C126.613,485.333,21.333,382.4,21.333,256S126.613,26.667,256,26.667S490.667,129.493,490.667,256 S385.387,485.333,256,485.333z"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M337.387,381.013c-0.107-0.107-0.32-0.213-0.427-0.32L167.36,256l169.6-124.8c4.8-3.413,5.76-10.133,2.347-14.827 c-3.52-4.8-10.133-5.76-14.933-2.24L143.04,247.467c-4.693,3.52-5.76,10.133-2.24,14.933c0.64,0.853,1.387,1.6,2.24,2.24 l181.333,133.227c4.693,3.627,11.307,2.773,14.933-1.92C342.933,391.253,342.08,384.64,337.387,381.013z"
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "next-btn"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    viewBox: "0 0 512 512"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M256,5.333C114.88,5.333,0,117.76,0,256s114.88,250.667,256,250.667S512,394.24,512,256S397.12,5.333,256,5.333z M256,485.333C126.613,485.333,21.333,382.4,21.333,256S126.613,26.667,256,26.667S490.667,129.493,490.667,256 S385.387,485.333,256,485.333z"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M337.387,381.013c-0.107-0.107-0.32-0.213-0.427-0.32L167.36,256l169.6-124.8c4.8-3.413,5.76-10.133,2.347-14.827 c-3.52-4.8-10.133-5.76-14.933-2.24L143.04,247.467c-4.693,3.52-5.76,10.133-2.24,14.933c0.64,0.853,1.387,1.6,2.24,2.24 l181.333,133.227c4.693,3.627,11.307,2.773,14.933-1.92C342.933,391.253,342.08,384.64,337.387,381.013z"
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "custom-3 svg-arrow"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "prev-btn"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    viewBox: "0 0 512.003 512.003"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M351.539,256.002l159.07-242.79c2.108-3.226,1.8-7.467-0.76-10.351c-2.568-2.867-6.741-3.686-10.197-1.963L4.719,248.364 C1.826,249.815,0,252.767,0,256.002s1.826,6.187,4.719,7.637l494.933,247.467c1.22,0.606,2.526,0.896,3.814,0.896 c2.381,0,4.719-0.998,6.383-2.859c2.56-2.884,2.867-7.125,0.76-10.351L351.539,256.002z"
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "next-btn"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    viewBox: "0 0 512.003 512.003"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M351.539,256.002l159.07-242.79c2.108-3.226,1.8-7.467-0.76-10.351c-2.568-2.867-6.741-3.686-10.197-1.963L4.719,248.364 C1.826,249.815,0,252.767,0,256.002s1.826,6.187,4.719,7.637l494.933,247.467c1.22,0.606,2.526,0.896,3.814,0.896 c2.381,0,4.719-0.998,6.383-2.859c2.56-2.884,2.867-7.125,0.76-10.351L351.539,256.002z"
+  })))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", null, `
                     /* CSS for arrows */
                     
-                    .slick-next, .slick-prev {
-                        border:2px solid ${arrowColor} !important;}
-
                     /* CSS for dots */
                     .slick-dots li {
                         color: ${dotsColor} !important;
@@ -777,6 +827,9 @@ function Save({
                     .mcfgb-gallery-single iframe , .mcfgb-gallery-single img ,.mcfgb-gallery-single video {
                         border-radius:${borderRadius}px;
                         width:100%;
+                    }
+                    #btn-wrap .svg-arrow svg{
+                        fill: ${arrowColor} !important;
                     }
                 
                 `), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("script", null, `              
@@ -812,9 +865,8 @@ function Save({
                                                         return '.';
                                                     }
                                                 },
-                                                prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
-                                                nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
-                                               
+                                                prevArrow: '#btn-wrap .prev-btn',
+                                                nextArrow: '#btn-wrap .next-btn',
                                             });
                                             break;
                                         case 'fade':
@@ -835,8 +887,8 @@ function Save({
                                                 arrows: ${showArrows},
                                                 autoplaySpeed:${speed},
                                                 infinite:${infinite},
-                                                prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
-                                                nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
+                                                prevArrow: '#btn-wrap .prev-btn',
+                                                nextArrow: '#btn-wrap .next-btn',
                                             });
                                             break;
                                         case 'adaptiveheight':
@@ -857,8 +909,8 @@ function Save({
                                                 arrows: ${showArrows},
                                                 autoplaySpeed:${speed},
                                                 infinite:${infinite},
-                                                prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
-                                                nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
+                                                prevArrow: '#btn-wrap .prev-btn',
+                                                nextArrow: '#btn-wrap .next-btn',
                                             });
                                             break;
                                     }
@@ -883,8 +935,8 @@ function Save({
                                                 arrows: ${showArrows},
                                                 autoplaySpeed:${speed},
                                                 infinite:${infinite},
-                                                prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
-                                                nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
+                                                prevArrow: '#btn-wrap .prev-btn',
+                                                nextArrow: '#btn-wrap .next-btn',
                                             });
                                             break;
                                         case 'centermode':
@@ -925,8 +977,8 @@ function Save({
                                                         return '.';
                                                     }
                                                 },
-                                                prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
-                                                nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
+                                                prevArrow: '#btn-wrap .prev-btn',
+                                                nextArrow: '#btn-wrap .next-btn',
                                             });
                                             break;
                                         case 'lazyloading':
@@ -948,8 +1000,8 @@ function Save({
                                                         return '.';
                                                     }
                                                 },
-                                                prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : 'null'},
-                                                nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : 'null'}
+                                                prevArrow: '#btn-wrap .prev-btn',
+                                                nextArrow: '#btn-wrap .next-btn',
                                             });
                                             break;
                                     }
@@ -963,8 +1015,8 @@ function Save({
                                         autoplaySpeed:${speed},
                                         arrows: ${showArrows},
                                         infinite:${infinite},
-                                        prevArrow: ${showArrows && arrowType ? getPrevArrow(arrowType) : null},
-                                        nextArrow: ${showArrows && arrowType ? getNextArrow(arrowType) : null}
+                                        prevArrow: '#btn-wrap .prev-btn',
+                                        nextArrow: '#btn-wrap .next-btn',
                                     });
                                     break;
                             }
