@@ -37,10 +37,10 @@ export default function Save({ attributes }) {
                         const isYouTubeUrl = url.includes("youtube.com");
                         const isWebsiteUrl = url.startsWith("http");
                         if (media.type === 'image') {
-                            if (fancybox && isYouTubeUrl && url != '') {
+                            if (fancybox && isYouTubeUrl && url !== '') {
                                 return (
                                     <div key={media.id}>
-                                        <div class="mcfgb-gallery-single">
+                                        <div className="mcfgb-gallery-single">
                                             <a href={url} data-fancybox={`gallery-${sliderId}`} data-caption={media.alt ? media.alt : "Gallery Image"}>
                                                 <img
                                                     src={media.url}
@@ -51,7 +51,7 @@ export default function Save({ attributes }) {
                                         {currentCaption && <div className="img-caption">{currentCaption}</div>}
                                     </div>
                                 );
-                            } else if (!fancybox && isYouTubeUrl && url != '') {
+                            } else if (!fancybox && isYouTubeUrl && url !== '') {
                                 const videoID = url.match(/[?&]v=([^&]+)/)[1];
                                 return (
                                     <div key={media.id}>
@@ -62,7 +62,7 @@ export default function Save({ attributes }) {
                                     </div>
                                 );
 
-                            } else if (!isYouTubeUrl && isWebsiteUrl && url != '') {
+                            } else if (!isYouTubeUrl && isWebsiteUrl && url !== '') {
                                 return (
                                     <div key={media.id}>
                                         <div className="mcfgb-gallery-single">
@@ -205,28 +205,37 @@ export default function Save({ attributes }) {
                                     switch("${simpleType}") {
                                         case 'simple':
                                             $(sliderId).slick({
-                                                arrows: ${showArrows},
-                                                speed:${speed},
-                                                autoplaySpeed:${speed},
-                                                autoplay:${autoplay},
-                                                infinite:${infinite},
-                                                dots:${dots},
-                                                customPaging: function(sliderId, i) {
-                                                    if ("${dotsType}" === "number") {
-                                                        return i + 1;
-                                                    } else {
-                                                        return '.';
-                                                    }
-                                                },
-                                                prevArrow: '#btn-wrap .prev-btn',
-                                                nextArrow: '#btn-wrap .next-btn',
-                                            });
+                                            arrows: ${showArrows},
+                                            speed:${speed},
+                                            autoplaySpeed:${speed},
+                                            autoplay:${autoplay},
+                                            infinite:${infinite},
+                                            dots:${dots},
+                                            customPaging: function(sliderId, i) {
+                                                if ("${dotsType}" === "number") {
+                                                    return i + 1;
+                                                } else {
+                                                    return '.';
+                                                }
+                                            },
+                                            prevArrow: '#btn-wrap .prev-btn',
+                                            nextArrow: '#btn-wrap .next-btn',
+                                        });
+
+                                        // Add classes to the slick dots
+                                        $(sliderId + ' .slick-dots li').each(function(index) {
+                                            if ("${dotsType}" === "number") {
+                                                $(this).addClass('number');
+                                            } else {
+                                                $(this).addClass('dot');
+                                            }
+                                        });
                                             break;
                                         case 'fade':
                                             $(sliderId).slick({
                                                 dots:${dots},
                                                 customPaging: function(sliderId, i) {
-                                                    if ("${dotsType}" === "number") { 
+                                                    if ("${dotsType}" === "number") {
                                                         return i + 1;
                                                     } else {
                                                         return '.';
@@ -242,6 +251,14 @@ export default function Save({ attributes }) {
                                                 infinite:${infinite},
                                                 prevArrow: '#btn-wrap .prev-btn',
                                                 nextArrow: '#btn-wrap .next-btn',
+                                            });
+                                            // Add classes to the slick dots
+                                            $(sliderId + ' .slick-dots li').each(function(index) {
+                                                if ("${dotsType}" === "number") {
+                                                    $(this).addClass('number');
+                                                } else {
+                                                    $(this).addClass('dot');
+                                                }
                                             });
                                             break;
                                         case 'adaptiveheight':
@@ -264,6 +281,13 @@ export default function Save({ attributes }) {
                                                 infinite:${infinite},
                                                 prevArrow: '#btn-wrap .prev-btn',
                                                 nextArrow: '#btn-wrap .next-btn',
+                                            });
+                                            $(sliderId + ' .slick-dots li').each(function(index) {
+                                                if ("${dotsType}" === "number") {
+                                                    $(this).addClass('number');
+                                                } else {
+                                                    $(this).addClass('dot');
+                                                }
                                             });
                                             break;
                                     }
@@ -290,6 +314,13 @@ export default function Save({ attributes }) {
                                                 infinite:${infinite},
                                                 prevArrow: '#btn-wrap .prev-btn',
                                                 nextArrow: '#btn-wrap .next-btn',
+                                            });
+                                            $(sliderId + ' .slick-dots li').each(function(index) {
+                                                if ("${dotsType}" === "number") {
+                                                    $(this).addClass('number');
+                                                } else {
+                                                    $(this).addClass('dot');
+                                                }
                                             });
                                             break;
                                         case 'centermode':
@@ -333,6 +364,13 @@ export default function Save({ attributes }) {
                                                 prevArrow: '#btn-wrap .prev-btn',
                                                 nextArrow: '#btn-wrap .next-btn',
                                             });
+                                            $(sliderId + ' .slick-dots li').each(function(index) {
+                                                if ("${dotsType}" === "number") {
+                                                    $(this).addClass('number');
+                                                } else {
+                                                    $(this).addClass('dot');
+                                                }
+                                            });
                                             break;
                                         case 'lazyloading':
                                             $(sliderId).slick({
@@ -340,11 +378,10 @@ export default function Save({ attributes }) {
                                                 slidesToShow: 3,
                                                 slidesToScroll: 1,
                                                 speed:${speed},
-                                                autoplay:${autoplay},
-                                                autoplay:true,
+                                                autoplay:${autoplay}, 
                                                 arrows: ${showArrows},
                                                 autoplaySpeed:${speed},
-                                                infinite:${infinite},
+                                                infinite:${infinite},   
                                                 dots:${dots},
                                                 customPaging: function(sliderId, i) {
                                                     if ("${dotsType}" === "number") { 
@@ -355,6 +392,13 @@ export default function Save({ attributes }) {
                                                 },
                                                 prevArrow: '#btn-wrap .prev-btn',
                                                 nextArrow: '#btn-wrap .next-btn',
+                                            });
+                                            $(sliderId + ' .slick-dots li').each(function(index) {
+                                                if ("${dotsType}" === "number") {
+                                                    $(this).addClass('number');
+                                                } else {
+                                                    $(this).addClass('dot');
+                                                }
                                             });
                                             break;
                                     }
@@ -371,6 +415,13 @@ export default function Save({ attributes }) {
                                         prevArrow: '#btn-wrap .prev-btn',
                                         nextArrow: '#btn-wrap .next-btn',
                                     });
+                                    $(sliderId + ' .slick-dots li').each(function(index) {
+                                                if ("${dotsType}" === "number") {
+                                                    $(this).addClass('number');
+                                                } else {
+                                                    $(this).addClass('dot');
+                                                }
+                                            });
                                     break;
                             }
                         });

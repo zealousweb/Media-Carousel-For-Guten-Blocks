@@ -171,7 +171,33 @@ function Edit({
     color: '#B1C5A4'
   }];
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Media Carousel Settings")
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Media Carousel Settings", "media-carousel-for-guten-blocks")
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Speed of Slider", "media-carousel-for-guten-blocks"),
+    value: speed,
+    onChange: value => setAttributes({
+      speed: value
+    }),
+    min: 1000,
+    max: 5000
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Caption", "media-carousel-for-guten-blocks"),
+    checked: caption,
+    onChange: val => {
+      setAttributes({
+        caption: val
+      });
+    }
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Radius for Image and Video ", "media-carousel-for-guten-blocks"),
+    value: borderRadius,
+    onChange: value => setAttributes({
+      borderRadius: value
+    }),
+    min: 0,
+    max: 50
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("FancyBox Settings", "media-carousel-for-guten-blocks")
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Enable FancyBox", "media-carousel-for-guten-blocks"),
     checked: attributes.fancybox,
@@ -204,7 +230,9 @@ function Edit({
     }),
     min: 0,
     max: 100
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RadioControl, {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slider Type Settings", "media-carousel-for-guten-blocks")
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RadioControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slider Type", "media-carousel-for-guten-blocks"),
     selected: sliderType,
     options: [{
@@ -323,15 +351,7 @@ function Edit({
         arrowpos: val
       });
     }
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Speed of Slider", "media-carousel-for-guten-blocks"),
-    value: speed,
-    onChange: value => setAttributes({
-      speed: value
-    }),
-    min: 1000,
-    max: 5000
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Auto Play", "media-carousel-for-guten-blocks"),
     checked: autoplay,
     onChange: val => {
@@ -360,14 +380,6 @@ function Edit({
           infinite: false
         });
       }
-    }
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Caption", "media-carousel-for-guten-blocks"),
-    checked: caption,
-    onChange: val => {
-      setAttributes({
-        caption: val
-      });
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dots", "media-carousel-for-guten-blocks"),
@@ -400,15 +412,7 @@ function Edit({
       dotsColor: color
     }),
     colors: colors
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Radius for Image and Video ", "media-carousel-for-guten-blocks"),
-    value: borderRadius,
-    onChange: value => setAttributes({
-      borderRadius: value
-    }),
-    min: 0,
-    max: 50
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.MediaUploadCheck, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.MediaUpload, {
+  }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.MediaUploadCheck, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.MediaUpload, {
     multiple: "add",
     onSelect: val => {
       setAttributes({
@@ -689,11 +693,11 @@ function Save({
     const isYouTubeUrl = url.includes("youtube.com");
     const isWebsiteUrl = url.startsWith("http");
     if (media.type === 'image') {
-      if (fancybox && isYouTubeUrl && url != '') {
+      if (fancybox && isYouTubeUrl && url !== '') {
         return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           key: media.id
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          class: "mcfgb-gallery-single"
+          className: "mcfgb-gallery-single"
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
           href: url,
           "data-fancybox": `gallery-${sliderId}`,
@@ -704,7 +708,7 @@ function Save({
         }))), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           className: "img-caption"
         }, currentCaption));
-      } else if (!fancybox && isYouTubeUrl && url != '') {
+      } else if (!fancybox && isYouTubeUrl && url !== '') {
         const videoID = url.match(/[?&]v=([^&]+)/)[1];
         return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           key: media.id
@@ -722,7 +726,7 @@ function Save({
         })), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           className: "img-caption"
         }, currentCaption));
-      } else if (!isYouTubeUrl && isWebsiteUrl && url != '') {
+      } else if (!isYouTubeUrl && isWebsiteUrl && url !== '') {
         return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           key: media.id
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -852,28 +856,37 @@ function Save({
                                     switch("${simpleType}") {
                                         case 'simple':
                                             $(sliderId).slick({
-                                                arrows: ${showArrows},
-                                                speed:${speed},
-                                                autoplaySpeed:${speed},
-                                                autoplay:${autoplay},
-                                                infinite:${infinite},
-                                                dots:${dots},
-                                                customPaging: function(sliderId, i) {
-                                                    if ("${dotsType}" === "number") {
-                                                        return i + 1;
-                                                    } else {
-                                                        return '.';
-                                                    }
-                                                },
-                                                prevArrow: '#btn-wrap .prev-btn',
-                                                nextArrow: '#btn-wrap .next-btn',
-                                            });
+                                            arrows: ${showArrows},
+                                            speed:${speed},
+                                            autoplaySpeed:${speed},
+                                            autoplay:${autoplay},
+                                            infinite:${infinite},
+                                            dots:${dots},
+                                            customPaging: function(sliderId, i) {
+                                                if ("${dotsType}" === "number") {
+                                                    return i + 1;
+                                                } else {
+                                                    return '.';
+                                                }
+                                            },
+                                            prevArrow: '#btn-wrap .prev-btn',
+                                            nextArrow: '#btn-wrap .next-btn',
+                                        });
+
+                                        // Add classes to the slick dots
+                                        $(sliderId + ' .slick-dots li').each(function(index) {
+                                            if ("${dotsType}" === "number") {
+                                                $(this).addClass('number');
+                                            } else {
+                                                $(this).addClass('dot');
+                                            }
+                                        });
                                             break;
                                         case 'fade':
                                             $(sliderId).slick({
                                                 dots:${dots},
                                                 customPaging: function(sliderId, i) {
-                                                    if ("${dotsType}" === "number") { 
+                                                    if ("${dotsType}" === "number") {
                                                         return i + 1;
                                                     } else {
                                                         return '.';
@@ -889,6 +902,14 @@ function Save({
                                                 infinite:${infinite},
                                                 prevArrow: '#btn-wrap .prev-btn',
                                                 nextArrow: '#btn-wrap .next-btn',
+                                            });
+                                            // Add classes to the slick dots
+                                            $(sliderId + ' .slick-dots li').each(function(index) {
+                                                if ("${dotsType}" === "number") {
+                                                    $(this).addClass('number');
+                                                } else {
+                                                    $(this).addClass('dot');
+                                                }
                                             });
                                             break;
                                         case 'adaptiveheight':
@@ -911,6 +932,13 @@ function Save({
                                                 infinite:${infinite},
                                                 prevArrow: '#btn-wrap .prev-btn',
                                                 nextArrow: '#btn-wrap .next-btn',
+                                            });
+                                            $(sliderId + ' .slick-dots li').each(function(index) {
+                                                if ("${dotsType}" === "number") {
+                                                    $(this).addClass('number');
+                                                } else {
+                                                    $(this).addClass('dot');
+                                                }
                                             });
                                             break;
                                     }
@@ -937,6 +965,13 @@ function Save({
                                                 infinite:${infinite},
                                                 prevArrow: '#btn-wrap .prev-btn',
                                                 nextArrow: '#btn-wrap .next-btn',
+                                            });
+                                            $(sliderId + ' .slick-dots li').each(function(index) {
+                                                if ("${dotsType}" === "number") {
+                                                    $(this).addClass('number');
+                                                } else {
+                                                    $(this).addClass('dot');
+                                                }
                                             });
                                             break;
                                         case 'centermode':
@@ -980,6 +1015,13 @@ function Save({
                                                 prevArrow: '#btn-wrap .prev-btn',
                                                 nextArrow: '#btn-wrap .next-btn',
                                             });
+                                            $(sliderId + ' .slick-dots li').each(function(index) {
+                                                if ("${dotsType}" === "number") {
+                                                    $(this).addClass('number');
+                                                } else {
+                                                    $(this).addClass('dot');
+                                                }
+                                            });
                                             break;
                                         case 'lazyloading':
                                             $(sliderId).slick({
@@ -987,11 +1029,10 @@ function Save({
                                                 slidesToShow: 3,
                                                 slidesToScroll: 1,
                                                 speed:${speed},
-                                                autoplay:${autoplay},
-                                                autoplay:true,
+                                                autoplay:${autoplay}, 
                                                 arrows: ${showArrows},
                                                 autoplaySpeed:${speed},
-                                                infinite:${infinite},
+                                                infinite:${infinite},   
                                                 dots:${dots},
                                                 customPaging: function(sliderId, i) {
                                                     if ("${dotsType}" === "number") { 
@@ -1002,6 +1043,13 @@ function Save({
                                                 },
                                                 prevArrow: '#btn-wrap .prev-btn',
                                                 nextArrow: '#btn-wrap .next-btn',
+                                            });
+                                            $(sliderId + ' .slick-dots li').each(function(index) {
+                                                if ("${dotsType}" === "number") {
+                                                    $(this).addClass('number');
+                                                } else {
+                                                    $(this).addClass('dot');
+                                                }
                                             });
                                             break;
                                     }
@@ -1018,6 +1066,13 @@ function Save({
                                         prevArrow: '#btn-wrap .prev-btn',
                                         nextArrow: '#btn-wrap .next-btn',
                                     });
+                                    $(sliderId + ' .slick-dots li').each(function(index) {
+                                                if ("${dotsType}" === "number") {
+                                                    $(this).addClass('number');
+                                                } else {
+                                                    $(this).addClass('dot');
+                                                }
+                                            });
                                     break;
                             }
                         });
