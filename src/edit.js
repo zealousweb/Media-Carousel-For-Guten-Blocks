@@ -92,19 +92,10 @@ export default function Edit({ attributes, setAttributes }) {
     return (
         <>
             <InspectorControls>
-
                 <Panel title={__("Media Carousel Settings", "media-carousel-for-guten-blocks")}>
                     <PanelBody>
-                        <RangeControl
-                            label={__("Speed of Slider", "media-carousel-for-guten-blocks")}
-                            value={speed}
-                            onChange={(value) => setAttributes({ speed: value })}
-                            min={1000}
-                            max={5000}
-                            step={1000}
-                        />
                         <ToggleControl
-                            label={__("Caption", "media-carousel-for-guten-blocks")}
+                            label={__("Enable Caption", "media-carousel-for-guten-blocks")}
                             checked={caption}
                             onChange={(val) => {
                                 setAttributes({ caption: val });
@@ -119,7 +110,7 @@ export default function Edit({ attributes, setAttributes }) {
                             step={10}
                         />
                     </PanelBody>
-                    <PanelBody title={__("FancyBox Settings", "media-carousel-for-guten-blocks")}>
+                    <PanelBody title={__("FancyBox Settings", "media-carousel-for-guten-blocks")} initialOpen={true}>
                         <ToggleControl
                             label={__("Enable FancyBox", "media-carousel-for-guten-blocks")}
                             checked={attributes.fancybox}
@@ -154,8 +145,7 @@ export default function Edit({ attributes, setAttributes }) {
                             </>
                         }
                     </PanelBody>
-
-                    <PanelBody title={__("Slider Type Settings", "media-carousel-for-guten-blocks")}>
+                    <PanelBody title={__("Slider Type Settings", "media-carousel-for-guten-blocks")} initialOpen={true}>
                         <RadioControl
                             label={__("Slider Type", "media-carousel-for-guten-blocks")}
                             selected={sliderType}
@@ -216,7 +206,14 @@ export default function Edit({ attributes, setAttributes }) {
                                 )}
                             </>
                         )}
-
+                        <RangeControl
+                            label={__("Speed of Slider", "media-carousel-for-guten-blocks")}
+                            value={speed}
+                            onChange={(value) => setAttributes({ speed: value })}
+                            min={1000}
+                            max={5000}
+                            step={1000}
+                        />
                         <ToggleControl
                             label={__("Show Arrows", "media-carousel-for-guten-blocks")}
                             checked={showArrows}
@@ -347,7 +344,6 @@ export default function Edit({ attributes, setAttributes }) {
                             </>
                         )}
                     </PanelBody>
-
                 </Panel>
             </InspectorControls>
 
@@ -480,6 +476,9 @@ export default function Edit({ attributes, setAttributes }) {
                 {`
                         .arrowclass input[type=radio]:checked + label svg{
                             fill:${arrowColor} !important;
+                        }
+                        #${sliderId} .slider-boxwrap .mcfgb-gallery-single img , #${sliderId} .slider-boxwrap .mcfgb-gallery-single video{
+                            border-radius:${borderRadius}px !important;
                         }
                 `}
             </style>

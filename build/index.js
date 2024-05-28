@@ -174,17 +174,8 @@ function Edit({
   }];
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Panel, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Media Carousel Settings", "media-carousel-for-guten-blocks")
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Speed of Slider", "media-carousel-for-guten-blocks"),
-    value: speed,
-    onChange: value => setAttributes({
-      speed: value
-    }),
-    min: 1000,
-    max: 5000,
-    step: 1000
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Caption", "media-carousel-for-guten-blocks"),
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Enable Caption", "media-carousel-for-guten-blocks"),
     checked: caption,
     onChange: val => {
       setAttributes({
@@ -201,7 +192,8 @@ function Edit({
     max: 50,
     step: 10
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("FancyBox Settings", "media-carousel-for-guten-blocks")
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("FancyBox Settings", "media-carousel-for-guten-blocks"),
+    initialOpen: true
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Enable FancyBox", "media-carousel-for-guten-blocks"),
     checked: attributes.fancybox,
@@ -237,7 +229,8 @@ function Edit({
     max: 100,
     step: 10
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slider Type Settings", "media-carousel-for-guten-blocks")
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slider Type Settings", "media-carousel-for-guten-blocks"),
+    initialOpen: true
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RadioControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slider Type", "media-carousel-for-guten-blocks"),
     selected: sliderType,
@@ -305,7 +298,16 @@ function Edit({
     }),
     min: 2,
     max: 4
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Speed of Slider", "media-carousel-for-guten-blocks"),
+    value: speed,
+    onChange: value => setAttributes({
+      speed: value
+    }),
+    min: 1000,
+    max: 5000,
+    step: 1000
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Show Arrows", "media-carousel-for-guten-blocks"),
     checked: showArrows,
     onChange: val => {
@@ -549,6 +551,9 @@ function Edit({
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", null, `
                         .arrowclass input[type=radio]:checked + label svg{
                             fill:${arrowColor} !important;
+                        }
+                        #${sliderId} .slider-boxwrap .mcfgb-gallery-single img , #${sliderId} .slider-boxwrap .mcfgb-gallery-single video{
+                            border-radius:${borderRadius}px !important;
                         }
                 `));
 }
@@ -849,15 +854,19 @@ function Save({
                     /* CSS for arrows */
                     
                     /* CSS for dots */
-                    .slick-dots li {
+                    #${sliderId} .slick-dots li {
                         color: ${dotsColor} !important;
                     }
-                    .mcfgb-gallery-single iframe , .mcfgb-gallery-single img ,.mcfgb-gallery-single video {
+                    #${sliderId} .mcfgb-gallery-single iframe , #${sliderId} .mcfgb-gallery-single img ,#${sliderId} .mcfgb-gallery-single video {
                         border-radius:${borderRadius}px;
                         width:100%;
                     }
-                    #btn-wrap .svg-arrow svg{
+                    #${sliderId} #btn-wrap .svg-arrow svg{
                         fill: ${arrowColor} !important;
+                    }
+                    #${sliderId} .slick-dots li.number{
+                        background: ${dotsColor} !important;
+                        color: #fff !important;
                     }
                 
                 `), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("script", null, `              
@@ -896,8 +905,6 @@ function Save({
                                             prevArrow: '#btn-wrap .prev-btn',
                                             nextArrow: '#btn-wrap .next-btn',
                                         });
-
-                                        // Add classes to the slick dots
                                         $(sliderId + ' .slick-dots li').each(function(index) {
                                             if ("${dotsType}" === "number") {
                                                 $(this).addClass('number');
@@ -6730,7 +6737,7 @@ module.exports = _interopRequireDefault, module.exports.__esModule = true, modul
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"1.0.0","title":"Media Carousel for Guten Blocks","category":"zealblocks","description":"The Media Carousel for Guten Blocks is a dynamic content block that enables users to upload and showcase images and videos in a captivating carousel format. With customizable features such as slider speed, autoplay, infinite loop, and fancybox integration, it offers a seamless and engaging viewing experience. Users can also add captions, customize arrow styles and colors, and adjust dots navigation to match their website\'s aesthetic and functional needs.","example":{},"attributes":{"sliderId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simpleType"},"showArrows":{"type":"boolean"},"arrowType":{"type":"string"},"urls":{"type":"array","items":{"type":"string"}},"simpleType":{"type":"string","default":"simple"},"carouselType":{"type":"string","default":"carousel"},"speed":{"type":"number","minimum":1000,"maximum":5000},"autoplay":{"type":"boolean"},"infinite":{"type":"boolean"},"dots":{"type":"boolean"},"dotsType":{"type":"string","default":"ndots"},"arrowColor":{"type":"string","default":"#000000"},"dotsColor":{"type":"string","default":"#000000"},"borderRadius":{"type":"number","default":0,"minimum":0,"maximum":50},"fancyboxBgColor":{"type":"string","default":"#000000"},"fancyboxWidth":{"type":"number"},"fancyboxOpacity":{"type":"number"},"arrowpos":{"type":"string","default":"side"},"slidesToShow":{"type":"number","default":2},"slidesToScroll":{"type":"number","default":2}},"supports":{"html":false,"align":["wide","full"],"video":true},"textdomain":"media-carousel-for-guten-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"1.0.0","title":"Media Carousel for Guten Blocks","category":"zealblocks","description":"The Media Carousel for Guten Blocks is a dynamic content block that enables users to upload and showcase images and videos in a captivating carousel format. With customizable features such as slider speed, autoplay, infinite loop, and fancybox integration, it offers a seamless and engaging viewing experience. Users can also add captions, customize arrow styles and colors, and adjust dots navigation to match their website\'s aesthetic and functional needs.","example":{},"attributes":{"sliderId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simpleType"},"showArrows":{"type":"boolean"},"arrowType":{"type":"string"},"urls":{"type":"array","items":{"type":"string"}},"simpleType":{"type":"string","default":"simple"},"carouselType":{"type":"string","default":"carousel"},"speed":{"type":"number","default":1000},"autoplay":{"type":"boolean"},"infinite":{"type":"boolean"},"dots":{"type":"boolean"},"dotsType":{"type":"string","default":"ndots"},"arrowColor":{"type":"string","default":"#000000"},"dotsColor":{"type":"string","default":"#000000"},"borderRadius":{"type":"number","default":0},"fancyboxBgColor":{"type":"string","default":"#000000"},"fancyboxWidth":{"type":"number","default":200},"fancyboxOpacity":{"type":"number","default":10},"arrowpos":{"type":"string","default":"side"},"slidesToShow":{"type":"number","default":2},"slidesToScroll":{"type":"number","default":2}},"supports":{"html":false,"align":["wide","full"],"video":true},"textdomain":"media-carousel-for-guten-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

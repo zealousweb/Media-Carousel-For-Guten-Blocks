@@ -171,15 +171,19 @@ export default function Save({ attributes }) {
                     /* CSS for arrows */
                     
                     /* CSS for dots */
-                    .slick-dots li {
+                    #${sliderId} .slick-dots li {
                         color: ${dotsColor} !important;
                     }
-                    .mcfgb-gallery-single iframe , .mcfgb-gallery-single img ,.mcfgb-gallery-single video {
+                    #${sliderId} .mcfgb-gallery-single iframe , #${sliderId} .mcfgb-gallery-single img ,#${sliderId} .mcfgb-gallery-single video {
                         border-radius:${borderRadius}px;
                         width:100%;
                     }
-                    #btn-wrap .svg-arrow svg{
+                    #${sliderId} #btn-wrap .svg-arrow svg{
                         fill: ${arrowColor} !important;
+                    }
+                    #${sliderId} .slick-dots li.number{
+                        background: ${dotsColor} !important;
+                        color: #fff !important;
                     }
                 
                 `}
@@ -221,8 +225,6 @@ export default function Save({ attributes }) {
                                             prevArrow: '#btn-wrap .prev-btn',
                                             nextArrow: '#btn-wrap .next-btn',
                                         });
-
-                                        // Add classes to the slick dots
                                         $(sliderId + ' .slick-dots li').each(function(index) {
                                             if ("${dotsType}" === "number") {
                                                 $(this).addClass('number');

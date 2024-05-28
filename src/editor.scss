@@ -55,11 +55,9 @@
 .slider-boxwrap .mcfgb-gallery-single {
 	max-height: 220px;
 	width: 48% !important;
-	margin-bottom: 4%;
+	margin: 2% 0;
 }
-.slider-boxwrap .mcfgb-gallery-single:last-child {
-    margin: 0;
-}
+
 input.ytb-url,
 input.caption,
 input.caption-video {
@@ -88,7 +86,7 @@ input.caption-video::placeholder {
 	max-width: 100%;
 	width: 100%;
 	object-fit: cover;
-	border-radius: 20px;
+	// border-radius: 20px;
 	transition: 0.3s ease all;
 	box-shadow: 0px 0px 10px #8f8f8f;
 }
