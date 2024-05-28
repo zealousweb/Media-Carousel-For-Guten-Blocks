@@ -35,7 +35,8 @@ import {
     RangeControl,
     ColorPalette,
     Placeholder,
-    Button
+    Button,
+    Panel
 
 } from "@wordpress/components";
 
@@ -63,7 +64,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.js";
 
 export default function Edit({ attributes, setAttributes }) {
-    const { galleryImages = [], urls = [], sliderType, showArrows, arrowType, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, fancyboxBgColor, fancyboxWidth, fancyboxOpacity, arrowpos } = attributes;
+    const { galleryImages = [], urls = [], sliderType, showArrows, arrowType, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, fancyboxBgColor, fancyboxWidth, fancyboxOpacity, arrowpos, slidesToShow, slidesToScroll } = attributes;
     const [sliderId, setSliderId] = useState(attributes.sliderId || '');
 
     useEffect(() => {
@@ -91,29 +92,33 @@ export default function Edit({ attributes, setAttributes }) {
     return (
         <>
             <InspectorControls>
-                <PanelBody title={__("Media Carousel Settings", "media-carousel-for-guten-blocks")}>
-                    <RangeControl
-                        label={__("Speed of Slider", "media-carousel-for-guten-blocks")}
-                        value={speed}
-                        onChange={(value) => setAttributes({ speed: value })}
-                        min={1000}
-                        max={5000}
-                    />
-                    <ToggleControl
-                        label={__("Caption", "media-carousel-for-guten-blocks")}
-                        checked={caption}
-                        onChange={(val) => {
-                            setAttributes({ caption: val });
-                        }}
-                    />
-                    <RangeControl
-                        label={__("Border Radius for Image and Video ", "media-carousel-for-guten-blocks")}
-                        value={borderRadius}
-                        onChange={(value) => setAttributes({ borderRadius: value })}
-                        min={0}
-                        max={50}
-                    />
 
+                <Panel title={__("Media Carousel Settings", "media-carousel-for-guten-blocks")}>
+                    <PanelBody>
+                        <RangeControl
+                            label={__("Speed of Slider", "media-carousel-for-guten-blocks")}
+                            value={speed}
+                            onChange={(value) => setAttributes({ speed: value })}
+                            min={1000}
+                            max={5000}
+                            step={1000}
+                        />
+                        <ToggleControl
+                            label={__("Caption", "media-carousel-for-guten-blocks")}
+                            checked={caption}
+                            onChange={(val) => {
+                                setAttributes({ caption: val });
+                            }}
+                        />
+                        <RangeControl
+                            label={__("Border Radius for Image and Video ", "media-carousel-for-guten-blocks")}
+                            value={borderRadius}
+                            onChange={(value) => setAttributes({ borderRadius: value })}
+                            min={0}
+                            max={50}
+                            step={10}
+                        />
+                    </PanelBody>
                     <PanelBody title={__("FancyBox Settings", "media-carousel-for-guten-blocks")}>
                         <ToggleControl
                             label={__("Enable FancyBox", "media-carousel-for-guten-blocks")}
@@ -136,6 +141,7 @@ export default function Edit({ attributes, setAttributes }) {
                                     onChange={(value) => setAttributes({ fancyboxWidth: value })}
                                     min={200}
                                     max={1200}
+                                    step={100}
                                 />
                                 <RangeControl
                                     label={__("FancyBox Opacity", "media-carousel-for-guten-blocks")}
@@ -143,6 +149,7 @@ export default function Edit({ attributes, setAttributes }) {
                                     onChange={(value) => setAttributes({ fancyboxOpacity: value })}
                                     min={0}
                                     max={100}
+                                    step={10}
                                 />
                             </>
                         }
@@ -177,18 +184,35 @@ export default function Edit({ attributes, setAttributes }) {
                                     />
                                 )}
                                 {sliderType === "carouselType" && (
-                                    <SelectControl
-                                        label={__("Carousel Slider Type", "media-carousel-for-guten-blocks")}
-                                        value={carouselType}
-                                        options={[
-                                            { label: __("Carousel", "media-carousel-for-guten-blocks"), value: "carousel" },
-                                            { label: __("Center Mode", "media-carousel-for-guten-blocks"), value: "centermode" },
-                                            { label: __("Lazy Loading", "media-carousel-for-guten-blocks"), value: "lazyloading" },
-                                        ]}
-                                        onChange={(val) => {
-                                            setAttributes({ carouselType: val });
-                                        }}
-                                    />
+                                    <>
+                                        <SelectControl
+                                            label={__("Carousel Slider Type", "media-carousel-for-guten-blocks")}
+                                            value={carouselType}
+                                            options={[
+                                                { label: __("Carousel", "media-carousel-for-guten-blocks"), value: "carousel" },
+                                                { label: __("Center Mode", "media-carousel-for-guten-blocks"), value: "centermode" },
+                                                { label: __("Lazy Loading", "media-carousel-for-guten-blocks"), value: "lazyloading" },
+                                            ]}
+                                            onChange={(val) => {
+                                                setAttributes({ carouselType: val });
+                                            }}
+                                        />
+                                        <RangeControl
+                                            label={__("Slides To Show", "media-carousel-for-guten-blocks")}
+                                            value={slidesToShow}
+                                            onChange={(value) => setAttributes({ slidesToShow: value })}
+                                            min={2}
+                                            max={4}
+                                        />
+                                        <RangeControl
+                                            label={__("Slides To Scroll", "media-carousel-for-guten-blocks")}
+                                            value={slidesToScroll}
+                                            onChange={(value) => setAttributes({ slidesToScroll: value })}
+                                            min={2}
+                                            max={4}
+                                        />
+
+                                    </>
                                 )}
                             </>
                         )}
@@ -324,8 +348,7 @@ export default function Edit({ attributes, setAttributes }) {
                         )}
                     </PanelBody>
 
-
-                </PanelBody>
+                </Panel>
             </InspectorControls>
 
             <BlockControls>
@@ -454,13 +477,11 @@ export default function Edit({ attributes, setAttributes }) {
             </div>
 
             <style>
-                {
-                    `
+                {`
                         .arrowclass input[type=radio]:checked + label svg{
                             fill:${arrowColor} !important;
                         }
-                    `
-                }
+                `}
             </style>
         </>
     );

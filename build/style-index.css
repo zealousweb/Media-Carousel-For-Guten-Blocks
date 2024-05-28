@@ -76,6 +76,25 @@
   height: 40px;
 }
 
+.custom1 .custom-1 .prev-btn,
+.custom2 .custom-2 .prev-btn,
+.custom3 .custom-3 .prev-btn,
+.custom1 .custom-1 .next-btn,
+.custom2 .custom-2 .next-btn,
+.custom3 .custom-3 .next-btn {
+  display: block !important;
+}
+
+.custom1 .prev-btn :focus,
+.custom2 .prev-btn:focus,
+.custom3 .prev-btn:focus,
+.custom1 .next-btn :focus,
+.custom2 .next-btn:focus,
+.custom3 .next-btn:focus {
+  border: none !important;
+  outline: none !important;
+}
+
 .next-btn svg {
   transform: rotate(180deg);
 }

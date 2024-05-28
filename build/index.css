@@ -22,8 +22,8 @@
 
 .slider-boxwrap {
   display: flex;
-  gap: 24px;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .arrowclass .components-radio-control__option {
@@ -59,6 +59,11 @@
 .slider-boxwrap .mcfgb-gallery-single {
   max-height: 220px;
   width: 48% !important;
+  margin-bottom: 4%;
+}
+
+.slider-boxwrap .mcfgb-gallery-single:last-child {
+  margin: 0;
 }
 
 input.ytb-url,

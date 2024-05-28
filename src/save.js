@@ -25,7 +25,7 @@ import 'react-fancybox/lib/fancybox.css';
 import ReactFancyBox from 'react-fancybox';
 
 export default function Save({ attributes }) {
-    const { galleryImages, sliderType, showArrows, arrowType, sliderId, urls, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, fancyboxBgColor, fancyboxWidth, fancyboxOpacity, arrowpos } = attributes;
+    const { galleryImages, sliderType, showArrows, arrowType, sliderId, urls, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, fancyboxBgColor, fancyboxWidth, fancyboxOpacity, arrowpos ,slidesToShow,slidesToScroll} = attributes;
 
     return (
         <>
@@ -63,7 +63,7 @@ export default function Save({ attributes }) {
                                 );
 
                             } else if (!isYouTubeUrl && isWebsiteUrl && url !== '') {
-                                return (
+                                return (    
                                     <div key={media.id}>
                                         <div className="mcfgb-gallery-single">
                                             <a href={url}>
@@ -209,7 +209,7 @@ export default function Save({ attributes }) {
                                             speed:${speed},
                                             autoplaySpeed:${speed},
                                             autoplay:${autoplay},
-                                            infinite:${infinite},
+                                            infinite: ${autoplay ? true : infinite},        
                                             dots:${dots},
                                             customPaging: function(sliderId, i) {
                                                 if ("${dotsType}" === "number") {
@@ -241,14 +241,13 @@ export default function Save({ attributes }) {
                                                         return '.';
                                                     }
                                                 },
-                                                infinite: true,
                                                 speed:${speed},
                                                 autoplay:${autoplay},
                                                 fade: true,
                                                 cssEase: 'linear',
                                                 arrows: ${showArrows},
                                                 autoplaySpeed:${speed},
-                                                infinite:${infinite},
+                                                infinite: ${autoplay ? true : infinite}, 
                                                 prevArrow: '#btn-wrap .prev-btn',
                                                 nextArrow: '#btn-wrap .next-btn',
                                             });
@@ -271,14 +270,12 @@ export default function Save({ attributes }) {
                                                         return '.';
                                                     }
                                                 },
-                                                infinite: true,
                                                 speed:${speed},
                                                 autoplay:${autoplay},
-                                                slidesToShow: 1,
                                                 adaptiveHeight: true,
                                                 arrows: ${showArrows},
                                                 autoplaySpeed:${speed},
-                                                infinite:${infinite},
+                                                infinite: ${autoplay ? true : infinite}, 
                                                 prevArrow: '#btn-wrap .prev-btn',
                                                 nextArrow: '#btn-wrap .next-btn',
                                             });
@@ -296,9 +293,8 @@ export default function Save({ attributes }) {
                                     switch("${carouselType}") {
                                         case 'carousel':
                                             $(sliderId).slick({
-                                                infinite: true,
-                                                slidesToShow: 3,
-                                                slidesToScroll: 3,
+                                                slidesToShow: ${slidesToShow},
+                                                slidesToScroll: ${slidesToScroll},
                                                 dots:${dots},
                                                 customPaging: function(sliderId, i) {
                                                     if ("${dotsType}" === "number") {
@@ -311,7 +307,7 @@ export default function Save({ attributes }) {
                                                 autoplay:${autoplay},
                                                 arrows: ${showArrows},
                                                 autoplaySpeed:${speed},
-                                                infinite:${infinite},
+                                                infinite: ${autoplay ? true : infinite}, 
                                                 prevArrow: '#btn-wrap .prev-btn',
                                                 nextArrow: '#btn-wrap .next-btn',
                                             });
@@ -327,10 +323,10 @@ export default function Save({ attributes }) {
                                             $(sliderId).slick({
                                                 centerMode: true,
                                                 centerPadding: '60px',
-                                                slidesToShow: 3,
+                                                slidesToShow: ${slidesToShow},
                                                 speed:${speed},
                                                 autoplay:${autoplay},
-                                                infinite:${infinite},
+                                                infinite: ${autoplay ? true : infinite}, 
                                                 responsive: [
                                                     {
                                                         breakpoint: 768,
@@ -338,7 +334,7 @@ export default function Save({ attributes }) {
                                                             arrows: false,
                                                             centerMode: true,
                                                             centerPadding: '40px',
-                                                            slidesToShow: 3
+                                                            slidesToShow: ${slidesToShow}
                                                         }
                                                     },
                                                     {
@@ -375,13 +371,13 @@ export default function Save({ attributes }) {
                                         case 'lazyloading':
                                             $(sliderId).slick({
                                                 lazyLoad: 'ondemand',
-                                                slidesToShow: 3,
-                                                slidesToScroll: 1,
+                                                slidesToShow: ${slidesToShow},
+                                                slidesToScroll: ${slidesToScroll},
                                                 speed:${speed},
                                                 autoplay:${autoplay}, 
                                                 arrows: ${showArrows},
                                                 autoplaySpeed:${speed},
-                                                infinite:${infinite},   
+                                                infinite: ${autoplay ? true : infinite},  
                                                 dots:${dots},
                                                 customPaging: function(sliderId, i) {
                                                     if ("${dotsType}" === "number") { 
@@ -405,13 +401,13 @@ export default function Save({ attributes }) {
                                     break;
                                 default:
                                     $(sliderId).slick({
-                                        slidesToShow: 1,
-                                        slidesToScroll: 1,
+                                        slidesToShow: ${slidesToShow},
+                                        slidesToScroll: ${slidesToScroll},
                                         speed:${speed}, 
                                         autoplay:${autoplay},
                                         autoplaySpeed:${speed},
                                         arrows: ${showArrows},
-                                        infinite:${infinite},
+                                        infinite: ${autoplay ? true : infinite}, 
                                         prevArrow: '#btn-wrap .prev-btn',
                                         nextArrow: '#btn-wrap .next-btn',
                                     });
