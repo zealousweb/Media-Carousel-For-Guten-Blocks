@@ -144,6 +144,12 @@ input.caption-video::placeholder {
   flex-direction: row;
   justify-content: space-between;
 }
+
+img.type_image {
+  width: auto;
+  height: auto;
+  margin-bottom: 20px;
+}
 /*!*************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./node_modules/slick-carousel/slick/slick.css ***!
   \*************************************************************************************************************************************************************************************************/

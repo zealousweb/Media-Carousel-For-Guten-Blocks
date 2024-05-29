@@ -58,10 +58,11 @@ import "./editor.scss";
  */
 
 import { useState, useEffect } from "@wordpress/element";
-import $ from "jquery";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.js";
+import carousel from '../assets/type-carousel.png';
+import simple from '../assets/type-slider.png';
 
 export default function Edit({ attributes, setAttributes }) {
     const { galleryImages = [], urls = [], sliderType, showArrows, arrowType, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, fancyboxBgColor, fancyboxWidth, fancyboxOpacity, arrowpos, slidesToShow, slidesToScroll } = attributes;
@@ -160,21 +161,25 @@ export default function Edit({ attributes, setAttributes }) {
                         {sliderType && (
                             <>
                                 {sliderType === "simpleType" && (
-                                    <SelectControl
-                                        label={__("Simple Slider Type", "media-carousel-for-guten-blocks")}
-                                        value={simpleType}
-                                        options={[
-                                            { label: __("Simple", "media-carousel-for-guten-blocks"), value: "simple" },
-                                            { label: __("Fade", "media-carousel-for-guten-blocks"), value: "fade" },
-                                            { label: __("Adaptive Height", "media-carousel-for-guten-blocks"), value: "adaptiveheight" },
-                                        ]}
-                                        onChange={(val) => {
-                                            setAttributes({ simpleType: val });
-                                        }}
-                                    />
+                                    <>
+                                        <img src={simple} className="type_image" />
+                                        <SelectControl
+                                            label={__("Simple Slider Type", "media-carousel-for-guten-blocks")}
+                                            value={simpleType}
+                                            options={[
+                                                { label: __("Simple", "media-carousel-for-guten-blocks"), value: "simple" },
+                                                { label: __("Fade", "media-carousel-for-guten-blocks"), value: "fade" },
+                                                { label: __("Adaptive Height", "media-carousel-for-guten-blocks"), value: "adaptiveheight" },
+                                            ]}
+                                            onChange={(val) => {
+                                                setAttributes({ simpleType: val });
+                                            }}
+                                        />
+                                    </>
                                 )}
                                 {sliderType === "carouselType" && (
                                     <>
+                                        <img src={carousel} className="type_image" />
                                         <SelectControl
                                             label={__("Carousel Slider Type", "media-carousel-for-guten-blocks")}
                                             value={carouselType}
@@ -224,7 +229,7 @@ export default function Edit({ attributes, setAttributes }) {
                         {showArrows && (
                             <>
                                 <RadioControl
-                                    className={` arrowclass  ${arrowType}`}
+                                    className={` arrowclass  ${arrowType} ${sliderId}`}
                                     label={__("Arrow Type", "media-carousel-for-guten-blocks")}
                                     selected={arrowType}
                                     options={[
@@ -283,7 +288,7 @@ export default function Edit({ attributes, setAttributes }) {
 
                                 <RadioControl
                                     className="arrowpos"
-                                    label={__("Arrow Type", "media-carousel-for-guten-blocks")}
+                                    label={__("Arrow Position", "media-carousel-for-guten-blocks")}
                                     selected={arrowpos}
                                     options={[
                                         { label: "Bottom", value: "bottom" },
@@ -478,7 +483,7 @@ export default function Edit({ attributes, setAttributes }) {
 
             <style>
                 {`
-                        .arrowclass.${arrowType} input[type=radio]:checked + label svg g{
+                        .arrowclass.${arrowType}.${sliderId} input[type=radio]:checked + label svg g{
                             fill:${arrowColor} !important;
                         }
                         #${sliderId} .slider-boxwrap .mcfgb-gallery-single img , #${sliderId} .slider-boxwrap .mcfgb-gallery-single video{

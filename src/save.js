@@ -16,13 +16,12 @@ import { InnerBlocks, useBlockProps } from "@wordpress/block-editor";
  * @return {WPElement} Element to render.
  */
 
-import $ from "jquery";
+
 import React from 'react';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.js";
 import 'react-fancybox/lib/fancybox.css';
-import ReactFancyBox from 'react-fancybox';
 
 export default function Save({ attributes }) {
     const { galleryImages, sliderType, showArrows, arrowType, sliderId, urls, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, fancyboxBgColor, fancyboxWidth, fancyboxOpacity, arrowpos, slidesToShow, slidesToScroll } = attributes;
