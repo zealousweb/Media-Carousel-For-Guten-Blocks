@@ -552,7 +552,7 @@ function Edit({
                         .arrowclass input[type=radio]:checked + label svg{
                             fill:${arrowColor} !important;
                         }
-                        #${sliderId} .slider-boxwrap .mcfgb-gallery-single img , #${sliderId} .slider-boxwrap .mcfgb-gallery-single video{
+                        .slider-boxwrap .mcfgb-gallery-single img , .slider-boxwrap .mcfgb-gallery-single video{
                             border-radius:${borderRadius}px !important;
                         }
                 `));
@@ -713,7 +713,7 @@ function Save({
     slidesToScroll
   } = attributes;
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `${arrowpos} ${showArrows}`
+    className: `${arrowpos} ${sliderType}  ${showArrows}`
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: sliderId
   }, galleryImages && galleryImages.map((media, index) => {
@@ -796,10 +796,10 @@ function Save({
     }
     return null;
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    id: "btn-wrap",
+    id: `btn-wrap-${sliderId}`,
     class: arrowType
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    class: "custom-1 svg-arrow"
+  }, arrowType === 'custom1' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "svg-arrow"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "prev-btn"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
@@ -818,8 +818,8 @@ function Save({
     d: "M154.52,265.848l90.964,69.014c2.329,1.766,4.674,2.702,6.78,2.702c2.148,0,4.022-0.974,5.276-2.741 c1.199-1.688,1.807-3.99,1.807-6.844v-26.424c0-6.952,5.656-12.608,12.607-12.608h75.036c8.705,0,15.788-7.085,15.788-15.788 v-34.313c0-8.703-7.083-15.788-15.788-15.788h-75.036c-6.951,0-12.607-5.656-12.607-12.608v-26.425 c0-7.065-3.659-9.584-7.082-9.584c-2.106,0-4.451,0.936-6.78,2.702l-90.964,69.014c-3.416,2.59-5.297,6.087-5.297,9.849 C149.223,259.762,151.103,263.259,154.52,265.848z"
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M256,0C114.842,0,0.002,114.84,0.002,256S114.842,512,256,512c141.158,0,255.998-114.84,255.998-256 S397.158,0,256,0z M256,66.785c104.334,0,189.216,84.879,189.216,189.215S360.334,445.215,256,445.215S66.783,360.336,66.783,256 S151.667,66.785,256,66.785z"
-  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    class: "custom-2 svg-arrow"
+  })))), arrowType === 'custom2' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "svg-arrow"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "prev-btn"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
@@ -836,8 +836,8 @@ function Save({
     d: "M256,5.333C114.88,5.333,0,117.76,0,256s114.88,250.667,256,250.667S512,394.24,512,256S397.12,5.333,256,5.333z M256,485.333C126.613,485.333,21.333,382.4,21.333,256S126.613,26.667,256,26.667S490.667,129.493,490.667,256 S385.387,485.333,256,485.333z"
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M337.387,381.013c-0.107-0.107-0.32-0.213-0.427-0.32L167.36,256l169.6-124.8c4.8-3.413,5.76-10.133,2.347-14.827 c-3.52-4.8-10.133-5.76-14.933-2.24L143.04,247.467c-4.693,3.52-5.76,10.133-2.24,14.933c0.64,0.853,1.387,1.6,2.24,2.24 l181.333,133.227c4.693,3.627,11.307,2.773,14.933-1.92C342.933,391.253,342.08,384.64,337.387,381.013z"
-  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    class: "custom-3 svg-arrow"
+  })))), arrowType === 'custom3' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "svg-arrow"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "prev-btn"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
@@ -861,12 +861,18 @@ function Save({
                         border-radius:${borderRadius}px;
                         width:100%;
                     }
-                    #${sliderId} #btn-wrap .svg-arrow svg{
+                    #btn-wrap-${sliderId} .svg-arrow svg{
                         fill: ${arrowColor} !important;
                     }
                     #${sliderId} .slick-dots li.number{
                         background: ${dotsColor} !important;
                         color: #fff !important;
+                    }
+
+                    #${sliderId} .slick-dots li.dot {
+                        background: ${dotsColor};
+                        border-radius: 50%;
+                        font-size: 0;
                     }
                 
                 `), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("script", null, `              
@@ -893,7 +899,7 @@ function Save({
                                             speed:${speed},
                                             autoplaySpeed:${speed},
                                             autoplay:${autoplay},
-                                            infinite: ${autoplay ? true : infinite},        
+                                            infinite: ${autoplay ? true : typeof infinite !== 'undefined' ? infinite : false},       
                                             dots:${dots},
                                             customPaging: function(sliderId, i) {
                                                 if ("${dotsType}" === "number") {
@@ -902,8 +908,8 @@ function Save({
                                                     return '.';
                                                 }
                                             },
-                                            prevArrow: '#btn-wrap .prev-btn',
-                                            nextArrow: '#btn-wrap .next-btn',
+                                            prevArrow: '#btn-wrap-${sliderId} .prev-btn',
+                                            nextArrow: '#btn-wrap-${sliderId} .next-btn',
                                         });
                                         $(sliderId + ' .slick-dots li').each(function(index) {
                                             if ("${dotsType}" === "number") {
@@ -929,11 +935,10 @@ function Save({
                                                 cssEase: 'linear',
                                                 arrows: ${showArrows},
                                                 autoplaySpeed:${speed},
-                                                infinite: ${autoplay ? true : infinite}, 
-                                                prevArrow: '#btn-wrap .prev-btn',
-                                                nextArrow: '#btn-wrap .next-btn',
+                                                infinite: ${autoplay ? true : typeof infinite !== 'undefined' ? infinite : false},
+                                                prevArrow: '#btn-wrap-${sliderId} .prev-btn',
+                                                nextArrow: '#btn-wrap-${sliderId} .next-btn',
                                             });
-                                            // Add classes to the slick dots
                                             $(sliderId + ' .slick-dots li').each(function(index) {
                                                 if ("${dotsType}" === "number") {
                                                     $(this).addClass('number');
@@ -957,9 +962,9 @@ function Save({
                                                 adaptiveHeight: true,
                                                 arrows: ${showArrows},
                                                 autoplaySpeed:${speed},
-                                                infinite: ${autoplay ? true : infinite}, 
-                                                prevArrow: '#btn-wrap .prev-btn',
-                                                nextArrow: '#btn-wrap .next-btn',
+                                                infinite: ${autoplay ? true : typeof infinite !== 'undefined' ? infinite : false},
+                                                prevArrow: '#btn-wrap-${sliderId} .prev-btn',
+                                                nextArrow: '#btn-wrap-${sliderId} .next-btn',
                                             });
                                             $(sliderId + ' .slick-dots li').each(function(index) {
                                                 if ("${dotsType}" === "number") {
@@ -989,9 +994,9 @@ function Save({
                                                 autoplay:${autoplay},
                                                 arrows: ${showArrows},
                                                 autoplaySpeed:${speed},
-                                                infinite: ${autoplay ? true : infinite}, 
-                                                prevArrow: '#btn-wrap .prev-btn',
-                                                nextArrow: '#btn-wrap .next-btn',
+                                                infinite: ${autoplay ? true : typeof infinite !== 'undefined' ? infinite : false},
+                                                prevArrow: '#btn-wrap-${sliderId} .prev-btn',
+                                                nextArrow: '#btn-wrap-${sliderId} .next-btn',
                                             });
                                             $(sliderId + ' .slick-dots li').each(function(index) {
                                                 if ("${dotsType}" === "number") {
@@ -1008,7 +1013,7 @@ function Save({
                                                 slidesToShow: ${slidesToShow},
                                                 speed:${speed},
                                                 autoplay:${autoplay},
-                                                infinite: ${autoplay ? true : infinite}, 
+                                                infinite: ${autoplay ? true : typeof infinite !== 'undefined' ? infinite : false},
                                                 responsive: [
                                                     {
                                                         breakpoint: 768,
@@ -1039,8 +1044,8 @@ function Save({
                                                         return '.';
                                                     }
                                                 },
-                                                prevArrow: '#btn-wrap .prev-btn',
-                                                nextArrow: '#btn-wrap .next-btn',
+                                                prevArrow: '#btn-wrap-${sliderId} .prev-btn',
+                                                nextArrow: '#btn-wrap-${sliderId} .next-btn',
                                             });
                                             $(sliderId + ' .slick-dots li').each(function(index) {
                                                 if ("${dotsType}" === "number") {
@@ -1059,7 +1064,7 @@ function Save({
                                                 autoplay:${autoplay}, 
                                                 arrows: ${showArrows},
                                                 autoplaySpeed:${speed},
-                                                infinite: ${autoplay ? true : infinite},  
+                                                infinite: ${autoplay ? true : typeof infinite !== 'undefined' ? infinite : false}, 
                                                 dots:${dots},
                                                 customPaging: function(sliderId, i) {
                                                     if ("${dotsType}" === "number") { 
@@ -1068,8 +1073,8 @@ function Save({
                                                         return '.';
                                                     }
                                                 },
-                                                prevArrow: '#btn-wrap .prev-btn',
-                                                nextArrow: '#btn-wrap .next-btn',
+                                                prevArrow: '#btn-wrap-${sliderId} .prev-btn',
+                                                nextArrow: '#btn-wrap-${sliderId} .next-btn',
                                             });
                                             $(sliderId + ' .slick-dots li').each(function(index) {
                                                 if ("${dotsType}" === "number") {
@@ -1089,9 +1094,9 @@ function Save({
                                         autoplay:${autoplay},
                                         autoplaySpeed:${speed},
                                         arrows: ${showArrows},
-                                        infinite: ${autoplay ? true : infinite}, 
-                                        prevArrow: '#btn-wrap .prev-btn',
-                                        nextArrow: '#btn-wrap .next-btn',
+                                        infinite: ${autoplay ? true : typeof infinite !== 'undefined' ? infinite : false},
+                                        prevArrow: '#btn-wrap-${sliderId} .prev-btn',
+                                        nextArrow: '#btn-wrap-${sliderId} .next-btn',
                                     });
                                     $(sliderId + ' .slick-dots li').each(function(index) {
                                                 if ("${dotsType}" === "number") {
@@ -6737,7 +6742,7 @@ module.exports = _interopRequireDefault, module.exports.__esModule = true, modul
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"1.0.0","title":"Media Carousel for Guten Blocks","category":"zealblocks","description":"The Media Carousel for Guten Blocks is a dynamic content block that enables users to upload and showcase images and videos in a captivating carousel format. With customizable features such as slider speed, autoplay, infinite loop, and fancybox integration, it offers a seamless and engaging viewing experience. Users can also add captions, customize arrow styles and colors, and adjust dots navigation to match their website\'s aesthetic and functional needs.","example":{},"attributes":{"sliderId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simpleType"},"showArrows":{"type":"boolean"},"arrowType":{"type":"string"},"urls":{"type":"array","items":{"type":"string"}},"simpleType":{"type":"string","default":"simple"},"carouselType":{"type":"string","default":"carousel"},"speed":{"type":"number","default":1000},"autoplay":{"type":"boolean"},"infinite":{"type":"boolean"},"dots":{"type":"boolean"},"dotsType":{"type":"string","default":"ndots"},"arrowColor":{"type":"string","default":"#000000"},"dotsColor":{"type":"string","default":"#000000"},"borderRadius":{"type":"number","default":0},"fancyboxBgColor":{"type":"string","default":"#000000"},"fancyboxWidth":{"type":"number","default":200},"fancyboxOpacity":{"type":"number","default":10},"arrowpos":{"type":"string","default":"side"},"slidesToShow":{"type":"number","default":2},"slidesToScroll":{"type":"number","default":2}},"supports":{"html":false,"align":["wide","full"],"video":true},"textdomain":"media-carousel-for-guten-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"1.0.0","title":"Media Carousel for Guten Blocks","category":"zealblocks","description":"The Media Carousel for Guten Blocks is a dynamic content block that enables users to upload and showcase images and videos in a captivating carousel format. With customizable features such as slider speed, autoplay, infinite loop, and fancybox integration, it offers a seamless and engaging viewing experience. Users can also add captions, customize arrow styles and colors, and adjust dots navigation to match their website\'s aesthetic and functional needs.","example":{},"attributes":{"sliderId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simpleType"},"showArrows":{"type":"boolean"},"arrowType":{"type":"string","default":"custom1"},"urls":{"type":"array","items":{"type":"string"}},"simpleType":{"type":"string","default":"simple"},"carouselType":{"type":"string","default":"carousel"},"speed":{"type":"number","default":1000},"autoplay":{"type":"boolean"},"infinite":{"type":"boolean"},"dots":{"type":"boolean"},"dotsType":{"type":"string","default":"ndots"},"arrowColor":{"type":"string","default":"#000000"},"dotsColor":{"type":"string","default":"#000000"},"borderRadius":{"type":"number","default":0},"fancyboxBgColor":{"type":"string","default":"#000000"},"fancyboxWidth":{"type":"number","default":200},"fancyboxOpacity":{"type":"number","default":10},"arrowpos":{"type":"string","default":"side"},"slidesToShow":{"type":"number","default":2},"slidesToScroll":{"type":"number","default":2}},"supports":{"html":false,"align":["wide","full"],"video":true},"textdomain":"media-carousel-for-guten-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

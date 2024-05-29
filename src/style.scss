@@ -7,6 +7,8 @@
 .bottom .slick-dots li,
 .side .slick-dots li {
 	opacity: 0.5;
+	width: 10px;
+	height: 10px;
 }
 .bottom .slick-dots li.slick-active,
 .side .slick-dots li.slick-active {
@@ -44,48 +46,33 @@
 	height: 50px;
 	cursor: pointer;
 }
-.svg-arrow {
-	display: none;
-}
-.custom1 .custom-1.svg-arrow {
+.bottom .custom1 .svg-arrow {
 	display: flex !important;
 	justify-content: center;
-	// margin-top: 60px;
-	gap: 20px;
+	gap: 10px;
+	margin-top: 10px;
 }
-.custom2 .custom-2.svg-arrow {
+.bottom .custom2 .svg-arrow {
 	display: flex !important;
 	justify-content: center;
-	// margin-top: 60px;
-	gap: 20px;
+	gap: 10px;
+	margin-top: 10px;
 }
-.custom3 .custom-3.svg-arrow {
+.bottom .custom3 .svg-arrow {
 	display: flex !important;
 	justify-content: center;
-	// margin-top: 60px;
-	gap: 20px;
-	height: 40px;
+	gap: 10px;
+	margin-top: 10px;
 }
-
-.custom1 .custom-1 .prev-btn 
-,.custom2 .custom-2 .prev-btn 
-,.custom3 .custom-3 .prev-btn 
-, .custom1 .custom-1 .next-btn 
-,.custom2 .custom-2 .next-btn 
-,.custom3 .custom-3 .next-btn{
-    display: block !important;
-}
-
 .custom1 .prev-btn :focus,
 .custom2 .prev-btn:focus,
 .custom3 .prev-btn:focus,
 .custom1 .next-btn :focus,
 .custom2 .next-btn:focus,
-.custom3 .next-btn:focus{
+.custom3 .next-btn:focus {
 	border: none !important;
 	outline: none !important;
 }
-
 
 .next-btn svg {
 	transform: rotate(180deg);
@@ -116,7 +103,6 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	// left: -45px !important;
 }
 .side .next-btn {
 	border-radius: 50% !important;
@@ -125,13 +111,11 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	// right: -65px !important;
 }
 
 .side .mcfgb-gallery-single,
 .bottom .mcfgb-gallery-single {
 	position: relative;
-	// padding-top: 13%;
 	padding-top: 70%;
 	margin: 0 10px;
 }
@@ -150,8 +134,9 @@
 }
 .side .slick-dots,
 .bottom .slick-dots {
-	// position: relative !important;
-	bottom: -45px !important;
+	bottom: unset;
+	position: relative;
+	margin: 10px 0 10px;
 }
 
 .side {
@@ -159,28 +144,30 @@
 }
 .side #btn-wrap {
 	position: absolute;
-    top: 50%;
-    width: 100%;
-    left: 0;
-    transform: translateY(-50%);
+	top: 50%;
+	width: 100%;
+	left: 0;
+	transform: translateY(-50%);
 }
 .side .prev-btn.slick-arrow {
 	position: absolute;
-	left: -40px;
+	left: -50px;
 	top: 0;
-
 }
 .side .next-btn.slick-arrow {
 	position: absolute;
-	right: -40px;
+	right: -50px;
 	top: 0;
-
 }
 .bottom #btn-wrap {
 	margin-top: 55px;
 }
-.side.false #btn-wrap,
-.bottom.false #btn-wrap {
+.false .custom1,
+.false .custom2,
+.false .custom3,
+.undefined .custom1,
+.undefined .custom2,
+.undefined .custom3 {
 	display: none;
 }
 .mcfgb-gallery-single {
@@ -189,37 +176,57 @@
 .img-caption {
 	text-align: center;
 	padding: 0 10px;
+	margin: 10px 0 0;
 }
 .slick-dots .number {
 	font-size: 24px;
 }
-.slick-dots .dot {
-	font-size: 85px !important;
-}
 
 @media (max-width: 767px) {
 	.side .next-btn,
-	.side .prev-btn,
+	.side .prev-btn {
+		width: 30px !important;
+		height: 30px !important;
+	}
 	.bottom .next-btn,
 	.bottom .prev-btn {
-		width: 22px !important;
-		height: 22px !important;
+		width: 30px !important;
+		height: 30px !important;
 	}
 
 	.side .prev-btn.slick-arrow {
-		left: -20px;
+		left: -30px;
 	}
 	.side .next-btn.slick-arrow {
-		right: -20px;
-	}
-	.custom3 .custom-3.svg-arrow {
-		height: 20px;
+		right: -30px;
 	}
 }
 
 .slick-dots li.number {
-    width: 26px;
-    height: 25px;
+	width: 26px;
+	height: 25px;
 	font-size: 16px;
-    border-radius: 50%;
+	border-radius: 50%;
+}
+
+.side .custom1,
+.side .custom2,
+.side .custom3 {
+	position: absolute;
+	width: 100%;
+	top: 37%;
+	transform: translateY(-50%);
+}
+
+.simpleType.side .custom3,
+.simpleType.side .custom2,
+.simpleType.side .custom1 {
+	top: 42% !important;
+}
+.bottom .slick-dotted {
+	margin-bottom: 20px !important;
+}
+.carouselType,
+.simpleType {
+	margin-bottom: 100px;
 }

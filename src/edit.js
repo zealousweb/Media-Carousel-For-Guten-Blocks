@@ -477,7 +477,7 @@ export default function Edit({ attributes, setAttributes }) {
                         .arrowclass input[type=radio]:checked + label svg{
                             fill:${arrowColor} !important;
                         }
-                        #${sliderId} .slider-boxwrap .mcfgb-gallery-single img , #${sliderId} .slider-boxwrap .mcfgb-gallery-single video{
+                        .slider-boxwrap .mcfgb-gallery-single img , .slider-boxwrap .mcfgb-gallery-single video{
                             border-radius:${borderRadius}px !important;
                         }
                 `}

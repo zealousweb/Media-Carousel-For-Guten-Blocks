@@ -22,7 +22,8 @@
 			"type": "boolean"
 		},
 		"arrowType": {
-			"type": "string"
+			"type": "string",
+			"default":"custom1"
 		},
 		"urls": {
 			"type": "array",

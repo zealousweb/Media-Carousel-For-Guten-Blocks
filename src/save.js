@@ -25,11 +25,11 @@ import 'react-fancybox/lib/fancybox.css';
 import ReactFancyBox from 'react-fancybox';
 
 export default function Save({ attributes }) {
-    const { galleryImages, sliderType, showArrows, arrowType, sliderId, urls, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, fancyboxBgColor, fancyboxWidth, fancyboxOpacity, arrowpos ,slidesToShow,slidesToScroll} = attributes;
+    const { galleryImages, sliderType, showArrows, arrowType, sliderId, urls, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, fancyboxBgColor, fancyboxWidth, fancyboxOpacity, arrowpos, slidesToShow, slidesToScroll } = attributes;
 
     return (
         <>
-            <div className={`${arrowpos} ${showArrows}`}>
+            <div className={`${arrowpos} ${sliderType}  ${showArrows}`}>
                 <div id={sliderId} >
                     {galleryImages && galleryImages.map((media, index) => {
                         const currentCaption = caption ? media.caption : '';
@@ -63,7 +63,7 @@ export default function Save({ attributes }) {
                                 );
 
                             } else if (!isYouTubeUrl && isWebsiteUrl && url !== '') {
-                                return (    
+                                return (
                                     <div key={media.id}>
                                         <div className="mcfgb-gallery-single">
                                             <a href={url}>
@@ -107,31 +107,34 @@ export default function Save({ attributes }) {
                         return null;
                     })}
                 </div>
-                <div id="btn-wrap" class={arrowType}>
-                    <div class="custom-1 svg-arrow">
-                        <div class="prev-btn">
-                            <svg viewBox="0 0 512 512" fill="#000000">
-                                <path d="M154.52,265.848l90.964,69.014c2.329,1.766,4.674,2.702,6.78,2.702c2.148,0,4.022-0.974,5.276-2.741 c1.199-1.688,1.807-3.99,1.807-6.844v-26.424c0-6.952,5.656-12.608,12.607-12.608h75.036c8.705,0,15.788-7.085,15.788-15.788 v-34.313c0-8.703-7.083-15.788-15.788-15.788h-75.036c-6.951,0-12.607-5.656-12.607-12.608v-26.425 c0-7.065-3.659-9.584-7.082-9.584c-2.106,0-4.451,0.936-6.78,2.702l-90.964,69.014c-3.416,2.59-5.297,6.087-5.297,9.849 C149.223,259.762,151.103,263.259,154.52,265.848z">
+                <div id={`btn-wrap-${sliderId}`} class={arrowType}>
+                    {arrowType === 'custom1' && (
+                        <div class="svg-arrow">
+                            <div class="prev-btn">
+                                <svg viewBox="0 0 512 512" fill="#000000">
+                                    <path d="M154.52,265.848l90.964,69.014c2.329,1.766,4.674,2.702,6.78,2.702c2.148,0,4.022-0.974,5.276-2.741 c1.199-1.688,1.807-3.99,1.807-6.844v-26.424c0-6.952,5.656-12.608,12.607-12.608h75.036c8.705,0,15.788-7.085,15.788-15.788 v-34.313c0-8.703-7.083-15.788-15.788-15.788h-75.036c-6.951,0-12.607-5.656-12.607-12.608v-26.425 c0-7.065-3.659-9.584-7.082-9.584c-2.106,0-4.451,0.936-6.78,2.702l-90.964,69.014c-3.416,2.59-5.297,6.087-5.297,9.849 C149.223,259.762,151.103,263.259,154.52,265.848z">
 
-                                </path>
-                                <path d="M256,0C114.842,0,0.002,114.84,0.002,256S114.842,512,256,512c141.158,0,255.998-114.84,255.998-256 S397.158,0,256,0z M256,66.785c104.334,0,189.216,84.879,189.216,189.215S360.334,445.215,256,445.215S66.783,360.336,66.783,256 S151.667,66.785,256,66.785z">
+                                    </path>
+                                    <path d="M256,0C114.842,0,0.002,114.84,0.002,256S114.842,512,256,512c141.158,0,255.998-114.84,255.998-256 S397.158,0,256,0z M256,66.785c104.334,0,189.216,84.879,189.216,189.215S360.334,445.215,256,445.215S66.783,360.336,66.783,256 S151.667,66.785,256,66.785z">
 
-                                </path>
-                            </svg>
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="next-btn">
+                                <svg viewBox="0 0 512 512" fill="#000000">
+                                    <path d="M154.52,265.848l90.964,69.014c2.329,1.766,4.674,2.702,6.78,2.702c2.148,0,4.022-0.974,5.276-2.741 c1.199-1.688,1.807-3.99,1.807-6.844v-26.424c0-6.952,5.656-12.608,12.607-12.608h75.036c8.705,0,15.788-7.085,15.788-15.788 v-34.313c0-8.703-7.083-15.788-15.788-15.788h-75.036c-6.951,0-12.607-5.656-12.607-12.608v-26.425 c0-7.065-3.659-9.584-7.082-9.584c-2.106,0-4.451,0.936-6.78,2.702l-90.964,69.014c-3.416,2.59-5.297,6.087-5.297,9.849 C149.223,259.762,151.103,263.259,154.52,265.848z">
+
+                                    </path>
+                                    <path d="M256,0C114.842,0,0.002,114.84,0.002,256S114.842,512,256,512c141.158,0,255.998-114.84,255.998-256 S397.158,0,256,0z M256,66.785c104.334,0,189.216,84.879,189.216,189.215S360.334,445.215,256,445.215S66.783,360.336,66.783,256 S151.667,66.785,256,66.785z">
+
+                                    </path>
+                                </svg>
+                            </div>
                         </div>
-                        <div class="next-btn">
-                            <svg viewBox="0 0 512 512" fill="#000000">
-                                <path d="M154.52,265.848l90.964,69.014c2.329,1.766,4.674,2.702,6.78,2.702c2.148,0,4.022-0.974,5.276-2.741 c1.199-1.688,1.807-3.99,1.807-6.844v-26.424c0-6.952,5.656-12.608,12.607-12.608h75.036c8.705,0,15.788-7.085,15.788-15.788 v-34.313c0-8.703-7.083-15.788-15.788-15.788h-75.036c-6.951,0-12.607-5.656-12.607-12.608v-26.425 c0-7.065-3.659-9.584-7.082-9.584c-2.106,0-4.451,0.936-6.78,2.702l-90.964,69.014c-3.416,2.59-5.297,6.087-5.297,9.849 C149.223,259.762,151.103,263.259,154.52,265.848z">
+                    )}
 
-                                </path>
-                                <path d="M256,0C114.842,0,0.002,114.84,0.002,256S114.842,512,256,512c141.158,0,255.998-114.84,255.998-256 S397.158,0,256,0z M256,66.785c104.334,0,189.216,84.879,189.216,189.215S360.334,445.215,256,445.215S66.783,360.336,66.783,256 S151.667,66.785,256,66.785z">
-
-                                </path>
-                            </svg>
-                        </div>
-                    </div>
-
-                    <div class="custom-2 svg-arrow">
+                    {arrowType === 'custom2' && (
+                    <div class="svg-arrow">
                         <div class="prev-btn">
                             <svg viewBox="0 0 512 512">
                                 <path d="M256,5.333C114.88,5.333,0,117.76,0,256s114.88,250.667,256,250.667S512,394.24,512,256S397.12,5.333,256,5.333z M256,485.333C126.613,485.333,21.333,382.4,21.333,256S126.613,26.667,256,26.667S490.667,129.493,490.667,256 S385.387,485.333,256,485.333z">
@@ -149,7 +152,9 @@ export default function Save({ attributes }) {
                             </svg>
                         </div>
                     </div>
-                    <div class="custom-3 svg-arrow">
+                )}
+                {arrowType === 'custom3' && (
+                    <div class="svg-arrow">
                         <div class="prev-btn">
                             <svg viewBox="0 0 512.003 512.003">
                                 <path d="M351.539,256.002l159.07-242.79c2.108-3.226,1.8-7.467-0.76-10.351c-2.568-2.867-6.741-3.686-10.197-1.963L4.719,248.364 C1.826,249.815,0,252.767,0,256.002s1.826,6.187,4.719,7.637l494.933,247.467c1.22,0.606,2.526,0.896,3.814,0.896 c2.381,0,4.719-0.998,6.383-2.859c2.56-2.884,2.867-7.125,0.76-10.351L351.539,256.002z">
@@ -163,7 +168,7 @@ export default function Save({ attributes }) {
                             </svg>
                         </div>
                     </div>
-
+                )}
                 </div>
             </div>
             <style>
@@ -178,12 +183,18 @@ export default function Save({ attributes }) {
                         border-radius:${borderRadius}px;
                         width:100%;
                     }
-                    #${sliderId} #btn-wrap .svg-arrow svg{
+                    #btn-wrap-${sliderId} .svg-arrow svg{
                         fill: ${arrowColor} !important;
                     }
                     #${sliderId} .slick-dots li.number{
                         background: ${dotsColor} !important;
                         color: #fff !important;
+                    }
+
+                    #${sliderId} .slick-dots li.dot {
+                        background: ${dotsColor};
+                        border-radius: 50%;
+                        font-size: 0;
                     }
                 
                 `}
@@ -213,7 +224,7 @@ export default function Save({ attributes }) {
                                             speed:${speed},
                                             autoplaySpeed:${speed},
                                             autoplay:${autoplay},
-                                            infinite: ${autoplay ? true : infinite},        
+                                            infinite: ${autoplay ? true : (typeof infinite !== 'undefined' ? infinite : false)},       
                                             dots:${dots},
                                             customPaging: function(sliderId, i) {
                                                 if ("${dotsType}" === "number") {
@@ -222,8 +233,8 @@ export default function Save({ attributes }) {
                                                     return '.';
                                                 }
                                             },
-                                            prevArrow: '#btn-wrap .prev-btn',
-                                            nextArrow: '#btn-wrap .next-btn',
+                                            prevArrow: '#btn-wrap-${sliderId} .prev-btn',
+                                            nextArrow: '#btn-wrap-${sliderId} .next-btn',
                                         });
                                         $(sliderId + ' .slick-dots li').each(function(index) {
                                             if ("${dotsType}" === "number") {
@@ -249,11 +260,10 @@ export default function Save({ attributes }) {
                                                 cssEase: 'linear',
                                                 arrows: ${showArrows},
                                                 autoplaySpeed:${speed},
-                                                infinite: ${autoplay ? true : infinite}, 
-                                                prevArrow: '#btn-wrap .prev-btn',
-                                                nextArrow: '#btn-wrap .next-btn',
+                                                infinite: ${autoplay ? true : (typeof infinite !== 'undefined' ? infinite : false)},
+                                                prevArrow: '#btn-wrap-${sliderId} .prev-btn',
+                                                nextArrow: '#btn-wrap-${sliderId} .next-btn',
                                             });
-                                            // Add classes to the slick dots
                                             $(sliderId + ' .slick-dots li').each(function(index) {
                                                 if ("${dotsType}" === "number") {
                                                     $(this).addClass('number');
@@ -277,9 +287,9 @@ export default function Save({ attributes }) {
                                                 adaptiveHeight: true,
                                                 arrows: ${showArrows},
                                                 autoplaySpeed:${speed},
-                                                infinite: ${autoplay ? true : infinite}, 
-                                                prevArrow: '#btn-wrap .prev-btn',
-                                                nextArrow: '#btn-wrap .next-btn',
+                                                infinite: ${autoplay ? true : (typeof infinite !== 'undefined' ? infinite : false)},
+                                                prevArrow: '#btn-wrap-${sliderId} .prev-btn',
+                                                nextArrow: '#btn-wrap-${sliderId} .next-btn',
                                             });
                                             $(sliderId + ' .slick-dots li').each(function(index) {
                                                 if ("${dotsType}" === "number") {
@@ -309,9 +319,9 @@ export default function Save({ attributes }) {
                                                 autoplay:${autoplay},
                                                 arrows: ${showArrows},
                                                 autoplaySpeed:${speed},
-                                                infinite: ${autoplay ? true : infinite}, 
-                                                prevArrow: '#btn-wrap .prev-btn',
-                                                nextArrow: '#btn-wrap .next-btn',
+                                                infinite: ${autoplay ? true : (typeof infinite !== 'undefined' ? infinite : false)},
+                                                prevArrow: '#btn-wrap-${sliderId} .prev-btn',
+                                                nextArrow: '#btn-wrap-${sliderId} .next-btn',
                                             });
                                             $(sliderId + ' .slick-dots li').each(function(index) {
                                                 if ("${dotsType}" === "number") {
@@ -328,7 +338,7 @@ export default function Save({ attributes }) {
                                                 slidesToShow: ${slidesToShow},
                                                 speed:${speed},
                                                 autoplay:${autoplay},
-                                                infinite: ${autoplay ? true : infinite}, 
+                                                infinite: ${autoplay ? true : (typeof infinite !== 'undefined' ? infinite : false)},
                                                 responsive: [
                                                     {
                                                         breakpoint: 768,
@@ -359,8 +369,8 @@ export default function Save({ attributes }) {
                                                         return '.';
                                                     }
                                                 },
-                                                prevArrow: '#btn-wrap .prev-btn',
-                                                nextArrow: '#btn-wrap .next-btn',
+                                                prevArrow: '#btn-wrap-${sliderId} .prev-btn',
+                                                nextArrow: '#btn-wrap-${sliderId} .next-btn',
                                             });
                                             $(sliderId + ' .slick-dots li').each(function(index) {
                                                 if ("${dotsType}" === "number") {
@@ -379,7 +389,7 @@ export default function Save({ attributes }) {
                                                 autoplay:${autoplay}, 
                                                 arrows: ${showArrows},
                                                 autoplaySpeed:${speed},
-                                                infinite: ${autoplay ? true : infinite},  
+                                                infinite: ${autoplay ? true : (typeof infinite !== 'undefined' ? infinite : false)}, 
                                                 dots:${dots},
                                                 customPaging: function(sliderId, i) {
                                                     if ("${dotsType}" === "number") { 
@@ -388,8 +398,8 @@ export default function Save({ attributes }) {
                                                         return '.';
                                                     }
                                                 },
-                                                prevArrow: '#btn-wrap .prev-btn',
-                                                nextArrow: '#btn-wrap .next-btn',
+                                                prevArrow: '#btn-wrap-${sliderId} .prev-btn',
+                                                nextArrow: '#btn-wrap-${sliderId} .next-btn',
                                             });
                                             $(sliderId + ' .slick-dots li').each(function(index) {
                                                 if ("${dotsType}" === "number") {
@@ -409,9 +419,9 @@ export default function Save({ attributes }) {
                                         autoplay:${autoplay},
                                         autoplaySpeed:${speed},
                                         arrows: ${showArrows},
-                                        infinite: ${autoplay ? true : infinite}, 
-                                        prevArrow: '#btn-wrap .prev-btn',
-                                        nextArrow: '#btn-wrap .next-btn',
+                                        infinite: ${autoplay ? true : (typeof infinite !== 'undefined' ? infinite : false)},
+                                        prevArrow: '#btn-wrap-${sliderId} .prev-btn',
+                                        nextArrow: '#btn-wrap-${sliderId} .next-btn',
                                     });
                                     $(sliderId + ' .slick-dots li').each(function(index) {
                                                 if ("${dotsType}" === "number") {
