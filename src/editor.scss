@@ -18,9 +18,8 @@
 }
 
 .slider-boxwrap {
-    display: flex;
-    // gap: 24px;
-    flex-wrap: wrap;
+	display: flex;
+	flex-wrap: wrap;
 	justify-content: space-between;
 }
 
@@ -38,6 +37,16 @@
 	position: relative;
 	width: 50px;
 	height: 50px;
+	width: 100%;
+}
+.arrowclass label .svg-arrow {
+    display: flex;
+    gap: 10px;
+}
+.arrowclass .svg-arrow .prev-btn, .arrowclass .svg-arrow .next-btn {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
 }
 .arrowclass .components-radio-control__option label img {
 	max-width: 30px !important;
@@ -86,7 +95,6 @@ input.caption-video::placeholder {
 	max-width: 100%;
 	width: 100%;
 	object-fit: cover;
-	// border-radius: 20px;
 	transition: 0.3s ease all;
 	box-shadow: 0px 0px 10px #8f8f8f;
 }
@@ -110,15 +118,11 @@ input.caption-video::placeholder {
 	top: 50%;
 }
 
-.arrowclass input[type=radio] {
+.arrowclass input[type="radio"] {
 	display: none;
-}
-
-.arrowclass input[type=radio]:checked + label {
-	border-radius: 50%;
 }
 
 .arrowclass .components-flex {
 	flex-direction: row;
-	justify-content: flex-start;
+    justify-content: space-between;
 }

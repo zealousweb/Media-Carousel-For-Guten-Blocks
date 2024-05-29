@@ -41,6 +41,18 @@
   position: relative;
   width: 50px;
   height: 50px;
+  width: 100%;
+}
+
+.arrowclass label .svg-arrow {
+  display: flex;
+  gap: 10px;
+}
+
+.arrowclass .svg-arrow .prev-btn, .arrowclass .svg-arrow .next-btn {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }
 
 .arrowclass .components-radio-control__option label img {
@@ -128,13 +140,9 @@ input.caption-video::placeholder {
   display: none;
 }
 
-.arrowclass input[type=radio]:checked + label {
-  border-radius: 50%;
-}
-
 .arrowclass .components-flex {
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
 }
 /*!*************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./node_modules/slick-carousel/slick/slick.css ***!

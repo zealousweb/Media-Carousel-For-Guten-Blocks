@@ -23,7 +23,7 @@ import {
  * React hook that is used creates a collapsible container that can be toggled open or closed.
  * It provides all the necessary props like the class name.
  *
- * @see https://developer.wordpress.org/block-editor/reference-guides/components/panel/#panelbody
+ * @see https://developer.wordpress.org/block-editor/reference-guides/components/panel/#panelbody  
  */
 import {
     ToolbarGroup,
@@ -145,7 +145,7 @@ export default function Edit({ attributes, setAttributes }) {
                             </>
                         }
                     </PanelBody>
-                    <PanelBody title={__("Slider Type Settings", "media-carousel-for-guten-blocks")} initialOpen={true}>
+                    <PanelBody title={__("Slider Type Settings", "media-carousel-for-guten-blocks")} initialOpen={true} id={sliderId}>
                         <RadioControl
                             label={__("Slider Type", "media-carousel-for-guten-blocks")}
                             selected={sliderType}
@@ -224,43 +224,47 @@ export default function Edit({ attributes, setAttributes }) {
                         {showArrows && (
                             <>
                                 <RadioControl
-                                    className="arrowclass"
+                                    className={` arrowclass  ${arrowType}`}
                                     label={__("Arrow Type", "media-carousel-for-guten-blocks")}
                                     selected={arrowType}
                                     options={[
                                         {
                                             label: <>
 
-                                                <svg viewBox="0 0 512 512" fill="#000000">
-                                                    <path d="M154.52,265.848l90.964,69.014c2.329,1.766,4.674,2.702,6.78,2.702c2.148,0,4.022-0.974,5.276-2.741 c1.199-1.688,1.807-3.99,1.807-6.844v-26.424c0-6.952,5.656-12.608,12.607-12.608h75.036c8.705,0,15.788-7.085,15.788-15.788 v-34.313c0-8.703-7.083-15.788-15.788-15.788h-75.036c-6.951,0-12.607-5.656-12.607-12.608v-26.425 c0-7.065-3.659-9.584-7.082-9.584c-2.106,0-4.451,0.936-6.78,2.702l-90.964,69.014c-3.416,2.59-5.297,6.087-5.297,9.849 C149.223,259.762,151.103,263.259,154.52,265.848z">
-
-                                                    </path>
-                                                    <path d="M256,0C114.842,0,0.002,114.84,0.002,256S114.842,512,256,512c141.158,0,255.998-114.84,255.998-256 S397.158,0,256,0z M256,66.785c104.334,0,189.216,84.879,189.216,189.215S360.334,445.215,256,445.215S66.783,360.336,66.783,256 S151.667,66.785,256,66.785z">
-
-                                                    </path>
-                                                </svg>
-
+                                                <div class="svg-arrow">
+                                                    <div class="prev-btn">
+                                                        <svg viewBox="0 0 30.725 30.725"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M24.078,26.457c0.977,0.978,0.977,2.559,0,3.536c-0.488,0.488-1.128,0.731-1.77,0.731c-0.639,0-1.278-0.243-1.768-0.731 L5.914,15.362l14.629-14.63c0.977-0.977,2.559-0.976,3.535,0c0.977,0.977,0.977,2.56,0,3.536L12.984,15.362L24.078,26.457z"></path> </g> </g></svg>
+                                                    </div>
+                                                    <div class="next-btn">
+                                                        <svg viewBox="0 0 30.725 30.725"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M24.078,26.457c0.977,0.978,0.977,2.559,0,3.536c-0.488,0.488-1.128,0.731-1.77,0.731c-0.639,0-1.278-0.243-1.768-0.731 L5.914,15.362l14.629-14.63c0.977-0.977,2.559-0.976,3.535,0c0.977,0.977,0.977,2.56,0,3.536L12.984,15.362L24.078,26.457z"></path> </g> </g></svg>
+                                                    </div>
+                                                </div>
                                             </>, value: "custom1"
                                         },
                                         {
                                             label: <>
 
-                                                <svg viewBox="0 0 512 512">
-                                                    <path d="M256,5.333C114.88,5.333,0,117.76,0,256s114.88,250.667,256,250.667S512,394.24,512,256S397.12,5.333,256,5.333z M256,485.333C126.613,485.333,21.333,382.4,21.333,256S126.613,26.667,256,26.667S490.667,129.493,490.667,256 S385.387,485.333,256,485.333z">
-                                                    </path>
-                                                    <path d="M337.387,381.013c-0.107-0.107-0.32-0.213-0.427-0.32L167.36,256l169.6-124.8c4.8-3.413,5.76-10.133,2.347-14.827 c-3.52-4.8-10.133-5.76-14.933-2.24L143.04,247.467c-4.693,3.52-5.76,10.133-2.24,14.933c0.64,0.853,1.387,1.6,2.24,2.24 l181.333,133.227c4.693,3.627,11.307,2.773,14.933-1.92C342.933,391.253,342.08,384.64,337.387,381.013z">
-                                                    </path>
-                                                </svg>
-
+                                                <div class="svg-arrow">
+                                                    <div class="prev-btn">
+                                                        <svg viewBox="0 0 8 8"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect x="-0.226" y="4.614" transform="matrix(0.7071 0.7071 -0.7071 0.7071 4.4884 -0.1417)" width="5.283" height="1.466"></rect> <rect x="1.607" y="3.161" width="6.375" height="1.683"></rect> <rect x="-0.233" y="1.921" transform="matrix(0.7069 -0.7073 0.7073 0.7069 -1.1708 2.4817)" width="5.284" height="1.465"></rect> </g></svg>
+                                                    </div>
+                                                    <div class="next-btn">
+                                                        <svg viewBox="0 0 8 8"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect x="-0.226" y="4.614" transform="matrix(0.7071 0.7071 -0.7071 0.7071 4.4884 -0.1417)" width="5.283" height="1.466"></rect> <rect x="1.607" y="3.161" width="6.375" height="1.683"></rect> <rect x="-0.233" y="1.921" transform="matrix(0.7069 -0.7073 0.7073 0.7069 -1.1708 2.4817)" width="5.284" height="1.465"></rect> </g></svg>
+                                                    </div>
+                                                </div>
                                             </>, value: "custom2"
                                         },
                                         {
                                             label: <>
 
-                                                <svg viewBox="0 0 512.003 512.003">
-                                                    <path d="M351.539,256.002l159.07-242.79c2.108-3.226,1.8-7.467-0.76-10.351c-2.568-2.867-6.741-3.686-10.197-1.963L4.719,248.364 C1.826,249.815,0,252.767,0,256.002s1.826,6.187,4.719,7.637l494.933,247.467c1.22,0.606,2.526,0.896,3.814,0.896 c2.381,0,4.719-0.998,6.383-2.859c2.56-2.884,2.867-7.125,0.76-10.351L351.539,256.002z">
-                                                    </path>
-                                                </svg>
+                                                <div class="svg-arrow">
+                                                    <div class="prev-btn">
+                                                        <svg viewBox="0 0 512.013 512.013"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M366.64,256.013L508.677,32.802c5.141-8.107,4.267-18.624-2.176-25.749c-6.443-7.168-16.832-9.067-25.365-4.8 L11.802,236.92c-7.232,3.627-11.797,11.008-11.797,19.093c0,8.085,4.565,15.467,11.797,19.093l469.333,234.667 c3.029,1.515,6.293,2.24,9.536,2.24c5.888,0,11.691-2.432,15.829-7.04c6.443-7.125,7.317-17.643,2.176-25.749L366.64,256.013z"></path> </g> </g> </g></svg>
+                                                    </div>
+                                                    <div class="next-btn">
+                                                        <svg viewBox="0 0 512.013 512.013"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M366.64,256.013L508.677,32.802c5.141-8.107,4.267-18.624-2.176-25.749c-6.443-7.168-16.832-9.067-25.365-4.8 L11.802,236.92c-7.232,3.627-11.797,11.008-11.797,19.093c0,8.085,4.565,15.467,11.797,19.093l469.333,234.667 c3.029,1.515,6.293,2.24,9.536,2.24c5.888,0,11.691-2.432,15.829-7.04c6.443-7.125,7.317-17.643,2.176-25.749L366.64,256.013z"></path> </g> </g> </g></svg>
+                                                    </div>
+                                                </div>
 
                                             </>, value: "custom3"
                                         },
@@ -474,10 +478,10 @@ export default function Edit({ attributes, setAttributes }) {
 
             <style>
                 {`
-                        .arrowclass input[type=radio]:checked + label svg{
+                        .arrowclass.${arrowType} input[type=radio]:checked + label svg g{
                             fill:${arrowColor} !important;
                         }
-                        .slider-boxwrap .mcfgb-gallery-single img , .slider-boxwrap .mcfgb-gallery-single video{
+                        #${sliderId} .slider-boxwrap .mcfgb-gallery-single img , #${sliderId} .slider-boxwrap .mcfgb-gallery-single video{
                             border-radius:${borderRadius}px !important;
                         }
                 `}
