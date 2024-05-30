@@ -1,18 +1,17 @@
 <?php
 /**
  * Plugin Name:       Media Carousel for Guten Blocks
- * Description:       The Media Carousel for Guten Blocks is a dynamic content block that enables users to upload and showcase images and videos in a captivating carousel format. With customizable features such as slider speed, autoplay, infinite loop, and fancybox integration, it offers a seamless and engaging viewing experience. Users can also add captions, customize arrow styles and colors, and adjust dots navigation to match their website's aesthetic and functional needs.
+ * Description:       The Media Carousel for Guten Blocks is a customizable content block that enables dynamic uploading and display of images and videos with options for captions, border radius, FancyBox functionality, slider settings, and customizable navigation arrows and dots.
  * Requires at least: 6.1
  * Requires PHP:      7.4
- * Version:           1.0.0
+ * Version:           1.0
+ * Stable tag:        1.0
  * Author:            <a href="https://www.zealousweb.com/">ZealousWeb</a>
  * License:           GPL-3.0-or-later
  * License URI:       http://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain:       media-carousel-for-guten-blocks
  *
- *
- * @package   Media-Carousel-for-Guten-Blocks
- * @author    ZealousWeb <support@zealousweb.com>
+ * @package           create-block
  */
 
 if (!defined('ABSPATH')) {

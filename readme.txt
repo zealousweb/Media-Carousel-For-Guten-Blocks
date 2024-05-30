@@ -8,15 +8,12 @@ Stable tag:        1.0
 License:           GPL-3.0-or-later
 License URI:       http://www.gnu.org/licenses/gpl-3.0.html
 
-
-The Media Carousel for Guten Blocks is a versatile content block that enables users to dynamically upload and display images and videos. It offers a range of customizable features to enhance the presentation of media. Users can enable captions for their media, adjust the border radius for both images and videos, and utilize FancyBox settings to activate fancybox functionality for an enhanced viewing experience. The Slider Type settings provide options to choose the type of slider, adjust its speed, and configure autoplay and infinite loop features. Additionally, users can show or hide navigation arrows, with customizable styles and colors, and select the type and color of navigation dots to match their design preferences.
+The Media Carousel for Guten Blocks: Customize media display with captions, border radius, FancyBox, sliders, and navigation options.
 
 == Description ==
 
-This is the long description. No limit, and you can use Markdown (as well as in the following sections).
+The Media Carousel for Guten Blocks is a versatile content block that enables users to dynamically upload and display images and videos. It offers a range of customizable features to enhance the presentation of media. Users can enable captions for their media, adjust the border radius for both images and videos, and utilize FancyBox settings to activate fancybox functionality for an enhanced viewing experience. The Slider Type settings provide options to choose the type of slider, adjust its speed, and configure autoplay and infinite loop features. Additionally, users can show or hide navigation arrows, with customizable styles and colors, and select the type and color of navigation dots to match their design preferences.
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
 
 == Installation ==
 

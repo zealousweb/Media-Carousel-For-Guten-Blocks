@@ -1061,7 +1061,8 @@ function Save({
                     }
                     #${sliderId} .mcfgb-gallery-single iframe , #${sliderId} .mcfgb-gallery-single img ,#${sliderId} .mcfgb-gallery-single video {
                         border-radius:${borderRadius}px;
-                        width:100%;
+                        width:100% !important;
+                        height: 100% !important;
                     }
                     #btn-wrap-${sliderId} .svg-arrow svg{
                         fill: ${arrowColor} !important;
