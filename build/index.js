@@ -686,22 +686,76 @@ __webpack_require__.r(__webpack_exports__);
  */
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_5__.name, {
   icon: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
-    fill: "#000000",
-    viewBox: "0 0 30 30",
-    xmlns: "http://www.w3.org/2000/svg"
+    width: "441.5",
+    height: "331.2",
+    viewBox: "0 0 441.5 331.2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
-    id: "SVGRepo_bgCarrier",
-    "stroke-width": "0"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
-    id: "SVGRepo_tracerCarrier",
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
-    id: "SVGRepo_iconCarrier"
+    id: "Media_Carousel_Icon",
+    "data-name": "Media Carousel Icon",
+    transform: "translate(-36.8 -100)"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
+    id: "Group_22945",
+    "data-name": "Group 22945"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
+    id: "Group_22944",
+    "data-name": "Group 22944"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
+    id: "Group_22943",
+    "data-name": "Group 22943"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
+    id: "Group_22942",
+    "data-name": "Group 22942"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-    d: "M19.5 9c-.492-.004-.916.242-1.092.47l-2.737 3.457c-.17.208-.55.073-.727-.03l-2.455-1.547c-.29-.19-.62-.35-.988-.35-.38 0-.786.114-1.072.434l-3.293 3.724c-.445.498.3 1.166.746.668l3.294-3.724c.218-.234.535-.05.765.084l2.46 1.552.012.006c.306.19.65.252.988.256.34.004.71-.027.985-.36l2.767-3.5c.217-.263.534-.14.744.04l2.254 1.688c.527.477 1.205-.375.62-.78l-2.252-1.69C20.252 9.188 19.913 9 19.5 9zm-12 8h15c.277 0 .5.223.5.5s-.223.5-.5.5h-15c-.277 0-.5-.223-.5-.5s.223-.5.5-.5zM11 5c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 1c.558 0 1 .442 1 1s-.442 1-1 1-1-.442-1-1 .442-1 1-1zm14 19.5a.5.5 0 0 1-.5.5.5.5 0 0 1-.5-.5.5.5 0 0 1 .5-.5.5.5 0 0 1 .5.5zm-19 0a.5.5 0 0 1-.5.5.5.5 0 0 1-.5-.5.5.5 0 0 1 .5-.5.5.5 0 0 1 .5.5zm9-1.5c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 1c.563 0 1 .437 1 1s-.437 1-1 1-1-.437-1-1 .437-1 1-1zM26.5 3c-.665 0-.648 1 0 1h2c.286 0 .5.214.5.5v14c0 .286-.214.5-.5.5h-2c-.654 0-.66 1 0 1h2c.822 0 1.5-.678 1.5-1.5v-14c0-.822-.678-1.5-1.5-1.5zm-25 0C.678 3 0 3.678 0 4.5v14c0 .822.678 1.5 1.5 1.5h2c.66 0 .665-1 0-1h-2c-.286 0-.5-.214-.5-.5v-14c0-.286.214-.5.5-.5h2c.66 0 .66-1 0-1zm5-1C5.678 2 5 2.678 5 3.5v16c0 .822.678 1.5 1.5 1.5h17c.822 0 1.5-.678 1.5-1.5v-16c0-.822-.678-1.5-1.5-1.5zm0 1h17c.286 0 .5.214.5.5v16c0 .286-.214.5-.5.5h-17c-.286 0-.5-.214-.5-.5v-16c0-.286.214-.5.5-.5z"
+    id: "Path_4238",
+    "data-name": "Path 4238",
+    d: "M388.5,100h-262a17.2,17.2,0,0,0-17.2,17.2V348.3a17.2,17.2,0,0,0,17.2,17.2h262a17.2,17.2,0,0,0,17.2-17.2V117.1A17.114,17.114,0,0,0,388.5,100ZM288.1,240.1l-26.4,15.2-26.4,15.2a8.521,8.521,0,0,1-12.8-7.4v-61a8.553,8.553,0,0,1,12.8-7.4l26.4,15.2,26.4,15.2A8.716,8.716,0,0,1,288.1,240.1Z",
+    fill: "#f7964b"
+  }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
+    id: "Group_22950",
+    "data-name": "Group 22950"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
+    id: "Group_22949",
+    "data-name": "Group 22949"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
+    id: "Group_22946",
+    "data-name": "Group 22946",
+    opacity: "0.2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    id: "Path_4239",
+    "data-name": "Path 4239",
+    d: "M196.4,426.4h0a7.81,7.81,0,0,1-7.8-7.8h0a7.81,7.81,0,0,1,7.8-7.8h0a7.81,7.81,0,0,1,7.8,7.8h0A7.685,7.685,0,0,1,196.4,426.4Z",
+    fill: "#a18451"
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
+    id: "Group_22947",
+    "data-name": "Group 22947"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    id: "Path_4240",
+    "data-name": "Path 4240",
+    d: "M257.5,431.2h0a12.548,12.548,0,0,1-12.6-12.6h0A12.548,12.548,0,0,1,257.5,406h0a12.548,12.548,0,0,1,12.6,12.6h0A12.676,12.676,0,0,1,257.5,431.2Z",
+    fill: "#f7964b"
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
+    id: "Group_22948",
+    "data-name": "Group 22948",
+    opacity: "0.2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    id: "Path_4241",
+    "data-name": "Path 4241",
+    d: "M318.5,426.4h0a7.81,7.81,0,0,1-7.8-7.8h0a7.81,7.81,0,0,1,7.8-7.8h0a7.81,7.81,0,0,1,7.8,7.8h0A7.81,7.81,0,0,1,318.5,426.4Z",
+    fill: "#a18451"
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    id: "Path_4242",
+    "data-name": "Path 4242",
+    d: "M91.7,326.1H51.5a14.724,14.724,0,0,1-14.7-14.7V151a14.724,14.724,0,0,1,14.7-14.7H91.7Z",
+    fill: "#a18451",
+    opacity: "0.2"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    id: "Path_4243",
+    "data-name": "Path 4243",
+    d: "M423.4,326.1h40.2a14.724,14.724,0,0,0,14.7-14.7V151a14.724,14.724,0,0,0-14.7-14.7H423.4Z",
+    fill: "#a18451",
+    opacity: "0.2"
   }))),
-  /**
+  /**	
    * @see ./edit.js
    */
   edit: _edit__WEBPACK_IMPORTED_MODULE_3__["default"],
