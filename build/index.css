@@ -69,7 +69,6 @@
 }
 
 .slider-boxwrap .mcfgb-gallery-single {
-  max-height: 220px;
   width: 48% !important;
   margin: 2% 0;
 }
@@ -77,29 +76,12 @@
 input.ytb-url,
 input.caption,
 input.caption-video {
-  position: absolute;
-  left: 50%;
-  top: 100%;
-  transform: translate(-50%, -50%);
-  width: 90%;
-  height: 40px;
-  background: transparent;
-  border: 1px solid rgb(255, 255, 255);
-  box-shadow: 5px 5px 10px #fff;
-  color: #fff;
-  opacity: 0;
-  visibility: hidden;
-  transition: 0.3s ease all;
+  height: 37px;
 }
 
-input.ytb-url::-moz-placeholder, input.caption::-moz-placeholder, input.caption-video::-moz-placeholder {
-  color: #fff;
-}
-
-input.ytb-url::placeholder,
-input.caption::placeholder,
-input.caption-video::placeholder {
-  color: #fff;
+.mcfgb-gallery-single input {
+  width: 100%;
+  margin: 5px 0;
 }
 
 .slider-boxwrap .mcfgb-gallery-single img,
@@ -111,29 +93,6 @@ input.caption-video::placeholder {
      object-fit: cover;
   transition: 0.3s ease all;
   box-shadow: 0px 0px 10px #8f8f8f;
-}
-
-.slider-boxwrap .mcfgb-gallery-single:hover img,
-.slider-boxwrap .mcfgb-gallery-single:hover video {
-  filter: blur(4px);
-}
-
-.slider-boxwrap .mcfgb-gallery-single:hover input.ytb-url {
-  opacity: 1;
-  visibility: visible;
-  top: 34%;
-}
-
-.slider-boxwrap .mcfgb-gallery-single:hover input.caption {
-  opacity: 1;
-  visibility: visible;
-  top: 63%;
-}
-
-.slider-boxwrap .mcfgb-gallery-single:hover input.caption-video {
-  opacity: 1;
-  visibility: visible;
-  top: 50%;
 }
 
 .arrowclass input[type=radio] {

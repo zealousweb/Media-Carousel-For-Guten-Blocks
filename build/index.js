@@ -509,7 +509,7 @@ function Edit({
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "color"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dots Color", "media-carousel-for-guten-blocks")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ColorPalette, {
+  }, dotsType === "number" ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Number Color", "media-carousel-for-guten-blocks") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dots Color", "media-carousel-for-guten-blocks")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ColorPalette, {
     value: dotsColor,
     onChange: color => setAttributes({
       dotsColor: color
@@ -518,14 +518,21 @@ function Edit({
   }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.MediaUploadCheck, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.MediaUpload, {
     multiple: "add",
     onSelect: val => {
+      // Filter out any duplicate images
+      const filteredVal = val.filter(media => {
+        return !galleryImages.some(img => img.id === media.id);
+      });
+
+      // Merge existing galleryImages with filtered newly selected media, preserving captions
+      const updatedGallery = [...galleryImages, ...filteredVal.map(media => ({
+        id: media.id,
+        url: media.url,
+        alt: media.alt,
+        type: media.type,
+        caption: media.caption || '' // Include the caption field or set to an empty string if not available
+      }))];
       setAttributes({
-        galleryImages: val.map(media => ({
-          id: media.id,
-          url: media.url,
-          alt: media.alt,
-          type: media.type,
-          caption: media.caption // Include the caption field
-        }))
+        galleryImages: updatedGallery
       });
     },
     allowedTypes: ['image', 'video'],
@@ -598,14 +605,16 @@ function Edit({
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.MediaUploadCheck, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.MediaUpload, {
     multiple: "add",
     onSelect: val => {
+      // Merge existing galleryImages with newly selected media, preserving captions
+      const updatedGallery = [...galleryImages, ...val.map(media => ({
+        id: media.id,
+        url: media.url,
+        alt: media.alt,
+        type: media.type,
+        caption: media.caption || '' // Include the caption field or set to an empty string if not available
+      }))];
       setAttributes({
-        galleryImages: val.map(media => ({
-          id: media.id,
-          url: media.url,
-          alt: media.alt,
-          type: media.type,
-          caption: media.caption // Include the caption field
-        }))
+        galleryImages: updatedGallery
       });
     },
     allowedTypes: ['image', 'video'],
@@ -4507,7 +4516,7 @@ module.exports = window["wp"]["i18n"];
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"1.0.0","title":"Media Carousel for Guten Blocks","category":"zealblocks","description":"The Media Carousel for Guten Blocks is a versatile tool for displaying images and videos, featuring customizable options like slider speed, autoplay, and FancyBox integration to enhance your website\'s design and functionality.","example":{},"attributes":{"sliderId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simpleType"},"showArrows":{"type":"boolean"},"arrowType":{"type":"string","default":"custom1"},"urls":{"type":"array","items":{"type":"string"}},"simpleType":{"type":"string","default":"simple"},"carouselType":{"type":"string","default":"carousel"},"speed":{"type":"number","default":1000},"autoplay":{"type":"boolean"},"infinite":{"type":"boolean"},"dots":{"type":"boolean"},"dotsType":{"type":"string","default":"ndots"},"arrowColor":{"type":"string","default":"#D8613C"},"dotsColor":{"type":"string","default":"#000000"},"borderRadius":{"type":"number","default":0},"fancyboxBgColor":{"type":"string","default":"#000000"},"fancyboxWidth":{"type":"number","default":200},"fancyboxOpacity":{"type":"number","default":10},"arrowpos":{"type":"string","default":"side"},"slidesToShow":{"type":"number","default":2},"slidesToScroll":{"type":"number","default":2}},"supports":{"html":false,"align":["wide","full"],"video":true},"textdomain":"media-carousel-for-guten-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"1.0.0","title":"Media Carousel for Guten Blocks","category":"zealblocks","description":"The Media Carousel for Guten Blocks is a versatile tool for displaying images and videos, featuring customizable options like slider speed, autoplay, and FancyBox integration to enhance your website\'s design and functionality.","example":{},"attributes":{"sliderId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simpleType"},"showArrows":{"type":"boolean"},"arrowType":{"type":"string","default":"custom1"},"urls":{"type":"array","items":{"type":"string"}},"simpleType":{"type":"string","default":"simple"},"carouselType":{"type":"string","default":"carousel"},"speed":{"type":"number","default":1000},"autoplay":{"type":"boolean","default":false},"infinite":{"type":"boolean","default":false},"dots":{"type":"boolean","default":false},"dotsType":{"type":"string","default":"ndots"},"arrowColor":{"type":"string","default":"#D8613C"},"dotsColor":{"type":"string","default":"#000000"},"borderRadius":{"type":"number","default":0},"fancyboxBgColor":{"type":"string","default":"#000000"},"fancyboxWidth":{"type":"number","default":200},"fancyboxOpacity":{"type":"number","default":10},"arrowpos":{"type":"string","default":"side"},"slidesToShow":{"type":"number","default":2},"slidesToScroll":{"type":"number","default":2},"caption":{"type":"boolean","default":false}},"supports":{"html":false,"align":["wide","full"],"video":true},"textdomain":"media-carousel-for-guten-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

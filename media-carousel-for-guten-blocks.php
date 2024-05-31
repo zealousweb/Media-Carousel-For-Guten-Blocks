@@ -35,7 +35,7 @@ add_action('init', 'mcfgb_init');
 
 function enqueue_slick_slider()
 {
-    wp_enqueue_style(
+    wp_enqueue_style(     
         'slick-slider-css',
         'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css',
         array(),

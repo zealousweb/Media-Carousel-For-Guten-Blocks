@@ -44,13 +44,16 @@
 			"default": 1000
 		},
 		"autoplay": {
-			"type": "boolean"
+			"type": "boolean",
+			"default": false
 		},
 		"infinite": {
-			"type": "boolean"
+			"type": "boolean",
+			"default": false
 		},
 		"dots": {
-			"type": "boolean"
+			"type": "boolean",
+			"default": false
 		},
 		"dotsType": {
 			"type": "string",
@@ -91,6 +94,10 @@
 		"slidesToScroll": {
 			"type": "number",
 			"default": 2
+		},
+		"caption": {
+			"type": "boolean",
+			"default": false
 		}
 	},
 	"supports": {

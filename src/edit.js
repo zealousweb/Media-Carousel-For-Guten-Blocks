@@ -344,7 +344,9 @@ export default function Edit({ attributes, setAttributes }) {
                                         setAttributes({ dotsType: val });
                                     }}
                                 />
-                                <span className="color">{__("Dots Color", "media-carousel-for-guten-blocks")}</span>
+                                <span className="color">
+                                    {dotsType === "number" ? __("Number Color", "media-carousel-for-guten-blocks") : __("Dots Color", "media-carousel-for-guten-blocks")}
+                                </span>
                                 <ColorPalette
                                     value={dotsColor}
                                     onChange={(color) => setAttributes({ dotsColor: color })}
@@ -362,15 +364,23 @@ export default function Edit({ attributes, setAttributes }) {
                         <MediaUpload
                             multiple="add"
                             onSelect={(val) => {
-                                setAttributes({
-                                    galleryImages: val.map((media) => ({
+                                // Filter out any duplicate images
+                                const filteredVal = val.filter((media) => {
+                                    return !galleryImages.some((img) => img.id === media.id);
+                                });
+
+                                // Merge existing galleryImages with filtered newly selected media, preserving captions
+                                const updatedGallery = [
+                                    ...galleryImages,
+                                    ...filteredVal.map((media) => ({
                                         id: media.id,
                                         url: media.url,
                                         alt: media.alt,
                                         type: media.type,
-                                        caption: media.caption, // Include the caption field
+                                        caption: media.caption || '' // Include the caption field or set to an empty string if not available
                                     }))
-                                });
+                                ];
+                                setAttributes({ galleryImages: updatedGallery });
                             }}
                             allowedTypes={['image', 'video']}
                             value={galleryImages.map((val) => val.id)}
@@ -404,7 +414,7 @@ export default function Edit({ attributes, setAttributes }) {
                                                 const updatedUrls = [...urls];
                                                 updatedUrls[index] = event.target.value;
                                                 setAttributes({ urls: updatedUrls });
-                                            }}
+                                            }} 
                                             placeholder="Enter URL "
                                         />
                                         {caption && (
@@ -457,15 +467,18 @@ export default function Edit({ attributes, setAttributes }) {
                             <MediaUpload
                                 multiple="add"
                                 onSelect={(val) => {
-                                    setAttributes({
-                                        galleryImages: val.map((media) => ({
+                                    // Merge existing galleryImages with newly selected media, preserving captions
+                                    const updatedGallery = [
+                                        ...galleryImages,
+                                        ...val.map((media) => ({
                                             id: media.id,
                                             url: media.url,
                                             alt: media.alt,
                                             type: media.type,
-                                            caption: media.caption, // Include the caption field
+                                            caption: media.caption || '' // Include the caption field or set to an empty string if not available
                                         }))
-                                    });
+                                    ];
+                                    setAttributes({ galleryImages: updatedGallery });
                                 }}
                                 allowedTypes={['image', 'video']}
                                 value={galleryImages.map((val) => val.id)}
