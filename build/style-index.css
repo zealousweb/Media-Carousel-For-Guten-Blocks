@@ -282,6 +282,14 @@
   outline: none;
 }
 
+video:focus {
+  outline: none !important;
+}
+
+.slick-dotted.slick-slider {
+  z-index: 1;
+}
+
 @media (max-width: 767px) {
   .side .svg-arrow .next-btn {
     right: 0;

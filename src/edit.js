@@ -369,19 +369,44 @@ export default function Edit({ attributes, setAttributes }) {
                                     return !galleryImages.some((img) => img.id === media.id);
                                 });
 
-                                // Merge existing galleryImages with filtered newly selected media, preserving captions
-                                const updatedGallery = [
-                                    ...galleryImages,
+                                // Filter out any removed images
+                                const updatedGallery = galleryImages.filter((img) => {
+                                    return val.some((media) => media.id === img.id);
+                                }).map((img) => ({
+                                    id: img.id,
+                                    url: img.url,
+                                    alt: img.alt,
+                                    type: img.type,
+                                    caption: img.caption || ''
+                                }));
+
+                                // Merge filtered newly selected media with the updated gallery, preserving captions
+                                const finalGallery = [
+                                    ...updatedGallery,
                                     ...filteredVal.map((media) => ({
                                         id: media.id,
                                         url: media.url,
                                         alt: media.alt,
                                         type: media.type,
-                                        caption: media.caption || '' // Include the caption field or set to an empty string if not available
+                                        caption: media.caption || '' // Set a default caption if not provided
                                     }))
                                 ];
-                                setAttributes({ galleryImages: updatedGallery });
+
+                                setAttributes({ galleryImages: finalGallery });
                             }}
+
+                            // onSelect={(val) => {
+                            //     setAttributes({
+                            //         galleryImages: val.map((media) => ({
+                            //             id: media.id,
+                            //             url: media.url,
+                            //             alt: media.alt,
+                            //             type: media.type,
+                            //             caption: media.caption, // Include the caption field
+                            //         }))
+                            //     });
+                            // }}
+
                             allowedTypes={['image', 'video']}
                             value={galleryImages.map((val) => val.id)}
                             render={({ open }) => (
@@ -414,7 +439,7 @@ export default function Edit({ attributes, setAttributes }) {
                                                 const updatedUrls = [...urls];
                                                 updatedUrls[index] = event.target.value;
                                                 setAttributes({ urls: updatedUrls });
-                                            }} 
+                                            }}
                                             placeholder="Enter URL "
                                         />
                                         {caption && (
@@ -467,18 +492,15 @@ export default function Edit({ attributes, setAttributes }) {
                             <MediaUpload
                                 multiple="add"
                                 onSelect={(val) => {
-                                    // Merge existing galleryImages with newly selected media, preserving captions
-                                    const updatedGallery = [
-                                        ...galleryImages,
-                                        ...val.map((media) => ({
+                                    setAttributes({
+                                        galleryImages: val.map((media) => ({
                                             id: media.id,
                                             url: media.url,
                                             alt: media.alt,
                                             type: media.type,
-                                            caption: media.caption || '' // Include the caption field or set to an empty string if not available
+                                            caption: media.caption, // Include the caption field
                                         }))
-                                    ];
-                                    setAttributes({ galleryImages: updatedGallery });
+                                    });
                                 }}
                                 allowedTypes={['image', 'video']}
                                 value={galleryImages.map((val) => val.id)}

@@ -523,18 +523,43 @@ function Edit({
         return !galleryImages.some(img => img.id === media.id);
       });
 
-      // Merge existing galleryImages with filtered newly selected media, preserving captions
-      const updatedGallery = [...galleryImages, ...filteredVal.map(media => ({
+      // Filter out any removed images
+      const updatedGallery = galleryImages.filter(img => {
+        return val.some(media => media.id === img.id);
+      }).map(img => ({
+        id: img.id,
+        url: img.url,
+        alt: img.alt,
+        type: img.type,
+        caption: img.caption || ''
+      }));
+
+      // Merge filtered newly selected media with the updated gallery, preserving captions
+      const finalGallery = [...updatedGallery, ...filteredVal.map(media => ({
         id: media.id,
         url: media.url,
         alt: media.alt,
         type: media.type,
-        caption: media.caption || '' // Include the caption field or set to an empty string if not available
+        caption: media.caption || '' // Set a default caption if not provided
       }))];
       setAttributes({
-        galleryImages: updatedGallery
+        galleryImages: finalGallery
       });
-    },
+    }
+
+    // onSelect={(val) => {
+    //     setAttributes({
+    //         galleryImages: val.map((media) => ({
+    //             id: media.id,
+    //             url: media.url,
+    //             alt: media.alt,
+    //             type: media.type,
+    //             caption: media.caption, // Include the caption field
+    //         }))
+    //     });
+    // }}
+    ,
+
     allowedTypes: ['image', 'video'],
     value: galleryImages.map(val => val.id),
     render: ({
@@ -605,16 +630,14 @@ function Edit({
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.MediaUploadCheck, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.MediaUpload, {
     multiple: "add",
     onSelect: val => {
-      // Merge existing galleryImages with newly selected media, preserving captions
-      const updatedGallery = [...galleryImages, ...val.map(media => ({
-        id: media.id,
-        url: media.url,
-        alt: media.alt,
-        type: media.type,
-        caption: media.caption || '' // Include the caption field or set to an empty string if not available
-      }))];
       setAttributes({
-        galleryImages: updatedGallery
+        galleryImages: val.map(media => ({
+          id: media.id,
+          url: media.url,
+          alt: media.alt,
+          type: media.type,
+          caption: media.caption // Include the caption field
+        }))
       });
     },
     allowedTypes: ['image', 'video'],
@@ -910,10 +933,14 @@ function Save({
           key: media.id
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           className: "mcfgb-gallery-single"
+        }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+          href: media.url,
+          "data-fancybox": `gallery-${sliderId}`,
+          "data-caption": media.alt ? media.alt : "Gallery Image"
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
           src: media.url,
           alt: media.alt ? media.alt : "Gallery Image"
-        })), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        }))), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           className: "img-caption"
         }, currentCaption));
       }
@@ -1085,6 +1112,7 @@ function Save({
                         background: ${dotsColor};
                         border-radius: 50%;
                         font-size: 0;
+                        border: 1px solid #000;
                     }
                 
                 `), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("script", null, `              
@@ -1097,7 +1125,6 @@ function Save({
                                     $('body.fancybox-active .fancybox-bg').css('background', '${fancyboxBgColor}');
                                     $('body.fancybox-active .fancybox-container .fancybox-content').css('width', '${fancyboxWidth}');
                                     $('body.fancybox-active .fancybox-bg').css('opacity', '${fancyboxOpacity}%');
-                                    
                                 }
                             });
                             

@@ -77,6 +77,11 @@ input.ytb-url,
 input.caption,
 input.caption-video {
   height: 37px;
+  width: -webkit-fill-available;
+  margin: 5px 0;
+  padding: 0 10px;
+  border-radius: 5px;
+  max-width: 100%;
 }
 
 .mcfgb-gallery-single input {

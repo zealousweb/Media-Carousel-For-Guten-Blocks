@@ -80,10 +80,16 @@ export default function Save({ attributes }) {
                                 return (
                                     <div key={media.id}>
                                         <div className="mcfgb-gallery-single">
-                                            <img
+                                            {/* <img
                                                 src={media.url}
                                                 alt={media.alt ? media.alt : "Gallery Image"}
-                                            />
+                                            /> */}
+                                            <a href={media.url} data-fancybox={`gallery-${sliderId}`} data-caption={media.alt ? media.alt : "Gallery Image"}>
+                                                <img
+                                                    src={media.url}
+                                                    alt={media.alt ? media.alt : "Gallery Image"}
+                                                />
+                                            </a>
 
                                         </div>
                                         {currentCaption && <div className="img-caption">{currentCaption}</div>}
@@ -165,6 +171,7 @@ export default function Save({ attributes }) {
                         background: ${dotsColor};
                         border-radius: 50%;
                         font-size: 0;
+                        border: 1px solid #000;
                     }
                 
                 `}
@@ -180,7 +187,6 @@ export default function Save({ attributes }) {
                                     $('body.fancybox-active .fancybox-bg').css('background', '${fancyboxBgColor}');
                                     $('body.fancybox-active .fancybox-container .fancybox-content').css('width', '${fancyboxWidth}');
                                     $('body.fancybox-active .fancybox-bg').css('opacity', '${fancyboxOpacity}%');
-                                    
                                 }
                             });
                             
