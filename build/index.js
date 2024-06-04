@@ -102,7 +102,8 @@ function Edit({
     fancyboxOpacity,
     arrowpos,
     slidesToShow,
-    slidesToScroll
+    slidesToScroll,
+    fancybox
   } = attributes;
   const [sliderId, setSliderId] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(attributes.sliderId || '');
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(() => {
@@ -159,7 +160,7 @@ function Edit({
     initialOpen: true
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Enable FancyBox", "media-carousel-for-guten-blocks"),
-    checked: attributes.fancybox,
+    checked: fancybox,
     onChange: val => {
       setAttributes({
         fancybox: val
@@ -179,7 +180,7 @@ function Edit({
     onChange: value => setAttributes({
       fancyboxWidth: value
     }),
-    min: 200,
+    min: 400,
     max: 1200,
     step: 100
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
@@ -266,10 +267,10 @@ function Edit({
     onChange: value => setAttributes({
       slidesToScroll: value
     }),
-    min: 2,
-    max: 4
+    min: 1,
+    max: 3
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Speed of Slider", "media-carousel-for-guten-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Delay Speed of Slider", "media-carousel-for-guten-blocks"),
     value: speed,
     onChange: value => setAttributes({
       speed: value
@@ -718,6 +719,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_5__.name, {
   icon: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
     width: "441.5",
     height: "331.2",
     viewBox: "0 0 441.5 331.2"
@@ -740,8 +742,7 @@ __webpack_require__.r(__webpack_exports__);
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     id: "Path_4238",
     "data-name": "Path 4238",
-    d: "M388.5,100h-262a17.2,17.2,0,0,0-17.2,17.2V348.3a17.2,17.2,0,0,0,17.2,17.2h262a17.2,17.2,0,0,0,17.2-17.2V117.1A17.114,17.114,0,0,0,388.5,100ZM288.1,240.1l-26.4,15.2-26.4,15.2a8.521,8.521,0,0,1-12.8-7.4v-61a8.553,8.553,0,0,1,12.8-7.4l26.4,15.2,26.4,15.2A8.716,8.716,0,0,1,288.1,240.1Z",
-    fill: "#f7964b"
+    d: "M388.5,100h-262a17.2,17.2,0,0,0-17.2,17.2V348.3a17.2,17.2,0,0,0,17.2,17.2h262a17.2,17.2,0,0,0,17.2-17.2V117.1A17.114,17.114,0,0,0,388.5,100ZM288.1,240.1l-26.4,15.2-26.4,15.2a8.521,8.521,0,0,1-12.8-7.4v-61a8.553,8.553,0,0,1,12.8-7.4l26.4,15.2,26.4,15.2A8.716,8.716,0,0,1,288.1,240.1Z"
   }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
     id: "Group_22950",
     "data-name": "Group 22950"
@@ -751,41 +752,36 @@ __webpack_require__.r(__webpack_exports__);
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
     id: "Group_22946",
     "data-name": "Group 22946",
-    opacity: "0.2"
+    opacity: "0.4"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     id: "Path_4239",
     "data-name": "Path 4239",
-    d: "M196.4,426.4h0a7.81,7.81,0,0,1-7.8-7.8h0a7.81,7.81,0,0,1,7.8-7.8h0a7.81,7.81,0,0,1,7.8,7.8h0A7.685,7.685,0,0,1,196.4,426.4Z",
-    fill: "#a18451"
+    d: "M196.4,426.4h0a7.81,7.81,0,0,1-7.8-7.8h0a7.81,7.81,0,0,1,7.8-7.8h0a7.81,7.81,0,0,1,7.8,7.8h0A7.685,7.685,0,0,1,196.4,426.4Z"
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
     id: "Group_22947",
     "data-name": "Group 22947"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     id: "Path_4240",
     "data-name": "Path 4240",
-    d: "M257.5,431.2h0a12.548,12.548,0,0,1-12.6-12.6h0A12.548,12.548,0,0,1,257.5,406h0a12.548,12.548,0,0,1,12.6,12.6h0A12.676,12.676,0,0,1,257.5,431.2Z",
-    fill: "#f7964b"
+    d: "M257.5,431.2h0a12.548,12.548,0,0,1-12.6-12.6h0A12.548,12.548,0,0,1,257.5,406h0a12.548,12.548,0,0,1,12.6,12.6h0A12.676,12.676,0,0,1,257.5,431.2Z"
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
     id: "Group_22948",
     "data-name": "Group 22948",
-    opacity: "0.2"
+    opacity: "0.4"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     id: "Path_4241",
     "data-name": "Path 4241",
-    d: "M318.5,426.4h0a7.81,7.81,0,0,1-7.8-7.8h0a7.81,7.81,0,0,1,7.8-7.8h0a7.81,7.81,0,0,1,7.8,7.8h0A7.81,7.81,0,0,1,318.5,426.4Z",
-    fill: "#a18451"
+    d: "M318.5,426.4h0a7.81,7.81,0,0,1-7.8-7.8h0a7.81,7.81,0,0,1,7.8-7.8h0a7.81,7.81,0,0,1,7.8,7.8h0A7.81,7.81,0,0,1,318.5,426.4Z"
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     id: "Path_4242",
     "data-name": "Path 4242",
     d: "M91.7,326.1H51.5a14.724,14.724,0,0,1-14.7-14.7V151a14.724,14.724,0,0,1,14.7-14.7H91.7Z",
-    fill: "#a18451",
-    opacity: "0.2"
+    opacity: "0.5"
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     id: "Path_4243",
     "data-name": "Path 4243",
     d: "M423.4,326.1h40.2a14.724,14.724,0,0,0,14.7-14.7V151a14.724,14.724,0,0,0-14.7-14.7H423.4Z",
-    fill: "#a18451",
-    opacity: "0.2"
+    opacity: "0.5"
   }))),
   /**	
    * @see ./edit.js
@@ -890,7 +886,8 @@ function Save({
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
           href: url,
           "data-fancybox": `gallery-${sliderId}`,
-          "data-caption": media.alt ? media.alt : "Gallery Image"
+          "data-caption": media.alt ? media.alt : "Gallery Image",
+          className: "ratio-part"
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
           src: media.url,
           alt: media.alt ? media.alt : "Gallery Image"
@@ -903,6 +900,8 @@ function Save({
           key: media.id
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           className: "mcfgb-gallery-single"
+        }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+          className: "ratio-part"
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("iframe", {
           width: "560",
           height: "315",
@@ -912,7 +911,7 @@ function Save({
           allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
           referrerpolicy: "strict-origin-when-cross-origin",
           allowfullscreen: true
-        })), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        }))), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           className: "img-caption"
         }, currentCaption));
       } else if (!isYouTubeUrl && isWebsiteUrl && url !== '') {
@@ -924,11 +923,12 @@ function Save({
           href: url
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
           src: media.url,
-          alt: media.alt ? media.alt : "Gallery Image"
+          alt: media.alt ? media.alt : "Gallery Image",
+          className: "ratio-part"
         }))), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           className: "img-caption"
         }, currentCaption));
-      } else {
+      } else if (fancybox) {
         return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           key: media.id
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -937,6 +937,20 @@ function Save({
           href: media.url,
           "data-fancybox": `gallery-${sliderId}`,
           "data-caption": media.alt ? media.alt : "Gallery Image"
+        }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+          src: media.url,
+          alt: media.alt ? media.alt : "Gallery Image",
+          className: "ratio-part"
+        }))), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+          className: "img-caption"
+        }, currentCaption));
+      } else {
+        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+          key: media.id
+        }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+          className: "mcfgb-gallery-single"
+        }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+          className: "ratio-part"
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
           src: media.url,
           alt: media.alt ? media.alt : "Gallery Image"
@@ -949,12 +963,14 @@ function Save({
         key: media.id
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "mcfgb-gallery-single"
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "ratio-part"
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("video", {
         controls: true
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("source", {
         src: media.url,
         type: media.mime
-      }))), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      })))), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "img-caption"
       }, currentCaption));
     }
@@ -1127,7 +1143,7 @@ function Save({
                                     $('body.fancybox-active .fancybox-bg').css('opacity', '${fancyboxOpacity}%');
                                 }
                             });
-                            
+                                
                             var sliderId = "#${sliderId}";
                             switch ("${sliderType}") {
                                 case 'simpleType':
@@ -4543,7 +4559,7 @@ module.exports = window["wp"]["i18n"];
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"1.0.0","title":"Media Carousel for Guten Blocks","category":"zealblocks","description":"The Media Carousel for Guten Blocks is a versatile tool for displaying images and videos, featuring customizable options like slider speed, autoplay, and FancyBox integration to enhance your website\'s design and functionality.","example":{},"attributes":{"sliderId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simpleType"},"showArrows":{"type":"boolean"},"arrowType":{"type":"string","default":"custom1"},"urls":{"type":"array","items":{"type":"string"}},"simpleType":{"type":"string","default":"simple"},"carouselType":{"type":"string","default":"carousel"},"speed":{"type":"number","default":1000},"autoplay":{"type":"boolean","default":false},"infinite":{"type":"boolean","default":false},"dots":{"type":"boolean","default":false},"dotsType":{"type":"string","default":"ndots"},"arrowColor":{"type":"string","default":"#D8613C"},"dotsColor":{"type":"string","default":"#000000"},"borderRadius":{"type":"number","default":0},"fancyboxBgColor":{"type":"string","default":"#000000"},"fancyboxWidth":{"type":"number","default":200},"fancyboxOpacity":{"type":"number","default":10},"arrowpos":{"type":"string","default":"side"},"slidesToShow":{"type":"number","default":2},"slidesToScroll":{"type":"number","default":2},"caption":{"type":"boolean","default":false}},"supports":{"html":false,"align":["wide","full"],"video":true},"textdomain":"media-carousel-for-guten-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/gutenberg-media-carousel","version":"1.0.0","title":"Media Carousel for Guten Blocks","category":"zealblocks","description":"The Media Carousel for Guten Blocks is a versatile tool for displaying images and videos, featuring customizable options like slider speed, autoplay, and FancyBox integration to enhance your website\'s design and functionality.","example":{},"attributes":{"sliderId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simpleType"},"showArrows":{"type":"boolean"},"arrowType":{"type":"string","default":"custom1"},"urls":{"type":"array","items":{"type":"string"}},"simpleType":{"type":"string","default":"simple"},"carouselType":{"type":"string","default":"carousel"},"speed":{"type":"number","default":1000},"autoplay":{"type":"boolean","default":false},"infinite":{"type":"boolean","default":false},"dots":{"type":"boolean","default":false},"dotsType":{"type":"string","default":"ndots"},"arrowColor":{"type":"string","default":"#D8613C"},"dotsColor":{"type":"string","default":"#000000"},"borderRadius":{"type":"number","default":0},"fancyboxBgColor":{"type":"string","default":"#000000"},"fancyboxWidth":{"type":"number","default":800},"fancyboxOpacity":{"type":"number","default":10},"arrowpos":{"type":"string","default":"side"},"slidesToShow":{"type":"number","default":2},"slidesToScroll":{"type":"number","default":1},"caption":{"type":"boolean","default":false},"fancybox":{"type":"boolean","default":false}},"supports":{"html":false,"align":["wide","full"],"video":true},"textdomain":"media-carousel-for-guten-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

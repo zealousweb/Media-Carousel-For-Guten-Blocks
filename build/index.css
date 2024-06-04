@@ -84,11 +84,6 @@ input.caption-video {
   max-width: 100%;
 }
 
-.mcfgb-gallery-single input {
-  width: 100%;
-  margin: 5px 0;
-}
-
 .slider-boxwrap .mcfgb-gallery-single img,
 .slider-boxwrap .mcfgb-gallery-single video {
   height: 220px;

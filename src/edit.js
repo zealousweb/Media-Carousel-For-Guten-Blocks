@@ -65,7 +65,7 @@ import carousel from '../assets/type-carousel.png';
 import simple from '../assets/type-slider.png';
 
 export default function Edit({ attributes, setAttributes }) {
-    const { galleryImages = [], urls = [], sliderType, showArrows, arrowType, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, fancyboxBgColor, fancyboxWidth, fancyboxOpacity, arrowpos, slidesToShow, slidesToScroll } = attributes;
+    const { galleryImages = [], urls = [], sliderType, showArrows, arrowType, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, fancyboxBgColor, fancyboxWidth, fancyboxOpacity, arrowpos, slidesToShow, slidesToScroll, fancybox } = attributes;
     const [sliderId, setSliderId] = useState(attributes.sliderId || '');
 
     useEffect(() => {
@@ -114,7 +114,7 @@ export default function Edit({ attributes, setAttributes }) {
                     <PanelBody title={__("FancyBox Settings", "media-carousel-for-guten-blocks")} initialOpen={true}>
                         <ToggleControl
                             label={__("Enable FancyBox", "media-carousel-for-guten-blocks")}
-                            checked={attributes.fancybox}
+                            checked={fancybox}
                             onChange={(val) => {
                                 setAttributes({ fancybox: val });
                             }}
@@ -131,7 +131,7 @@ export default function Edit({ attributes, setAttributes }) {
                                     label={__("FancyBox Width", "media-carousel-for-guten-blocks")}
                                     value={fancyboxWidth}
                                     onChange={(value) => setAttributes({ fancyboxWidth: value })}
-                                    min={200}
+                                    min={400}
                                     max={1200}
                                     step={100}
                                 />
@@ -203,8 +203,8 @@ export default function Edit({ attributes, setAttributes }) {
                                             label={__("Slides To Scroll", "media-carousel-for-guten-blocks")}
                                             value={slidesToScroll}
                                             onChange={(value) => setAttributes({ slidesToScroll: value })}
-                                            min={2}
-                                            max={4}
+                                            min={1}
+                                            max={3}
                                         />
 
                                     </>
@@ -212,7 +212,7 @@ export default function Edit({ attributes, setAttributes }) {
                             </>
                         )}
                         <RangeControl
-                            label={__("Speed of Slider", "media-carousel-for-guten-blocks")}
+                            label={__("Delay Speed of Slider", "media-carousel-for-guten-blocks")}
                             value={speed}
                             onChange={(value) => setAttributes({ speed: value })}
                             min={1000}

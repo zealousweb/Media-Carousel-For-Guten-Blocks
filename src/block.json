@@ -77,7 +77,7 @@
 		},
 		"fancyboxWidth": {
 			"type": "number",
-			"default": 200
+			"default": 800
 		},
 		"fancyboxOpacity": {
 			"type": "number",
@@ -93,9 +93,13 @@
 		},
 		"slidesToScroll": {
 			"type": "number",
-			"default": 2
+			"default": 1
 		},
 		"caption": {
+			"type": "boolean",
+			"default": false
+		},
+		"fancybox":{
 			"type": "boolean",
 			"default": false
 		}

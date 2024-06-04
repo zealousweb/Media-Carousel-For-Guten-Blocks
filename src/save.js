@@ -40,7 +40,7 @@ export default function Save({ attributes }) {
                                 return (
                                     <div key={media.id}>
                                         <div className="mcfgb-gallery-single">
-                                            <a href={url} data-fancybox={`gallery-${sliderId}`} data-caption={media.alt ? media.alt : "Gallery Image"}>
+                                            <a href={url} data-fancybox={`gallery-${sliderId}`} data-caption={media.alt ? media.alt : "Gallery Image"} className="ratio-part">
                                                 <img
                                                     src={media.url}
                                                     alt={media.alt ? media.alt : "Gallery Image"}
@@ -55,7 +55,9 @@ export default function Save({ attributes }) {
                                 return (
                                     <div key={media.id}>
                                         <div className="mcfgb-gallery-single">
-                                            <iframe width="560" height="315" src={`https://www.youtube.com/embed/${videoID}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                            <div className="ratio-part">
+                                                <iframe width="560" height="315" src={`https://www.youtube.com/embed/${videoID}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                            </div>
                                         </div>
                                         {currentCaption && <div className="img-caption">{currentCaption}</div>}
                                     </div>
@@ -69,6 +71,7 @@ export default function Save({ attributes }) {
                                                 <img
                                                     src={media.url}
                                                     alt={media.alt ? media.alt : "Gallery Image"}
+                                                    className="ratio-part"
                                                 />
 
                                             </a>
@@ -76,7 +79,7 @@ export default function Save({ attributes }) {
                                         {currentCaption && <div className="img-caption">{currentCaption}</div>}
                                     </div>
                                 );
-                            } else {
+                            } else if (fancybox) {
                                 return (
                                     <div key={media.id}>
                                         <div className="mcfgb-gallery-single">
@@ -88,8 +91,25 @@ export default function Save({ attributes }) {
                                                 <img
                                                     src={media.url}
                                                     alt={media.alt ? media.alt : "Gallery Image"}
+                                                    className="ratio-part"
                                                 />
                                             </a>
+
+                                        </div>
+                                        {currentCaption && <div className="img-caption">{currentCaption}</div>}
+                                    </div>
+                                );
+                            } else {
+                                return (
+                                    <div key={media.id}>
+                                        <div className="mcfgb-gallery-single">
+                                            <div className="ratio-part">
+
+                                                <img
+                                                    src={media.url}
+                                                    alt={media.alt ? media.alt : "Gallery Image"}
+                                                />
+                                            </div>
 
                                         </div>
                                         {currentCaption && <div className="img-caption">{currentCaption}</div>}
@@ -101,9 +121,11 @@ export default function Save({ attributes }) {
                             return (
                                 <div key={media.id}>
                                     <div className="mcfgb-gallery-single">
-                                        <video controls>
-                                            <source src={media.url} type={media.mime} />
-                                        </video>
+                                        <div className="ratio-part">
+                                            <video controls>
+                                                <source src={media.url} type={media.mime} />
+                                            </video>
+                                        </div>
                                     </div>
                                     {currentCaption && <div className="img-caption">{currentCaption}</div>}
                                 </div>
@@ -189,7 +211,7 @@ export default function Save({ attributes }) {
                                     $('body.fancybox-active .fancybox-bg').css('opacity', '${fancyboxOpacity}%');
                                 }
                             });
-                            
+                                
                             var sliderId = "#${sliderId}";
                             switch ("${sliderType}") {
                                 case 'simpleType':
