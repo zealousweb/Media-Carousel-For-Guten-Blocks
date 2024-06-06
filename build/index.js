@@ -1133,6 +1133,25 @@ function Save({
                 
                 `), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("script", null, `              
                         jQuery(document).ready(function($) {
+                        $('#${sliderId}').on('click', 'a', function(event) {
+                            event.preventDefault();
+                            var index = $(this).parent().index();
+                            $.fancybox.open($('#${sliderId} a'), {
+                                loop: true,
+                                index: index
+                            });
+                        });
+                        $(document).on('afterShow.fb', function(event, instance, slide) {
+                            var fancyIndex = slide.index;
+                            $('#${sliderId}').slick('slickGoTo', fancyIndex, true);
+                        });
+                        function removeGalleryHash() {
+                            if (window.location.hash.startsWith('#gallery-${sliderId}-')) {
+                                history.replaceState("", document.title, window.location.pathname + window.location.search);
+                                window.location.reload();
+                            }
+                        }
+                        removeGalleryHash();
 
                             $('[data-fancybox="gallery-${sliderId}"]').fancybox();
                             $('[data-fancybox="gallery-${sliderId}"]').on('click', function() {
