@@ -206,6 +206,21 @@ export default function Save({ attributes }) {
                             var fancyIndex = slide.index;
                             $('#${sliderId}').slick('slickGoTo', fancyIndex, true);
                         });
+                        
+                        function removeGalleryHash() {
+                            if (window.location.hash.startsWith('#gallery-${sliderId}-')) {
+                                history.replaceState("", document.title, window.location.pathname + window.location.search);
+                                window.location.reload();
+                            }
+                        }
+                        function removeGalleryHash2() {
+                            if (window.location.hash) {
+                                history.replaceState("", document.title, window.location.pathname + window.location.search);
+                                window.location.reload();
+                            }
+                        }
+                        removeGalleryHash();
+                        removeGalleryHash2();
 
                             $('[data-fancybox="gallery-${sliderId}"]').fancybox();
                             $('[data-fancybox="gallery-${sliderId}"]').on('click', function() {
