@@ -184,8 +184,11 @@
 .slick-dots li.number {
 	width: 26px;
 	height: 25px;
-	font-size: 16px;
+	font-size: 10px;
 	border-radius: 50%;
+	display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .carouselType.side .custom1,
@@ -220,7 +223,7 @@
 }
 .carouselType,
 .simpleType {
-	margin-bottom: 100px;
+	margin-bottom: 150px;
 	max-width: 620px !important;
 	margin-left: auto !important;
 	margin-right: auto !important;
@@ -248,6 +251,12 @@
 .side .slick-dots {
 	position: absolute;
 	left: 0;
+}
+.side .slick-dots,.bottom .slick-dots {
+	display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .mcfgb-gallery-single:focus {
