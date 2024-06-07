@@ -40,7 +40,7 @@ export default function Save({ attributes }) {
                                 return (
                                     <div key={media.id}>
                                         <div className="mcfgb-gallery-single">
-                                            <a href={url} data-fancybox={`gallery-${sliderId}`} data-caption={media.alt ? media.alt : "Gallery Image"} className="ratio-part">
+                                            <a href={url} data-fancybox={`gallery-${sliderId}`} data-fancy-class={sliderId} data-caption={media.alt ? media.alt : "Gallery Image"} className="ratio-part">
                                                 <img
                                                     src={media.url}
                                                     alt={media.alt ? media.alt : "Gallery Image"}
@@ -87,7 +87,7 @@ export default function Save({ attributes }) {
                                                 src={media.url}
                                                 alt={media.alt ? media.alt : "Gallery Image"}
                                             /> */}
-                                            <a href={media.url} data-fancybox={`gallery-${sliderId}`} data-caption={media.alt ? media.alt : "Gallery Image"}>
+                                            <a href={media.url} data-fancybox={`gallery-${sliderId}`} data-fancy-class={sliderId} data-caption={media.alt ? media.alt : "Gallery Image"}>
                                                 <img
                                                     src={media.url}
                                                     alt={media.alt ? media.alt : "Gallery Image"}
@@ -195,6 +195,10 @@ export default function Save({ attributes }) {
                         font-size: 0;
                         border: 1px solid #000;
                     }
+                    #${sliderId}-fancy-custom .fancybox-content {
+                        max-width: ${fancyboxWidth}px !important;
+                        width: 100% !important;
+                    }
                 
                 `}
             </style>
@@ -227,7 +231,6 @@ export default function Save({ attributes }) {
                                 $(this).attr('data-fancybox', 'gallery-${sliderId}');
                                 if ($.fancybox.getInstance()) {
                                     $('body.fancybox-active .fancybox-bg').css('background', '${fancyboxBgColor}');
-                                    $('body.fancybox-active .fancybox-container .fancybox-content').css('width', '${fancyboxWidth}');
                                     $('body.fancybox-active .fancybox-bg').css('opacity', '${fancyboxOpacity}%');
                                 }
                             });

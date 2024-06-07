@@ -25,3 +25,14 @@ console.log(
 	'Hello World! (from create-block-gutenberg-media-carousel block)'
 );
 /* eslint-enable no-console */
+var $ = jQuery.noConflict();
+$(() => {
+	jQuery("[data-fancybox]").each(function () {
+		$this = jQuery(this);
+        $datafancyclass = jQuery(this).attr('data-fancy-class');
+        console.log($datafancyclass);
+        Fancybox.bind('[data-fancybox="' + $datafancyclass + '"]', {
+            mainClass: `media-carousel-fancy ` + $datafancyclass + '-fancy-custom',
+		});
+	});
+});

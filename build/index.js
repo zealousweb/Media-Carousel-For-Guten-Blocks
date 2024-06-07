@@ -886,6 +886,7 @@ function Save({
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
           href: url,
           "data-fancybox": `gallery-${sliderId}`,
+          "data-fancy-class": sliderId,
           "data-caption": media.alt ? media.alt : "Gallery Image",
           className: "ratio-part"
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
@@ -936,6 +937,7 @@ function Save({
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
           href: media.url,
           "data-fancybox": `gallery-${sliderId}`,
+          "data-fancy-class": sliderId,
           "data-caption": media.alt ? media.alt : "Gallery Image"
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
           src: media.url,
@@ -1130,6 +1132,10 @@ function Save({
                         font-size: 0;
                         border: 1px solid #000;
                     }
+                    #${sliderId}-fancy-custom .fancybox-content {
+                        max-width: ${fancyboxWidth}px !important;
+                        width: 100% !important;
+                    }
                 
                 `), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("script", null, `              
                         jQuery(document).ready(function($) {
@@ -1159,7 +1165,6 @@ function Save({
                                 $(this).attr('data-fancybox', 'gallery-${sliderId}');
                                 if ($.fancybox.getInstance()) {
                                     $('body.fancybox-active .fancybox-bg').css('background', '${fancyboxBgColor}');
-                                    $('body.fancybox-active .fancybox-container .fancybox-content').css('width', '${fancyboxWidth}');
                                     $('body.fancybox-active .fancybox-bg').css('opacity', '${fancyboxOpacity}%');
                                 }
                             });
