@@ -28,17 +28,17 @@ var __webpack_exports__ = {};
 /* eslint-disable no-console */
 console.log('Hello World! (from create-block-gutenberg-media-carousel block)');
 /* eslint-enable no-console */
-var $ = jQuery.noConflict();
-$(() => {
-  jQuery("[data-fancybox]").each(function () {
-    $this = jQuery(this);
-    $datafancyclass = jQuery(this).attr('data-fancy-class');
-    console.log($datafancyclass);
-    Fancybox.bind('[data-fancybox="' + $datafancyclass + '"]', {
-      mainClass: `media-carousel-fancy ` + $datafancyclass + '-fancy-custom'
-    });
-  });
-});
+// // var $ = jQuery.noConflict();
+// $(() => {
+// 	jQuery("[data-fancybox]").each(function () {
+// 		$this = jQuery(this);
+//         $datafancyclass = jQuery(this).attr('data-fancy-class');
+//         // console.log($datafancyclass);
+//         Fancybox.bind('[data-fancybox="gallery-' + $datafancyclass + '"]', {
+//             mainClass: `media-carousel-fancy-custom ` + $datafancyclass + '-fancy-custom',
+// 		});
+// 	}); 
+// });
 /******/ })()
 ;
 //# sourceMappingURL=view.js.map

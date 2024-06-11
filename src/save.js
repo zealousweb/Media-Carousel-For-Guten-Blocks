@@ -83,10 +83,6 @@ export default function Save({ attributes }) {
                                 return (
                                     <div key={media.id}>
                                         <div className="mcfgb-gallery-single">
-                                            {/* <img
-                                                src={media.url}
-                                                alt={media.alt ? media.alt : "Gallery Image"}
-                                            /> */}
                                             <a href={media.url} data-fancybox={`gallery-${sliderId}`} data-fancy-class={sliderId} data-caption={media.alt ? media.alt : "Gallery Image"}>
                                                 <img
                                                     src={media.url}
@@ -195,9 +191,18 @@ export default function Save({ attributes }) {
                         font-size: 0;
                         border: 1px solid #000;
                     }
-                    #${sliderId}-fancy-custom .fancybox-content {
-                        max-width: ${fancyboxWidth}px !important;
+                     .${sliderId}-fancy-custom .fancybox__backdrop {
+                        background: ${fancyboxBgColor} !important;
+                        opacity: ${fancyboxOpacity}% !important;
+                    }
+                    .${sliderId}-fancy-custom .fancybox__content {
+                        max-width: ${fancyboxWidth}px;
                         width: 100% !important;
+                    }
+                    .fancybox__content{
+                        max-width: ${fancyboxWidth}px;
+                        width: 100% !important;
+                        height: 100% !important;
                     }
                 
                 `}
@@ -206,7 +211,7 @@ export default function Save({ attributes }) {
                 {`              
                         jQuery(document).ready(function($) {
                       
-                        $(document).on('afterShow.fb', function(event, instance, slide) {
+                        $(document).on('afterShow.fb', function(event, instance,slide ) {
                             var fancyIndex = slide.index;
                             $('#${sliderId}').slick('slickGoTo', fancyIndex, true);
                         });
@@ -226,13 +231,13 @@ export default function Save({ attributes }) {
                         removeGalleryHash();
                         removeGalleryHash2();
 
-                            $('[data-fancybox="gallery-${sliderId}"]').fancybox();
-                            $('[data-fancybox="gallery-${sliderId}"]').on('click', function() {
+                           
+                            $('[data-fancybox').each(function(){
                                 $(this).attr('data-fancybox', 'gallery-${sliderId}');
-                                if ($.fancybox.getInstance()) {
-                                    $('body.fancybox-active .fancybox-bg').css('background', '${fancyboxBgColor}');
-                                    $('body.fancybox-active .fancybox-bg').css('opacity', '${fancyboxOpacity}%');
-                                }
+                                var $datafancyclass = $(this).attr('data-fancy-class');
+                                Fancybox.bind('[data-fancybox="gallery-' + $datafancyclass + '"]', {
+                                    mainClass: 'media-carousel-fancy-custom ' + $datafancyclass + '-fancy-custom',
+                               });
                             });
                                 
                             var sliderId = "#${sliderId}";

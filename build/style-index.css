@@ -249,7 +249,6 @@
   margin-bottom: 20px !important;
 }
 
-.carouselType,
 .simpleType {
   margin-bottom: 150px;
   max-width: 620px !important;
@@ -288,6 +287,8 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  padding: 0;
 }
 
 .mcfgb-gallery-single:focus {
