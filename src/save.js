@@ -114,18 +114,38 @@ export default function Save({ attributes }) {
                             }
 
                         } else if (media.type === 'video') {
-                            return (
-                                <div key={media.id}>
-                                    <div className="mcfgb-gallery-single">
-                                        <div className="ratio-part">
-                                            <video controls>
-                                                <source src={media.url} type={media.mime} />
-                                            </video>
+                            if (fancybox) {
+                                return (
+                                    <div key={media.id}>
+                                        <div className="mcfgb-gallery-single">
+                                            <div className="ratio-part">
+                                                <a href={media.url} data-fancybox={`gallery-${sliderId}`} data-fancy-class={sliderId} data-caption={media.alt ? media.alt : "Gallery Image"}>
+                                                    <video controls>
+                                                        <source src={media.url} type={media.mime} />
+                                                    </video>
+                                                </a>
+                                            </div>
+
                                         </div>
+                                        {currentCaption && <div className="img-caption">{currentCaption}</div>}
                                     </div>
-                                    {currentCaption && <div className="img-caption">{currentCaption}</div>}
-                                </div>
-                            );
+                                );
+                            }
+                            else {
+                                return (
+                                    <div key={media.id}>
+                                        <div className="mcfgb-gallery-single">
+                                            <div className="ratio-part">
+                                                <video controls>
+                                                    <source src={media.url} type={media.mime} />
+                                                </video>
+                                            </div>
+
+                                        </div>
+                                        {currentCaption && <div className="img-caption">{currentCaption}</div>}
+                                    </div>
+                                );
+                            }
                         }
                         return null;
                     })}
@@ -223,8 +243,6 @@ export default function Save({ attributes }) {
 
                             var sliderId = "#${sliderId}";
 
-                            
-                            
                                 $("[data-fancybox]").each(function () {
                                     var $this = $(this);
                                     var $datafancyclass = $this.attr('data-fancy-class');
