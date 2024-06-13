@@ -61,26 +61,26 @@ add_action('wp_enqueue_scripts', 'enqueue_slick_slider');
 function enqueue_fancybox()
 {
     // // Enqueue Fancybox JavaScript
-    wp_enqueue_script('fancybox', 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js', array('jquery'), '5.0', true);
+    // wp_enqueue_script('fancybox', 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js', array('jquery'), '5.0', true);
 
     // // Enqueue Fancybox CSS
-    wp_enqueue_style('fancybox-css', 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css', array(), '5.0');
+    // wp_enqueue_style('fancybox-css', 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css', array(), '5.0');
 
-    // wp_enqueue_script(
-    //     'mcfgb-fancybox-library-js',
-    //     plugins_url('/assets/js/fancybox.umd.js', __FILE__),
-    //     array('jquery'),
-    //     '5.0.24',
-    //     false
-    // );
+    wp_enqueue_script(
+        'mcfgb-fancybox-library-js',
+        plugins_url('/assets/js/fancybox.umd.js', __FILE__),
+        array('jquery'),
+        '5.0.24',
+        false
+    );
 
-    // wp_enqueue_style(
-    //     'mcfgb-fancybox-liblibrary-css',
-    //     plugins_url('/assets/css/fancybox.css', __FILE__),
-    //     '',
-    //     '5.0.24',
-    //     ''
-    // );
+    wp_enqueue_style(
+        'mcfgb-fancybox-liblibrary-css',
+        plugins_url('/assets/css/fancybox.css', __FILE__),
+        '',
+        '5.0.24',
+        ''
+    );
 }
 
 add_action('wp_enqueue_scripts', 'enqueue_fancybox');

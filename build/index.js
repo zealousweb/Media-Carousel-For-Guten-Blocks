@@ -1140,54 +1140,54 @@ function Save({
                         max-width: ${fancyboxWidth}px;
                         width: 100% !important;
                     }
-                    .fancybox__content{
-                        max-width: ${fancyboxWidth}px;
-                        width: 100% !important;
-                        height: 100% !important;
-                    }
                 
                 `), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("script", null, `              
                         jQuery(document).ready(function($) {
-                      
-                        $(document).on('afterShow.fb', function(event, instance,slide ) {
-                            var fancyIndex = slide.index;
-                            $('#${sliderId}').slick('slickGoTo', fancyIndex, true);
-                        });
-                        
-                        function removeGalleryHash() {
-                            if (window.location.hash.startsWith('#gallery-${sliderId}-')) {
-                                history.replaceState("", document.title, window.location.pathname + window.location.search);
-                                window.location.reload();
-                            }
-                        }
-                        function removeGalleryHash2() {
-                            if (window.location.hash) {
-                                history.replaceState("", document.title, window.location.pathname + window.location.search);
-                                window.location.reload();
-                            }
-                        }
-                        removeGalleryHash();
-                        removeGalleryHash2();
 
-                           
-                            $('[data-fancybox').each(function(){
-                                $(this).attr('data-fancybox', 'gallery-${sliderId}');
-                                var $datafancyclass = $(this).attr('data-fancy-class');
-                                Fancybox.bind('[data-fancybox="gallery-' + $datafancyclass + '"]', {
-                                    mainClass: 'media-carousel-fancy-custom ' + $datafancyclass + '-fancy-custom',
-                               });
-                            });
-                                
+                            function removeGalleryHash() {
+                                if (window.location.hash.startsWith('#gallery-${sliderId}-')) {
+                                    history.replaceState("", document.title, window.location.pathname + window.location.search);
+                                    window.location.reload();
+                                }
+                            }
+                            function removeGalleryHash2() {
+                                if (window.location.hash) {
+                                    history.replaceState("", document.title, window.location.pathname + window.location.search);
+                                    window.location.reload();
+                                }
+                            }
+                            removeGalleryHash();
+                            removeGalleryHash2();
+
                             var sliderId = "#${sliderId}";
+
+                            
+                            
+                                $("[data-fancybox]").each(function () {
+                                    var $this = $(this);
+                                    var $datafancyclass = $this.attr('data-fancy-class');
+                                    
+                                    Fancybox.bind('[data-fancybox="gallery-' + $datafancyclass + '"]', {
+                                        mainClass: 'media-carousel-fancy-custom ' + $datafancyclass + '-fancy-custom',
+                                        on: {
+                                            done: (fancybox, slide) => {
+                                                const slide1 = fancybox.getSlide();
+                                                const currentSlide=slide1.index
+                                                $(sliderId).slick('slickGoTo', currentSlide);
+                                            },
+                                        },
+                                    });
+                                });
+                            
                             switch ("${sliderType}") {
-                                case 'simpleType':
-                                    switch("${simpleType}") {
-                                        case 'simple':
+                                    case 'simpleType':
+                                        switch("${simpleType}") {
+                                            case 'simple':
                                             $(sliderId).slick({
                                             arrows: ${showArrows},
                                             speed:${speed},
                                             autoplaySpeed:${speed},
-                                            autoplay:${autoplay},
+                                            autoplay:${autoplay},   
                                             infinite: ${autoplay ? true : typeof infinite !== 'undefined' ? infinite : false},       
                                             dots:${dots},
                                             customPaging: function(sliderId, i) {
@@ -1397,7 +1397,7 @@ function Save({
                                     break;
                             }
                         });
-                    `));
+                `));
 }
 
 /***/ }),
