@@ -33,7 +33,7 @@ export default function Save({ attributes }) {
                     {galleryImages && galleryImages.map((media, index) => {
                         const currentCaption = caption ? media.caption : '';
                         const url = urls && urls[index] ? urls[index] : "";
-                        const isYouTubeUrl = url.includes("youtube.com");
+                        const isYouTubeUrl = url.includes("youtube.com") || url.includes("youtu.be");
                         const isWebsiteUrl = url.startsWith("http");
                         if (media.type === 'image') {
                             if (fancybox && isYouTubeUrl && url !== '') {
@@ -51,7 +51,9 @@ export default function Save({ attributes }) {
                                     </div>
                                 );
                             } else if (!fancybox && isYouTubeUrl && url !== '') {
-                                const videoID = url.match(/[?&]v=([^&]+)/)[1];
+                                {/* const videoID = url.match(/[?&]v=([^&]+)/); */}
+                                const match = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^&\n?#]+)/);
+                                const videoID = match ? match[1] : null;
                                 return (
                                     <div key={media.id}>
                                         <div className="mcfgb-gallery-single">
@@ -218,6 +220,7 @@ export default function Save({ attributes }) {
                     .${sliderId}-fancy-custom .fancybox__content {
                         max-width: ${fancyboxWidth}px;
                         width: 100% !important;
+                        max-height:700px !important;
                     }
                 
                 `}
@@ -424,36 +427,7 @@ export default function Save({ attributes }) {
                                                 }
                                             });
                                             break;
-                                        case 'lazyloading':
-                                            $(sliderId).slick({
-                                                lazyLoad: 'ondemand',
-                                                slidesToShow: ${slidesToShow},
-                                                slidesToScroll: ${slidesToScroll},
-                                                speed:${speed},
-                                                autoplay:${autoplay}, 
-                                                arrows: ${showArrows},
-                                                autoplaySpeed:${speed},
-                                                infinite: ${autoplay ? true : (typeof infinite !== 'undefined' ? infinite : false)}, 
-                                                dots:${dots},
-                                                customPaging: function(sliderId, i) {
-                                                    if ("${dotsType}" === "number") { 
-                                                        return i + 1;
-                                                    } else {
-                                                        return '.';
-                                                    }
-                                                },
-                                                prevArrow: '#btn-wrap-${sliderId} .prev-btn',
-                                                nextArrow: '#btn-wrap-${sliderId} .next-btn',
-                                            });
-                                            $(sliderId + ' .slick-dots li').each(function(index) {
-                                                if ("${dotsType}" === "number") {
-                                                    $(this).addClass('number');
-                                                } else {
-                                                    $(this).addClass('dot');
-                                                }
-                                            });
-                                            break;
-                                    }
+                                        }
                                     break;
                                 default:
                                     $(sliderId).slick({

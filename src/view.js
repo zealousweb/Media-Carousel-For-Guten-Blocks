@@ -24,4 +24,3 @@
 console.log(
 	'Hello World! (from create-block-gutenberg-media-carousel block)'
 );
-

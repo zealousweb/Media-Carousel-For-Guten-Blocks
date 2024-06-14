@@ -116,7 +116,12 @@ export default function Edit({ attributes, setAttributes }) {
                             label={__("Enable FancyBox", "media-carousel-for-guten-blocks")}
                             checked={fancybox}
                             onChange={(val) => {
-                                setAttributes({ fancybox: val });
+                                if (val) {
+                                    setAttributes({ autoplay: false, infinite: false, fancybox: true });
+                                }
+                                else {
+                                    setAttributes({ fancybox: false });
+                                }
                             }}
                         />
                         {attributes.fancybox &&
@@ -186,7 +191,6 @@ export default function Edit({ attributes, setAttributes }) {
                                             options={[
                                                 { label: __("Carousel", "media-carousel-for-guten-blocks"), value: "carousel" },
                                                 { label: __("Center Mode", "media-carousel-for-guten-blocks"), value: "centermode" },
-                                                { label: __("Lazy Loading", "media-carousel-for-guten-blocks"), value: "lazyloading" },
                                             ]}
                                             onChange={(val) => {
                                                 setAttributes({ carouselType: val });
@@ -306,7 +310,7 @@ export default function Edit({ attributes, setAttributes }) {
                             checked={autoplay}
                             onChange={(val) => {
                                 if (val) {
-                                    setAttributes({ autoplay: true, infinite: false });
+                                    setAttributes({ autoplay: true, infinite: false, fancybox: false });
                                 }
                                 else {
                                     setAttributes({ autoplay: false });
@@ -318,7 +322,7 @@ export default function Edit({ attributes, setAttributes }) {
                             checked={infinite}
                             onChange={(val) => {
                                 if (val) {
-                                    setAttributes({ infinite: true, autoplay: false });
+                                    setAttributes({ infinite: true, autoplay: false, fancybox: false });
                                 } else {
                                     setAttributes({ infinite: false });
                                 }

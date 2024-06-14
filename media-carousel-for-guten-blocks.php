@@ -27,10 +27,39 @@ if (!defined('ABSPATH')) {
  */
 function mcfgb_init()
 {
+    if ( ! function_exists( 'register_block_type' ) ) {
+        // Block editor is not available.
+        return;
+    }
     register_block_type(__DIR__ . '/build');
 }
 add_action('init', 'mcfgb_init');
 
+
+/**
+ * Category Creation function
+ *
+ * @param array $categories - list of category.
+ *
+ * @return mixed Return description.
+ */
+function MediaCarousel_Plugin_Block_Categories( $categories )
+{
+    if (array_search('zealblocks', array_column($categories, 'slug'), true) === false) {
+        return array_merge(
+            $categories,
+            array(
+                array(
+                    'slug' => 'zealblocks',
+                    'title' => __('ZealBlocks', 'media-carousel-for-guten-blocks'),
+                    'icon' => '',
+                ),
+            )
+        );
+    }
+    return $categories;
+}
+add_action('block_categories_all', 'MediaCarousel_Plugin_Block_Categories', 10, 2);
 
 
 function enqueue_slick_slider()
