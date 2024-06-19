@@ -33,10 +33,12 @@ export default function Save({ attributes }) {
                     {galleryImages && galleryImages.map((media, index) => {
                         const currentCaption = caption ? media.caption : '';
                         const url = urls && urls[index] ? urls[index] : "";
+                        {/* const isYouTubeUrl = url.includes("youtube.com") || url.includes("youtu.be") || url.includes("vimeo.com"); */ }
                         const isYouTubeUrl = url.includes("youtube.com") || url.includes("youtu.be");
+                        const isVimeoUrl = url.includes("vimeo.com");
                         const isWebsiteUrl = url.startsWith("http");
                         if (media.type === 'image') {
-                            if (fancybox && isYouTubeUrl && url !== '') {
+                            if (fancybox && (isYouTubeUrl || isVimeoUrl) && url !== '') {
                                 return (
                                     <div key={media.id}>
                                         <div className="mcfgb-gallery-single">
@@ -50,15 +52,36 @@ export default function Save({ attributes }) {
                                         {currentCaption && <div className="img-caption">{currentCaption}</div>}
                                     </div>
                                 );
-                            } else if (!fancybox && isYouTubeUrl && url !== '') {
-                                {/* const videoID = url.match(/[?&]v=([^&]+)/); */}
-                                const match = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^&\n?#]+)/);
-                                const videoID = match ? match[1] : null;
+                            } else if (!fancybox && (isYouTubeUrl || isVimeoUrl) && url !== '') {
+                                let embedUrl;
+                                if (isYouTubeUrl) {
+                                    const match = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^&\n?#]+)/);
+                                    const videoID = match ? match[1] : null;
+                                    embedUrl = videoID ? `https://www.youtube.com/embed/${videoID}` : null;
+                                } else if (isVimeoUrl) {
+                                    const match = url.match(/vimeo\.com\/(\d+)/);
+                                    const videoID = match ? match[1] : null;
+                                    embedUrl = videoID ? `https://player.vimeo.com/video/${videoID}` : null;
+                                }
+
                                 return (
                                     <div key={media.id}>
                                         <div className="mcfgb-gallery-single">
                                             <div className="ratio-part">
-                                                <iframe width="560" height="315" src={`https://www.youtube.com/embed/${videoID}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                                {embedUrl ? (
+                                                    <iframe
+                                                        width="560"
+                                                        height="315"
+                                                        src={embedUrl}
+                                                        title="Video player"
+                                                        frameBorder="0"
+                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                        referrerPolicy="strict-origin-when-cross-origin"
+                                                        allowFullScreen
+                                                    ></iframe>
+                                                ) : (
+                                                    <div>Invalid video URL</div>
+                                                )}
                                             </div>
                                         </div>
                                         {currentCaption && <div className="img-caption">{currentCaption}</div>}
@@ -218,7 +241,7 @@ export default function Save({ attributes }) {
                         opacity: ${fancyboxOpacity}% !important;
                     }
                     .${sliderId}-fancy-custom .fancybox__content {
-                        max-width: ${fancyboxWidth}px;
+                        max-width: ${fancyboxWidth}px !important;
                         width: 100% !important;
                         max-height:700px !important;
                     }

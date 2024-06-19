@@ -882,10 +882,12 @@ function Save({
   }, galleryImages && galleryImages.map((media, index) => {
     const currentCaption = caption ? media.caption : '';
     const url = urls && urls[index] ? urls[index] : "";
+    {/* const isYouTubeUrl = url.includes("youtube.com") || url.includes("youtu.be") || url.includes("vimeo.com"); */}
     const isYouTubeUrl = url.includes("youtube.com") || url.includes("youtu.be");
+    const isVimeoUrl = url.includes("vimeo.com");
     const isWebsiteUrl = url.startsWith("http");
     if (media.type === 'image') {
-      if (fancybox && isYouTubeUrl && url !== '') {
+      if (fancybox && (isYouTubeUrl || isVimeoUrl) && url !== '') {
         return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           key: media.id
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -902,26 +904,33 @@ function Save({
         }))), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           className: "img-caption"
         }, currentCaption));
-      } else if (!fancybox && isYouTubeUrl && url !== '') {
-        {/* const videoID = url.match(/[?&]v=([^&]+)/); */}
-        const match = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^&\n?#]+)/);
-        const videoID = match ? match[1] : null;
+      } else if (!fancybox && (isYouTubeUrl || isVimeoUrl) && url !== '') {
+        let embedUrl;
+        if (isYouTubeUrl) {
+          const match = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^&\n?#]+)/);
+          const videoID = match ? match[1] : null;
+          embedUrl = videoID ? `https://www.youtube.com/embed/${videoID}` : null;
+        } else if (isVimeoUrl) {
+          const match = url.match(/vimeo\.com\/(\d+)/);
+          const videoID = match ? match[1] : null;
+          embedUrl = videoID ? `https://player.vimeo.com/video/${videoID}` : null;
+        }
         return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           key: media.id
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           className: "mcfgb-gallery-single"
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           className: "ratio-part"
-        }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("iframe", {
+        }, embedUrl ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("iframe", {
           width: "560",
           height: "315",
-          src: `https://www.youtube.com/embed/${videoID}`,
-          title: "YouTube video player",
-          frameborder: "0",
+          src: embedUrl,
+          title: "Video player",
+          frameBorder: "0",
           allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
-          referrerpolicy: "strict-origin-when-cross-origin",
-          allowfullscreen: true
-        }))), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+          referrerPolicy: "strict-origin-when-cross-origin",
+          allowFullScreen: true
+        }) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "Invalid video URL"))), currentCaption && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           className: "img-caption"
         }, currentCaption));
       } else if (!isYouTubeUrl && isWebsiteUrl && url !== '') {
@@ -1168,7 +1177,7 @@ function Save({
                         opacity: ${fancyboxOpacity}% !important;
                     }
                     .${sliderId}-fancy-custom .fancybox__content {
-                        max-width: ${fancyboxWidth}px;
+                        max-width: ${fancyboxWidth}px !important;
                         width: 100% !important;
                         max-height:700px !important;
                     }
