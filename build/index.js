@@ -1202,7 +1202,7 @@ function Save({
 
                             var sliderId = "#${sliderId}";
 
-                                $("[data-fancybox]").each(function () {
+                                $('[data-fancybox="gallery-${sliderId}"]').each(function () {
                                     var $this = $(this);
                                     var $datafancyclass = $this.attr('data-fancy-class');
                                     
