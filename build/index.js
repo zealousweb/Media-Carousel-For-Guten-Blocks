@@ -1177,8 +1177,7 @@ function Save({
                         opacity: ${fancyboxOpacity}% !important;
                     }
                     .${sliderId}-fancy-custom .fancybox__content {
-                        max-width: ${fancyboxWidth}px !important;
-                        width: 100% !important;
+                        width: ${fancyboxWidth}px !important;
                         max-height:700px !important;
                     }
                 
@@ -1209,7 +1208,7 @@ function Save({
                                     Fancybox.bind('[data-fancybox="gallery-' + $datafancyclass + '"]', {
                                         mainClass: 'media-carousel-fancy-custom ' + $datafancyclass + '-fancy-custom',
                                         on: {
-                                            done: (fancybox, slide) => {
+                                            close: (fancybox, slide) => {
                                                 const slide1 = fancybox.getSlide();
                                                 const currentSlide=slide1.index
                                                 $(sliderId).slick('slickGoTo', currentSlide);
