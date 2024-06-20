@@ -281,6 +281,9 @@ export default function Save({ attributes }) {
                                                 $(sliderId).slick('slickGoTo', currentSlide);
                                             },
                                         },
+                                        Image: {
+                                            zoom: false,
+                                        },
                                     });
                                 });
                             

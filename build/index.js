@@ -1214,6 +1214,9 @@ function Save({
                                                 $(sliderId).slick('slickGoTo', currentSlide);
                                             },
                                         },
+                                        Image: {
+                                            zoom: false,
+                                        },
                                     });
                                 });
                             
