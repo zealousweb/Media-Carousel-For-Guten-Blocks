@@ -160,19 +160,20 @@ function Edit({
     initialOpen: true
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Enable FancyBox", "media-carousel-for-guten-blocks"),
-    checked: fancybox,
+    checked: fancybox
+    // onChange={(val) => {
+    //     if (val) {
+    //         setAttributes({ autoplay: false, infinite: false, fancybox: true });
+    //     }
+    //     else {
+    //         setAttributes({ fancybox: false });
+    //     }
+    // }}
+    ,
     onChange: val => {
-      if (val) {
-        setAttributes({
-          autoplay: false,
-          infinite: false,
-          fancybox: true
-        });
-      } else {
-        setAttributes({
-          fancybox: false
-        });
-      }
+      setAttributes({
+        fancybox: val
+      });
     }
   }), attributes.fancybox && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "color"
@@ -467,8 +468,7 @@ function Edit({
       if (val) {
         setAttributes({
           autoplay: true,
-          infinite: false,
-          fancybox: false
+          infinite: false
         });
       } else {
         setAttributes({
@@ -483,8 +483,7 @@ function Edit({
       if (val) {
         setAttributes({
           infinite: true,
-          autoplay: false,
-          fancybox: false
+          autoplay: false
         });
       } else {
         setAttributes({
@@ -1204,20 +1203,32 @@ function Save({
                                 $('[data-fancybox="gallery-${sliderId}"]').each(function () {
                                     var $this = $(this);
                                     var $datafancyclass = $this.attr('data-fancy-class');
+                                    const isAutoplay =${autoplay};
                                     
                                     Fancybox.bind('[data-fancybox="gallery-' + $datafancyclass + '"]', {
                                         mainClass: 'media-carousel-fancy-custom ' + $datafancyclass + '-fancy-custom',
                                         on: {
+                                           init: (fancybox) => {
+                                                if (isAutoplay) {
+                                                    $(sliderId).slick('slickPause');
+                                                } 
+                                            },
                                             close: (fancybox, slide) => {
                                                 const slide1 = fancybox.getSlide();
-                                                const currentSlide=slide1.index
-                                                $(sliderId).slick('slickGoTo', currentSlide);
+                                                const currentSlide = slide1.index;
+                                                $(sliderId).slick('slickGoTo', currentSlide); 
+
+                                                if (isAutoplay) {
+                                                    setTimeout(() => {
+                                                        $(sliderId).slick('slickPlay');
+                                                    }, 100);
+                                                }
                                             },
                                         },
-                                        Image: {
+                                        Image: { 
                                             zoom: false,
                                         },
-                                    });
+                                    });   
                                 });
                             
                             switch ("${sliderType}") {

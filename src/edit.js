@@ -115,13 +115,16 @@ export default function Edit({ attributes, setAttributes }) {
                         <ToggleControl
                             label={__("Enable FancyBox", "media-carousel-for-guten-blocks")}
                             checked={fancybox}
+                            // onChange={(val) => {
+                            //     if (val) {
+                            //         setAttributes({ autoplay: false, infinite: false, fancybox: true });
+                            //     }
+                            //     else {
+                            //         setAttributes({ fancybox: false });
+                            //     }
+                            // }}
                             onChange={(val) => {
-                                if (val) {
-                                    setAttributes({ autoplay: false, infinite: false, fancybox: true });
-                                }
-                                else {
-                                    setAttributes({ fancybox: false });
-                                }
+                                setAttributes({ fancybox: val });
                             }}
                         />
                         {attributes.fancybox &&
@@ -310,7 +313,7 @@ export default function Edit({ attributes, setAttributes }) {
                             checked={autoplay}
                             onChange={(val) => {
                                 if (val) {
-                                    setAttributes({ autoplay: true, infinite: false, fancybox: false });
+                                    setAttributes({ autoplay: true, infinite: false });
                                 }
                                 else {
                                     setAttributes({ autoplay: false });
@@ -322,7 +325,7 @@ export default function Edit({ attributes, setAttributes }) {
                             checked={infinite}
                             onChange={(val) => {
                                 if (val) {
-                                    setAttributes({ infinite: true, autoplay: false, fancybox: false });
+                                    setAttributes({ infinite: true, autoplay: false});
                                 } else {
                                     setAttributes({ infinite: false });
                                 }

@@ -271,20 +271,32 @@ export default function Save({ attributes }) {
                                 $('[data-fancybox="gallery-${sliderId}"]').each(function () {
                                     var $this = $(this);
                                     var $datafancyclass = $this.attr('data-fancy-class');
+                                    const isAutoplay =${autoplay};
                                     
                                     Fancybox.bind('[data-fancybox="gallery-' + $datafancyclass + '"]', {
                                         mainClass: 'media-carousel-fancy-custom ' + $datafancyclass + '-fancy-custom',
                                         on: {
+                                           init: (fancybox) => {
+                                                if (isAutoplay) {
+                                                    $(sliderId).slick('slickPause');
+                                                } 
+                                            },
                                             close: (fancybox, slide) => {
                                                 const slide1 = fancybox.getSlide();
-                                                const currentSlide=slide1.index
-                                                $(sliderId).slick('slickGoTo', currentSlide);
+                                                const currentSlide = slide1.index;
+                                                $(sliderId).slick('slickGoTo', currentSlide); 
+
+                                                if (isAutoplay) {
+                                                    setTimeout(() => {
+                                                        $(sliderId).slick('slickPlay');
+                                                    }, 100);
+                                                }
                                             },
                                         },
-                                        Image: {
+                                        Image: { 
                                             zoom: false,
                                         },
-                                    });
+                                    });   
                                 });
                             
                             switch ("${sliderType}") {
