@@ -290,7 +290,7 @@ export default function Save({ attributes }) {
                                                     console.log('on');
                                                     const slickSlidesCount = $(sliderId).slick('getSlick').slideCount;
                                                     console.log(slickSlidesCount);
-                                                    slickIndex = currentSlide % slickSlidesCount;
+                                                    slickIndex = (currentSlide % slickSlidesCount) - 1;
                                                     console.log('slickIndex',slickIndex);
                                                 }
 
