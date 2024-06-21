@@ -1204,6 +1204,7 @@ function Save({
                                     var $this = $(this);
                                     var $datafancyclass = $this.attr('data-fancy-class');
                                     const isAutoplay =${autoplay};
+                                    const isInfinite =${infinite};
                                     
                                     Fancybox.bind('[data-fancybox="gallery-' + $datafancyclass + '"]', {
                                         mainClass: 'media-carousel-fancy-custom ' + $datafancyclass + '-fancy-custom',
@@ -1214,9 +1215,18 @@ function Save({
                                                 } 
                                             },
                                             close: (fancybox, slide) => {
-                                                const slide1 = fancybox.getSlide();
-                                                const currentSlide = slide1.index;
-                                                $(sliderId).slick('slickGoTo', currentSlide); 
+                                                const currentSlide = fancybox.getSlide().index;
+                                                let slickIndex = currentSlide;
+
+                                                if (isInfinite) {
+                                                    console.log('on');
+                                                    const slickSlidesCount = $(sliderId).slick('getSlick').slideCount;
+                                                    console.log(slickSlidesCount);
+                                                    slickIndex = currentSlide % slickSlidesCount;
+                                                    console.log('slickIndex',slickIndex);
+                                                }
+
+                                                $(sliderId).slick('slickGoTo', slickIndex);
 
                                                 if (isAutoplay) {
                                                     setTimeout(() => {
