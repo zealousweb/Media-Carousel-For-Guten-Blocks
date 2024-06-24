@@ -297,7 +297,7 @@ export default function Save({ attributes }) {
                                                 $(sliderId).slick('slickGoTo', slickIndex);
 
                                                 if (isAutoplay) {
-                                                    setTimeout(() => {
+                                                    setTimeout(() => {      
                                                         $(sliderId).slick('slickPlay');
                                                     }, 100);
                                                 }
