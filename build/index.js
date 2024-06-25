@@ -1220,7 +1220,7 @@ function Save({
                                                 var currentSlide = fancybox.getSlide().index;
 
                                                 if (${sliderType === "carouselType"}) {
-                                                    let slickIndex = currentSlide - 1;
+                                                    let slickIndex = currentSlide ;
                                                     // console.log('Navigating to the corresponding slide in Slick slider:', slickIndex);
                                                     if (isInfinite) {
                                                         console.log('on');
