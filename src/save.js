@@ -273,28 +273,42 @@ export default function Save({ attributes }) {
                                     var $datafancyclass = $this.attr('data-fancy-class');
                                     const isAutoplay =${autoplay};
                                     const isInfinite =${infinite};
+                                    var $slider = $(sliderId);
                                     
                                     Fancybox.bind('[data-fancybox="gallery-' + $datafancyclass + '"]', {
                                         mainClass: 'media-carousel-fancy-custom ' + $datafancyclass + '-fancy-custom',
                                         on: {
-                                           init: (fancybox) => {
+                                            reveal: (fancybox, slide) => {
+                                                console.log('Fancybox triggered, stopping autoplay');
                                                 if (isAutoplay) {
                                                     $(sliderId).slick('slickPause');
                                                 } 
                                             },
                                             close: (fancybox, slide) => {
-                                                const currentSlide = fancybox.getSlide().index;
-                                                let slickIndex = currentSlide;
+                                                var currentSlide = fancybox.getSlide().index;
 
-                                                if (isInfinite) {
-                                                    console.log('on');
-                                                    const slickSlidesCount = $(sliderId).slick('getSlick').slideCount;
-                                                    console.log(slickSlidesCount);
-                                                    slickIndex = (currentSlide % slickSlidesCount) - 1;
-                                                    console.log('slickIndex',slickIndex);
+                                                if (${sliderType === "carouselType"}) {
+                                                    let slickIndex = currentSlide - 1;
+                                                    // console.log('Navigating to the corresponding slide in Slick slider:', slickIndex);
+                                                    if (isInfinite) {
+                                                        console.log('on');
+                                                        const slickSlidesCount = $(sliderId).slick('getSlick').slideCount;
+                                                        console.log(slickSlidesCount);
+                                                        slickIndex = (currentSlide % slickSlidesCount) - 2;
+                                                        console.log('slickIndex',slickIndex);
+                                                    }
+                                                    $slider.slick('slickGoTo', slickIndex);
+                                                } else {
+                                                let slickIndex = currentSlide ;
+                                                    if (isInfinite) {
+                                                        console.log('on');
+                                                        const slickSlidesCount = $(sliderId).slick('getSlick').slideCount;
+                                                        console.log(slickSlidesCount);
+                                                        slickIndex = (currentSlide % slickSlidesCount) - 1;
+                                                        console.log('slickIndex',slickIndex);
+                                                    }
+                                                    $slider.slick('slickGoTo', slickIndex);
                                                 }
-
-                                                $(sliderId).slick('slickGoTo', slickIndex);
 
                                                 if (isAutoplay) {
                                                     setTimeout(() => {      
@@ -306,7 +320,7 @@ export default function Save({ attributes }) {
                                         Image: { 
                                             zoom: false,
                                         },
-                                    });   
+                                    });
                                 });
                             
                             switch ("${sliderType}") {
