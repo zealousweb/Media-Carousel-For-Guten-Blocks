@@ -77,11 +77,17 @@ Navigation dots provide a visual indicator of the total number of media items an
 
 
 == Screenshots ==
-1.It will show Back-End Option for Media Carousel - Image and Video Upload Options
-2.It will show Back-End View for Media Carousel Section
-3.It will show Back-End Option for Media Carousel - How to Enable the Caption option 
-
-
+1. It will show Back-End Option for Media Carousel - Image and Video Upload Options
+2. It will show Back-End View for Media Carousel Section
+3. It will show Back-End Option for Media Carousel - How to Enable the Caption option and How it will show Back-End Option for Media Carousel
+4. It will show Back-End Option for Media Carousel - How to change Border Radius option and How it will show Back-End Option for Media Carousel
+5. It will show Back-End Option for Media Carousel - How to Enable the FancyBox option
+6. It will show Back-End Option for Media Carousel - How to Enable the Navigation Arrows option
+7. It will show Back-End Option for Media Carousel - How to Enable the Navigation Dots option
+8. It will show Front-End View for Media Carousel when FancyBox is Enable
+9. It will show Front-End View for Media Carousel when Caption is Enable ,Dots is Enable and Enable the Navigation Arrows option
+10. It will show Back-End Option for Media Carousel - How to switch to other slider mode i.e Carousel Type
+11. It will show Front-End View for Media Carousel when Carousel Type is Enable 
 
 
 == OUR OTHER PLUGINS ==
@@ -120,3 +126,4 @@ This plugin utilizes third-party libraries to enhance its functionality:
 = 0.1.0 =
 * Release
 Initial Release
+ 
