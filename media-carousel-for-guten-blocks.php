@@ -2,16 +2,20 @@
 /**
  * Plugin Name:       Media Carousel for Guten Blocks
  * Description:       The Media Carousel for Guten Blocks is a customizable content block that enables dynamic uploading and display of images and videos with options for captions, border radius, FancyBox functionality, slider settings, and customizable navigation arrows and dots.
- * Requires at least: 6.1
+ * Requires at least: 5.9
  * Requires PHP:      7.4
- * Version:           1.0
- * Stable tag:        1.0
+ * Version:           1.0.1
  * Author:            <a href="https://www.zealousweb.com/">ZealousWeb</a>
- * License:           GPL-3.0-or-later
+ * License:           GPLv3 or later License
  * License URI:       http://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain:       media-carousel-for-guten-blocks
  *
- * @package           create-block
+ * @category  ZealBlocks
+ * @package   Media-Carousel-for-Guten-Blocks
+ * @author    ZealousWeb <support@zealousweb.com>
+ * @copyright 2024 ZealousWeb
+ * @license   GPLv3 or later License
+ * @link      http://www.gnu.org/licenses/gpl-3.0.html
  */
 
 if (!defined('ABSPATH')) {
@@ -42,8 +46,8 @@ add_action('init', 'mcfgb_init');
  * @param array $categories - list of category.
  *
  * @return mixed Return description.
- */
-function MediaCarousel_Plugin_Block_Categories( $categories )
+ */    
+function mcfgb_MediaCarousel_Plugin_Block_Categories( $categories )
 {
     if (array_search('zealblocks', array_column($categories, 'slug'), true) === false) {
         return array_merge(
@@ -59,35 +63,28 @@ function MediaCarousel_Plugin_Block_Categories( $categories )
     }
     return $categories;
 }
-add_action('block_categories_all', 'MediaCarousel_Plugin_Block_Categories', 10, 2);
+add_action('block_categories_all', 'mcfgb_MediaCarousel_Plugin_Block_Categories', 10, 2);
 
 
-function enqueue_slick_slider()
+function mcfgb_enqueue_slick_slider()
 {
     wp_enqueue_style(     
         'mcfgb-slick-slider-css',
-        'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css',
-        array(),
-        '1.8.1'
-    );
-
-    wp_enqueue_style(
-        'mcfgb-slick-slider-theme-css',
-        'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css',
-        array('slick-slider-css'),
+        plugins_url('/assets/css/slick.css', __FILE__),
+        '',
         '1.8.1'
     );
 
     wp_enqueue_script(
         'mcfgb-slick-slider-js',
-        'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js',
+        plugins_url('/assets/js/slick.min.js', __FILE__),
         array('jquery'),
         '1.8.1',
         true
-    );
+    );  
 }
-add_action('wp_enqueue_scripts', 'enqueue_slick_slider');
-function enqueue_fancybox()
+add_action('wp_enqueue_scripts', 'mcfgb_enqueue_slick_slider');
+function mcfgb_enqueue_fancybox()
 {
 
     wp_enqueue_script(
@@ -107,5 +104,5 @@ function enqueue_fancybox()
     );
 }
 
-add_action('wp_enqueue_scripts', 'enqueue_fancybox');
+add_action('wp_enqueue_scripts', 'mcfgb_enqueue_fancybox');
 

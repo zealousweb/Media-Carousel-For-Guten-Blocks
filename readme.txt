@@ -1,12 +1,15 @@
 === Media Carousel for Guten Blocks ===
 Contributors:      zealopensource
 Tags:              Carousel, Media, Gutenberg
-Tested up to:      6.4
+Donate link: http://www.zealousweb.com/payment/
+Requires at least: 5.9
+Tested up to:      6.4.2
 Requires PHP:      7.4
+Version: 1.0.1
+Stable tag: 1.0.1
 Requires at least: 6.1
-Stable tag:        1.0
-License:           GPL-3.0-or-later
-License URI:       http://www.gnu.org/licenses/gpl-3.0.html
+License: GPLv3 or later License
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 The Media Carousel for Guten Blocks: Customize media display with captions, border radius, FancyBox, sliders, and navigation options.
 
@@ -31,6 +34,11 @@ e.g.
 
 1. Upload the plugin files to the `/wp-content/plugins/gutenberg-media-carousel` directory, or install the plugin through the WordPress plugins screen directly.
 1. Activate the plugin through the 'Plugins' screen in WordPress
+
+== Plugin Requirement ==
+
+PHP version : 7.4 and latest
+WordPress   : WordPress 5.9 and latest
 
 
 == Frequently Asked Questions ==
@@ -69,6 +77,9 @@ Navigation dots provide a visual indicator of the total number of media items an
 
 
 == Screenshots ==
+1.It will show Back-End Option for Media Carousel - Image and Video Upload Options
+2.It will show Back-End View for Media Carousel Section
+3.It will show Back-End Option for Media Carousel - How to Enable the Caption option 
 
 
 
@@ -82,6 +93,26 @@ Navigation dots provide a visual indicator of the total number of media items an
 * <strong>[Accept Sage Pay Payments Using Contact Form 7 Pro](https://www.zealousweb.com/store/accept-sage-pay-opayo-payments-using-contact-form-7-pro)</strong>
 * <strong>[User Registration Using Contact Form 7 Pro](https://www.zealousweb.com/store/user-registration-using-contact-form-7-pro)</strong>
 * <strong>[Abandoned Contact Form 7 Pro](https://www.zealousweb.com/store/abandoned-contact-form-7-pro)</strong>
+
+
+== Getting Help With Wordpress ==
+
+If you have any difficulties while using this Plugin, please feel free to contact us at https://zealousweb.com/support/
+
+We also offer custom Wordpress extension development and Wordpress theme design services to fulfill your e-commerce objectives.
+
+Our professional impassioned Wordpress experts provide profound and customer-oriented development of your project within short timeframes.
+
+Thank you for choosing a Plugin developed by <strong>[ZealousWeb](https://www.zealousweb.com)</strong>!
+
+## Functionality
+
+This plugin utilizes third-party libraries to enhance its functionality:
+
+- **Fancybox JS:** https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js - Use to acieve lightbox functionality for images and videos in popup
+- **Fancybox CSS:** https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css - Use to acieve lightbox functionality for images and videos in popup
+-**Slick JS:**https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js - Use to acieve slider functionality for images and videos
+-**Slick CSS:**https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css - Use to acieve slider functionality for images and videos
 
 
 == Changelog ==
