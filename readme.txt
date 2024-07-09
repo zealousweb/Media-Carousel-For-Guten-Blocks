@@ -3,13 +3,13 @@ Contributors:      zealopensource
 Tags:              Carousel, Media, Gutenberg
 Donate link: http://www.zealousweb.com/payment/
 Requires at least: 5.9
-Tested up to:      6.4.2
+Tested up to:      6.5
 Requires PHP:      7.4
 Version: 1.0.1
 Stable tag: 1.0.1
 Requires at least: 6.1
-License: GPLv3 or later License
-License URI: http://www.gnu.org/licenses/gpl-3.0.html
+License:  GPLv3 or later
+License URI: https://spdx.org/licenses/GPL-3.0-or-later.html
 
 The Media Carousel for Guten Blocks: Customize media display with captions, border radius, FancyBox, sliders, and navigation options.
 
