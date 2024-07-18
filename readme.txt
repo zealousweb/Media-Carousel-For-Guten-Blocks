@@ -115,10 +115,10 @@ Thank you for choosing a Plugin developed by <strong>[ZealousWeb](https://www.ze
 
 This plugin utilizes third-party libraries to enhance its functionality:
 
-- **Fancybox JS:** https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js - Use to acieve lightbox functionality for images and videos in popup
-- **Fancybox CSS:** https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css - Use to acieve lightbox functionality for images and videos in popup
--**Slick JS:**https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js - Use to acieve slider functionality for images and videos
--**Slick CSS:**https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css - Use to acieve slider functionality for images and videos
+- **Fancybox JS:** https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js - Use to achieve  lightbox functionality for images and videos in popup
+- **Fancybox CSS:** https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css - Use to achieve  lightbox functionality for images and videos in popup
+-**Slick JS:**https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js - Use to achieve  slider functionality for images and videos
+-**Slick CSS:**https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css - Use to achieve  slider functionality for images and videos
 
 
 == Changelog ==
