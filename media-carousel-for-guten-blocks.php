@@ -4,8 +4,9 @@
  * Description:       The Media Carousel for Guten Blocks is a customizable content block that enables dynamic uploading and display of images and videos with options for captions, border radius, FancyBox functionality, slider settings, and customizable navigation arrows and dots.
  * Requires at least: 5.9
  * Requires PHP:      7.4
- * Version:           1.0.0
- * Author:            <a href="https://www.zealousweb.com/">ZealousWeb</a>
+ * Version:           1.0.1
+ * Author:            ZealousWeb
+ * Author URI:        https://www.zealousweb.com
  * License:           GPLv3 or later
  * License URI:       https://spdx.org/licenses/GPL-3.0-or-later.html
  * Text Domain:       media-carousel-for-guten-blocks

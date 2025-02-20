@@ -3,10 +3,10 @@ Contributors:      zealopensource
 Tags:              Carousel, Media, Gutenberg
 Donate link: http://www.zealousweb.com/payment/
 Requires at least: 5.9
-Tested up to:      6.5
+Tested up to:      6.7
 Requires PHP:      7.4
-Version: 1.0.0
-Stable tag: 1.0.0
+Version: 1.0.1
+Stable tag: 1.0.1
 Requires at least: 6.1
 License:  GPLv3 or later
 License URI: https://spdx.org/licenses/GPL-3.0-or-later.html
@@ -92,18 +92,18 @@ Navigation dots provide a visual indicator of the total number of media items an
 
 == OUR OTHER PLUGINS ==
 
-* <strong>[Accept PayPal Payments Using Contact Form 7 Pro](https://www.zealousweb.com/store/generate-pdf-using-contact-form-7-pro/)</strong>
-* <strong>[Accept Stripe Payments Using Contact Form 7 Pro](https://www.zealousweb.com/store/accept-stripe-payments-using-contact-form-7-pro)</strong>
-* <strong>[Accept Authorize.NET Payments Using Contact Form 7 Pro](https://www.zealousweb.com/store/accept-authorize-net-payments-using-contact-form-7-pro)</strong>
-* <strong>[Accept 2Checkout Payments Using Contact Form 7 Pro](https://www.zealousweb.com/store/accept-2checkout-payments-using-contact-form-7-pro)</strong>
-* <strong>[Accept Sage Pay Payments Using Contact Form 7 Pro](https://www.zealousweb.com/store/accept-sage-pay-opayo-payments-using-contact-form-7-pro)</strong>
-* <strong>[User Registration Using Contact Form 7 Pro](https://www.zealousweb.com/store/user-registration-using-contact-form-7-pro)</strong>
-* <strong>[Abandoned Contact Form 7 Pro](https://www.zealousweb.com/store/abandoned-contact-form-7-pro)</strong>
+* <strong>[Accept PayPal Payments Using Contact Form 7 Pro](https://store.zealousweb.com/accept-paypal-payments-using-contact-form-7-pro)</strong>
+* <strong>[Accept Stripe Payments Using Contact Form 7 Pro](https://store.zealousweb.com/accept-stripe-payments-using-contact-form-7-pro)</strong>
+* <strong>[Accept Authorize.NET Payments Using Contact Form 7 Pro](https://store.zealousweb.com/accept-authorize-net-payments-using-contact-form-7-pro)</strong>
+* <strong>[Accept 2Checkout Payments Using Contact Form 7 Pro](https://store.zealousweb.com/accept-2checkout-payments-using-contact-form-7-pro)</strong>
+* <strong>[Accept Sage Pay Payments Using Contact Form 7 Pro](https://store.zealousweb.com/accept-sage-pay-opayo-payments-using-contact-form-7-pro)</strong>
+* <strong>[User Registration Using Contact Form 7 Pro](https://store.zealousweb.com/user-registration-using-contact-form-7-pro)</strong>
+* <strong>[Abandoned Contact Form 7 Pro](https://store.zealousweb.com/abandoned-contact-form-7-pro)</strong>
 
 
 == Getting Help With Wordpress ==
 
-If you have any difficulties while using this Plugin, please feel free to contact us at https://zealousweb.com/support/
+If you have any difficulties while using this Plugin, please feel free to contact us at <strong>[support](https://support.zealousweb.com/portal/en/home)</strong>
 
 We also offer custom Wordpress extension development and Wordpress theme design services to fulfill your e-commerce objectives.
 
@@ -115,13 +115,16 @@ Thank you for choosing a Plugin developed by <strong>[ZealousWeb](https://www.ze
 
 This plugin utilizes third-party libraries to enhance its functionality:
 
-- **Fancybox JS:** https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js - Use to achieve  lightbox functionality for images and videos in popup
-- **Fancybox CSS:** https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css - Use to achieve  lightbox functionality for images and videos in popup
--**Slick JS:**https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js - Use to achieve  slider functionality for images and videos
--**Slick CSS:**https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css - Use to achieve  slider functionality for images and videos
+- **Fancybox JS:** https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js - Used to achieve lightbox functionality for displaying images and videos in a popup.
+- **Fancybox CSS:** https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css - Use to achieve lightbox functionality for images and videos in popup
+- **Slick JS:** https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js - Used to achieve slider functionality for images and videos.
+- **Slick CSS:** https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css - Used to achieve slider functionality for images and videos.
 
 
 == Changelog ==
+
+= 1.0.1 =
+* Minor workflow adjustments
 
 = 1.0.0 =
 * Release
