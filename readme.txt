@@ -3,10 +3,10 @@ Contributors:      zealopensource
 Tags:              Carousel, Media, Gutenberg
 Donate link: http://www.zealousweb.com/payment/
 Requires at least: 5.9
-Tested up to:      6.7
+Tested up to:      6.8
 Requires PHP:      7.4
-Version: 1.0.1
-Stable tag: 1.0.1
+Version: 1.0.2
+Stable tag: 1.0.2
 Requires at least: 6.1
 License:  GPLv3 or later
 License URI: https://spdx.org/licenses/GPL-3.0-or-later.html
@@ -89,17 +89,23 @@ Navigation dots provide a visual indicator of the total number of media items an
 10. It will show Back-End Option for Media Carousel - How to switch to other slider mode i.e Carousel Type
 11. It will show Front-End View for Media Carousel when Carousel Type is Enable 
 
+<strong>[Demo for Media Carousel for Guten Blocks](https://demo.zealousweb.com/wordpress-plugins/media-carousel-for-guten-blocks/ )</strong>
+
 
 == OUR OTHER PLUGINS ==
 
-* <strong>[Accept PayPal Payments Using Contact Form 7 Pro](https://store.zealousweb.com/accept-paypal-payments-using-contact-form-7-pro)</strong>
-* <strong>[Accept Stripe Payments Using Contact Form 7 Pro](https://store.zealousweb.com/accept-stripe-payments-using-contact-form-7-pro)</strong>
-* <strong>[Accept Authorize.NET Payments Using Contact Form 7 Pro](https://store.zealousweb.com/accept-authorize-net-payments-using-contact-form-7-pro)</strong>
-* <strong>[Accept 2Checkout Payments Using Contact Form 7 Pro](https://store.zealousweb.com/accept-2checkout-payments-using-contact-form-7-pro)</strong>
-* <strong>[Accept Sage Pay Payments Using Contact Form 7 Pro](https://store.zealousweb.com/accept-sage-pay-opayo-payments-using-contact-form-7-pro)</strong>
-* <strong>[User Registration Using Contact Form 7 Pro](https://store.zealousweb.com/user-registration-using-contact-form-7-pro)</strong>
-* <strong>[Abandoned Contact Form 7 Pro](https://store.zealousweb.com/abandoned-contact-form-7-pro)</strong>
-
+* <strong>[Abandoned Contact Form 7 Pro](https://store.zealousweb.com/wordpress-plugins/abandoned-contact-form-7-pro)</strong>
+* <strong>[Accept 2 Checkout Payments Using Contact Form 7 Pro](https://store.zealousweb.com/wordpress-plugins/accept-2checkout-payments-using-contact-form-7-pro)</strong>
+* <strong>[Accept Authorize.NET Payments Using Contact Form 7 Pro](https://store.zealousweb.com/wordpress-plugins/accept-authorize-net-payments-using-contact-form-7-pro)</strong>
+* <strong>[Accept Elavon Payments Using Contact Form 7 Pro](https://store.zealousweb.com/wordpress-plugins/accept-elavon-payments-using-contact-form-7-pro)</strong>
+* <strong>[Accept PayPal Payments Using Contact Form 7 Pro](https://store.zealousweb.com/wordpress-plugins/accept-paypal-payments-using-contact-form-7-pro)</strong>
+* <strong>[Accept Sagepay(Opayo) Payments Using Contact Form 7 Pro](https://store.zealousweb.com/wordpress-plugins/accept-sage-pay-opayo-payments-using-contact-form-7-pro)</strong>
+* <strong>[Accept Stripe Payments Using Contact Form 7 Pro](https://store.zealousweb.com/wordpress-plugins/accept-stripe-payments-using-contact-form-7-pro)</strong>
+* <strong>[Custom Product Options WooCommerce Pro](https://store.zealousweb.com/wordpress-plugins/custom-product-options-woocommerce-pro)</strong>
+* <strong>[Generate PDF Using Contact Form 7 Pro](https://store.zealousweb.com/wordpress-plugins/generate-pdf-using-contact-form-7-pro)</strong>
+* <strong>[Smart Appointment & Booking Pro](https://store.zealousweb.com/wordpress-plugins/smart-appointment-booking-pro)</strong>
+* <strong>[Smart Showcase for Google Reviews Pro](https://store.zealousweb.com/wordpress-plugins/smart-showcase-for-google-reviews-pro)</strong>
+* <strong>[User Registration Using Contact Form 7 Pro](https://store.zealousweb.com/wordpress-plugins/user-registration-using-contact-form-7-pro)</strong>
 
 == Getting Help With Wordpress ==
 
@@ -122,6 +128,9 @@ This plugin utilizes third-party libraries to enhance its functionality:
 
 
 == Changelog ==
+
+= 1.0.2 =
+* Minor changes - Doc update
 
 = 1.0.1 =
 * Minor workflow adjustments
