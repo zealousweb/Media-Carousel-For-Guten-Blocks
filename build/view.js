@@ -1,8 +1,3 @@
-/******/ (() => { // webpackBootstrap
-var __webpack_exports__ = {};
-/*!*********************!*\
-  !*** ./src/view.js ***!
-  \*********************/
 /**
  * Use this file for JavaScript code that you want to run in the front-end
  * on posts/pages that contain this block.
@@ -26,7 +21,6 @@ var __webpack_exports__ = {};
  */
 
 /* eslint-disable no-console */
-console.log('Hello World! (from create-block-gutenberg-media-carousel block)');
-/******/ })()
-;
-//# sourceMappingURL=view.js.map
+console.log(
+	'Hello World! (from create-block-gutenberg-media-carousel block)'
+);

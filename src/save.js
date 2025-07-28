@@ -21,17 +21,49 @@ import React from 'react';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.js";
-import 'react-fancybox/lib/fancybox.css';
+
 
 export default function Save({ attributes }) {
-    const { galleryImages, sliderType, showArrows, arrowType, sliderId, urls, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, fancyboxBgColor, fancyboxWidth, fancyboxOpacity, arrowpos, slidesToShow, slidesToScroll } = attributes;
+    const { galleryImages, sliderType, showArrows, arrowType, customPrevArrow, customNextArrow, sliderId, urls, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, borderRadiusTop, borderRadiusRight, borderRadiusBottom, borderRadiusLeft, fancyboxBgColor, fancyboxWidth, fancyboxOpacity, arrowpos, slidesToShow, slidesToShowDesktop, slidesToShowTablet, slidesToShowMobile, slidesToScroll, pauseOnHover, hideOnDesktop, hideOnTablet, hideOnMobile, hideArrowsOnDesktop, hideArrowsOnTablet, hideArrowsOnMobile, imageAspectRatio = "16:9", description, headingColor = "#111111", descriptionColor = "#636363" } = attributes;
+
+    // Build responsive visibility classes
+    const responsiveClasses = [
+        hideOnDesktop ? 'mcfgb-hide-desktop' : '',
+        hideOnTablet ? 'mcfgb-hide-tablet' : '',
+        hideOnMobile ? 'mcfgb-hide-mobile' : ''
+    ].filter(Boolean).join(' ');
+
+    // Build arrow responsive visibility classes
+    const arrowResponsiveClasses = [
+        hideArrowsOnDesktop ? 'mcfgb-hide-arrows-desktop' : '',
+        hideArrowsOnTablet ? 'mcfgb-hide-arrows-tablet' : '',
+        hideArrowsOnMobile ? 'mcfgb-hide-arrows-mobile' : ''
+    ].filter(Boolean).join(' ');
+
+    // Generate aspect ratio CSS
+    const getAspectRatioStyle = () => {
+        if (imageAspectRatio === 'auto') {
+            return {};
+        }
+        const aspectRatios = {
+            '16:9': '16 / 9',
+            '4:3': '4 / 3',
+            '1:1': '1 / 1',
+            '3:2': '3 / 2',
+            '21:9': '21 / 9',
+        };
+        return { aspectRatio: aspectRatios[imageAspectRatio] || '16 / 9' };
+    };
+
+    const aspectRatioStyle = getAspectRatioStyle();
 
     return (
         <>
-            <div className={`${arrowpos} ${sliderType}  ${showArrows}`}>
+            <div className={`${arrowpos} ${sliderType}  ${showArrows} ${responsiveClasses}`}>
                 <div id={sliderId} >
                     {galleryImages && galleryImages.map((media, index) => {
                         const currentCaption = caption ? media.caption : '';
+                        const currentDescription = caption ? media.description : '';
                         const url = urls && urls[index] ? urls[index] : "";
                         {/* const isYouTubeUrl = url.includes("youtube.com") || url.includes("youtu.be") || url.includes("vimeo.com"); */ }
                         const isYouTubeUrl = url.includes("youtube.com") || url.includes("youtu.be");
@@ -42,14 +74,15 @@ export default function Save({ attributes }) {
                                 return (
                                     <div key={media.id}>
                                         <div className="mcfgb-gallery-single">
-                                            <a href={url} data-fancybox={`gallery-${sliderId}`} data-fancy-class={sliderId} data-caption={media.alt ? media.alt : "Gallery Image"} className="ratio-part">
+                                            <a href={url} data-fancybox={`gallery-${sliderId}`} data-fancy-class={sliderId} data-caption={media.alt ? media.alt : "Gallery Image"} className="ratio-part" style={aspectRatioStyle}>
                                                 <img
                                                     src={media.url}
                                                     alt={media.alt ? media.alt : "Gallery Image"}
                                                 />
                                             </a>
                                         </div>
-                                        {currentCaption && <div className="img-caption">{currentCaption}</div>}
+                                        {currentCaption && <div className="img-caption" style={{ color: headingColor }}>{currentCaption}</div>}
+                                        {currentDescription && <div className="img-description" style={{ color: descriptionColor }}>{currentDescription}</div>}
                                     </div>
                                 );
                             } else if (!fancybox && (isYouTubeUrl || isVimeoUrl) && url !== '') {
@@ -67,7 +100,7 @@ export default function Save({ attributes }) {
                                 return (
                                     <div key={media.id}>
                                         <div className="mcfgb-gallery-single">
-                                            <div className="ratio-part">
+                                            <div className="ratio-part" style={aspectRatioStyle}>
                                                 {embedUrl ? (
                                                     <iframe
                                                         width="560"
@@ -84,7 +117,8 @@ export default function Save({ attributes }) {
                                                 )}
                                             </div>
                                         </div>
-                                        {currentCaption && <div className="img-caption">{currentCaption}</div>}
+                                        {currentCaption && <div className="img-caption" style={{ color: headingColor }}>{currentCaption}</div>}
+                                        {currentDescription && <div className="img-description" style={{ color: descriptionColor }}>{currentDescription}</div>}
                                     </div>
                                 );
 
@@ -97,11 +131,13 @@ export default function Save({ attributes }) {
                                                     src={media.url}
                                                     alt={media.alt ? media.alt : "Gallery Image"}
                                                     className="ratio-part"
+                                                    style={aspectRatioStyle}
                                                 />
 
                                             </a>
                                         </div>
-                                        {currentCaption && <div className="img-caption">{currentCaption}</div>}
+                                        {currentCaption && <div className="img-caption" style={{ color: headingColor }}>{currentCaption}</div>}
+                                        {currentDescription && <div className="img-description" style={{ color: descriptionColor }}>{currentDescription}</div>}
                                     </div>
                                 );
                             } else if (fancybox) {
@@ -113,18 +149,21 @@ export default function Save({ attributes }) {
                                                     src={media.url}
                                                     alt={media.alt ? media.alt : "Gallery Image"}
                                                     className="ratio-part"
+                                                    style={aspectRatioStyle}
                                                 />
                                             </a>
 
                                         </div>
-                                        {currentCaption && <div className="img-caption">{currentCaption}</div>}
+                                        {currentCaption && <div className="img-caption" style={{ color: headingColor }}>{currentCaption}</div>}
+                                        {currentDescription && <div className="img-description" style={{ color: descriptionColor }}>{currentDescription}</div>}
+                                    
                                     </div>
                                 );
                             } else {
                                 return (
                                     <div key={media.id}>
                                         <div className="mcfgb-gallery-single">
-                                            <div className="ratio-part">
+                                            <div className="ratio-part" style={aspectRatioStyle}>
 
                                                 <img
                                                     src={media.url}
@@ -133,7 +172,8 @@ export default function Save({ attributes }) {
                                             </div>
 
                                         </div>
-                                        {currentCaption && <div className="img-caption">{currentCaption}</div>}
+                                        {currentCaption && <div className="img-caption" style={{ color: headingColor }}>{currentCaption}</div>}
+                                        {currentDescription && <div className="img-description" style={{ color: descriptionColor }}>{currentDescription}</div>}
                                     </div>
                                 );
                             }
@@ -143,16 +183,76 @@ export default function Save({ attributes }) {
                                 return (
                                     <div key={media.id}>
                                         <div className="mcfgb-gallery-single">
-                                            <div className="ratio-part">
-                                                <a href={media.url} data-fancybox={`gallery-${sliderId}`} data-fancy-class={sliderId} data-caption={media.alt ? media.alt : "Gallery Image"}>
-                                                    <video controls>
-                                                        <source src={media.url} type={media.mime} />
-                                                    </video>
+                                            <div className="ratio-part" style={aspectRatioStyle}>
+                                                <a href={media.url} data-fancybox={`gallery-${sliderId}`} data-fancy-class={sliderId} data-caption={media.alt ? media.alt : "Video"}>
+                                                    {/* Video thumbnail with play button */}
+                                                    <div className="video-thumbnail-wrapper" style={{ position: 'relative', width: '100%', height: '100%' }}>
+                                                        {media.thumbnailUrl ? (
+                                                            <img 
+                                                                src={media.thumbnailUrl} 
+                                                                alt={media.alt || "Video Thumbnail"} 
+                                                                style={{ 
+                                                                    width: '100%', 
+                                                                    height: '100%', 
+                                                                    objectFit: 'cover'
+                                                                }}
+                                                            />
+                                                        ) : (
+                                                            <div style={{
+                                                                width: '100%',
+                                                                height: '100%',
+                                                                backgroundColor: '#f8f9fa',
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                                justifyContent: 'center',
+                                                                border: '2px dashed #dee2e6'
+                                                            }}>
+                                                                <div style={{ textAlign: 'center' }}>
+                                                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="#6c757d" style={{ marginBottom: '8px' }}>
+                                                                        <path d="M8 5v14l11-7z"/>
+                                                                    </svg>
+                                                                    <div style={{ fontSize: '12px', color: '#6c757d' }}>
+                                                                        Generating thumbnail...
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                        
+                                                        {/* Play button overlay */}
+                                                        <div className="play-button-overlay" style={{
+                                                            position: 'absolute',
+                                                            top: '50%',
+                                                            left: '50%',
+                                                            transform: 'translate(-50%, -50%)',
+                                                            width: '60px',
+                                                            height: '60px',
+                                                            backgroundColor: 'rgba(0,0,0,0.7)',
+                                                            borderRadius: '50%',
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            justifyContent: 'center',
+                                                            cursor: 'pointer'
+                                                        }}>
+                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                                                                <path d="M8 5v14l11-7z"/>
+                                                            </svg>
+                                                        </div>
+                                                        
+                                                        {/* Hidden video element for thumbnail generation */}
+                                                        <video 
+                                                            style={{ display: 'none' }}
+                                                            preload="metadata"
+                                                            muted
+                                                            playsInline
+                                                        >
+                                                            <source src={media.url} type={media.mime} />
+                                                        </video>
+                                                    </div>
                                                 </a>
                                             </div>
-
                                         </div>
-                                        {currentCaption && <div className="img-caption">{currentCaption}</div>}
+                                        {currentCaption && <div className="img-caption" style={{ color: headingColor }}>{currentCaption}</div>}
+                                        {currentDescription && <div className="img-description" style={{ color: descriptionColor }}>{currentDescription}</div>}
                                     </div>
                                 );
                             }
@@ -160,14 +260,135 @@ export default function Save({ attributes }) {
                                 return (
                                     <div key={media.id}>
                                         <div className="mcfgb-gallery-single">
-                                            <div className="ratio-part">
-                                                <video controls>
-                                                    <source src={media.url} type={media.mime} />
-                                                </video>
+                                            <div className="ratio-part" style={aspectRatioStyle}>
+                                                {/* Video thumbnail with click to play functionality */}
+                                                <div className="video-thumbnail-wrapper" style={{ position: 'relative', width: '100%', height: '100%', cursor: 'pointer' }}>
+                                                    {media.thumbnailUrl ? (
+                                                        <img 
+                                                            src={media.thumbnailUrl} 
+                                                            alt={media.alt || "Video Thumbnail"} 
+                                                            style={{ 
+                                                                width: '100%', 
+                                                                height: '100%', 
+                                                                objectFit: 'cover'
+                                                            }}
+                                                            onClick={() => {
+                                                                // Create and show video player
+                                                                const videoContainer = document.createElement('div');
+                                                                videoContainer.style.cssText = `
+                                                                    position: fixed;
+                                                                    top: 0;
+                                                                    left: 0;
+                                                                    width: 100%;
+                                                                    height: 100%;
+                                                                    background: rgba(0,0,0,0.9);
+                                                                    z-index: 9999;
+                                                                    display: flex;
+                                                                    align-items: center;
+                                                                    justify-content: center;
+                                                                `;
+                                                                
+                                                                const video = document.createElement('video');
+                                                                video.controls = true;
+                                                                video.autoplay = true;
+                                                                video.style.cssText = `
+                                                                    max-width: 90%;
+                                                                    max-height: 90%;
+                                                                    width: auto;
+                                                                    height: auto;
+                                                                `;
+                                                                
+                                                                const source = document.createElement('source');
+                                                                source.src = media.url;
+                                                                source.type = media.mime;
+                                                                
+                                                                video.appendChild(source);
+                                                                videoContainer.appendChild(video);
+                                                                
+                                                                // Close button
+                                                                const closeBtn = document.createElement('button');
+                                                                closeBtn.innerHTML = '×';
+                                                                closeBtn.style.cssText = `
+                                                                    position: absolute;
+                                                                    top: 20px;
+                                                                    right: 20px;
+                                                                    background: none;
+                                                                    border: none;
+                                                                    color: white;
+                                                                    font-size: 30px;
+                                                                    cursor: pointer;
+                                                                    z-index: 10000;
+                                                                `;
+                                                                closeBtn.onclick = () => {
+                                                                    document.body.removeChild(videoContainer);
+                                                                };
+                                                                
+                                                                videoContainer.appendChild(closeBtn);
+                                                                document.body.appendChild(videoContainer);
+                                                                
+                                                                // Close on background click
+                                                                videoContainer.onclick = (e) => {
+                                                                    if (e.target === videoContainer) {
+                                                                        document.body.removeChild(videoContainer);
+                                                                    }
+                                                                };
+                                                            }}
+                                                        />
+                                                    ) : (
+                                                        <div style={{
+                                                            width: '100%',
+                                                            height: '100%',
+                                                            backgroundColor: '#f8f9fa',
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            justifyContent: 'center',
+                                                            border: '2px dashed #dee2e6'
+                                                        }}>
+                                                            <div style={{ textAlign: 'center' }}>
+                                                                <svg width="32" height="32" viewBox="0 0 24 24" fill="#6c757d" style={{ marginBottom: '8px' }}>
+                                                                    <path d="M8 5v14l11-7z"/>
+                                                                </svg>
+                                                                <div style={{ fontSize: '12px', color: '#6c757d' }}>
+                                                                    Generating thumbnail...
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                    
+                                                    {/* Play button overlay */}
+                                                    <div className="play-button-overlay" style={{
+                                                        position: 'absolute',
+                                                        top: '50%',
+                                                        left: '50%',
+                                                        transform: 'translate(-50%, -50%)',
+                                                        width: '60px',
+                                                        height: '60px',
+                                                        backgroundColor: 'rgba(0,0,0,0.7)',
+                                                        borderRadius: '50%',
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        justifyContent: 'center',
+                                                        cursor: 'pointer'
+                                                    }}>
+                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                                                            <path d="M8 5v14l11-7z"/>
+                                                        </svg>
+                                                    </div>
+                                                    
+                                                    {/* Hidden video element for thumbnail generation */}
+                                                    <video 
+                                                        style={{ display: 'none' }}
+                                                        preload="metadata"
+                                                        muted
+                                                        playsInline
+                                                    >
+                                                        <source src={media.url} type={media.mime} />
+                                                    </video>
+                                                </div>
                                             </div>
-
                                         </div>
-                                        {currentCaption && <div className="img-caption">{currentCaption}</div>}
+                                        {currentCaption && <div className="img-caption" style={{ color: headingColor }}>{currentCaption}</div>}
+                                        {currentDescription && <div className="img-description" style={{ color: descriptionColor }}>{currentDescription}</div>}
                                     </div>
                                 );
                             }
@@ -175,7 +396,7 @@ export default function Save({ attributes }) {
                         return null;
                     })}
                 </div>
-                <div id={`btn-wrap-${sliderId}`} class={arrowType}>
+                <div id={`btn-wrap-${sliderId}`} class={`${arrowType} ${arrowResponsiveClasses}`}>
                     {arrowType === 'custom1' && (
                         <div class="svg-arrow">
                             <div class="prev-btn">
@@ -207,23 +428,83 @@ export default function Save({ attributes }) {
                             </div>
                         </div>
                     )}
+                    {arrowType === 'custom' && customPrevArrow && customNextArrow && (
+                        <div class="svg-arrow">
+                            <div class="prev-btn">
+                                <img 
+                                    src={customPrevArrow.url} 
+                                    alt={customPrevArrow.alt || 'Previous Arrow'} 
+                                    class="custom-arrow-img"
+                                />
+                            </div>
+                            <div class="next-btn">
+                                <img 
+                                    src={customNextArrow.url} 
+                                    alt={customNextArrow.alt || 'Next Arrow'} 
+                                    class="custom-arrow-img"
+                                />
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
             <style>
                 {`
                     /* CSS for arrows */
+                    #btn-wrap-${sliderId} .prev-btn svg,
+                    #btn-wrap-${sliderId} .next-btn svg {
+                        fill: ${arrowColor || '#D8613C'} !important;
+                    }
+                    
+                    /* CSS for caption colors */
+                    #${sliderId} .img-caption {
+                        color: ${headingColor || 'inherit'} !important;
+                    }
+                    #${sliderId} .img-description {
+                        color: ${descriptionColor || 'inherit'} !important;
+                    }
                     
                     /* CSS for dots */
                     #${sliderId} .slick-dots li {
                         color: ${dotsColor} !important;
                     }
                     #${sliderId} .mcfgb-gallery-single iframe , #${sliderId} .mcfgb-gallery-single img ,#${sliderId} .mcfgb-gallery-single video {
-                        border-radius:${borderRadius}px;
+                        border-radius: ${
+                            (typeof borderRadiusTop !== 'undefined' && typeof borderRadiusRight !== 'undefined' && typeof borderRadiusBottom !== 'undefined' && typeof borderRadiusLeft !== 'undefined')
+                                ? `${borderRadiusTop || 0}px ${borderRadiusRight || 0}px ${borderRadiusBottom || 0}px ${borderRadiusLeft || 0}px`
+                                : `${borderRadius || 0}px`
+                        };
                         width:100% !important;
                         height: 100% !important;
                     }
-                    #btn-wrap-${sliderId} .svg-arrow svg{
-                        fill: ${arrowColor} !important;
+                    
+                    /* Video thumbnail styling */
+                    #${sliderId} .video-thumbnail-wrapper {
+                        border-radius: ${
+                            (typeof borderRadiusTop !== 'undefined' && typeof borderRadiusRight !== 'undefined' && typeof borderRadiusBottom !== 'undefined' && typeof borderRadiusLeft !== 'undefined')
+                                ? `${borderRadiusTop || 0}px ${borderRadiusRight || 0}px ${borderRadiusBottom || 0}px ${borderRadiusLeft || 0}px`
+                                : `${borderRadius || 0}px`
+                        };
+                        overflow: hidden;
+                    }
+                    
+                    #${sliderId} .video-thumbnail-wrapper img {
+                        transition: transform 0.3s ease;
+                    }
+                    
+                    #${sliderId} .video-thumbnail-wrapper .play-button-overlay {
+                        transition: all 0.3s ease;
+                    }
+                    
+                    #${sliderId} .video-thumbnail-wrapper:hover .play-button-overlay {
+                        background-color: rgba(0,0,0,0.8) !important;
+                        transform: translate(-50%, -50%) scale(1.1);
+                    }
+                    #btn-wrap-${sliderId} .custom-arrow-img{
+                        width: 30px !important;
+                        height: 30px !important;
+                        object-fit: contain !important;
+                        filter: brightness(0) saturate(100%) !important;
                     }
                     #${sliderId} .slick-dots li.number{
                         background: ${dotsColor} !important;
@@ -240,9 +521,19 @@ export default function Save({ attributes }) {
                         background: ${fancyboxBgColor} !important;
                         opacity: ${fancyboxOpacity}% !important;
                     }
-                    .${sliderId}-fancy-custom .fancybox__content {
+                                         .${sliderId}-fancy-custom .fancybox__content {
                         width: ${fancyboxWidth}px !important;
                         max-height:700px !important;
+                    }
+                     
+                     /* Hide Fancybox caption completely */
+                     .${sliderId}-fancy-custom .fancybox__caption,
+                     .fancybox__caption {
+                        display: none !important;
+                        visibility: hidden !important;
+                        opacity: 0 !important;
+                        height: 0 !important;
+                        overflow: hidden !important;
                     }
                 
                 `}
@@ -250,6 +541,8 @@ export default function Save({ attributes }) {
             <script>
                 {`              
                         jQuery(document).ready(function($) {
+                            
+
 
                             function removeGalleryHash() {
                                 if (window.location.hash.startsWith('#gallery-${sliderId}-')) {
@@ -271,15 +564,14 @@ export default function Save({ attributes }) {
                                 $('[data-fancybox="gallery-${sliderId}"]').each(function () {
                                     var $this = $(this);
                                     var $datafancyclass = $this.attr('data-fancy-class');
-                                    const isAutoplay =${autoplay};
-                                    const isInfinite =${infinite};
+                                    const isAutoplay = ${autoplay || false};
+                                    const isInfinite = ${infinite || false};
                                     var $slider = $(sliderId);
                                     
                                     Fancybox.bind('[data-fancybox="gallery-' + $datafancyclass + '"]', {
                                         mainClass: 'media-carousel-fancy-custom ' + $datafancyclass + '-fancy-custom',
                                         on: {
                                             reveal: (fancybox, slide) => {
-                                                console.log('Fancybox triggered, stopping autoplay');
                                                 if (isAutoplay) {
                                                     $(sliderId).slick('slickPause');
                                                 } 
@@ -287,25 +579,18 @@ export default function Save({ attributes }) {
                                             close: (fancybox, slide) => {
                                                 var currentSlide = fancybox.getSlide().index;
 
-                                                if (${sliderType === "carouselType"}) {
+                                                if ("${sliderType}" === "carouselType") {
                                                     let slickIndex = currentSlide ;
-                                                    // console.log('Navigating to the corresponding slide in Slick slider:', slickIndex);
                                                     if (isInfinite) {
-                                                        console.log('on');
                                                         const slickSlidesCount = $(sliderId).slick('getSlick').slideCount;
-                                                        console.log(slickSlidesCount);
                                                         slickIndex = (currentSlide % slickSlidesCount) - 2;
-                                                        console.log('slickIndex',slickIndex);
                                                     }
                                                     $slider.slick('slickGoTo', slickIndex);
                                                 } else {
                                                 let slickIndex = currentSlide ;
                                                     if (isInfinite) {
-                                                        console.log('on');
                                                         const slickSlidesCount = $(sliderId).slick('getSlick').slideCount;
-                                                        console.log(slickSlidesCount);
                                                         slickIndex = (currentSlide % slickSlidesCount) - 1;
-                                                        console.log('slickIndex',slickIndex);
                                                     }
                                                     $slider.slick('slickGoTo', slickIndex);
                                                 }
@@ -320,6 +605,64 @@ export default function Save({ attributes }) {
                                         Image: { 
                                             zoom: false,
                                         },
+                                        Html: {
+                                            video: {
+                                                autoplay: false,
+                                                ratio: 16/9
+                                            }
+                                        },
+                                        Carousel: {
+                                            infinite: false,
+                                            Navigation: false
+                                        },
+                                        Toolbar: {
+                                            display: false
+                                        },
+                                        Thumbs: {
+                                            autoStart: false
+                                        },
+                                        // Additional options to ensure footer and caption are hidden
+                                        hideScrollbar: true,
+                                        backdropClick: "close",
+                                        dragToClose: false,
+                                        // Explicitly hide footer and caption elements
+                                        on: {
+                                            initLayout: (fancybox) => {
+                                                // Hide footer after layout is initialized
+                                                const footer = fancybox.container.querySelector('.fancybox__footer');
+                                                if (footer) {
+                                                    footer.style.display = 'none';
+                                                }
+                                                
+                                                // Hide caption after layout is initialized
+                                                const caption = fancybox.container.querySelector('.fancybox__caption');
+                                                if (caption) {
+                                                    caption.style.display = 'none';
+                                                }
+                                            },
+                                            done: (fancybox, slide) => {
+                                                // Additional attempt to hide caption after slide is loaded
+                                                setTimeout(() => {
+                                                    const captions = document.querySelectorAll('.fancybox__caption');
+                                                    captions.forEach(caption => {
+                                                        caption.style.display = 'none';
+                                                        caption.style.visibility = 'hidden';
+                                                        caption.style.opacity = '0';
+                                                    });
+                                                }, 100);
+                                            },
+                                            reveal: (fancybox, slide) => {
+                                                // Hide caption when modal is revealed
+                                                setTimeout(() => {
+                                                    const captions = document.querySelectorAll('.fancybox__caption');
+                                                    captions.forEach(caption => {
+                                                        caption.style.display = 'none';
+                                                        caption.style.visibility = 'hidden';
+                                                        caption.style.opacity = '0';
+                                                    });
+                                                }, 50);
+                                            }
+                                        }
                                     });
                                 });
                             
@@ -328,12 +671,15 @@ export default function Save({ attributes }) {
                                         switch("${simpleType}") {
                                             case 'simple':
                                             $(sliderId).slick({
-                                            arrows: ${showArrows},
-                                            speed:${speed},
-                                            autoplaySpeed:${speed},
-                                            autoplay:${autoplay},   
-                                            infinite: ${autoplay ? true : (typeof infinite !== 'undefined' ? infinite : false)},       
-                                            dots:${dots},
+                                            slidesToShow: ${slidesToShowDesktop || 2},
+                                            slidesToScroll: ${slidesToScroll || 1},
+                                            arrows: ${showArrows || false},
+                                            speed: ${speed || 1000},
+                                            autoplaySpeed: ${speed || 1000},
+                                            autoplay: ${autoplay || false},   
+                                            infinite: ${autoplay ? true : (infinite || false)},       
+                                            dots: ${dots || false},
+                                            pauseOnHover: ${pauseOnHover !== undefined ? pauseOnHover : true},
                                             customPaging: function(sliderId, i) {
                                                 if ("${dotsType}" === "number") {
                                                     return i + 1;
@@ -341,6 +687,24 @@ export default function Save({ attributes }) {
                                                     return '.';
                                                 }
                                             },
+                                            responsive: [
+                                                {
+                                                    breakpoint: 1024,
+                                                    settings: {
+                                                        slidesToShow: ${slidesToShowTablet || 2},
+                                                        slidesToScroll: ${slidesToScroll || 1},
+                                                        arrows: ${showArrows || false}
+                                                    }
+                                                },
+                                                {
+                                                    breakpoint: 768,
+                                                    settings: {
+                                                        slidesToShow: ${slidesToShowMobile || 1},
+                                                        slidesToScroll: ${slidesToScroll || 1},
+                                                        arrows: ${showArrows || false}
+                                                    }
+                                                }
+                                            ],
                                             prevArrow: '#btn-wrap-${sliderId} .prev-btn',
                                             nextArrow: '#btn-wrap-${sliderId} .next-btn',
                                         });
@@ -354,7 +718,9 @@ export default function Save({ attributes }) {
                                             break;
                                         case 'fade':
                                             $(sliderId).slick({
-                                                dots:${dots},
+                                                slidesToShow: ${slidesToShowDesktop || 2},
+                                                slidesToScroll: ${slidesToScroll || 1},
+                                                dots: ${dots || false},
                                                 customPaging: function(sliderId, i) {
                                                     if ("${dotsType}" === "number") {
                                                         return i + 1;
@@ -362,13 +728,32 @@ export default function Save({ attributes }) {
                                                         return '.';
                                                     }
                                                 },
-                                                speed:${speed},
-                                                autoplay:${autoplay},
+                                                speed: ${speed || 1000},
+                                                autoplay: ${autoplay || false},
                                                 fade: true,
                                                 cssEase: 'linear',
-                                                arrows: ${showArrows},
-                                                autoplaySpeed:${speed},
-                                                infinite: ${autoplay ? true : (typeof infinite !== 'undefined' ? infinite : false)},
+                                                arrows: ${showArrows || false},
+                                                autoplaySpeed: ${speed || 1000},
+                                                infinite: ${autoplay ? true : (infinite || false)},
+                                                pauseOnHover: ${pauseOnHover !== undefined ? pauseOnHover : true},
+                                                responsive: [
+                                                    {
+                                                        breakpoint: 1024,
+                                                        settings: {
+                                                            slidesToShow: ${slidesToShowTablet || 2},
+                                                            slidesToScroll: ${slidesToScroll || 1},
+                                                            arrows: ${showArrows || false}
+                                                        }
+                                                    },
+                                                    {
+                                                        breakpoint: 768,
+                                                        settings: {
+                                                            slidesToShow: ${slidesToShowMobile || 1},
+                                                            slidesToScroll: ${slidesToScroll || 1},
+                                                            arrows: ${showArrows || false}
+                                                        }
+                                                    }
+                                                ],
                                                 prevArrow: '#btn-wrap-${sliderId} .prev-btn',
                                                 nextArrow: '#btn-wrap-${sliderId} .next-btn',
                                             });
@@ -382,7 +767,9 @@ export default function Save({ attributes }) {
                                             break;
                                         case 'adaptiveheight':
                                             $(sliderId).slick({
-                                                dots:${dots},
+                                                slidesToShow: ${slidesToShowDesktop || 2},
+                                                slidesToScroll: ${slidesToScroll || 1},
+                                                dots: ${dots || false},
                                                 customPaging: function(sliderId, i) {
                                                     if ("${dotsType}" === "number") {
                                                         return i + 1;
@@ -390,12 +777,31 @@ export default function Save({ attributes }) {
                                                         return '.';
                                                     }
                                                 },
-                                                speed:${speed},
-                                                autoplay:${autoplay},
+                                                speed: ${speed || 1000},
+                                                autoplay: ${autoplay || false},
                                                 adaptiveHeight: true,
-                                                arrows: ${showArrows},
-                                                autoplaySpeed:${speed},
-                                                infinite: ${autoplay ? true : (typeof infinite !== 'undefined' ? infinite : false)},
+                                                arrows: ${showArrows || false},
+                                                autoplaySpeed: ${speed || 1000},
+                                                infinite: ${autoplay ? true : (infinite || false)},
+                                                pauseOnHover: ${pauseOnHover !== undefined ? pauseOnHover : true},
+                                                responsive: [
+                                                    {
+                                                        breakpoint: 1024,
+                                                        settings: {
+                                                            slidesToShow: ${slidesToShowTablet || 2},
+                                                            slidesToScroll: ${slidesToScroll || 1},
+                                                            arrows: ${showArrows || false}
+                                                        }
+                                                    },
+                                                    {
+                                                        breakpoint: 768,
+                                                        settings: {
+                                                            slidesToShow: ${slidesToShowMobile || 1},
+                                                            slidesToScroll: ${slidesToScroll || 1},
+                                                            arrows: ${showArrows || false}
+                                                        }
+                                                    }
+                                                ],
                                                 prevArrow: '#btn-wrap-${sliderId} .prev-btn',
                                                 nextArrow: '#btn-wrap-${sliderId} .next-btn',
                                             });
@@ -413,9 +819,9 @@ export default function Save({ attributes }) {
                                     switch("${carouselType}") {
                                         case 'carousel':
                                             $(sliderId).slick({
-                                                slidesToShow: ${slidesToShow},
-                                                slidesToScroll: ${slidesToScroll},
-                                                dots:${dots},
+                                                slidesToShow: ${slidesToShowDesktop || 2},
+                                                slidesToScroll: ${slidesToScroll || 1},
+                                                dots: ${dots || false},
                                                 customPaging: function(sliderId, i) {
                                                     if ("${dotsType}" === "number") {
                                                         return i + 1;
@@ -423,11 +829,30 @@ export default function Save({ attributes }) {
                                                         return '.';
                                                     }
                                                 },
-                                                speed:${speed},
-                                                autoplay:${autoplay},
-                                                arrows: ${showArrows},
-                                                autoplaySpeed:${speed},
-                                                infinite: ${autoplay ? true : (typeof infinite !== 'undefined' ? infinite : false)},
+                                                speed: ${speed || 1000},
+                                                autoplay: ${autoplay || false},
+                                                arrows: ${showArrows || false},
+                                                autoplaySpeed: ${speed || 1000},
+                                                infinite: ${autoplay ? true : (infinite || false)},
+                                                pauseOnHover: ${pauseOnHover !== undefined ? pauseOnHover : true},
+                                                responsive: [
+                                                    {
+                                                        breakpoint: 1024,
+                                                        settings: {
+                                                            slidesToShow: ${slidesToShowTablet || 2},
+                                                            slidesToScroll: ${slidesToScroll || 1},
+                                                            arrows: ${showArrows || false}
+                                                        }
+                                                    },
+                                                    {
+                                                        breakpoint: 768,
+                                                        settings: {
+                                                            slidesToShow: ${slidesToShowMobile || 1},
+                                                            slidesToScroll: ${slidesToScroll || 1},
+                                                            arrows: ${showArrows || false}
+                                                        }
+                                                    }
+                                                ],
                                                 prevArrow: '#btn-wrap-${sliderId} .prev-btn',
                                                 nextArrow: '#btn-wrap-${sliderId} .next-btn',
                                             });
@@ -443,33 +868,34 @@ export default function Save({ attributes }) {
                                             $(sliderId).slick({
                                                 centerMode: true,
                                                 centerPadding: '60px',
-                                                slidesToShow: ${slidesToShow},
-                                                speed:${speed},
-                                                autoplay:${autoplay},
-                                                infinite: ${autoplay ? true : (typeof infinite !== 'undefined' ? infinite : false)},
+                                                slidesToShow: ${slidesToShowDesktop || 2},
+                                                speed: ${speed || 1000},
+                                                autoplay: ${autoplay || false},
+                                                infinite: ${autoplay ? true : (infinite || false)},
+                                                pauseOnHover: ${pauseOnHover !== undefined ? pauseOnHover : true},
                                                 responsive: [
                                                     {
-                                                        breakpoint: 768,
+                                                        breakpoint: 1024,
                                                         settings: {
-                                                            arrows: false,
+                                                            arrows: ${showArrows || false},
                                                             centerMode: true,
                                                             centerPadding: '40px',
-                                                            slidesToShow: ${slidesToShow}
+                                                            slidesToShow: ${slidesToShowTablet || 2}
                                                         }
                                                     },
                                                     {
-                                                        breakpoint: 480,
+                                                        breakpoint: 768,
                                                         settings: {
-                                                            arrows: false,
+                                                            arrows: ${showArrows || false},
                                                             centerMode: true,
                                                             centerPadding: '40px',
-                                                            slidesToShow: 1
+                                                            slidesToShow: ${slidesToShowMobile || 1}
                                                         }
                                                     }
                                                 ],
-                                                arrows: ${showArrows},
-                                                autoplaySpeed:${speed},
-                                                dots:${dots},
+                                                arrows: ${showArrows || false},
+                                                autoplaySpeed: ${speed || 1000},
+                                                dots: ${dots || false},
                                                 customPaging: function(sliderId, i) {
                                                     if ("${dotsType}" === "number") { 
                                                         return i + 1;
@@ -492,13 +918,32 @@ export default function Save({ attributes }) {
                                     break;
                                 default:
                                     $(sliderId).slick({
-                                        slidesToShow: ${slidesToShow},
-                                        slidesToScroll: ${slidesToScroll},
-                                        speed:${speed}, 
-                                        autoplay:${autoplay},
-                                        autoplaySpeed:${speed},
-                                        arrows: ${showArrows},
-                                        infinite: ${autoplay ? true : (typeof infinite !== 'undefined' ? infinite : false)},
+                                        slidesToShow: ${slidesToShowDesktop || 2},
+                                        slidesToScroll: ${slidesToScroll || 1},
+                                        speed: ${speed || 1000}, 
+                                        autoplay: ${autoplay || false},
+                                        autoplaySpeed: ${speed || 1000},
+                                        arrows: ${showArrows || false},
+                                        infinite: ${autoplay ? true : (infinite || false)},
+                                        pauseOnHover: ${pauseOnHover !== undefined ? pauseOnHover : true},
+                                        responsive: [
+                                            {
+                                                breakpoint: 1024,
+                                                settings: {
+                                                    slidesToShow: ${slidesToShowTablet || 2},
+                                                    slidesToScroll: ${slidesToScroll || 1},
+                                                    arrows: ${showArrows || false}
+                                                }
+                                            },
+                                            {
+                                                breakpoint: 768,
+                                                settings: {
+                                                    slidesToShow: ${slidesToShowMobile || 1},
+                                                    slidesToScroll: ${slidesToScroll || 1},
+                                                    arrows: ${showArrows || false}
+                                                }
+                                            }
+                                        ],
                                         prevArrow: '#btn-wrap-${sliderId} .prev-btn',
                                         nextArrow: '#btn-wrap-${sliderId} .next-btn',
                                     });
