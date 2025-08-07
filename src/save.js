@@ -24,7 +24,7 @@ import "slick-carousel/slick/slick.js";
 
 
 export default function Save({ attributes }) {
-    const { galleryImages, sliderType, showArrows, arrowType, customPrevArrow, customNextArrow, sliderId, urls, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, borderRadiusTop, borderRadiusRight, borderRadiusBottom, borderRadiusLeft, fancyboxBgColor, fancyboxWidth, fancyboxOpacity, arrowpos, slidesToShow, slidesToShowDesktop, slidesToShowTablet, slidesToShowMobile, slidesToScroll, pauseOnHover, hideOnDesktop, hideOnTablet, hideOnMobile, hideArrowsOnDesktop, hideArrowsOnTablet, hideArrowsOnMobile, imageAspectRatio = "16:9", description, headingColor = "#111111", descriptionColor = "#636363" } = attributes;
+    const { galleryImages, sliderType, showArrows, arrowType, customPrevArrow, customNextArrow, sliderId, urls, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, borderRadiusTop, borderRadiusRight, borderRadiusBottom, borderRadiusLeft, fancyboxBgColor, fancyboxWidth, fancyboxOpacity, arrowpos, slidesToShow, slidesToShowDesktop, slidesToShowTablet, slidesToShowMobile, slidesToScroll, pauseOnHover, hideOnDesktop, hideOnTablet, hideOnMobile, hideArrowsOnDesktop, hideArrowsOnTablet, hideArrowsOnMobile, imageAspectRatio = "16:9", description, headingColor = "#111111", descriptionColor = "#000000" } = attributes;
 
     // Build responsive visibility classes
     const responsiveClasses = [
@@ -466,7 +466,7 @@ export default function Save({ attributes }) {
                     
                     /* CSS for dots */
                     #${sliderId} .slick-dots li {
-                        color: ${dotsColor} !important;
+                        background: ${dotsColor} !important;
                     }
                     #${sliderId} .mcfgb-gallery-single iframe , #${sliderId} .mcfgb-gallery-single img ,#${sliderId} .mcfgb-gallery-single video {
                         border-radius: ${

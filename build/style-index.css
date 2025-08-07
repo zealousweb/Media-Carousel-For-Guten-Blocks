@@ -1,1 +1,477 @@
-.bottom .slick-dots li,.side .slick-dots li{height:10px;opacity:.5;width:10px}.bottom .slick-dots li.slick-active,.bottom .slick-dots li:hover,.side .slick-dots li.slick-active,.side .slick-dots li:hover{opacity:1}.bottom .slick-next,.bottom .slick-prev{align-items:center;border-radius:50%!important;display:flex;height:40px!important;justify-content:center;width:40px!important}.bottom .slick-prev{left:-56px!important}.bottom .slick-next{right:-56px!important}.next-btn svg,.prev-btn svg{height:100%;width:100%}.next-btn,.prev-btn{cursor:pointer;height:30px;width:30px}.bottom .custom .svg-arrow,.bottom .custom1 .svg-arrow,.bottom .custom2 .svg-arrow,.bottom .custom3 .svg-arrow{display:flex!important;gap:10px;justify-content:center;margin-top:10px}.custom .next-btn:focus,.custom .prev-btn:focus,.custom1 .next-btn :focus,.custom1 .prev-btn :focus,.custom2 .next-btn:focus,.custom2 .prev-btn:focus,.custom3 .next-btn:focus,.custom3 .prev-btn:focus{border:none!important;outline:none!important}.next-btn svg{transform:rotate(180deg)}.next-btn.slick-arrow.slick-disabled,.prev-btn.slick-arrow.slick-disabled{cursor:default;opacity:.5}.bottom .slick-prev{left:45%!important}.bottom .slick-next,.bottom .slick-prev{bottom:-106px!important;top:unset!important;transform:translate(-50%,-50%)}.bottom .slick-next{right:40%!important}.side .next-btn,.side .prev-btn{align-items:center;border-radius:50%!important;display:flex;height:30px!important;justify-content:center;width:30px!important}.bottom .slick-slide,.side .slick-slide{margin:0 5px}.bottom .mcfgb-gallery-single,.side .mcfgb-gallery-single{position:relative}.bottom .mcfgb-gallery-single iframe,.bottom .mcfgb-gallery-single img,.bottom .mcfgb-gallery-single video,.side .mcfgb-gallery-single iframe,.side .mcfgb-gallery-single img,.side .mcfgb-gallery-single video{height:100%;left:0;-o-object-fit:cover;object-fit:cover;position:relative;top:0;width:100%}.bottom .slick-dots,.side .slick-dots{bottom:unset;margin:10px 0;position:relative}.side{position:relative}.side #btn-wrap{left:0;position:absolute;top:50%;transform:translateY(-50%);width:100%}.bottom #btn-wrap{margin-top:55px}.false .custom1,.false .custom2,.false .custom3,.undefined .custom1,.undefined .custom2,.undefined .custom3{display:none}.mcfgb-gallery-single{position:relative}.slick-dots li{margin:5px!important}.img-caption{font-size:16px;font-weight:600;line-height:1.4;margin:10px 0 0}.img-caption,.img-description{text-align:center;transition:color .3s ease}.img-description{font-size:14px;line-height:1.5;margin:5px 0 0}.slick-dots .number{font-size:24px}.slick-dots li.number{align-items:center;border-radius:50%;display:flex;font-size:10px;height:25px;justify-content:center;width:26px}.carouselType,.simpleType{margin:100px 0}.carouselType.side .custom,.carouselType.side .custom1,.carouselType.side .custom2,.carouselType.side .custom3{top:42%}@media(max-width:1024px){.bottom .mcfgb-gallery-single,.bottom .slick-slide,.side .mcfgb-gallery-single,.side .slick-slide{margin:0 3px}}@media(max-width:768px){.bottom .mcfgb-gallery-single,.bottom .slick-slide,.side .mcfgb-gallery-single,.side .slick-slide{margin:0 2px}.bottom .slick-prev{left:40%!important}.bottom .slick-next{right:35%!important}}.side .custom,.side .custom1,.side .custom2,.side .custom3{position:absolute;top:43%;transform:translateY(-50%);width:100%}.side .svg-arrow{display:flex;justify-content:space-between}.side .svg-arrow .next-btn{position:relative;right:-50px}.side .svg-arrow .prev-btn{left:-50px;position:relative}.bottom .slick-dotted{margin-bottom:20px!important}.simpleType{margin-bottom:150px;margin-left:auto!important;margin-right:auto!important;max-width:100%!important}.side .slick-list{padding-bottom:50px}.side .img-caption{margin:0;overflow:hidden}.side .slick-slide{position:relative;text-align:center}.side .slick-dots{left:0;position:absolute}.bottom .slick-dots,.side .slick-dots{align-items:center;display:flex;flex-wrap:wrap;justify-content:center;padding:0;width:100%}.mcfgb-gallery-single:focus{border:none!important;outline:none!important}.slick-slide:focus{outline:none}video:focus{outline:none!important}.slick-dotted.slick-slider{z-index:1}.mcfgb-gallery-single a{display:block;height:100%;width:100%}.mcfgb-gallery-single a:focus{border:none!important;outline:none!important}.bottom .slick-slider,.side .slick-slider{position:relative;z-index:1}@media(max-width:767px){.side .svg-arrow .next-btn{right:0}.side .svg-arrow .prev-btn{left:0}.side .slick-slider{padding:0 40px!important;position:relative!important}.side .img-caption{font-size:13px}.side .slick-list{padding-bottom:20px}}@media(min-width:1025px){.mcfgb-hide-desktop{display:none!important}}@media(min-width:768px)and (max-width:1024px){.mcfgb-hide-tablet{display:none!important}}@media(max-width:767px){.mcfgb-hide-mobile{display:none!important}}@media(min-width:1025px){.mcfgb-hide-arrows-desktop{display:none!important}}@media(min-width:768px)and (max-width:1024px){.mcfgb-hide-arrows-tablet{display:none!important}}@media(max-width:767px){.mcfgb-hide-arrows-mobile{display:none!important}}.ratio-part{aspect-ratio:16/9;display:block;overflow:hidden;position:relative;width:100%}.ratio-part iframe,.ratio-part img,.ratio-part video{height:100%;left:0;-o-object-fit:cover;object-fit:cover;position:absolute;top:0;width:100%}
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/style.scss ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+.bottom .slick-dots li,
+.side .slick-dots li {
+  opacity: 0.5;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+}
+
+.bottom .slick-dots li.dot,
+.side .slick-dots li.dot {
+  font-size: 0;
+}
+
+.bottom .slick-dots li::marker,
+.side .slick-dots li::marker {
+  content: none;
+}
+
+.bottom .slick-dots li.slick-active,
+.side .slick-dots li.slick-active {
+  opacity: 1;
+}
+
+.bottom .slick-dots li:hover,
+.side .slick-dots li:hover {
+  opacity: 1;
+}
+
+.bottom .slick-next,
+.bottom .slick-prev {
+  border-radius: 50% !important;
+  width: 40px !important;
+  height: 40px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottom .slick-prev {
+  left: -56px !important;
+}
+
+.bottom .slick-next {
+  right: -56px !important;
+}
+
+.prev-btn svg,
+.next-btn svg {
+  width: 100%;
+  height: 100%;
+}
+
+.prev-btn,
+.next-btn {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.bottom .custom .svg-arrow {
+  display: flex !important;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.bottom .custom1 .svg-arrow {
+  display: flex !important;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.bottom .custom2 .svg-arrow {
+  display: flex !important;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.bottom .custom3 .svg-arrow {
+  display: flex !important;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.custom .prev-btn:focus,
+.custom1 .prev-btn :focus,
+.custom2 .prev-btn:focus,
+.custom3 .prev-btn:focus,
+.custom .next-btn:focus,
+.custom1 .next-btn :focus,
+.custom2 .next-btn:focus,
+.custom3 .next-btn:focus {
+  border: none !important;
+  outline: none !important;
+}
+
+.next-btn svg {
+  transform: rotate(180deg);
+}
+
+.prev-btn.slick-arrow.slick-disabled,
+.next-btn.slick-arrow.slick-disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.bottom .slick-prev {
+  bottom: -106px !important;
+  top: unset !important;
+  left: 45% !important;
+  transform: translate(-50%, -50%);
+}
+
+.bottom .slick-next {
+  bottom: -106px !important;
+  top: unset !important;
+  right: 40% !important;
+  transform: translate(-50%, -50%);
+}
+
+.side .prev-btn {
+  border-radius: 50% !important;
+  width: 30px !important;
+  height: 30px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.side .next-btn {
+  border-radius: 50% !important;
+  width: 30px !important;
+  height: 30px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.side .slick-slide,
+.bottom .slick-slide {
+  margin: 0 5px;
+}
+
+.side .mcfgb-gallery-single,
+.bottom .mcfgb-gallery-single {
+  position: relative;
+}
+
+.side .mcfgb-gallery-single img,
+.side .mcfgb-gallery-single video,
+.bottom .mcfgb-gallery-single img,
+.bottom .mcfgb-gallery-single video,
+.bottom .mcfgb-gallery-single iframe,
+.side .mcfgb-gallery-single iframe {
+  position: relative;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.side .slick-dots,
+.bottom .slick-dots {
+  bottom: unset;
+  position: relative;
+  margin: 10px 0 10px;
+}
+
+.side {
+  position: relative;
+}
+
+.side #btn-wrap {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.bottom #btn-wrap {
+  margin-top: 55px;
+}
+
+.false .custom1,
+.false .custom2,
+.false .custom3,
+.undefined .custom1,
+.undefined .custom2,
+.undefined .custom3 {
+  display: none;
+}
+
+.mcfgb-gallery-single {
+  position: relative;
+}
+
+.slick-dots li {
+  margin: 5px !important;
+  cursor: pointer;
+}
+
+.img-caption {
+  text-align: center;
+  margin: 10px 0 0;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.4;
+  transition: color 0.3s ease;
+}
+
+.img-description {
+  text-align: center;
+  margin: 5px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+  transition: color 0.3s ease;
+}
+
+.slick-dots .number {
+  font-size: 24px;
+}
+
+.slick-dots li.number {
+  width: 26px;
+  height: 25px;
+  font-size: 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carouselType, .simpleType {
+  margin: 100px 0;
+}
+
+.carouselType.side .custom,
+.carouselType.side .custom1,
+.carouselType.side .custom2,
+.carouselType.side .custom3 {
+  top: 42%;
+}
+
+/* Responsive styles for smooth transitions */
+@media (max-width: 1024px) {
+  .side .mcfgb-gallery-single,
+  .bottom .mcfgb-gallery-single {
+    margin: 0 3px;
+  }
+  .side .slick-slide,
+  .bottom .slick-slide {
+    margin: 0 3px;
+  }
+}
+@media (max-width: 768px) {
+  .side .mcfgb-gallery-single,
+  .bottom .mcfgb-gallery-single {
+    margin: 0 2px;
+  }
+  .side .slick-slide,
+  .bottom .slick-slide {
+    margin: 0 2px;
+  }
+  .bottom .slick-prev {
+    left: 40% !important;
+  }
+  .bottom .slick-next {
+    right: 35% !important;
+  }
+}
+.side .custom,
+.side .custom1,
+.side .custom2,
+.side .custom3 {
+  position: absolute;
+  width: 100%;
+  top: 43%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+.side .svg-arrow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.side .svg-arrow .next-btn {
+  right: -50px;
+  position: relative;
+}
+
+.side .svg-arrow .prev-btn {
+  left: -50px;
+  position: relative;
+}
+
+.bottom .slick-dotted {
+  margin-bottom: 20px !important;
+}
+
+.simpleType {
+  margin-bottom: 150px;
+  max-width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.side .slick-list {
+  padding-bottom: 50px;
+}
+
+.side .img-caption {
+  overflow: hidden;
+  margin: 0;
+}
+
+.side .slick-slide {
+  position: relative;
+  text-align: center;
+}
+
+.side .slick-dots {
+  position: absolute;
+  left: 0;
+}
+
+.side .slick-dots, .bottom .slick-dots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+}
+
+.mcfgb-gallery-single:focus {
+  outline: none !important;
+  border: none !important;
+}
+
+.slick-slide:focus {
+  outline: none;
+}
+
+video:focus {
+  outline: none !important;
+}
+
+.slick-dotted.slick-slider {
+  z-index: 1;
+}
+
+.mcfgb-gallery-single a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.mcfgb-gallery-single a:focus {
+  outline: none !important;
+  border: none !important;
+}
+
+.side .slick-slider,
+.bottom .slick-slider {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 1023px) {
+  .side .svg-arrow .next-btn {
+    right: -18px;
+  }
+  .side .svg-arrow .prev-btn {
+    left: -18px;
+  }
+  .side .slick-slider {
+    padding: 0 40px !important;
+  }
+}
+@media (max-width: 767px) {
+  .side .svg-arrow .next-btn {
+    right: 0;
+  }
+  .side .svg-arrow .prev-btn {
+    left: 0;
+  }
+  .side .slick-slider {
+    padding: 0 40px !important;
+    position: relative !important;
+  }
+  .side .img-caption {
+    font-size: 13px;
+  }
+  .side .slick-list {
+    padding-bottom: 20px;
+  }
+}
+@media (min-width: 1025px) {
+  .mcfgb-hide-desktop {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .mcfgb-hide-tablet {
+    display: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .mcfgb-hide-mobile {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1025px) {
+  .mcfgb-hide-arrows-desktop {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .mcfgb-hide-arrows-tablet {
+    display: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .mcfgb-hide-arrows-mobile {
+    display: none !important;
+  }
+}
+
+/* Aspect Ratio Styles */
+.ratio-part {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9; /* fallback, will be overridden by inline style */
+  overflow: hidden;
+  display: block;
+}
+
+.ratio-part img,
+.ratio-part video,
+.ratio-part iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+/*# sourceMappingURL=style-index.css.map*/

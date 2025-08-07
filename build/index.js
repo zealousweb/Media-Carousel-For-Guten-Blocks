@@ -1,28 +1,6 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./assets/type-carousel.png":
-/*!**********************************!*\
-  !*** ./assets/type-carousel.png ***!
-  \**********************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-module.exports = __webpack_require__.p + "images/type-carousel.10af45c0.png";
-
-/***/ }),
-
-/***/ "./assets/type-slider.png":
-/*!********************************!*\
-  !*** ./assets/type-slider.png ***!
-  \********************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-module.exports = __webpack_require__.p + "images/type-slider.c3e76149.png";
-
-/***/ }),
-
 /***/ "./node_modules/@babel/runtime/helpers/esm/extends.js":
 /*!************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/esm/extends.js ***!
@@ -3130,8 +3108,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var slick_carousel_slick_slick_theme_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! slick-carousel/slick/slick-theme.css */ "./node_modules/slick-carousel/slick/slick-theme.css");
 /* harmony import */ var slick_carousel_slick_slick_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! slick-carousel/slick/slick.js */ "./node_modules/slick-carousel/slick/slick.js");
 /* harmony import */ var slick_carousel_slick_slick_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(slick_carousel_slick_slick_js__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _assets_type_carousel_png__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../assets/type-carousel.png */ "./assets/type-carousel.png");
-/* harmony import */ var _assets_type_slider_png__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../assets/type-slider.png */ "./assets/type-slider.png");
 
 
 /**
@@ -3173,8 +3149,6 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @return {WPElement} Element to render.
  */
-
-
 
 
 
@@ -3284,13 +3258,45 @@ function Edit({
     }
   }, []);
 
+  // Validate and clamp existing border radius values to ensure they don't exceed 100
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    const needsUpdate = {};
+    let hasChanges = false;
+
+    // Check and clamp each border radius value
+    if (borderRadiusTop !== undefined && (borderRadiusTop < 0 || borderRadiusTop > 100)) {
+      needsUpdate.borderRadiusTop = Math.min(Math.max(borderRadiusTop, 0), 100);
+      hasChanges = true;
+    }
+    if (borderRadiusRight !== undefined && (borderRadiusRight < 0 || borderRadiusRight > 100)) {
+      needsUpdate.borderRadiusRight = Math.min(Math.max(borderRadiusRight, 0), 100);
+      hasChanges = true;
+    }
+    if (borderRadiusBottom !== undefined && (borderRadiusBottom < 0 || borderRadiusBottom > 100)) {
+      needsUpdate.borderRadiusBottom = Math.min(Math.max(borderRadiusBottom, 0), 100);
+      hasChanges = true;
+    }
+    if (borderRadiusLeft !== undefined && (borderRadiusLeft < 0 || borderRadiusLeft > 100)) {
+      needsUpdate.borderRadiusLeft = Math.min(Math.max(borderRadiusLeft, 0), 100);
+      hasChanges = true;
+    }
+
+    // Update attributes if any values need clamping
+    if (hasChanges) {
+      setAttributes(needsUpdate);
+    }
+  }, [borderRadiusTop, borderRadiusRight, borderRadiusBottom, borderRadiusLeft]);
+
   // Helper to update all sides
   const setAllRadius = value => {
+    // Ensure value is a number and clamp it to valid range
+    const numValue = parseInt(value) || 0;
+    const clampedValue = Math.min(Math.max(numValue, 0), 100);
     setAttributes({
-      borderRadiusTop: value,
-      borderRadiusRight: value,
-      borderRadiusBottom: value,
-      borderRadiusLeft: value
+      borderRadiusTop: clampedValue,
+      borderRadiusRight: clampedValue,
+      borderRadiusBottom: clampedValue,
+      borderRadiusLeft: clampedValue
     });
   };
 
@@ -3312,50 +3318,102 @@ function Edit({
     type: "number",
     min: 0,
     max: 100,
+    step: 1,
     value: borderRadiusTop !== null && borderRadiusTop !== void 0 ? borderRadiusTop : 0,
     onChange: e => {
       const value = parseInt(e.target.value) || 0;
-      if (radiusLinked) setAllRadius(value);else setAttributes({
-        borderRadiusTop: value
+      const clampedValue = Math.min(Math.max(value, 0), 100);
+      if (radiusLinked) setAllRadius(clampedValue);else setAttributes({
+        borderRadiusTop: clampedValue
       });
     },
-    "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Top', 'media-carousel-for-guten-blocks')
+    onBlur: e => {
+      // Additional validation on blur to ensure value is within range
+      const value = parseInt(e.target.value) || 0;
+      const clampedValue = Math.min(Math.max(value, 0), 100);
+      if (value !== clampedValue) {
+        if (radiusLinked) setAllRadius(clampedValue);else setAttributes({
+          borderRadiusTop: clampedValue
+        });
+      }
+    },
+    "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Top', 'media-carousel-for-guten-blocks'),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Border radius value (0-100)', 'media-carousel-for-guten-blocks')
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("input", {
     type: "number",
     min: 0,
     max: 100,
+    step: 1,
     value: borderRadiusRight !== null && borderRadiusRight !== void 0 ? borderRadiusRight : 0,
     onChange: e => {
       const value = parseInt(e.target.value) || 0;
-      if (radiusLinked) setAllRadius(value);else setAttributes({
-        borderRadiusRight: value
+      const clampedValue = Math.min(Math.max(value, 0), 100);
+      if (radiusLinked) setAllRadius(clampedValue);else setAttributes({
+        borderRadiusRight: clampedValue
       });
     },
-    "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Right', 'media-carousel-for-guten-blocks')
+    onBlur: e => {
+      // Additional validation on blur to ensure value is within range
+      const value = parseInt(e.target.value) || 0;
+      const clampedValue = Math.min(Math.max(value, 0), 100);
+      if (value !== clampedValue) {
+        if (radiusLinked) setAllRadius(clampedValue);else setAttributes({
+          borderRadiusRight: clampedValue
+        });
+      }
+    },
+    "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Right', 'media-carousel-for-guten-blocks'),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Border radius value (0-100)', 'media-carousel-for-guten-blocks')
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("input", {
     type: "number",
     min: 0,
     max: 100,
+    step: 1,
     value: borderRadiusBottom !== null && borderRadiusBottom !== void 0 ? borderRadiusBottom : 0,
     onChange: e => {
       const value = parseInt(e.target.value) || 0;
-      if (radiusLinked) setAllRadius(value);else setAttributes({
-        borderRadiusBottom: value
+      const clampedValue = Math.min(Math.max(value, 0), 100);
+      if (radiusLinked) setAllRadius(clampedValue);else setAttributes({
+        borderRadiusBottom: clampedValue
       });
     },
-    "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Bottom', 'media-carousel-for-guten-blocks')
+    onBlur: e => {
+      // Additional validation on blur to ensure value is within range
+      const value = parseInt(e.target.value) || 0;
+      const clampedValue = Math.min(Math.max(value, 0), 100);
+      if (value !== clampedValue) {
+        if (radiusLinked) setAllRadius(clampedValue);else setAttributes({
+          borderRadiusBottom: clampedValue
+        });
+      }
+    },
+    "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Bottom', 'media-carousel-for-guten-blocks'),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Border radius value (0-100)', 'media-carousel-for-guten-blocks')
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("input", {
     type: "number",
     min: 0,
     max: 100,
+    step: 1,
     value: borderRadiusLeft !== null && borderRadiusLeft !== void 0 ? borderRadiusLeft : 0,
     onChange: e => {
       const value = parseInt(e.target.value) || 0;
-      if (radiusLinked) setAllRadius(value);else setAttributes({
-        borderRadiusLeft: value
+      const clampedValue = Math.min(Math.max(value, 0), 100);
+      if (radiusLinked) setAllRadius(clampedValue);else setAttributes({
+        borderRadiusLeft: clampedValue
       });
     },
-    "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Left', 'media-carousel-for-guten-blocks')
+    onBlur: e => {
+      // Additional validation on blur to ensure value is within range
+      const value = parseInt(e.target.value) || 0;
+      const clampedValue = Math.min(Math.max(value, 0), 100);
+      if (value !== clampedValue) {
+        if (radiusLinked) setAllRadius(clampedValue);else setAttributes({
+          borderRadiusLeft: clampedValue
+        });
+      }
+    },
+    "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Left', 'media-carousel-for-guten-blocks'),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Border radius value (0-100)', 'media-carousel-for-guten-blocks')
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("button", {
     type: "button",
     className: radiusLinked ? 'linked' : '',
@@ -3372,7 +3430,19 @@ function Edit({
     d: "M10 17.389H8.444A5.194 5.194 0 1 1 8.444 7H10v1.5H8.444a3.694 3.694 0 0 0 0 7.389H10v1.5ZM14 7h1.556a5.194 5.194 0 0 1 0 10.39H14v-1.5h1.556a3.694 3.694 0 0 0 0-7.39H14V7Zm-4.5 6h5v-1.5h-5V13Z"
   })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
     className: "mcfgb-radius-labels"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Top', 'media-carousel-for-guten-blocks')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Right', 'media-carousel-for-guten-blocks')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Bottom', 'media-carousel-for-guten-blocks')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Left', 'media-carousel-for-guten-blocks'))));
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Top', 'media-carousel-for-guten-blocks')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Right', 'media-carousel-for-guten-blocks')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Bottom', 'media-carousel-for-guten-blocks')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Left', 'media-carousel-for-guten-blocks'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    style: {
+      fontSize: '11px',
+      color: '#555555',
+      marginTop: '4px'
+    }
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Maximum value: 100px', 'media-carousel-for-guten-blocks')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    style: {
+      fontSize: '12px',
+      color: '#555555',
+      marginTop: '4px'
+    }
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Desktop Border Radius', 'media-carousel-for-guten-blocks'), ": ", borderRadiusTop || 0, "px"));
 
   // Aspect Ratio Control Component
   const AspectRatioControl = () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
@@ -3403,9 +3473,6 @@ function Edit({
     }, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("21:9 (Ultrawide)", "media-carousel-for-guten-blocks"),
       value: "21:9"
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Auto (Original)", "media-carousel-for-guten-blocks"),
-      value: "auto"
     }],
     onChange: value => setAttributes({
       imageAspectRatio: value
@@ -3645,6 +3712,7 @@ function Edit({
   }, deviceLabel[activeDevice], " Columns: ", deviceValue[activeDevice])), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
     style: {
       marginTop: '16px',
+      marginBottom: '16px',
       padding: '12px',
       backgroundColor: '#e7f3ff',
       borderRadius: '4px',
@@ -3672,7 +3740,13 @@ function Edit({
     min: 1000,
     max: 5000,
     step: 1000
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    style: {
+      fontSize: '12px',
+      color: '#555555',
+      marginBottom: '16px'
+    }
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Delay Speed", "media-carousel-for-guten-blocks"), ": ", (speed || 1000) / 1000, "s"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Pause on hover", "media-carousel-for-guten-blocks"),
     checked: pauseOnHover,
     onChange: val => {
@@ -3690,7 +3764,7 @@ function Edit({
     }
   }), showArrows && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RadioControl, {
     className: ` arrowclass  ${arrowType} ${sliderId}`,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Arrow Type", "media-carousel-for-guten-blocks"),
+    label: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Arrow Type", "media-carousel-for-guten-blocks")),
     selected: arrowType,
     options: [{
       label: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
@@ -3887,7 +3961,8 @@ function Edit({
     style: {
       fontSize: 12,
       color: '#666'
-    }
+    },
+    "data-tooltip": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Upload an image for the previous/left navigation arrow. Recommended size: 30x30px", "media-carousel-for-guten-blocks")
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Previous Arrow", "media-carousel-for-guten-blocks")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUploadCheck, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUpload, {
     onSelect: media => setAttributes({
       customPrevArrow: media
@@ -3937,7 +4012,8 @@ function Edit({
     style: {
       fontSize: 12,
       color: '#666'
-    }
+    },
+    "data-tooltip": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Upload an image for the next/right navigation arrow. Recommended size: 30x30px", "media-carousel-for-guten-blocks")
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Next Arrow", "media-carousel-for-guten-blocks")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUploadCheck, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUpload, {
     onSelect: media => setAttributes({
       customNextArrow: media
@@ -3979,7 +4055,7 @@ function Edit({
       onClick: open,
       variant: "secondary"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Upload Next Arrow", "media-carousel-for-guten-blocks")))
-  }))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+  }))))), arrowType !== 'custom' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
     className: "color"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Arrow Color", "media-carousel-for-guten-blocks")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPalette, {
     value: arrowColor,
@@ -3987,7 +4063,7 @@ function Edit({
       arrowColor: color
     }),
     colors: colors
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RadioControl, {
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RadioControl, {
     className: "arrowpos",
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Arrow Position", "media-carousel-for-guten-blocks"),
     selected: arrowpos,
@@ -4480,7 +4556,12 @@ function Edit({
                             fill:${arrowColor} !important;
                         }
                         #${sliderId} .slider-boxwrap .mcfgb-gallery-single img , #${sliderId} .slider-boxwrap .mcfgb-gallery-single video{
-                            border-radius:${borderRadius}px !important;
+                            border-radius: ${typeof borderRadiusTop !== 'undefined' && typeof borderRadiusRight !== 'undefined' && typeof borderRadiusBottom !== 'undefined' && typeof borderRadiusLeft !== 'undefined' ? `${borderRadiusTop || 0}px ${borderRadiusRight || 0}px ${borderRadiusBottom || 0}px ${borderRadiusLeft || 0}px` : `${borderRadius || 0}px`} !important;
+                        }
+                        #${sliderId} .slider-boxwrap .mcfgb-gallery-single .video-thumbnail-container,
+                        #${sliderId} .slider-boxwrap .mcfgb-gallery-single .video-thumbnail-wrapper {
+                            border-radius: ${typeof borderRadiusTop !== 'undefined' && typeof borderRadiusRight !== 'undefined' && typeof borderRadiusBottom !== 'undefined' && typeof borderRadiusLeft !== 'undefined' ? `${borderRadiusTop || 0}px ${borderRadiusRight || 0}px ${borderRadiusBottom || 0}px ${borderRadiusLeft || 0}px` : `${borderRadius || 0}px`} !important;
+                            overflow: hidden;
                         }
                 `));
 }
@@ -4714,7 +4795,7 @@ function Save({
     imageAspectRatio = "16:9",
     description,
     headingColor = "#111111",
-    descriptionColor = "#636363"
+    descriptionColor = "#000000"
   } = attributes;
 
   // Build responsive visibility classes
@@ -5308,7 +5389,7 @@ function Save({
                     
                     /* CSS for dots */
                     #${sliderId} .slick-dots li {
-                        color: ${dotsColor} !important;
+                        background: ${dotsColor} !important;
                     }
                     #${sliderId} .mcfgb-gallery-single iframe , #${sliderId} .mcfgb-gallery-single img ,#${sliderId} .mcfgb-gallery-single video {
                         border-radius: ${typeof borderRadiusTop !== 'undefined' && typeof borderRadiusRight !== 'undefined' && typeof borderRadiusBottom !== 'undefined' && typeof borderRadiusLeft !== 'undefined' ? `${borderRadiusTop || 0}px ${borderRadiusRight || 0}px ${borderRadiusBottom || 0}px ${borderRadiusLeft || 0}px` : `${borderRadius || 0}px`};
@@ -5969,18 +6050,6 @@ module.exports = window["React"];
 /******/ 		};
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/global */
-/******/ 	(() => {
-/******/ 		__webpack_require__.g = (function() {
-/******/ 			if (typeof globalThis === 'object') return globalThis;
-/******/ 			try {
-/******/ 				return this || new Function('return this')();
-/******/ 			} catch (e) {
-/******/ 				if (typeof window === 'object') return window;
-/******/ 			}
-/******/ 		})();
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
@@ -5995,29 +6064,6 @@ module.exports = window["React"];
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/publicPath */
-/******/ 	(() => {
-/******/ 		var scriptUrl;
-/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
-/******/ 		var document = __webpack_require__.g.document;
-/******/ 		if (!scriptUrl && document) {
-/******/ 			if (document.currentScript && document.currentScript.tagName.toUpperCase() === 'SCRIPT')
-/******/ 				scriptUrl = document.currentScript.src;
-/******/ 			if (!scriptUrl) {
-/******/ 				var scripts = document.getElementsByTagName("script");
-/******/ 				if(scripts.length) {
-/******/ 					var i = scripts.length - 1;
-/******/ 					while (i > -1 && (!scriptUrl || !/^http(s?):/.test(scriptUrl))) scriptUrl = scripts[i--].src;
-/******/ 				}
-/******/ 			}
-/******/ 		}
-/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
-/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
-/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
-/******/ 		scriptUrl = scriptUrl.replace(/^blob:/, "").replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
-/******/ 		__webpack_require__.p = scriptUrl;
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/jsonp chunk loading */

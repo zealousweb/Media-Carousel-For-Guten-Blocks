@@ -7,8 +7,28 @@
 .bottom .slick-dots li,
 .side .slick-dots li {
 	opacity: 0.5;
-	width: 10px;
-	height: 10px;
+	width: 24px;
+    height: 24px;
+	display: flex;
+	color: #fff;
+	font-size: 12px;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
+	border-radius: 100%;
+}
+.bottom .slick-dots li.dot,
+.side .slick-dots li.dot {
+	font-size: 0;
+}
+
+.bottom .slick-dots li.number,
+.side .slick-dots li.number {
+}
+
+.bottom .slick-dots li::marker,
+.side .slick-dots li::marker {
+	content: none;
 }
 .bottom .slick-dots li.slick-active,
 .side .slick-dots li.slick-active {
@@ -174,6 +194,7 @@
 }
 .slick-dots li {
 	margin: 5px !important;
+	cursor: pointer;
 }
 .img-caption {
 	text-align: center;
@@ -255,6 +276,7 @@
 	width: 100%;
 	top: 43%;
 	transform: translateY(-50%);
+	z-index: 2;
 }
 
 .side .svg-arrow {
@@ -334,7 +356,17 @@ video:focus {
 	position: relative;
 	z-index: 1;
 }
-
+@media (max-width: 1023px) {
+	.side .svg-arrow .next-btn {
+		right: -18px;
+	}
+	.side .svg-arrow .prev-btn {
+		left: -18px;
+	}
+	.side .slick-slider {
+		padding: 0 40px !important;
+	}
+}
 @media (max-width: 767px) {
 	.side .svg-arrow .next-btn {
 		right: 0;

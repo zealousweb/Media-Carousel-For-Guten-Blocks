@@ -7,7 +7,14 @@ function copyBlockJson() {
     const buildPath = path.join(__dirname, 'build', 'block.json');
     
     if (fs.existsSync(srcPath)) {
-        fs.copyFileSync(srcPath, buildPath);
+        try {
+            fs.copyFileSync(srcPath, buildPath);
+            console.log('✓ block.json copied successfully');
+        } catch (error) {
+            console.error('✗ Error copying block.json:', error.message);
+        }
+    } else {
+        console.error('✗ block.json not found in src directory');
     }
 }
 
@@ -17,10 +24,41 @@ function copyViewJs() {
     const buildPath = path.join(__dirname, 'build', 'view.js');
     
     if (fs.existsSync(srcPath)) {
-        fs.copyFileSync(srcPath, buildPath);
+        try {
+            fs.copyFileSync(srcPath, buildPath);
+            console.log('✓ view.js copied successfully');
+        } catch (error) {
+            console.error('✗ Error copying view.js:', error.message);
+        }
+    } else {
+        console.error('✗ view.js not found in src directory');
     }
 }
 
+// Check if required files exist in build directory
+function checkBuildFiles() {
+    const requiredFiles = [
+        'block.json',
+        'index.js',
+        'index.css',
+        'style-index.css',
+        'view.js'
+    ];
+    
+    console.log('\nChecking build files:');
+    requiredFiles.forEach(file => {
+        const filePath = path.join(__dirname, 'build', file);
+        if (fs.existsSync(filePath)) {
+            console.log(`✓ ${file} exists`);
+        } else {
+            console.log(`✗ ${file} missing`);
+        }
+    });
+}
+
 // Run the copy functions
+console.log('Starting build process...');
 copyBlockJson();
-copyViewJs(); 
+copyViewJs();
+checkBuildFiles();
+console.log('Build process completed!'); 

@@ -23,6 +23,14 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 
+// Plugin activation hook for debugging
+register_activation_hook(__FILE__, 'mcfgb_activate');
+function mcfgb_activate() {
+    error_log('Media Carousel Block: Plugin activated');
+    error_log('Media Carousel Block: WordPress version: ' . get_bloginfo('version'));
+    error_log('Media Carousel Block: PHP version: ' . PHP_VERSION);
+}
+
 /**
  * Registers the block using the metadata loaded from the `block.json` file.
  * Behind the scenes, it registers also all assets so they can be enqueued
@@ -33,12 +41,14 @@ if (!defined('ABSPATH')) {
 function mcfgb_init()
 {
     // Check WordPress version compatibility
-    if (version_compare(get_bloginfo('version'), '5.0', '<')) {
+    if (version_compare(get_bloginfo('version'), '5.9', '<')) {
+        error_log('Media Carousel Block: WordPress version too old');
         return;
     }
     
     if (!function_exists('register_block_type')) {
         // Block editor is not available.
+        error_log('Media Carousel Block: register_block_type function not available');
         return;
     }
     
@@ -47,6 +57,7 @@ function mcfgb_init()
     $block_json_path = $build_path . '/block.json';
     
     if (!file_exists($block_json_path)) {
+        error_log('Media Carousel Block: block.json not found at ' . $block_json_path);
         return;
     }
     
@@ -60,17 +71,60 @@ function mcfgb_init()
     
     foreach ($required_files as $file) {
         if (!file_exists($file)) {
-            // Required file not found
+            // Required file not found, return early
+            error_log('Media Carousel Block: Required file not found: ' . $file);
+            return;
         }
     }
+    
+    // Log the block registration attempt
+    error_log('Media Carousel Block: Attempting to register block from: ' . $build_path);
     
     $result = register_block_type($build_path);
     
     if (is_wp_error($result)) {
         // Failed to register block
+        error_log('Media Carousel Block registration failed: ' . $result->get_error_message());
+    } else {
+        // Block registered successfully
+        error_log('Media Carousel Block registered successfully');
+        
+        // Additional debugging: check if block is available
+        $block_types = WP_Block_Type_Registry::get_instance()->get_all_registered();
+        $block_name = 'media-carousel-for-guten-blocks/media-carousel';
+        if (isset($block_types[$block_name])) {
+            error_log('Media Carousel Block: Block confirmed as registered in registry');
+        } else {
+            error_log('Media Carousel Block: Block not found in registry after registration');
+        }
     }
 }
-add_action('init', 'mcfgb_init', 10);
+/**
+ * Register block category for ZealBlocks
+ */
+function mcfgb_register_block_category($categories) {
+    if (array_search('zealblocks', array_column($categories, 'slug'), true) === false) {
+        error_log('Media Carousel Block: Registering ZealBlocks category');
+        return array_merge(
+            $categories,
+            array(
+                array(
+                    'slug' => 'zealblocks',
+                    'title' => __('ZealBlocks', 'media-carousel-for-guten-blocks'),
+                    'icon' => '',
+                ),
+            )
+        );
+    }
+    return $categories;
+}
+
+// Register for both old and new WordPress versions
+add_action('block_categories_all', 'mcfgb_register_block_category', 5, 1);
+// Deprecated hook for older WordPress versions
+add_action('block_categories', 'mcfgb_register_block_category', 5, 2);
+
+add_action('init', 'mcfgb_init', 5);
 
 
 
@@ -119,6 +173,16 @@ add_action('wp_enqueue_scripts', 'mcfgb_enqueue_block_assets');
  * Enqueue editor assets for the block
  */
 function mcfgb_enqueue_editor_assets() {
+    // Only enqueue if we're in the block editor
+    if (!function_exists('get_current_screen')) {
+        return;
+    }
+    
+    $screen = get_current_screen();
+    if (!$screen || !in_array($screen->base, ['post', 'post-new'])) {
+        return;
+    }
+    
     // Enqueue slick carousel for editor
     wp_enqueue_style(
         'mcfgb-slick-slider-css',
@@ -141,38 +205,33 @@ function mcfgb_enqueue_editor_assets() {
         '1.8.1',
         true
     );
-    
-
-    
-
 }
 add_action('enqueue_block_editor_assets', 'mcfgb_enqueue_editor_assets');
 
-
-
-
-
 /**
- * Register block category for ZealBlocks
+ * Debug function to check block registration
+ * You can call this function manually to debug block registration issues
  */
-function mcfgb_register_block_category($categories) {
-    if (array_search('zealblocks', array_column($categories, 'slug'), true) === false) {
-        return array_merge(
-            $categories,
-            array(
-                array(
-                    'slug' => 'zealblocks',
-                    'title' => __('ZealBlocks', 'media-carousel-for-guten-blocks'),
-                    'icon' => '',
-                ),
-            )
-        );
+function mcfgb_debug_block_registration() {
+    if (!function_exists('WP_Block_Type_Registry')) {
+        error_log('Media Carousel Block: WP_Block_Type_Registry not available');
+        return;
     }
-    return $categories;
+    
+    $block_types = WP_Block_Type_Registry::get_instance()->get_all_registered();
+    $block_name = 'media-carousel-for-guten-blocks/media-carousel';
+    
+    if (isset($block_types[$block_name])) {
+        error_log('Media Carousel Block: Block is registered successfully');
+        error_log('Media Carousel Block: Block title: ' . $block_types[$block_name]->title);
+        error_log('Media Carousel Block: Block category: ' . $block_types[$block_name]->category);
+    } else {
+        error_log('Media Carousel Block: Block is NOT registered');
+        error_log('Media Carousel Block: Available blocks: ' . implode(', ', array_keys($block_types)));
+    }
 }
 
-// Register for both old and new WordPress versions
-add_action('block_categories_all', 'mcfgb_register_block_category', 5, 1);
-add_action('block_categories', 'mcfgb_register_block_category', 5, 2);
+// Uncomment the line below to debug block registration
+// add_action('init', 'mcfgb_debug_block_registration', 20);
 
 

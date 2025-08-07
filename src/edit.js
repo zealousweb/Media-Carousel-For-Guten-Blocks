@@ -61,8 +61,6 @@ import { useState, useEffect } from "@wordpress/element";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.js";
-import carousel from '../assets/type-carousel.png';
-import simple from '../assets/type-slider.png';
 
 export default function Edit({ attributes, setAttributes }) {
     const { galleryImages = [], urls = [], sliderType, showArrows, arrowType, customPrevArrow, customNextArrow, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, borderRadiusTop, borderRadiusRight, borderRadiusBottom, borderRadiusLeft, fancyboxBgColor, fancyboxWidth, fancyboxOpacity, arrowpos, slidesToShow, slidesToShowDesktop, slidesToShowTablet, slidesToShowMobile, slidesToScroll, fancybox, pauseOnHover, hideOnDesktop = false, hideOnTablet = false, hideOnMobile = false, hideArrowsOnDesktop = false, hideArrowsOnTablet = false, hideArrowsOnMobile = false, description = "", imageAspectRatio = "16:9", headingColor = "", descriptionColor = "" } = attributes;
@@ -126,13 +124,45 @@ export default function Edit({ attributes, setAttributes }) {
         }
     }, []);
 
+    // Validate and clamp existing border radius values to ensure they don't exceed 100
+    useEffect(() => {
+        const needsUpdate = {};
+        let hasChanges = false;
+
+        // Check and clamp each border radius value
+        if (borderRadiusTop !== undefined && (borderRadiusTop < 0 || borderRadiusTop > 100)) {
+            needsUpdate.borderRadiusTop = Math.min(Math.max(borderRadiusTop, 0), 100);
+            hasChanges = true;
+        }
+        if (borderRadiusRight !== undefined && (borderRadiusRight < 0 || borderRadiusRight > 100)) {
+            needsUpdate.borderRadiusRight = Math.min(Math.max(borderRadiusRight, 0), 100);
+            hasChanges = true;
+        }
+        if (borderRadiusBottom !== undefined && (borderRadiusBottom < 0 || borderRadiusBottom > 100)) {
+            needsUpdate.borderRadiusBottom = Math.min(Math.max(borderRadiusBottom, 0), 100);
+            hasChanges = true;
+        }
+        if (borderRadiusLeft !== undefined && (borderRadiusLeft < 0 || borderRadiusLeft > 100)) {
+            needsUpdate.borderRadiusLeft = Math.min(Math.max(borderRadiusLeft, 0), 100);
+            hasChanges = true;
+        }
+
+        // Update attributes if any values need clamping
+        if (hasChanges) {
+            setAttributes(needsUpdate);
+        }
+    }, [borderRadiusTop, borderRadiusRight, borderRadiusBottom, borderRadiusLeft]);
+
     // Helper to update all sides
     const setAllRadius = (value) => {
+        // Ensure value is a number and clamp it to valid range
+        const numValue = parseInt(value) || 0;
+        const clampedValue = Math.min(Math.max(numValue, 0), 100);
         setAttributes({
-            borderRadiusTop: value,
-            borderRadiusRight: value,
-            borderRadiusBottom: value,
-            borderRadiusLeft: value,
+            borderRadiusTop: clampedValue,
+            borderRadiusRight: clampedValue,
+            borderRadiusBottom: clampedValue,
+            borderRadiusLeft: clampedValue,
         });
     };
 
@@ -145,49 +175,97 @@ export default function Edit({ attributes, setAttributes }) {
                     type="number"
                     min={0}
                     max={100}
+                    step={1}
                     value={borderRadiusTop ?? 0}
                     onChange={e => {
                         const value = parseInt(e.target.value) || 0;
-                        if (radiusLinked) setAllRadius(value);
-                        else setAttributes({ borderRadiusTop: value });
+                        const clampedValue = Math.min(Math.max(value, 0), 100);
+                        if (radiusLinked) setAllRadius(clampedValue);
+                        else setAttributes({ borderRadiusTop: clampedValue });
+                    }}
+                    onBlur={e => {
+                        // Additional validation on blur to ensure value is within range
+                        const value = parseInt(e.target.value) || 0;
+                        const clampedValue = Math.min(Math.max(value, 0), 100);
+                        if (value !== clampedValue) {
+                            if (radiusLinked) setAllRadius(clampedValue);
+                            else setAttributes({ borderRadiusTop: clampedValue });
+                        }
                     }}
                     aria-label={__('Top', 'media-carousel-for-guten-blocks')}
+                    title={__('Border radius value (0-100)', 'media-carousel-for-guten-blocks')}
                 />
                 <input
                     type="number"
                     min={0}
                     max={100}
+                    step={1}
                     value={borderRadiusRight ?? 0}
                     onChange={e => {
                         const value = parseInt(e.target.value) || 0;
-                        if (radiusLinked) setAllRadius(value);
-                        else setAttributes({ borderRadiusRight: value });
+                        const clampedValue = Math.min(Math.max(value, 0), 100);
+                        if (radiusLinked) setAllRadius(clampedValue);
+                        else setAttributes({ borderRadiusRight: clampedValue });
+                    }}
+                    onBlur={e => {
+                        // Additional validation on blur to ensure value is within range
+                        const value = parseInt(e.target.value) || 0;
+                        const clampedValue = Math.min(Math.max(value, 0), 100);
+                        if (value !== clampedValue) {
+                            if (radiusLinked) setAllRadius(clampedValue);
+                            else setAttributes({ borderRadiusRight: clampedValue });
+                        }
                     }}
                     aria-label={__('Right', 'media-carousel-for-guten-blocks')}
+                    title={__('Border radius value (0-100)', 'media-carousel-for-guten-blocks')}
                 />
                 <input
                     type="number"
                     min={0}
                     max={100}
+                    step={1}
                     value={borderRadiusBottom ?? 0}
                     onChange={e => {
                         const value = parseInt(e.target.value) || 0;
-                        if (radiusLinked) setAllRadius(value);
-                        else setAttributes({ borderRadiusBottom: value });
+                        const clampedValue = Math.min(Math.max(value, 0), 100);
+                        if (radiusLinked) setAllRadius(clampedValue);
+                        else setAttributes({ borderRadiusBottom: clampedValue });
+                    }}
+                    onBlur={e => {
+                        // Additional validation on blur to ensure value is within range
+                        const value = parseInt(e.target.value) || 0;
+                        const clampedValue = Math.min(Math.max(value, 0), 100);
+                        if (value !== clampedValue) {
+                            if (radiusLinked) setAllRadius(clampedValue);
+                            else setAttributes({ borderRadiusBottom: clampedValue });
+                        }
                     }}
                     aria-label={__('Bottom', 'media-carousel-for-guten-blocks')}
+                    title={__('Border radius value (0-100)', 'media-carousel-for-guten-blocks')}
                 />
                 <input
                     type="number"
                     min={0}
                     max={100}
+                    step={1}
                     value={borderRadiusLeft ?? 0}
                     onChange={e => {
                         const value = parseInt(e.target.value) || 0;
-                        if (radiusLinked) setAllRadius(value);
-                        else setAttributes({ borderRadiusLeft: value });
+                        const clampedValue = Math.min(Math.max(value, 0), 100);
+                        if (radiusLinked) setAllRadius(clampedValue);
+                        else setAttributes({ borderRadiusLeft: clampedValue });
+                    }}
+                    onBlur={e => {
+                        // Additional validation on blur to ensure value is within range
+                        const value = parseInt(e.target.value) || 0;
+                        const clampedValue = Math.min(Math.max(value, 0), 100);
+                        if (value !== clampedValue) {
+                            if (radiusLinked) setAllRadius(clampedValue);
+                            else setAttributes({ borderRadiusLeft: clampedValue });
+                        }
                     }}
                     aria-label={__('Left', 'media-carousel-for-guten-blocks')}
+                    title={__('Border radius value (0-100)', 'media-carousel-for-guten-blocks')}
                 />
                 <button
                     type="button"
@@ -204,6 +282,12 @@ export default function Edit({ attributes, setAttributes }) {
                 <span>{__('Bottom', 'media-carousel-for-guten-blocks')}</span>
                 <span>{__('Left', 'media-carousel-for-guten-blocks')}</span>
             </div>
+            <div style={{ fontSize: '11px', color: '#555555', marginTop: '4px' }}>
+                {__('Maximum value: 100px', 'media-carousel-for-guten-blocks')}
+            </div>
+            <div style={{ fontSize: '12px', color: '#555555', marginTop: '4px' }}>
+                {__('Desktop Border Radius', 'media-carousel-for-guten-blocks')}: {borderRadiusTop || 0}px
+            </div>
         </div>
     );
 
@@ -218,8 +302,7 @@ export default function Edit({ attributes, setAttributes }) {
                     { label: __("4:3 (Standard)", "media-carousel-for-guten-blocks"), value: "4:3" },
                     { label: __("1:1 (Square)", "media-carousel-for-guten-blocks"), value: "1:1" },
                     { label: __("3:2 (Photo)", "media-carousel-for-guten-blocks"), value: "3:2" },
-                    { label: __("21:9 (Ultrawide)", "media-carousel-for-guten-blocks"), value: "21:9" },
-                    { label: __("Auto (Original)", "media-carousel-for-guten-blocks"), value: "auto" }
+                    { label: __("21:9 (Ultrawide)", "media-carousel-for-guten-blocks"), value: "21:9" }
                 ]}
                 onChange={(value) => setAttributes({ imageAspectRatio: value })}
             />
@@ -427,7 +510,7 @@ export default function Edit({ attributes, setAttributes }) {
                                 </div>
                                 
                                 {/* Current responsive values display */}
-                                <div style={{ marginTop: '16px', padding: '12px', backgroundColor: '#e7f3ff', borderRadius: '4px', border: '1px solid #0073aa' }}>
+                                <div style={{ marginTop: '16px',  marginBottom: '16px', padding: '12px', backgroundColor: '#e7f3ff', borderRadius: '4px', border: '1px solid #0073aa' }}>
                                     <p style={{ margin: '0 0 8px 0', fontSize: '12px', fontWeight: 'bold', color: '#0073aa' }}>
                                         {__("Current Responsive Settings:", "media-carousel-for-guten-blocks")}
                                     </p>
@@ -445,6 +528,9 @@ export default function Edit({ attributes, setAttributes }) {
                             max={5000}
                             step={1000}
                         />
+                        <div style={{ fontSize: '12px', color: '#555555', marginBottom: '16px' }}>
+                            {__("Delay Speed", "media-carousel-for-guten-blocks")}: {(speed || 1000) / 1000}s
+                        </div>
                         <ToggleControl
                             label={__("Pause on hover", "media-carousel-for-guten-blocks")}
                             checked={pauseOnHover}
@@ -463,7 +549,11 @@ export default function Edit({ attributes, setAttributes }) {
                             <>
                                 <RadioControl
                                     className={` arrowclass  ${arrowType} ${sliderId}`}
-                                    label={__("Arrow Type", "media-carousel-for-guten-blocks")}
+                                    label={
+                                        <span>
+                                            {__("Arrow Type", "media-carousel-for-guten-blocks")}
+                                        </span>
+                                    }
                                     selected={arrowType}
                                     options={[
                                         {
@@ -502,7 +592,6 @@ export default function Edit({ attributes, setAttributes }) {
                                                         <svg viewBox="0 0 512.013 512.013"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M366.64,256.013L508.677,32.802c5.141-8.107,4.267-18.624-2.176-25.749c-6.443-7.168-16.832-9.067-25.365-4.8 L11.802,236.92c-7.232,3.627-11.797,11.008-11.797,19.093c0,8.085,4.565,15.467,11.797,19.093l469.333,234.667 c3.029,1.515,6.293,2.24,9.536,2.24c5.888,0,11.691-2.432,15.829-7.04c6.443-7.125,7.317-17.643,2.176-25.749L366.64,256.013z"></path> </g> </g> </g></svg>
                                                     </div>
                                                 </div>
-
                                             </>, value: "custom3"
                                         },
                                         {
@@ -520,7 +609,6 @@ export default function Edit({ attributes, setAttributes }) {
                                                         </svg>
                                                     </div>
                                                 </div>
-
                                             </>, value: "custom"
                                         },
                                     ]}
@@ -535,7 +623,7 @@ export default function Edit({ attributes, setAttributes }) {
                                             <span style={{ fontWeight: 500, fontSize: 13, display: 'block', marginBottom: 8 }}>{__("Custom Arrow Icons", "media-carousel-for-guten-blocks")}</span>
                                             
                                             <div style={{ marginBottom: '12px' }}>
-                                                <span style={{ fontSize: 12, color: '#666' }}>{__("Previous Arrow", "media-carousel-for-guten-blocks")}</span>
+                                                <span style={{ fontSize: 12, color: '#666' }} data-tooltip={__("Upload an image for the previous/left navigation arrow. Recommended size: 30x30px", "media-carousel-for-guten-blocks")}>{__("Previous Arrow", "media-carousel-for-guten-blocks")}</span>
                                                 <MediaUploadCheck>
                                                     <MediaUpload
                                                         onSelect={(media) => setAttributes({ customPrevArrow: media })}
@@ -581,7 +669,7 @@ export default function Edit({ attributes, setAttributes }) {
                                             </div>
 
                                             <div style={{ marginBottom: '12px' }}>
-                                                <span style={{ fontSize: 12, color: '#666' }}>{__("Next Arrow", "media-carousel-for-guten-blocks")}</span>
+                                                <span style={{ fontSize: 12, color: '#666' }} data-tooltip={__("Upload an image for the next/right navigation arrow. Recommended size: 30x30px", "media-carousel-for-guten-blocks")}>{__("Next Arrow", "media-carousel-for-guten-blocks")}</span>
                                                 <MediaUploadCheck>
                                                     <MediaUpload
                                                         onSelect={(media) => setAttributes({ customNextArrow: media })}
@@ -629,12 +717,16 @@ export default function Edit({ attributes, setAttributes }) {
                                     </>
                                 )}
 
-                                <span className="color">{__("Arrow Color", "media-carousel-for-guten-blocks")}</span>
-                                <ColorPalette
-                                    value={arrowColor}
-                                    onChange={(color) => setAttributes({ arrowColor: color })}
-                                    colors={colors}
-                                />
+                                {arrowType !== 'custom' && (
+                                    <>
+                                        <span className="color">{__("Arrow Color", "media-carousel-for-guten-blocks")}</span>
+                                        <ColorPalette
+                                            value={arrowColor}
+                                            onChange={(color) => setAttributes({ arrowColor: color })}
+                                            colors={colors}
+                                        />
+                                    </>
+                                )}
 
                                 <RadioControl
                                     className="arrowpos"
@@ -1136,7 +1228,20 @@ export default function Edit({ attributes, setAttributes }) {
                             fill:${arrowColor} !important;
                         }
                         #${sliderId} .slider-boxwrap .mcfgb-gallery-single img , #${sliderId} .slider-boxwrap .mcfgb-gallery-single video{
-                            border-radius:${borderRadius}px !important;
+                            border-radius: ${
+                                (typeof borderRadiusTop !== 'undefined' && typeof borderRadiusRight !== 'undefined' && typeof borderRadiusBottom !== 'undefined' && typeof borderRadiusLeft !== 'undefined')
+                                    ? `${borderRadiusTop || 0}px ${borderRadiusRight || 0}px ${borderRadiusBottom || 0}px ${borderRadiusLeft || 0}px`
+                                    : `${borderRadius || 0}px`
+                            } !important;
+                        }
+                        #${sliderId} .slider-boxwrap .mcfgb-gallery-single .video-thumbnail-container,
+                        #${sliderId} .slider-boxwrap .mcfgb-gallery-single .video-thumbnail-wrapper {
+                            border-radius: ${
+                                (typeof borderRadiusTop !== 'undefined' && typeof borderRadiusRight !== 'undefined' && typeof borderRadiusBottom !== 'undefined' && typeof borderRadiusLeft !== 'undefined')
+                                    ? `${borderRadiusTop || 0}px ${borderRadiusRight || 0}px ${borderRadiusBottom || 0}px ${borderRadiusLeft || 0}px`
+                                    : `${borderRadius || 0}px`
+                            } !important;
+                            overflow: hidden;
                         }
                 `}
             </style>
