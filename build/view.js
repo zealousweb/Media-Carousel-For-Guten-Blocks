@@ -18,4 +18,4 @@
  * the `viewScript` property from `block.json`.
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-metadata/#view-script
- */ 
+ */

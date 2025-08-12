@@ -122,7 +122,7 @@ export default function Save({ attributes }) {
                                     </div>
                                 );
 
-                            } else if (!isYouTubeUrl && isWebsiteUrl && url !== '') {
+                            } else if (!isYouTubeUrl && isWebsiteUrl && url !== '' && !fancybox) {
                                 return (
                                     <div key={media.id}>
                                         <div className="mcfgb-gallery-single">
@@ -159,6 +159,22 @@ export default function Save({ attributes }) {
                                     
                                     </div>
                                 );
+                            } else if (!isYouTubeUrl && isWebsiteUrl && url !== '' && fancybox) {
+                                // When Fancybox is enabled but URL is a website URL (not YouTube/Vimeo), show image without anchor
+                                return (
+                                    <div key={media.id}>
+                                        <div className="mcfgb-gallery-single">
+                                            <div className="ratio-part" style={aspectRatioStyle}>
+                                                <img
+                                                    src={media.url}
+                                                    alt={media.alt ? media.alt : "Gallery Image"}
+                                                />
+                                            </div>
+                                        </div>
+                                        {currentCaption && <div className="img-caption" style={{ color: headingColor }}>{currentCaption}</div>}
+                                        {currentDescription && <div className="img-description" style={{ color: descriptionColor }}>{currentDescription}</div>}
+                                    </div>
+                                );
                             } else {
                                 return (
                                     <div key={media.id}>
@@ -179,7 +195,190 @@ export default function Save({ attributes }) {
                             }
 
                         } else if (media.type === 'video') {
-                            if (fancybox) {
+                            const url = urls && urls[index] ? urls[index] : "";
+                            const isYouTubeUrl = url.includes("youtube.com") || url.includes("youtu.be");
+                            const isVimeoUrl = url.includes("vimeo.com");
+                            const isWebsiteUrl = url.startsWith("http");
+                            
+                            if (fancybox && (isYouTubeUrl || isVimeoUrl) && url !== '') {
+                                return (
+                                    <div key={media.id}>
+                                        <div className="mcfgb-gallery-single">
+                                            <div className="ratio-part" style={aspectRatioStyle}>
+                                                <a href={url} data-fancybox={`gallery-${sliderId}`} data-fancy-class={sliderId} data-caption={media.alt ? media.alt : "Video"}>
+                                                    {/* Video thumbnail with play button */}
+                                                    <div className="video-thumbnail-wrapper" style={{ position: 'relative', width: '100%', height: '100%' }}>
+                                                        {media.thumbnailUrl ? (
+                                                            <img 
+                                                                src={media.thumbnailUrl} 
+                                                                alt={media.alt || "Video Thumbnail"} 
+                                                                style={{ 
+                                                                    width: '100%', 
+                                                                    height: '100%', 
+                                                                    objectFit: 'cover'
+                                                                }}
+                                                            />
+                                                        ) : (
+                                                            <div style={{
+                                                                width: '100%',
+                                                                height: '100%',
+                                                                backgroundColor: '#f8f9fa',
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                                justifyContent: 'center',
+                                                                border: '2px dashed #dee2e6'
+                                                            }}>
+                                                                <div style={{ textAlign: 'center' }}>
+                                                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="#6c757d" style={{ marginBottom: '8px' }}>
+                                                                        <path d="M8 5v14l11-7z"/>
+                                                                    </svg>
+                                                                    <div style={{ fontSize: '12px', color: '#6c757d' }}>
+                                                                        Generating thumbnail...
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                        
+                                                        {/* Play button overlay */}
+                                                        <div className="play-button-overlay" style={{
+                                                            position: 'absolute',
+                                                            top: '50%',
+                                                            left: '50%',
+                                                            transform: 'translate(-50%, -50%)',
+                                                            width: '60px',
+                                                            height: '60px',
+                                                            backgroundColor: 'rgba(0,0,0,0.7)',
+                                                            borderRadius: '50%',
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            justifyContent: 'center',
+                                                            cursor: 'pointer'
+                                                        }}>
+                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                                                                <path d="M8 5v14l11-7z"/>
+                                                            </svg>
+                                                        </div>
+                                                        
+                                                        {/* Hidden video element for thumbnail generation */}
+                                                        <video 
+                                                            style={{ display: 'none' }}
+                                                            preload="metadata"
+                                                            muted
+                                                            playsInline
+                                                        >
+                                                            <source src={media.url} type={media.mime} />
+                                                        </video>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        {currentCaption && <div className="img-caption" style={{ color: headingColor }}>{currentCaption}</div>}
+                                        {currentDescription && <div className="img-description" style={{ color: descriptionColor }}>{currentDescription}</div>}
+                                    </div>
+                                );
+                            } else if (!fancybox && (isYouTubeUrl || isVimeoUrl) && url !== '') {
+                                let embedUrl;
+                                if (isYouTubeUrl) {
+                                    const match = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^&\n?#]+)/);
+                                    const videoID = match ? match[1] : null;
+                                    embedUrl = videoID ? `https://www.youtube.com/embed/${videoID}` : null;
+                                } else if (isVimeoUrl) {
+                                    const match = url.match(/vimeo\.com\/(\d+)/);
+                                    const videoID = match ? match[1] : null;
+                                    embedUrl = videoID ? `https://player.vimeo.com/video/${videoID}` : null;
+                                }
+
+                                return (
+                                    <div key={media.id}>
+                                        <div className="mcfgb-gallery-single">
+                                            <div className="ratio-part" style={aspectRatioStyle}>
+                                                {embedUrl ? (
+                                                    <iframe
+                                                        width="560"
+                                                        height="315"
+                                                        src={embedUrl}
+                                                        title="Video player"
+                                                        frameBorder="0"
+                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                        referrerPolicy="strict-origin-when-cross-origin"
+                                                        allowFullScreen
+                                                    ></iframe>
+                                                ) : (
+                                                    <div>Invalid video URL</div>
+                                                )}
+                                            </div>
+                                        </div>
+                                        {currentCaption && <div className="img-caption" style={{ color: headingColor }}>{currentCaption}</div>}
+                                        {currentDescription && <div className="img-description" style={{ color: descriptionColor }}>{currentDescription}</div>}
+                                    </div>
+                                );
+                            } else if (!isYouTubeUrl && isWebsiteUrl && url !== '' && !fancybox) {
+                                return (
+                                    <div key={media.id}>
+                                        <div className="mcfgb-gallery-single">
+                                            <div className="ratio-part" style={aspectRatioStyle}>
+                                                <a href={url}>
+                                                    {/* Video thumbnail with play button */}
+                                                    <div className="video-thumbnail-wrapper" style={{ position: 'relative', width: '100%', height: '100%' }}>
+                                                        {media.thumbnailUrl ? (
+                                                            <img 
+                                                                src={media.thumbnailUrl} 
+                                                                alt={media.alt || "Video Thumbnail"} 
+                                                                style={{ 
+                                                                    width: '100%', 
+                                                                    height: '100%', 
+                                                                    objectFit: 'cover'
+                                                                }}
+                                                            />
+                                                        ) : (
+                                                            <div style={{
+                                                                width: '100%',
+                                                                height: '100%',
+                                                                backgroundColor: '#f8f9fa',
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                                justifyContent: 'center',
+                                                                border: '2px dashed #dee2e6'
+                                                            }}>
+                                                                <div style={{ textAlign: 'center' }}>
+                                                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="#6c757d" style={{ marginBottom: '8px' }}>
+                                                                        <path d="M8 5v14l11-7z"/>
+                                                                    </svg>
+                                                                    <div style={{ fontSize: '12px', color: '#6c757d' }}>
+                                                                        Generating thumbnail...
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                        
+                                                        {/* Play button overlay */}
+                                                        <div className="play-button-overlay" style={{
+                                                            position: 'absolute',
+                                                            top: '50%',
+                                                            left: '50%',
+                                                            transform: 'translate(-50%, -50%)',
+                                                            width: '60px',
+                                                            height: '60px',
+                                                            backgroundColor: 'rgba(0,0,0,0.7)',
+                                                            borderRadius: '50%',
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            justifyContent: 'center',
+                                                            cursor: 'pointer'
+                                                        }}>
+                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                                                                <path d="M8 5v14l11-7z"/>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        {currentCaption && <div className="img-caption" style={{ color: headingColor }}>{currentCaption}</div>}
+                                        {currentDescription && <div className="img-description" style={{ color: descriptionColor }}>{currentDescription}</div>}
+                                    </div>
+                                );
+                            } else if (fancybox) {
                                 return (
                                     <div key={media.id}>
                                         <div className="mcfgb-gallery-single">
@@ -249,6 +448,142 @@ export default function Save({ attributes }) {
                                                         </video>
                                                     </div>
                                                 </a>
+                                            </div>
+                                        </div>
+                                        {currentCaption && <div className="img-caption" style={{ color: headingColor }}>{currentCaption}</div>}
+                                        {currentDescription && <div className="img-description" style={{ color: descriptionColor }}>{currentDescription}</div>}
+                                    </div>
+                                );
+                            } else if (!isYouTubeUrl && isWebsiteUrl && url !== '' && fancybox) {
+                                // When Fancybox is enabled but URL is a website URL (not YouTube/Vimeo), show video without anchor
+                                return (
+                                    <div key={media.id}>
+                                        <div className="mcfgb-gallery-single">
+                                            <div className="ratio-part" style={aspectRatioStyle}>
+                                                {/* Video thumbnail with click to play functionality */}
+                                                <div className="video-thumbnail-wrapper" style={{ position: 'relative', width: '100%', height: '100%', cursor: 'pointer' }}>
+                                                    {media.thumbnailUrl ? (
+                                                        <img 
+                                                            src={media.thumbnailUrl} 
+                                                            alt={media.alt || "Video Thumbnail"} 
+                                                            style={{ 
+                                                                width: '100%', 
+                                                                height: '100%', 
+                                                                objectFit: 'cover'
+                                                            }}
+                                                            onClick={() => {
+                                                                // Create and show video player
+                                                                const videoContainer = document.createElement('div');
+                                                                videoContainer.style.cssText = `
+                                                                    position: fixed;
+                                                                    top: 0;
+                                                                    left: 0;
+                                                                    width: 100%;
+                                                                    height: 100%;
+                                                                    background: rgba(0,0,0,0.9);
+                                                                    z-index: 9999;
+                                                                    display: flex;
+                                                                    align-items: center;
+                                                                    justify-content: center;
+                                                                `;
+                                                                
+                                                                const video = document.createElement('video');
+                                                                video.controls = true;
+                                                                video.autoplay = true;
+                                                                video.style.cssText = `
+                                                                    max-width: 90%;
+                                                                    max-height: 90%;
+                                                                    width: auto;
+                                                                    height: auto;
+                                                                `;
+                                                                
+                                                                const source = document.createElement('source');
+                                                                source.src = media.url;
+                                                                source.type = media.mime;
+                                                                
+                                                                video.appendChild(source);
+                                                                videoContainer.appendChild(video);
+                                                                
+                                                                // Close button
+                                                                const closeBtn = document.createElement('button');
+                                                                closeBtn.innerHTML = '×';
+                                                                closeBtn.style.cssText = `
+                                                                    position: absolute;
+                                                                    top: 20px;
+                                                                    right: 20px;
+                                                                    background: none;
+                                                                    border: none;
+                                                                    color: white;
+                                                                    font-size: 30px;
+                                                                    cursor: pointer;
+                                                                    z-index: 10000;
+                                                                `;
+                                                                closeBtn.onclick = () => {
+                                                                    document.body.removeChild(videoContainer);
+                                                                };
+                                                                
+                                                                videoContainer.appendChild(closeBtn);
+                                                                document.body.appendChild(videoContainer);
+                                                                
+                                                                // Close on background click
+                                                                videoContainer.onclick = (e) => {
+                                                                    if (e.target === videoContainer) {
+                                                                        document.body.removeChild(videoContainer);
+                                                                    }
+                                                                };
+                                                            }}
+                                                        />
+                                                    ) : (
+                                                        <div style={{
+                                                            width: '100%',
+                                                            height: '100%',
+                                                            backgroundColor: '#f8f9fa',
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            justifyContent: 'center',
+                                                            border: '2px dashed #dee2e6'
+                                                        }}>
+                                                            <div style={{ textAlign: 'center' }}>
+                                                                <svg width="32" height="32" viewBox="0 0 24 24" fill="#6c757d" style={{ marginBottom: '8px' }}>
+                                                                    <path d="M8 5v14l11-7z"/>
+                                                                </svg>
+                                                                <div style={{ fontSize: '12px', color: '#6c757d' }}>
+                                                                    Generating thumbnail...
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                    
+                                                    {/* Play button overlay */}
+                                                    <div className="play-button-overlay" style={{
+                                                        position: 'absolute',
+                                                        top: '50%',
+                                                        left: '50%',
+                                                        transform: 'translate(-50%, -50%)',
+                                                        width: '60px',
+                                                        height: '60px',
+                                                        backgroundColor: 'rgba(0,0,0,0.7)',
+                                                        borderRadius: '50%',
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        justifyContent: 'center',
+                                                        cursor: 'pointer'
+                                                    }}>
+                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                                                            <path d="M8 5v14l11-7z"/>
+                                                        </svg>
+                                                    </div>
+                                                    
+                                                    {/* Hidden video element for thumbnail generation */}
+                                                    <video 
+                                                        style={{ display: 'none' }}
+                                                        preload="metadata"
+                                                        muted
+                                                        playsInline
+                                                    >
+                                                        <source src={media.url} type={media.mime} />
+                                                    </video>
+                                                </div>
                                             </div>
                                         </div>
                                         {currentCaption && <div className="img-caption" style={{ color: headingColor }}>{currentCaption}</div>}
@@ -677,7 +1012,7 @@ export default function Save({ attributes }) {
                                             speed: ${speed || 1000},
                                             autoplaySpeed: ${speed || 1000},
                                             autoplay: ${autoplay || false},   
-                                            infinite: ${autoplay ? true : (infinite || false)},       
+                                            infinite: ${infinite || false},       
                                             dots: ${dots || false},
                                             pauseOnHover: ${pauseOnHover !== undefined ? pauseOnHover : true},
                                             customPaging: function(sliderId, i) {
@@ -734,7 +1069,7 @@ export default function Save({ attributes }) {
                                                 cssEase: 'linear',
                                                 arrows: ${showArrows || false},
                                                 autoplaySpeed: ${speed || 1000},
-                                                infinite: ${autoplay ? true : (infinite || false)},
+                                                infinite: ${infinite || false},
                                                 pauseOnHover: ${pauseOnHover !== undefined ? pauseOnHover : true},
                                                 responsive: [
                                                     {
@@ -782,7 +1117,7 @@ export default function Save({ attributes }) {
                                                 adaptiveHeight: true,
                                                 arrows: ${showArrows || false},
                                                 autoplaySpeed: ${speed || 1000},
-                                                infinite: ${autoplay ? true : (infinite || false)},
+                                                infinite: ${infinite || false},
                                                 pauseOnHover: ${pauseOnHover !== undefined ? pauseOnHover : true},
                                                 responsive: [
                                                     {
@@ -833,7 +1168,7 @@ export default function Save({ attributes }) {
                                                 autoplay: ${autoplay || false},
                                                 arrows: ${showArrows || false},
                                                 autoplaySpeed: ${speed || 1000},
-                                                infinite: ${autoplay ? true : (infinite || false)},
+                                                infinite: ${infinite || false},
                                                 pauseOnHover: ${pauseOnHover !== undefined ? pauseOnHover : true},
                                                 responsive: [
                                                     {
@@ -871,7 +1206,7 @@ export default function Save({ attributes }) {
                                                 slidesToShow: ${slidesToShowDesktop || 2},
                                                 speed: ${speed || 1000},
                                                 autoplay: ${autoplay || false},
-                                                infinite: ${autoplay ? true : (infinite || false)},
+                                                infinite: ${infinite || false},
                                                 pauseOnHover: ${pauseOnHover !== undefined ? pauseOnHover : true},
                                                 responsive: [
                                                     {
@@ -924,7 +1259,7 @@ export default function Save({ attributes }) {
                                         autoplay: ${autoplay || false},
                                         autoplaySpeed: ${speed || 1000},
                                         arrows: ${showArrows || false},
-                                        infinite: ${autoplay ? true : (infinite || false)},
+                                        infinite: ${infinite || false},
                                         pauseOnHover: ${pauseOnHover !== undefined ? pauseOnHover : true},
                                         responsive: [
                                             {

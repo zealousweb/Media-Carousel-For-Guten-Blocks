@@ -80,6 +80,22 @@ function mcfgb_init()
     // Log the block registration attempt
     error_log('Media Carousel Block: Attempting to register block from: ' . $build_path);
     
+    // Read and validate block.json content
+    $block_json_content = file_get_contents($block_json_path);
+    $block_json_data = json_decode($block_json_content, true);
+    
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        error_log('Media Carousel Block: Invalid JSON in block.json: ' . json_last_error_msg());
+        return;
+    }
+    
+    if (!isset($block_json_data['name'])) {
+        error_log('Media Carousel Block: Missing block name in block.json');
+        return;
+    }
+    
+    error_log('Media Carousel Block: Block name from block.json: ' . $block_json_data['name']);
+    
     $result = register_block_type($build_path);
     
     if (is_wp_error($result)) {
@@ -94,8 +110,11 @@ function mcfgb_init()
         $block_name = 'media-carousel-for-guten-blocks/media-carousel';
         if (isset($block_types[$block_name])) {
             error_log('Media Carousel Block: Block confirmed as registered in registry');
+            error_log('Media Carousel Block: Block title: ' . $block_types[$block_name]->title);
+            error_log('Media Carousel Block: Block category: ' . $block_types[$block_name]->category);
         } else {
             error_log('Media Carousel Block: Block not found in registry after registration');
+            error_log('Media Carousel Block: Available blocks: ' . implode(', ', array_keys($block_types)));
         }
     }
 }
@@ -232,6 +251,6 @@ function mcfgb_debug_block_registration() {
 }
 
 // Uncomment the line below to debug block registration
-// add_action('init', 'mcfgb_debug_block_registration', 20);
+add_action('init', 'mcfgb_debug_block_registration', 20);
 
 

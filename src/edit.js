@@ -508,16 +508,6 @@ export default function Edit({ attributes, setAttributes }) {
                                         {deviceLabel[activeDevice]} Columns: {deviceValue[activeDevice]}
                                     </div>
                                 </div>
-                                
-                                {/* Current responsive values display */}
-                                <div style={{ marginTop: '16px',  marginBottom: '16px', padding: '12px', backgroundColor: '#e7f3ff', borderRadius: '4px', border: '1px solid #0073aa' }}>
-                                    <p style={{ margin: '0 0 8px 0', fontSize: '12px', fontWeight: 'bold', color: '#0073aa' }}>
-                                        {__("Current Responsive Settings:", "media-carousel-for-guten-blocks")}
-                                    </p>
-                                    <p style={{ margin: '0', fontSize: '11px', color: '#0073aa' }}>
-                                        Desktop: {slidesToShowDesktop} slides | Tablet: {slidesToShowTablet} slides | Mobile: {slidesToShowMobile} slides
-                                    </p>
-                                </div>
                             </>
                         )}
                         <RangeControl
@@ -538,6 +528,50 @@ export default function Edit({ attributes, setAttributes }) {
                                 setAttributes({ pauseOnHover: val });
                             }}
                         />
+                        <ToggleControl
+                            label={__("Auto Play", "media-carousel-for-guten-blocks")}
+                            checked={autoplay}
+                            onChange={(val) => {
+                                setAttributes({ autoplay: val });
+                            }}
+                        />
+                        <ToggleControl
+                            label={__("Infinite", "media-carousel-for-guten-blocks")}
+                            checked={infinite}
+                            onChange={(val) => {
+                                setAttributes({ infinite: val });
+                            }}
+                        />
+                        <ToggleControl
+                            label={__("Dots", "media-carousel-for-guten-blocks")}
+                            checked={dots}
+                            onChange={(val) => {
+                                setAttributes({ dots: val });
+                            }}
+                        />
+                        {dots && (
+                            <>
+                                <SelectControl
+                                    label={__("Dots Type", "media-carousel-for-guten-blocks")}
+                                    value={dotsType}
+                                    options={[
+                                        { label: "Normal Dots", value: "ndots" },
+                                        { label: "Number", value: "number" },
+                                    ]}
+                                    onChange={(val) => {
+                                        setAttributes({ dotsType: val });
+                                    }}
+                                />
+                                <span className="color">
+                                    {dotsType === "number" ? __("Number Color", "media-carousel-for-guten-blocks") : __("Dots Color", "media-carousel-for-guten-blocks")}
+                                </span>
+                                <ColorPalette
+                                    value={dotsColor}
+                                    onChange={(color) => setAttributes({ dotsColor: color })}
+                                    colors={colors}
+                                />
+                            </>
+                        )}
                         <ToggleControl
                             label={__("Show Arrows", "media-carousel-for-guten-blocks")}
                             checked={showArrows}
@@ -744,59 +778,6 @@ export default function Edit({ attributes, setAttributes }) {
 
                             </>
                         )}
-                        <ToggleControl
-                            label={__("Auto Play", "media-carousel-for-guten-blocks")}
-                            checked={autoplay}
-                            onChange={(val) => {
-                                if (val) {
-                                    setAttributes({ autoplay: true, infinite: false });
-                                }
-                                else {
-                                    setAttributes({ autoplay: false });
-                                }
-                            }}
-                        />
-                        <ToggleControl
-                            label={__("Infinite", "media-carousel-for-guten-blocks")}
-                            checked={infinite}
-                            onChange={(val) => {
-                                if (val) {
-                                    setAttributes({ infinite: true, autoplay: false});
-                                } else {
-                                    setAttributes({ infinite: false });
-                                }
-                            }}
-                        />
-                        <ToggleControl
-                            label={__("Dots", "media-carousel-for-guten-blocks")}
-                            checked={dots}
-                            onChange={(val) => {
-                                setAttributes({ dots: val });
-                            }}
-                        />
-                        {dots && (
-                            <>
-                                <SelectControl
-                                    label={__("Dots Type", "media-carousel-for-guten-blocks")}
-                                    value={dotsType}
-                                    options={[
-                                        { label: "Normal Dots", value: "ndots" },
-                                        { label: "Number", value: "number" },
-                                    ]}
-                                    onChange={(val) => {
-                                        setAttributes({ dotsType: val });
-                                    }}
-                                />
-                                <span className="color">
-                                    {dotsType === "number" ? __("Number Color", "media-carousel-for-guten-blocks") : __("Dots Color", "media-carousel-for-guten-blocks")}
-                                </span>
-                                <ColorPalette
-                                    value={dotsColor}
-                                    onChange={(color) => setAttributes({ dotsColor: color })}
-                                    colors={colors}
-                                />
-                            </>
-                        )}
                     </PanelBody>
                     {/* Arrow Responsive Visibility Controls */}
                     {showArrows && (
@@ -880,7 +861,16 @@ export default function Edit({ attributes, setAttributes }) {
                                     }))
                                 ];
 
-                                setAttributes({ galleryImages: finalGallery });
+                                // Update URLs array to match the new gallery
+                                const updatedUrls = finalGallery.map((media, index) => {
+                                    // Preserve existing URL if it exists, otherwise set empty string
+                                    return urls[index] || '';
+                                });
+
+                                setAttributes({ 
+                                    galleryImages: finalGallery,
+                                    urls: updatedUrls
+                                });
                             }}
 
                             allowedTypes={['image', 'video']}
@@ -910,7 +900,7 @@ export default function Edit({ attributes, setAttributes }) {
                                         <input
                                             type="text"
                                             className="ytb-url"
-                                            value={urls.map((url, idx) => idx === index ? url : '').join('')}
+                                            value={urls[index] || ''}
                                             onChange={(event) => {
                                                 const updatedUrls = [...urls];
                                                 updatedUrls[index] = event.target.value;
@@ -1064,6 +1054,17 @@ export default function Edit({ attributes, setAttributes }) {
                                                 </svg>
                                             </div>
                                         </div>
+                                        <input
+                                            type="text"
+                                            className="ytb-url"
+                                            value={urls[index] || ''}
+                                            onChange={(event) => {
+                                                const updatedUrls = [...urls];
+                                                updatedUrls[index] = event.target.value;
+                                                setAttributes({ urls: updatedUrls });
+                                            }}
+                                            placeholder="Enter URL"
+                                        />
                                         {caption && (
                                             <input
                                                 type="text"
@@ -1116,15 +1117,21 @@ export default function Edit({ attributes, setAttributes }) {
                             <MediaUpload
                                 multiple="add"
                                 onSelect={(val) => {
+                                    const newGallery = val.map((media) => ({
+                                        id: media.id,
+                                        url: media.url,
+                                        alt: media.alt,
+                                        type: media.type,
+                                        caption: media.caption, // Include the caption field
+                                        description: media.description || '', // Include the description field
+                                    }));
+                                    
+                                    // Initialize URLs array with empty strings for new media
+                                    const newUrls = new Array(newGallery.length).fill('');
+                                    
                                     setAttributes({
-                                        galleryImages: val.map((media) => ({
-                                            id: media.id,
-                                            url: media.url,
-                                            alt: media.alt,
-                                            type: media.type,
-                                            caption: media.caption, // Include the caption field
-                                            description: media.description || '', // Include the description field
-                                        }))
+                                        galleryImages: newGallery,
+                                        urls: newUrls
                                     });
                                 }}
                                 allowedTypes={['image', 'video']}
@@ -1140,86 +1147,7 @@ export default function Edit({ attributes, setAttributes }) {
                     </Placeholder>
                 )}
                 
-                {/* Custom Arrow Preview */}
-                {showArrows && arrowType === 'custom' && (customPrevArrow || customNextArrow) && (
-                    <div style={{ 
-                        marginTop: '20px', 
-                        padding: '15px', 
-                        border: '1px solid #ddd', 
-                        borderRadius: '5px',
-                        backgroundColor: '#f9f9f9'
-                    }}>
-                        <div style={{ 
-                            fontSize: '12px', 
-                            fontWeight: 'bold', 
-                            marginBottom: '10px',
-                            color: '#666'
-                        }}>
-                            {__("Custom Arrow Preview", "media-carousel-for-guten-blocks")}
-                        </div>
-                        <div style={{ 
-                            display: 'flex', 
-                            gap: '10px', 
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}>
-                            {customPrevArrow && (
-                                <div style={{
-                                    backgroundColor: arrowColor || '#D8613C',
-                                    borderRadius: '50%',
-                                    width: '40px',
-                                    height: '40px',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center'
-                                }}>
-                                    <img 
-                                        src={customPrevArrow.url} 
-                                        alt="Previous Arrow Preview" 
-                                        style={{ 
-                                            width: '25px', 
-                                            height: '25px', 
-                                            objectFit: 'contain',
-                                            filter: 'brightness(0) saturate(100%)'
-                                        }}
-                                    />
-                                </div>
-                            )}
-                            {customNextArrow && (
-                                <div style={{
-                                    backgroundColor: arrowColor || '#D8613C',
-                                    borderRadius: '50%',
-                                    width: '40px',
-                                    height: '40px',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center'
-                                }}>
-                                    <img 
-                                        src={customNextArrow.url} 
-                                        alt="Next Arrow Preview" 
-                                        style={{ 
-                                            width: '25px', 
-                                            height: '25px', 
-                                            objectFit: 'contain',
-                                            filter: 'brightness(0) saturate(100%)'
-                                        }}
-                                    />
-                                </div>
-                            )}
-                        </div>
-                        {(!customPrevArrow || !customNextArrow) && (
-                            <div style={{ 
-                                fontSize: '11px', 
-                                color: '#999', 
-                                marginTop: '8px',
-                                textAlign: 'center'
-                            }}>
-                                {__("Upload both previous and next arrows to see the complete preview", "media-carousel-for-guten-blocks")}
-                            </div>
-                        )}
-                    </div>
-                )}
+
             </div>
 
             <style>
