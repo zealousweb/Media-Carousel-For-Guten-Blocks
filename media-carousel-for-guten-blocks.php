@@ -40,6 +40,12 @@ function mcfgb_activate() {
  */
 function mcfgb_init()
 {
+    // Increase memory limit for this operation
+    $current_memory_limit = ini_get('memory_limit');
+    if (intval($current_memory_limit) < 512) {
+        @ini_set('memory_limit', '512M');
+    }
+    
     // Check WordPress version compatibility
     if (version_compare(get_bloginfo('version'), '5.9', '<')) {
         error_log('Media Carousel Block: WordPress version too old');
@@ -82,6 +88,11 @@ function mcfgb_init()
     
     // Read and validate block.json content
     $block_json_content = file_get_contents($block_json_path);
+    if ($block_json_content === false) {
+        error_log('Media Carousel Block: Could not read block.json file');
+        return;
+    }
+    
     $block_json_data = json_decode($block_json_content, true);
     
     if (json_last_error() !== JSON_ERROR_NONE) {
@@ -96,7 +107,12 @@ function mcfgb_init()
     
     error_log('Media Carousel Block: Block name from block.json: ' . $block_json_data['name']);
     
-    $result = register_block_type($build_path);
+    try {
+        $result = register_block_type($build_path);
+    } catch (Exception $e) {
+        error_log('Media Carousel Block: Exception during block registration: ' . $e->getMessage());
+        return;
+    }
     
     if (is_wp_error($result)) {
         // Failed to register block
@@ -104,6 +120,11 @@ function mcfgb_init()
     } else {
         // Block registered successfully
         error_log('Media Carousel Block registered successfully');
+        
+        // Clear any potential memory issues
+        if (function_exists('wp_cache_flush')) {
+            wp_cache_flush();
+        }
         
         // Additional debugging: check if block is available
         $block_types = WP_Block_Type_Registry::get_instance()->get_all_registered();
@@ -154,7 +175,15 @@ add_action('init', 'mcfgb_init', 5);
 function mcfgb_enqueue_block_assets() {
     // Check if the current post contains our block
     global $post;
-    if ($post && has_block('media-carousel-for-guten-blocks/media-carousel', $post)) {
+    
+    // Add memory management
+    if (function_exists('wp_raise_memory_limit')) {
+        wp_raise_memory_limit('admin');
+    }
+    
+    if ($post && is_object($post) && isset($post->post_content) && !empty($post->post_content)) {
+        try {
+            if (has_block('media-carousel-for-guten-blocks/media-carousel', $post)) {
         wp_enqueue_style(
             'mcfgb-slick-slider-css',
             plugins_url('/assets/css/slick.css', __FILE__),
@@ -184,6 +213,10 @@ function mcfgb_enqueue_block_assets() {
             '5.0.24',
             ''
         );
+            }
+        } catch (Exception $e) {
+            error_log('Media Carousel Block: Exception during has_block check: ' . $e->getMessage());
+        }
     }
 }
 add_action('wp_enqueue_scripts', 'mcfgb_enqueue_block_assets');

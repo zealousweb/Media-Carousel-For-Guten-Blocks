@@ -897,17 +897,19 @@ export default function Edit({ attributes, setAttributes }) {
                                 {media.type === 'image' ? (
                                     <>
                                         <img src={media.url} alt={media.alt ? media.alt : "Gallery Image"} />
-                                        <input
-                                            type="text"
-                                            className="ytb-url"
-                                            value={urls[index] || ''}
-                                            onChange={(event) => {
-                                                const updatedUrls = [...urls];
-                                                updatedUrls[index] = event.target.value;
-                                                setAttributes({ urls: updatedUrls });
-                                            }}
-                                            placeholder="Enter URL "
-                                        />
+                                        {!fancybox && (
+                                            <input
+                                                type="text"
+                                                className="ytb-url"
+                                                value={urls[index] || ''}
+                                                onChange={(event) => {
+                                                    const updatedUrls = [...urls];
+                                                    updatedUrls[index] = event.target.value;
+                                                    setAttributes({ urls: updatedUrls });
+                                                }}
+                                                placeholder="Enter URL "
+                                            />
+                                        )}
                                         {caption && (
                                             <input
                                                 type="text"
@@ -1054,17 +1056,19 @@ export default function Edit({ attributes, setAttributes }) {
                                                 </svg>
                                             </div>
                                         </div>
-                                        <input
-                                            type="text"
-                                            className="ytb-url"
-                                            value={urls[index] || ''}
-                                            onChange={(event) => {
-                                                const updatedUrls = [...urls];
-                                                updatedUrls[index] = event.target.value;
-                                                setAttributes({ urls: updatedUrls });
-                                            }}
-                                            placeholder="Enter URL"
-                                        />
+                                        {!fancybox && (
+                                            <input
+                                                type="text"
+                                                className="ytb-url"
+                                                value={urls[index] || ''}
+                                                onChange={(event) => {
+                                                    const updatedUrls = [...urls];
+                                                    updatedUrls[index] = event.target.value;
+                                                    setAttributes({ urls: updatedUrls });
+                                                }}
+                                                placeholder="Enter URL"
+                                            />
+                                        )}
                                         {caption && (
                                             <input
                                                 type="text"

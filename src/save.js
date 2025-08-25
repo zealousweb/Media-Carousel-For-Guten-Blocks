@@ -26,6 +26,18 @@ import "slick-carousel/slick/slick.js";
 export default function Save({ attributes }) {
     const { galleryImages, sliderType, showArrows, arrowType, customPrevArrow, customNextArrow, sliderId, urls, fancybox, simpleType, carouselType, speed, autoplay, infinite, caption, dotsType, dots, arrowColor, dotsColor, borderRadius, borderRadiusTop, borderRadiusRight, borderRadiusBottom, borderRadiusLeft, fancyboxBgColor, fancyboxWidth, fancyboxOpacity, arrowpos, slidesToShow, slidesToShowDesktop, slidesToShowTablet, slidesToShowMobile, slidesToScroll, pauseOnHover, hideOnDesktop, hideOnTablet, hideOnMobile, hideArrowsOnDesktop, hideArrowsOnTablet, hideArrowsOnMobile, imageAspectRatio = "16:9", description, headingColor = "#111111", descriptionColor = "#000000" } = attributes;
 
+    // Helper function to normalize URLs by adding protocol if missing
+    const normalizeUrl = (url) => {
+        if (!url || typeof url !== 'string') return url;
+        const trimmedUrl = url.trim();
+        if (!trimmedUrl) return url;
+        if (trimmedUrl.startsWith('http://') || trimmedUrl.startsWith('https://')) {
+            return trimmedUrl;
+        }
+        // Add https:// protocol for URLs that don't have it
+        return `https://${trimmedUrl}`;
+    };
+
     // Build responsive visibility classes
     const responsiveClasses = [
         hideOnDesktop ? 'mcfgb-hide-desktop' : '',
@@ -61,23 +73,26 @@ export default function Save({ attributes }) {
         <>
             <div className={`${arrowpos} ${sliderType}  ${showArrows} ${responsiveClasses}`}>
                 <div id={sliderId} >
-                    {galleryImages && galleryImages.map((media, index) => {
+                    {galleryImages && Array.isArray(galleryImages) && galleryImages.map((media, index) => {
                         const currentCaption = caption ? media.caption : '';
                         const currentDescription = caption ? media.description : '';
-                        const url = urls && urls[index] ? urls[index] : "";
+                        const url = urls && Array.isArray(urls) && urls[index] ? urls[index] : "";
+                        const normalizedUrl = normalizeUrl(url);
                         {/* const isYouTubeUrl = url.includes("youtube.com") || url.includes("youtu.be") || url.includes("vimeo.com"); */ }
-                        const isYouTubeUrl = url.includes("youtube.com") || url.includes("youtu.be");
-                        const isVimeoUrl = url.includes("vimeo.com");
-                        const isWebsiteUrl = url.startsWith("http");
-                        if (media.type === 'image') {
-                            if (fancybox && (isYouTubeUrl || isVimeoUrl) && url !== '') {
+                        const isYouTubeUrl = url && typeof url === 'string' && (url.includes("youtube.com") || url.includes("youtu.be"));
+                        const isVimeoUrl = url && typeof url === 'string' && url.includes("vimeo.com");
+                        const isWebsiteUrl = url && typeof url === 'string' && (url.startsWith("http") || url.includes("www.") || (url.includes(".") && url.length > 3 && !url.startsWith(".") && !url.endsWith(".")));
+                        if (media && media.type === 'image') {
+                            if (fancybox) {
                                 return (
                                     <div key={media.id}>
                                         <div className="mcfgb-gallery-single">
-                                            <a href={url} data-fancybox={`gallery-${sliderId}`} data-fancy-class={sliderId} data-caption={media.alt ? media.alt : "Gallery Image"} className="ratio-part" style={aspectRatioStyle}>
+                                            <a href={media.url} data-fancybox={`gallery-${sliderId}`} data-fancy-class={sliderId} data-caption={media.alt ? media.alt : "Gallery Image"}>
                                                 <img
                                                     src={media.url}
                                                     alt={media.alt ? media.alt : "Gallery Image"}
+                                                    className="ratio-part"
+                                                    style={aspectRatioStyle}
                                                 />
                                             </a>
                                         </div>
@@ -126,7 +141,7 @@ export default function Save({ attributes }) {
                                 return (
                                     <div key={media.id}>
                                         <div className="mcfgb-gallery-single">
-                                            <a href={url}>
+                                            <a href={normalizedUrl}>
                                                 <img
                                                     src={media.url}
                                                     alt={media.alt ? media.alt : "Gallery Image"}
@@ -135,41 +150,6 @@ export default function Save({ attributes }) {
                                                 />
 
                                             </a>
-                                        </div>
-                                        {currentCaption && <div className="img-caption" style={{ color: headingColor }}>{currentCaption}</div>}
-                                        {currentDescription && <div className="img-description" style={{ color: descriptionColor }}>{currentDescription}</div>}
-                                    </div>
-                                );
-                            } else if (fancybox) {
-                                return (
-                                    <div key={media.id}>
-                                        <div className="mcfgb-gallery-single">
-                                            <a href={media.url} data-fancybox={`gallery-${sliderId}`} data-fancy-class={sliderId} data-caption={media.alt ? media.alt : "Gallery Image"}>
-                                                <img
-                                                    src={media.url}
-                                                    alt={media.alt ? media.alt : "Gallery Image"}
-                                                    className="ratio-part"
-                                                    style={aspectRatioStyle}
-                                                />
-                                            </a>
-
-                                        </div>
-                                        {currentCaption && <div className="img-caption" style={{ color: headingColor }}>{currentCaption}</div>}
-                                        {currentDescription && <div className="img-description" style={{ color: descriptionColor }}>{currentDescription}</div>}
-                                    
-                                    </div>
-                                );
-                            } else if (!isYouTubeUrl && isWebsiteUrl && url !== '' && fancybox) {
-                                // When Fancybox is enabled but URL is a website URL (not YouTube/Vimeo), show image without anchor
-                                return (
-                                    <div key={media.id}>
-                                        <div className="mcfgb-gallery-single">
-                                            <div className="ratio-part" style={aspectRatioStyle}>
-                                                <img
-                                                    src={media.url}
-                                                    alt={media.alt ? media.alt : "Gallery Image"}
-                                                />
-                                            </div>
                                         </div>
                                         {currentCaption && <div className="img-caption" style={{ color: headingColor }}>{currentCaption}</div>}
                                         {currentDescription && <div className="img-description" style={{ color: descriptionColor }}>{currentDescription}</div>}
@@ -194,191 +174,14 @@ export default function Save({ attributes }) {
                                 );
                             }
 
-                        } else if (media.type === 'video') {
-                            const url = urls && urls[index] ? urls[index] : "";
-                            const isYouTubeUrl = url.includes("youtube.com") || url.includes("youtu.be");
-                            const isVimeoUrl = url.includes("vimeo.com");
-                            const isWebsiteUrl = url.startsWith("http");
+                        } else if (media && media.type === 'video') {
+                            const url = urls && Array.isArray(urls) && urls[index] ? urls[index] : "";
+                            const normalizedUrl = normalizeUrl(url);
+                            const isYouTubeUrl = url && typeof url === 'string' && (url.includes("youtube.com") || url.includes("youtu.be"));
+                            const isVimeoUrl = url && typeof url === 'string' && url.includes("vimeo.com");
+                            const isWebsiteUrl = url && typeof url === 'string' && (url.startsWith("http") || url.includes("www.") || (url.includes(".") && url.length > 3 && !url.startsWith(".") && !url.endsWith(".")));
                             
-                            if (fancybox && (isYouTubeUrl || isVimeoUrl) && url !== '') {
-                                return (
-                                    <div key={media.id}>
-                                        <div className="mcfgb-gallery-single">
-                                            <div className="ratio-part" style={aspectRatioStyle}>
-                                                <a href={url} data-fancybox={`gallery-${sliderId}`} data-fancy-class={sliderId} data-caption={media.alt ? media.alt : "Video"}>
-                                                    {/* Video thumbnail with play button */}
-                                                    <div className="video-thumbnail-wrapper" style={{ position: 'relative', width: '100%', height: '100%' }}>
-                                                        {media.thumbnailUrl ? (
-                                                            <img 
-                                                                src={media.thumbnailUrl} 
-                                                                alt={media.alt || "Video Thumbnail"} 
-                                                                style={{ 
-                                                                    width: '100%', 
-                                                                    height: '100%', 
-                                                                    objectFit: 'cover'
-                                                                }}
-                                                            />
-                                                        ) : (
-                                                            <div style={{
-                                                                width: '100%',
-                                                                height: '100%',
-                                                                backgroundColor: '#f8f9fa',
-                                                                display: 'flex',
-                                                                alignItems: 'center',
-                                                                justifyContent: 'center',
-                                                                border: '2px dashed #dee2e6'
-                                                            }}>
-                                                                <div style={{ textAlign: 'center' }}>
-                                                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="#6c757d" style={{ marginBottom: '8px' }}>
-                                                                        <path d="M8 5v14l11-7z"/>
-                                                                    </svg>
-                                                                    <div style={{ fontSize: '12px', color: '#6c757d' }}>
-                                                                        Generating thumbnail...
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        )}
-                                                        
-                                                        {/* Play button overlay */}
-                                                        <div className="play-button-overlay" style={{
-                                                            position: 'absolute',
-                                                            top: '50%',
-                                                            left: '50%',
-                                                            transform: 'translate(-50%, -50%)',
-                                                            width: '60px',
-                                                            height: '60px',
-                                                            backgroundColor: 'rgba(0,0,0,0.7)',
-                                                            borderRadius: '50%',
-                                                            display: 'flex',
-                                                            alignItems: 'center',
-                                                            justifyContent: 'center',
-                                                            cursor: 'pointer'
-                                                        }}>
-                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-                                                                <path d="M8 5v14l11-7z"/>
-                                                            </svg>
-                                                        </div>
-                                                        
-                                                        {/* Hidden video element for thumbnail generation */}
-                                                        <video 
-                                                            style={{ display: 'none' }}
-                                                            preload="metadata"
-                                                            muted
-                                                            playsInline
-                                                        >
-                                                            <source src={media.url} type={media.mime} />
-                                                        </video>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        {currentCaption && <div className="img-caption" style={{ color: headingColor }}>{currentCaption}</div>}
-                                        {currentDescription && <div className="img-description" style={{ color: descriptionColor }}>{currentDescription}</div>}
-                                    </div>
-                                );
-                            } else if (!fancybox && (isYouTubeUrl || isVimeoUrl) && url !== '') {
-                                let embedUrl;
-                                if (isYouTubeUrl) {
-                                    const match = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^&\n?#]+)/);
-                                    const videoID = match ? match[1] : null;
-                                    embedUrl = videoID ? `https://www.youtube.com/embed/${videoID}` : null;
-                                } else if (isVimeoUrl) {
-                                    const match = url.match(/vimeo\.com\/(\d+)/);
-                                    const videoID = match ? match[1] : null;
-                                    embedUrl = videoID ? `https://player.vimeo.com/video/${videoID}` : null;
-                                }
-
-                                return (
-                                    <div key={media.id}>
-                                        <div className="mcfgb-gallery-single">
-                                            <div className="ratio-part" style={aspectRatioStyle}>
-                                                {embedUrl ? (
-                                                    <iframe
-                                                        width="560"
-                                                        height="315"
-                                                        src={embedUrl}
-                                                        title="Video player"
-                                                        frameBorder="0"
-                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                                        referrerPolicy="strict-origin-when-cross-origin"
-                                                        allowFullScreen
-                                                    ></iframe>
-                                                ) : (
-                                                    <div>Invalid video URL</div>
-                                                )}
-                                            </div>
-                                        </div>
-                                        {currentCaption && <div className="img-caption" style={{ color: headingColor }}>{currentCaption}</div>}
-                                        {currentDescription && <div className="img-description" style={{ color: descriptionColor }}>{currentDescription}</div>}
-                                    </div>
-                                );
-                            } else if (!isYouTubeUrl && isWebsiteUrl && url !== '' && !fancybox) {
-                                return (
-                                    <div key={media.id}>
-                                        <div className="mcfgb-gallery-single">
-                                            <div className="ratio-part" style={aspectRatioStyle}>
-                                                <a href={url}>
-                                                    {/* Video thumbnail with play button */}
-                                                    <div className="video-thumbnail-wrapper" style={{ position: 'relative', width: '100%', height: '100%' }}>
-                                                        {media.thumbnailUrl ? (
-                                                            <img 
-                                                                src={media.thumbnailUrl} 
-                                                                alt={media.alt || "Video Thumbnail"} 
-                                                                style={{ 
-                                                                    width: '100%', 
-                                                                    height: '100%', 
-                                                                    objectFit: 'cover'
-                                                                }}
-                                                            />
-                                                        ) : (
-                                                            <div style={{
-                                                                width: '100%',
-                                                                height: '100%',
-                                                                backgroundColor: '#f8f9fa',
-                                                                display: 'flex',
-                                                                alignItems: 'center',
-                                                                justifyContent: 'center',
-                                                                border: '2px dashed #dee2e6'
-                                                            }}>
-                                                                <div style={{ textAlign: 'center' }}>
-                                                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="#6c757d" style={{ marginBottom: '8px' }}>
-                                                                        <path d="M8 5v14l11-7z"/>
-                                                                    </svg>
-                                                                    <div style={{ fontSize: '12px', color: '#6c757d' }}>
-                                                                        Generating thumbnail...
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        )}
-                                                        
-                                                        {/* Play button overlay */}
-                                                        <div className="play-button-overlay" style={{
-                                                            position: 'absolute',
-                                                            top: '50%',
-                                                            left: '50%',
-                                                            transform: 'translate(-50%, -50%)',
-                                                            width: '60px',
-                                                            height: '60px',
-                                                            backgroundColor: 'rgba(0,0,0,0.7)',
-                                                            borderRadius: '50%',
-                                                            display: 'flex',
-                                                            alignItems: 'center',
-                                                            justifyContent: 'center',
-                                                            cursor: 'pointer'
-                                                        }}>
-                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-                                                                <path d="M8 5v14l11-7z"/>
-                                                            </svg>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        {currentCaption && <div className="img-caption" style={{ color: headingColor }}>{currentCaption}</div>}
-                                        {currentDescription && <div className="img-description" style={{ color: descriptionColor }}>{currentDescription}</div>}
-                                    </div>
-                                );
-                            } else if (fancybox) {
+                            if (fancybox) {
                                 return (
                                     <div key={media.id}>
                                         <div className="mcfgb-gallery-single">
@@ -454,8 +257,110 @@ export default function Save({ attributes }) {
                                         {currentDescription && <div className="img-description" style={{ color: descriptionColor }}>{currentDescription}</div>}
                                     </div>
                                 );
-                            } else if (!isYouTubeUrl && isWebsiteUrl && url !== '' && fancybox) {
-                                // When Fancybox is enabled but URL is a website URL (not YouTube/Vimeo), show video without anchor
+                            } else if (!fancybox && (isYouTubeUrl || isVimeoUrl) && url !== '') {
+                                let embedUrl;
+                                if (isYouTubeUrl) {
+                                    const match = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^&\n?#]+)/);
+                                    const videoID = match ? match[1] : null;
+                                    embedUrl = videoID ? `https://www.youtube.com/embed/${videoID}` : null;
+                                } else if (isVimeoUrl) {
+                                    const match = url.match(/vimeo\.com\/(\d+)/);
+                                    const videoID = match ? match[1] : null;
+                                    embedUrl = videoID ? `https://player.vimeo.com/video/${videoID}` : null;
+                                }
+
+                                return (
+                                    <div key={media.id}>
+                                        <div className="mcfgb-gallery-single">
+                                            <div className="ratio-part" style={aspectRatioStyle}>
+                                                {embedUrl ? (
+                                                    <iframe
+                                                        width="560"
+                                                        height="315"
+                                                        src={embedUrl}
+                                                        title="Video player"
+                                                        frameBorder="0"
+                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                        referrerPolicy="strict-origin-when-cross-origin"
+                                                        allowFullScreen
+                                                    ></iframe>
+                                                ) : (
+                                                    <div>Invalid video URL</div>
+                                                )}
+                                            </div>
+                                        </div>
+                                        {currentCaption && <div className="img-caption" style={{ color: headingColor }}>{currentCaption}</div>}
+                                        {currentDescription && <div className="img-description" style={{ color: descriptionColor }}>{currentDescription}</div>}
+                                    </div>
+                                );
+                            } else if (!isYouTubeUrl && isWebsiteUrl && url !== '' && !fancybox) {
+                                return (
+                                    <div key={media.id}>
+                                        <div className="mcfgb-gallery-single">
+                                            <div className="ratio-part" style={aspectRatioStyle}>
+                                                <a href={normalizedUrl}>
+                                                    {/* Video thumbnail with play button */}
+                                                    <div className="video-thumbnail-wrapper" style={{ position: 'relative', width: '100%', height: '100%' }}>
+                                                        {media.thumbnailUrl ? (
+                                                            <img 
+                                                                src={media.thumbnailUrl} 
+                                                                alt={media.alt || "Video Thumbnail"} 
+                                                                style={{ 
+                                                                    width: '100%', 
+                                                                    height: '100%', 
+                                                                    objectFit: 'cover'
+                                                                }}
+                                                            />
+                                                        ) : (
+                                                            <div style={{
+                                                                width: '100%',
+                                                                height: '100%',
+                                                                backgroundColor: '#f8f9fa',
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                                justifyContent: 'center',
+                                                                border: '2px dashed #dee2e6'
+                                                            }}>
+                                                                <div style={{ textAlign: 'center' }}>
+                                                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="#6c757d" style={{ marginBottom: '8px' }}>
+                                                                        <path d="M8 5v14l11-7z"/>
+                                                                    </svg>
+                                                                    <div style={{ fontSize: '12px', color: '#6c757d' }}>
+                                                                        Generating thumbnail...
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                        
+                                                        {/* Play button overlay */}
+                                                        <div className="play-button-overlay" style={{
+                                                            position: 'absolute',
+                                                            top: '50%',
+                                                            left: '50%',
+                                                            transform: 'translate(-50%, -50%)',
+                                                            width: '60px',
+                                                            height: '60px',
+                                                            backgroundColor: 'rgba(0,0,0,0.7)',
+                                                            borderRadius: '50%',
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            justifyContent: 'center',
+                                                            cursor: 'pointer'
+                                                        }}>
+                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                                                                <path d="M8 5v14l11-7z"/>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        {currentCaption && <div className="img-caption" style={{ color: headingColor }}>{currentCaption}</div>}
+                                        {currentDescription && <div className="img-description" style={{ color: descriptionColor }}>{currentDescription}</div>}
+                                    </div>
+                                );
+                            } else if (!isYouTubeUrl && isWebsiteUrl && url !== '' && !fancybox) {
+                                // When Fancybox is disabled but URL is a website URL (not YouTube/Vimeo), show video with click to play
                                 return (
                                     <div key={media.id}>
                                         <div className="mcfgb-gallery-single">

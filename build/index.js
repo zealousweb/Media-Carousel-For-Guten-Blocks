@@ -4220,7 +4220,7 @@ function Edit({
   }, media.type === 'image' ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
     src: media.url,
     alt: media.alt ? media.alt : "Gallery Image"
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("input", {
+  }), !fancybox && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("input", {
     type: "text",
     className: "ytb-url",
     value: urls[index] || '',
@@ -4383,7 +4383,7 @@ function Edit({
     fill: "white"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("path", {
     d: "M8 5v14l11-7z"
-  })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("input", {
+  })))), !fancybox && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("input", {
     type: "text",
     className: "ytb-url",
     value: urls[index] || '',
@@ -4719,6 +4719,18 @@ function Save({
     descriptionColor = "#000000"
   } = attributes;
 
+  // Helper function to normalize URLs by adding protocol if missing
+  const normalizeUrl = url => {
+    if (!url || typeof url !== 'string') return url;
+    const trimmedUrl = url.trim();
+    if (!trimmedUrl) return url;
+    if (trimmedUrl.startsWith('http://') || trimmedUrl.startsWith('https://')) {
+      return trimmedUrl;
+    }
+    // Add https:// protocol for URLs that don't have it
+    return `https://${trimmedUrl}`;
+  };
+
   // Build responsive visibility classes
   const responsiveClasses = [hideOnDesktop ? 'mcfgb-hide-desktop' : '', hideOnTablet ? 'mcfgb-hide-tablet' : '', hideOnMobile ? 'mcfgb-hide-mobile' : ''].filter(Boolean).join(' ');
 
@@ -4746,30 +4758,31 @@ function Save({
     className: `${arrowpos} ${sliderType}  ${showArrows} ${responsiveClasses}`
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: sliderId
-  }, galleryImages && galleryImages.map((media, index) => {
+  }, galleryImages && Array.isArray(galleryImages) && galleryImages.map((media, index) => {
     const currentCaption = caption ? media.caption : '';
     const currentDescription = caption ? media.description : '';
-    const url = urls && urls[index] ? urls[index] : "";
+    const url = urls && Array.isArray(urls) && urls[index] ? urls[index] : "";
+    const normalizedUrl = normalizeUrl(url);
     {/* const isYouTubeUrl = url.includes("youtube.com") || url.includes("youtu.be") || url.includes("vimeo.com"); */}
-    const isYouTubeUrl = url.includes("youtube.com") || url.includes("youtu.be");
-    const isVimeoUrl = url.includes("vimeo.com");
-    const isWebsiteUrl = url.startsWith("http");
-    if (media.type === 'image') {
-      if (fancybox && (isYouTubeUrl || isVimeoUrl) && url !== '') {
+    const isYouTubeUrl = url && typeof url === 'string' && (url.includes("youtube.com") || url.includes("youtu.be"));
+    const isVimeoUrl = url && typeof url === 'string' && url.includes("vimeo.com");
+    const isWebsiteUrl = url && typeof url === 'string' && (url.startsWith("http") || url.includes("www.") || url.includes(".") && url.length > 3 && !url.startsWith(".") && !url.endsWith("."));
+    if (media && media.type === 'image') {
+      if (fancybox) {
         return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           key: media.id
         }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           className: "mcfgb-gallery-single"
         }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-          href: url,
+          href: media.url,
           "data-fancybox": `gallery-${sliderId}`,
           "data-fancy-class": sliderId,
-          "data-caption": media.alt ? media.alt : "Gallery Image",
-          className: "ratio-part",
-          style: aspectRatioStyle
+          "data-caption": media.alt ? media.alt : "Gallery Image"
         }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
           src: media.url,
-          alt: media.alt ? media.alt : "Gallery Image"
+          alt: media.alt ? media.alt : "Gallery Image",
+          className: "ratio-part",
+          style: aspectRatioStyle
         }))), currentCaption && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           className: "img-caption",
           style: {
@@ -4825,61 +4838,12 @@ function Save({
         }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           className: "mcfgb-gallery-single"
         }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-          href: url
+          href: normalizedUrl
         }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
           src: media.url,
           alt: media.alt ? media.alt : "Gallery Image",
           className: "ratio-part",
           style: aspectRatioStyle
-        }))), currentCaption && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          className: "img-caption",
-          style: {
-            color: headingColor
-          }
-        }, currentCaption), currentDescription && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          className: "img-description",
-          style: {
-            color: descriptionColor
-          }
-        }, currentDescription));
-      } else if (fancybox) {
-        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          key: media.id
-        }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          className: "mcfgb-gallery-single"
-        }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-          href: media.url,
-          "data-fancybox": `gallery-${sliderId}`,
-          "data-fancy-class": sliderId,
-          "data-caption": media.alt ? media.alt : "Gallery Image"
-        }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-          src: media.url,
-          alt: media.alt ? media.alt : "Gallery Image",
-          className: "ratio-part",
-          style: aspectRatioStyle
-        }))), currentCaption && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          className: "img-caption",
-          style: {
-            color: headingColor
-          }
-        }, currentCaption), currentDescription && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          className: "img-description",
-          style: {
-            color: descriptionColor
-          }
-        }, currentDescription));
-      } else if (!isYouTubeUrl && isWebsiteUrl && url !== '' && fancybox) {
-        // When Fancybox is enabled but URL is a website URL (not YouTube/Vimeo), show image without anchor
-        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          key: media.id
-        }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          className: "mcfgb-gallery-single"
-        }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          className: "ratio-part",
-          style: aspectRatioStyle
-        }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-          src: media.url,
-          alt: media.alt ? media.alt : "Gallery Image"
         }))), currentCaption && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           className: "img-caption",
           style: {
@@ -4914,12 +4878,13 @@ function Save({
           }
         }, currentDescription));
       }
-    } else if (media.type === 'video') {
-      const url = urls && urls[index] ? urls[index] : "";
-      const isYouTubeUrl = url.includes("youtube.com") || url.includes("youtu.be");
-      const isVimeoUrl = url.includes("vimeo.com");
-      const isWebsiteUrl = url.startsWith("http");
-      if (fancybox && (isYouTubeUrl || isVimeoUrl) && url !== '') {
+    } else if (media && media.type === 'video') {
+      const url = urls && Array.isArray(urls) && urls[index] ? urls[index] : "";
+      const normalizedUrl = normalizeUrl(url);
+      const isYouTubeUrl = url && typeof url === 'string' && (url.includes("youtube.com") || url.includes("youtu.be"));
+      const isVimeoUrl = url && typeof url === 'string' && url.includes("vimeo.com");
+      const isWebsiteUrl = url && typeof url === 'string' && (url.startsWith("http") || url.includes("www.") || url.includes(".") && url.length > 3 && !url.startsWith(".") && !url.endsWith("."));
+      if (fancybox) {
         return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           key: media.id
         }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -4928,7 +4893,7 @@ function Save({
           className: "ratio-part",
           style: aspectRatioStyle
         }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-          href: url,
+          href: media.url,
           "data-fancybox": `gallery-${sliderId}`,
           "data-fancy-class": sliderId,
           "data-caption": media.alt ? media.alt : "Video"
@@ -5067,7 +5032,7 @@ function Save({
           className: "ratio-part",
           style: aspectRatioStyle
         }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-          href: url
+          href: normalizedUrl
         }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           className: "video-thumbnail-wrapper",
           style: {
@@ -5146,109 +5111,8 @@ function Save({
             color: descriptionColor
           }
         }, currentDescription));
-      } else if (fancybox) {
-        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          key: media.id
-        }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          className: "mcfgb-gallery-single"
-        }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          className: "ratio-part",
-          style: aspectRatioStyle
-        }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-          href: media.url,
-          "data-fancybox": `gallery-${sliderId}`,
-          "data-fancy-class": sliderId,
-          "data-caption": media.alt ? media.alt : "Video"
-        }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          className: "video-thumbnail-wrapper",
-          style: {
-            position: 'relative',
-            width: '100%',
-            height: '100%'
-          }
-        }, media.thumbnailUrl ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-          src: media.thumbnailUrl,
-          alt: media.alt || "Video Thumbnail",
-          style: {
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover'
-          }
-        }) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          style: {
-            width: '100%',
-            height: '100%',
-            backgroundColor: '#f8f9fa',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            border: '2px dashed #dee2e6'
-          }
-        }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          style: {
-            textAlign: 'center'
-          }
-        }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
-          width: "32",
-          height: "32",
-          viewBox: "0 0 24 24",
-          fill: "#6c757d",
-          style: {
-            marginBottom: '8px'
-          }
-        }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-          d: "M8 5v14l11-7z"
-        })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          style: {
-            fontSize: '12px',
-            color: '#6c757d'
-          }
-        }, "Generating thumbnail..."))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          className: "play-button-overlay",
-          style: {
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '60px',
-            height: '60px',
-            backgroundColor: 'rgba(0,0,0,0.7)',
-            borderRadius: '50%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer'
-          }
-        }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
-          width: "24",
-          height: "24",
-          viewBox: "0 0 24 24",
-          fill: "white"
-        }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-          d: "M8 5v14l11-7z"
-        }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("video", {
-          style: {
-            display: 'none'
-          },
-          preload: "metadata",
-          muted: true,
-          playsInline: true
-        }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("source", {
-          src: media.url,
-          type: media.mime
-        })))))), currentCaption && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          className: "img-caption",
-          style: {
-            color: headingColor
-          }
-        }, currentCaption), currentDescription && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          className: "img-description",
-          style: {
-            color: descriptionColor
-          }
-        }, currentDescription));
-      } else if (!isYouTubeUrl && isWebsiteUrl && url !== '' && fancybox) {
-        // When Fancybox is enabled but URL is a website URL (not YouTube/Vimeo), show video without anchor
+      } else if (!isYouTubeUrl && isWebsiteUrl && url !== '' && !fancybox) {
+        // When Fancybox is disabled but URL is a website URL (not YouTube/Vimeo), show video with click to play
         return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           key: media.id
         }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
