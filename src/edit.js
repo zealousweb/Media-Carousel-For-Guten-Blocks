@@ -37,7 +37,8 @@ import {
     Placeholder,
     Button,
     Panel,
-    TextControl
+    TextControl,
+    Notice
 } from "@wordpress/components";
 
 /**
@@ -67,6 +68,7 @@ export default function Edit({ attributes, setAttributes }) {
     const [sliderId, setSliderId] = useState(attributes.sliderId || '');
     const [activeDevice, setActiveDevice] = useState('desktop');
     const [radiusLinked, setRadiusLinked] = useState(true);
+    const [noticeMessage, setNoticeMessage] = useState('');
 
     useEffect(() => {
         if (!sliderId) {
@@ -656,11 +658,27 @@ export default function Edit({ attributes, setAttributes }) {
                                         <div style={{ marginBottom: '16px' }}>
                                             <span style={{ fontWeight: 500, fontSize: 13, display: 'block', marginBottom: 8 }}>{__("Custom Arrow Icons", "media-carousel-for-guten-blocks")}</span>
                                             
+                                            {noticeMessage && (
+                                                <Notice status="error" isDismissible={false} style={{ marginBottom: '12px' }}>
+                                                    {noticeMessage}
+                                                </Notice>
+                                            )}
+                                            
                                             <div style={{ marginBottom: '12px' }}>
                                                 <span style={{ fontSize: 12, color: '#666' }} data-tooltip={__("Upload an image for the previous/left navigation arrow. Recommended size: 30x30px", "media-carousel-for-guten-blocks")}>{__("Previous Arrow", "media-carousel-for-guten-blocks")}</span>
                                                 <MediaUploadCheck>
                                                     <MediaUpload
-                                                        onSelect={(media) => setAttributes({ customPrevArrow: media })}
+                                                        onSelect={(media) => {
+                                                            // Validate file type - only allow PNG and SVG
+                                                            const allowedMimeTypes = ['image/png', 'image/svg+xml'];
+                                                            if (!allowedMimeTypes.includes(media.mime)) {
+                                                                setNoticeMessage(__('Please upload only PNG or SVG files for the arrow icon.', 'media-carousel-for-guten-blocks'));
+                                                                setTimeout(() => setNoticeMessage(''), 5000);
+                                                                return;
+                                                            }
+                                                            setNoticeMessage('');
+                                                            setAttributes({ customPrevArrow: media });
+                                                        }}
                                                         allowedTypes={['image']}
                                                         value={customPrevArrow ? customPrevArrow.id : ''}
                                                         render={({ open }) => (
@@ -706,7 +724,17 @@ export default function Edit({ attributes, setAttributes }) {
                                                 <span style={{ fontSize: 12, color: '#666' }} data-tooltip={__("Upload an image for the next/right navigation arrow. Recommended size: 30x30px", "media-carousel-for-guten-blocks")}>{__("Next Arrow", "media-carousel-for-guten-blocks")}</span>
                                                 <MediaUploadCheck>
                                                     <MediaUpload
-                                                        onSelect={(media) => setAttributes({ customNextArrow: media })}
+                                                        onSelect={(media) => {
+                                                            // Validate file type - only allow PNG and SVG
+                                                            const allowedMimeTypes = ['image/png', 'image/svg+xml'];
+                                                            if (!allowedMimeTypes.includes(media.mime)) {
+                                                                setNoticeMessage(__('Please upload only PNG or SVG files for the arrow icon.', 'media-carousel-for-guten-blocks'));
+                                                                setTimeout(() => setNoticeMessage(''), 5000);
+                                                                return;
+                                                            }
+                                                            setNoticeMessage('');
+                                                            setAttributes({ customNextArrow: media });
+                                                        }}
                                                         allowedTypes={['image']}
                                                         value={customNextArrow ? customNextArrow.id : ''}
                                                         render={({ open }) => (

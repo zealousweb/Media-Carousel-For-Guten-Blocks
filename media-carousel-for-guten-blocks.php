@@ -32,6 +32,14 @@ function mcfgb_activate() {
 }
 
 /**
+ * Render callback for the block
+ */
+function mcfgb_render_callback($attributes, $content) {
+    // Return the content as-is for widget areas
+    return $content;
+}
+
+/**
  * Registers the block using the metadata loaded from the `block.json` file.
  * Behind the scenes, it registers also all assets so they can be enqueued
  * through the block editor in the corresponding context.
@@ -108,7 +116,9 @@ function mcfgb_init()
     error_log('Media Carousel Block: Block name from block.json: ' . $block_json_data['name']);
     
     try {
-        $result = register_block_type($build_path);
+        $result = register_block_type($build_path, array(
+            'render_callback' => 'mcfgb_render_callback',
+        ));
     } catch (Exception $e) {
         error_log('Media Carousel Block: Exception during block registration: ' . $e->getMessage());
         return;
@@ -166,6 +176,22 @@ add_action('block_categories', 'mcfgb_register_block_category', 5, 2);
 
 add_action('init', 'mcfgb_init', 5);
 
+/**
+ * Ensure block is available in widget areas
+ */
+function mcfgb_widget_init() {
+    // Make sure the block is registered for widget areas
+    if (function_exists('register_block_type')) {
+        $build_path = __DIR__ . '/build';
+        if (file_exists($build_path . '/block.json')) {
+            register_block_type($build_path, array(
+                'render_callback' => 'mcfgb_render_callback',
+            ));
+        }
+    }
+}
+add_action('widgets_init', 'mcfgb_widget_init');
+
 
 
 
@@ -181,9 +207,45 @@ function mcfgb_enqueue_block_assets() {
         wp_raise_memory_limit('admin');
     }
     
+    $should_enqueue = false;
+    
+    // Check if block is used in post content
     if ($post && is_object($post) && isset($post->post_content) && !empty($post->post_content)) {
         try {
             if (has_block('media-carousel-for-guten-blocks/media-carousel', $post)) {
+                $should_enqueue = true;
+            }
+        } catch (Exception $e) {
+            error_log('Media Carousel Block: Exception during has_block check: ' . $e->getMessage());
+        }
+    }
+    
+    // Check if block is used in widget areas
+    if (!$should_enqueue) {
+        $widget_blocks = wp_get_sidebars_widgets();
+        if (!empty($widget_blocks)) {
+            foreach ($widget_blocks as $sidebar => $widgets) {
+                if (is_array($widgets)) {
+                    foreach ($widgets as $widget_id) {
+                        if (strpos($widget_id, 'block-') === 0) {
+                            $widget_content = get_option('widget_block');
+                            if (is_array($widget_content)) {
+                                foreach ($widget_content as $widget_instance) {
+                                    if (isset($widget_instance['content']) && 
+                                        strpos($widget_instance['content'], 'media-carousel-for-guten-blocks/media-carousel') !== false) {
+                                        $should_enqueue = true;
+                                        break 3;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    if ($should_enqueue) {
         wp_enqueue_style(
             'mcfgb-slick-slider-css',
             plugins_url('/assets/css/slick.css', __FILE__),
@@ -213,10 +275,6 @@ function mcfgb_enqueue_block_assets() {
             '5.0.24',
             ''
         );
-            }
-        } catch (Exception $e) {
-            error_log('Media Carousel Block: Exception during has_block check: ' . $e->getMessage());
-        }
     }
 }
 add_action('wp_enqueue_scripts', 'mcfgb_enqueue_block_assets');

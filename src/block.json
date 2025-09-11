@@ -187,7 +187,8 @@
 	"supports": {
 		"html": false,
 		"align": ["wide", "full"],
-		"video": true
+		"video": true,
+		"__experimentalSelector": ".wp-block-media-carousel-for-guten-blocks-media-carousel"
 	},
 	"textdomain": "media-carousel-for-guten-blocks",
 	"editorScript": "file:./index.js",

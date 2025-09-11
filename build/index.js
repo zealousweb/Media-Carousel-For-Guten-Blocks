@@ -3079,7 +3079,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"media-carousel-for-guten-blocks/media-carousel","version":"1.0.0","title":"Media Carousel for Guten Blocks","category":"zealblocks","description":"The Media Carousel for Guten Blocks is a versatile tool for displaying images and videos, featuring customizable options like slider speed, autoplay, and FancyBox integration to enhance your website\'s design and functionality.","example":{},"attributes":{"sliderId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simpleType"},"showArrows":{"type":"boolean"},"arrowType":{"type":"string","default":"custom1"},"customPrevArrow":{"type":"object","default":null},"customNextArrow":{"type":"object","default":null},"urls":{"type":"array","items":{"type":"string"}},"simpleType":{"type":"string","default":"simple"},"carouselType":{"type":"string","default":"carousel"},"speed":{"type":"number","default":1000},"autoplay":{"type":"boolean","default":false},"infinite":{"type":"boolean","default":false},"dots":{"type":"boolean","default":false},"dotsType":{"type":"string","default":"ndots"},"arrowColor":{"type":"string","default":"#D8613C"},"dotsColor":{"type":"string","default":"#000000"},"borderRadius":{"type":"number","default":0},"borderRadiusTop":{"type":"number","default":0},"borderRadiusRight":{"type":"number","default":0},"borderRadiusBottom":{"type":"number","default":0},"borderRadiusLeft":{"type":"number","default":0},"fancyboxBgColor":{"type":"string","default":"#000000"},"fancyboxWidth":{"type":"number","default":800},"fancyboxOpacity":{"type":"number","default":70},"arrowpos":{"type":"string","default":"side"},"slidesToShow":{"type":"number","default":2},"slidesToShowDesktop":{"type":"number","default":2},"slidesToShowTablet":{"type":"number","default":2},"slidesToShowMobile":{"type":"number","default":1},"slidesToScroll":{"type":"number","default":1},"caption":{"type":"boolean","default":false},"fancybox":{"type":"boolean","default":false},"pauseOnHover":{"type":"boolean","default":true},"hideOnDesktop":{"type":"boolean","default":false},"hideOnTablet":{"type":"boolean","default":false},"hideOnMobile":{"type":"boolean","default":false},"description":{"type":"string","default":""},"headingColor":{"type":"string","default":""},"descriptionColor":{"type":"string","default":""},"hideArrowsOnDesktop":{"type":"boolean","default":false},"hideArrowsOnTablet":{"type":"boolean","default":false},"hideArrowsOnMobile":{"type":"boolean","default":false},"imageAspectRatio":{"type":"string","default":"16:9"}},"supports":{"html":false,"align":["wide","full"],"video":true},"textdomain":"media-carousel-for-guten-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"media-carousel-for-guten-blocks/media-carousel","version":"1.0.0","title":"Media Carousel for Guten Blocks","category":"zealblocks","description":"The Media Carousel for Guten Blocks is a versatile tool for displaying images and videos, featuring customizable options like slider speed, autoplay, and FancyBox integration to enhance your website\'s design and functionality.","example":{},"attributes":{"sliderId":{"type":"string"},"galleryImages":{"type":"array"},"sliderType":{"type":"string","default":"simpleType"},"showArrows":{"type":"boolean"},"arrowType":{"type":"string","default":"custom1"},"customPrevArrow":{"type":"object","default":null},"customNextArrow":{"type":"object","default":null},"urls":{"type":"array","items":{"type":"string"}},"simpleType":{"type":"string","default":"simple"},"carouselType":{"type":"string","default":"carousel"},"speed":{"type":"number","default":1000},"autoplay":{"type":"boolean","default":false},"infinite":{"type":"boolean","default":false},"dots":{"type":"boolean","default":false},"dotsType":{"type":"string","default":"ndots"},"arrowColor":{"type":"string","default":"#D8613C"},"dotsColor":{"type":"string","default":"#000000"},"borderRadius":{"type":"number","default":0},"borderRadiusTop":{"type":"number","default":0},"borderRadiusRight":{"type":"number","default":0},"borderRadiusBottom":{"type":"number","default":0},"borderRadiusLeft":{"type":"number","default":0},"fancyboxBgColor":{"type":"string","default":"#000000"},"fancyboxWidth":{"type":"number","default":800},"fancyboxOpacity":{"type":"number","default":70},"arrowpos":{"type":"string","default":"side"},"slidesToShow":{"type":"number","default":2},"slidesToShowDesktop":{"type":"number","default":2},"slidesToShowTablet":{"type":"number","default":2},"slidesToShowMobile":{"type":"number","default":1},"slidesToScroll":{"type":"number","default":1},"caption":{"type":"boolean","default":false},"fancybox":{"type":"boolean","default":false},"pauseOnHover":{"type":"boolean","default":true},"hideOnDesktop":{"type":"boolean","default":false},"hideOnTablet":{"type":"boolean","default":false},"hideOnMobile":{"type":"boolean","default":false},"description":{"type":"string","default":""},"headingColor":{"type":"string","default":""},"descriptionColor":{"type":"string","default":""},"hideArrowsOnDesktop":{"type":"boolean","default":false},"hideArrowsOnTablet":{"type":"boolean","default":false},"hideArrowsOnMobile":{"type":"boolean","default":false},"imageAspectRatio":{"type":"string","default":"16:9"}},"supports":{"html":false,"align":["wide","full"],"video":true,"__experimentalSelector":".wp-block-media-carousel-for-guten-blocks-media-carousel"},"textdomain":"media-carousel-for-guten-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ }),
 
@@ -3206,6 +3206,7 @@ function Edit({
   const [sliderId, setSliderId] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(attributes.sliderId || '');
   const [activeDevice, setActiveDevice] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)('desktop');
   const [radiusLinked, setRadiusLinked] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(true);
+  const [noticeMessage, setNoticeMessage] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)('');
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     if (!sliderId) {
       setSliderId(`mcfgb-slider-${sliderType}-${Math.floor(Math.random() * 1000)}`);
@@ -3978,7 +3979,13 @@ function Edit({
       display: 'block',
       marginBottom: 8
     }
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Custom Arrow Icons", "media-carousel-for-guten-blocks")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Custom Arrow Icons", "media-carousel-for-guten-blocks")), noticeMessage && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Notice, {
+    status: "error",
+    isDismissible: false,
+    style: {
+      marginBottom: '12px'
+    }
+  }, noticeMessage), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
     style: {
       marginBottom: '12px'
     }
@@ -3989,9 +3996,19 @@ function Edit({
     },
     "data-tooltip": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Upload an image for the previous/left navigation arrow. Recommended size: 30x30px", "media-carousel-for-guten-blocks")
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Previous Arrow", "media-carousel-for-guten-blocks")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUploadCheck, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUpload, {
-    onSelect: media => setAttributes({
-      customPrevArrow: media
-    }),
+    onSelect: media => {
+      // Validate file type - only allow PNG and SVG
+      const allowedMimeTypes = ['image/png', 'image/svg+xml'];
+      if (!allowedMimeTypes.includes(media.mime)) {
+        setNoticeMessage((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Please upload only PNG or SVG files for the arrow icon.', 'media-carousel-for-guten-blocks'));
+        setTimeout(() => setNoticeMessage(''), 5000);
+        return;
+      }
+      setNoticeMessage('');
+      setAttributes({
+        customPrevArrow: media
+      });
+    },
     allowedTypes: ['image'],
     value: customPrevArrow ? customPrevArrow.id : '',
     render: ({
@@ -4040,9 +4057,19 @@ function Edit({
     },
     "data-tooltip": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Upload an image for the next/right navigation arrow. Recommended size: 30x30px", "media-carousel-for-guten-blocks")
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Next Arrow", "media-carousel-for-guten-blocks")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUploadCheck, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUpload, {
-    onSelect: media => setAttributes({
-      customNextArrow: media
-    }),
+    onSelect: media => {
+      // Validate file type - only allow PNG and SVG
+      const allowedMimeTypes = ['image/png', 'image/svg+xml'];
+      if (!allowedMimeTypes.includes(media.mime)) {
+        setNoticeMessage((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Please upload only PNG or SVG files for the arrow icon.', 'media-carousel-for-guten-blocks'));
+        setTimeout(() => setNoticeMessage(''), 5000);
+        return;
+      }
+      setNoticeMessage('');
+      setAttributes({
+        customNextArrow: media
+      });
+    },
     allowedTypes: ['image'],
     value: customNextArrow ? customNextArrow.id : '',
     render: ({
