@@ -130,15 +130,21 @@ This plugin utilizes third-party libraries to enhance its functionality:
 == Changelog ==
 
 = 1.0.3 =
-* Added breakpoint options for Desktop, Laptop, and Tablet.
-* New Pause on Hover option.
-* Border radius option for carousel items.
-* Support for custom navigation arrows.
-* Responsive visibility controls (hide on Desktop/Tablet/Mobile).
-* Caption section updated with heading tag.
-* Image aspect ratio option added.
-* Upcoming: customizable text color for captions.
-* Option to hide navigation arrows on devices.
+* Added breakpoint options for Carousel (Desktop, Laptop, Tablet).
+* Added Pause on Hover toggle (ON/OFF).
+* Introduced Border Radius option (similar to Elementor).
+* Added option to upload custom navigation arrows.
+* Added Responsive Conditions for visibility:
+		(1) Hide on Desktop
+		(2) Hide on Tablet
+		(3) Hide on Mobile
+* Updated Caption section to support custom heading tags.
+* Added Image Aspect Ratio option for better design flexibility.
+* Added Text Color option for captions.
+* Added option to hide carousel/slider arrows with responsive conditions:
+		(1) Hide on Desktop
+		(2) Hide on Tablet
+		(3) Hide on Mobile
 
 = 1.0.2 =
 * Minor changes - Doc update
