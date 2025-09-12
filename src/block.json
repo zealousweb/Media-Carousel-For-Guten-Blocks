@@ -1,7 +1,7 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "create-block/gutenberg-media-carousel",
+	"name": "media-carousel-for-guten-blocks/media-carousel",
 	"version": "1.0.0",
 	"title": "Media Carousel for Guten Blocks",
 	"category": "zealblocks",
@@ -24,6 +24,14 @@
 		"arrowType": {
 			"type": "string",
 			"default": "custom1"
+		},
+		"customPrevArrow": {
+			"type": "object",
+			"default": null
+		},
+		"customNextArrow": {
+			"type": "object",
+			"default": null
 		},
 		"urls": {
 			"type": "array",
@@ -71,6 +79,22 @@
 			"type": "number",
 			"default": 0
 		},
+		"borderRadiusTop": {
+			"type": "number",
+			"default": 0
+		},
+		"borderRadiusRight": {
+			"type": "number",
+			"default": 0
+		},
+		"borderRadiusBottom": {
+			"type": "number",
+			"default": 0
+		},
+		"borderRadiusLeft": {
+			"type": "number",
+			"default": 0
+		},
 		"fancyboxBgColor": {
 			"type": "string",
 			"default": "#000000"
@@ -91,6 +115,18 @@
 			"type": "number",
 			"default": 2
 		},
+		"slidesToShowDesktop": {
+			"type": "number",
+			"default": 2
+		},
+		"slidesToShowTablet": {
+			"type": "number",
+			"default": 2
+		},
+		"slidesToShowMobile": {
+			"type": "number",
+			"default": 1
+		},
 		"slidesToScroll": {
 			"type": "number",
 			"default": 1
@@ -102,12 +138,57 @@
 		"fancybox":{
 			"type": "boolean",
 			"default": false
+		},
+		"pauseOnHover": {
+			"type": "boolean",
+			"default": true
+		},
+		"hideOnDesktop": {
+			"type": "boolean",
+			"default": false
+		},
+		"hideOnTablet": {
+			"type": "boolean",
+			"default": false
+		},
+		"hideOnMobile": {
+			"type": "boolean",
+			"default": false
+		},
+		"description": {
+			"type": "string",
+			"default": ""
+		},
+		"headingColor": {
+			"type": "string",
+			"default": ""
+		},
+		"descriptionColor": {
+			"type": "string",
+			"default": ""
+		},
+		"hideArrowsOnDesktop": {
+			"type": "boolean",
+			"default": false
+		},
+		"hideArrowsOnTablet": {
+			"type": "boolean",
+			"default": false
+		},
+		"hideArrowsOnMobile": {
+			"type": "boolean",
+			"default": false
+		},
+		"imageAspectRatio": {
+			"type": "string",
+			"default": "16:9"
 		}
 	},
 	"supports": {
 		"html": false,
 		"align": ["wide", "full"],
-		"video": true
+		"video": true,
+		"__experimentalSelector": ".wp-block-media-carousel-for-guten-blocks-media-carousel"
 	},
 	"textdomain": "media-carousel-for-guten-blocks",
 	"editorScript": "file:./index.js",
