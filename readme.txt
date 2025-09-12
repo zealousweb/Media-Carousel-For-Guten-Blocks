@@ -130,7 +130,15 @@ This plugin utilizes third-party libraries to enhance its functionality:
 == Changelog ==
 
 = 1.0.3 =
-* Minor changes - Doc update
+* Added breakpoint options for Desktop, Laptop, and Tablet.
+* New Pause on Hover option.
+* Border radius option for carousel items.
+* Support for custom navigation arrows.
+* Responsive visibility controls (hide on Desktop/Tablet/Mobile).
+* Caption section updated with heading tag.
+* Image aspect ratio option added.
+* Upcoming: customizable text color for captions.
+* Option to hide navigation arrows on devices.
 
 = 1.0.2 =
 * Minor changes - Doc update
