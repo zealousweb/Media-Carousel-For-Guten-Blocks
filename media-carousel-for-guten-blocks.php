@@ -23,6 +23,17 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 
+add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'mcfgb_admin_plugin_links' );
+
+function mcfgb_admin_plugin_links( $links ) {
+
+	$support_link = '<a href="https://support.zealousweb.com/portal/en/home" target="_blank">' . esc_html__( 'Open Support Ticket', 'media-carousel-for-guten-blocks' ) . '</a>';
+
+	$links[] = $support_link;
+
+	return $links;
+}
+
 // Plugin activation hook for debugging
 register_activation_hook(__FILE__, 'mcfgb_activate');
 function mcfgb_activate() {
