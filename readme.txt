@@ -3,7 +3,7 @@ Contributors:      zealopensource
 Tags:              Carousel, Media, Gutenberg
 Donate link: http://www.zealousweb.com/payment/
 Requires at least: 5.9
-Tested up to:      6.9
+Tested up to:      7.0
 Requires PHP:      7.4
 Version: 1.0.4
 Stable tag: 1.0.4
@@ -129,7 +129,7 @@ This plugin utilizes third-party libraries to enhance its functionality:
 
 == Changelog ==
 = 1.0.4 =
-* Tested with the latest version of WordPress (6.9).
+* Added a new "Open Support Ticket" button to provide quick and direct access to support.
 
 = 1.0.3 =
 * Added breakpoint options for Carousel (Desktop, Laptop, Tablet).
